@@ -134,12 +134,7 @@ export function Nav() {
 
       <div className="relative mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:h-20">
         {/* ---------- Logo ---------- */}
-        <Link
-          to="/"
-          className="flex shrink-0 items-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-4"
-        >
-          <img src="/assets/icons/logo.png" alt="TrustSend" className="h-28 w-auto sm:h-36 lg:h-46" />
-        </Link>
+        
 
         {/* ---------- Navigation, centrée optiquement ---------- */}
         <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 xl:flex">
