@@ -142,13 +142,13 @@ export function Nav() {
         "
       >
         {/* ---------- Logo : toujours à gauche ---------- */}
-       <Link
-  to="/"
-  aria-label="TrustSend"
-  className="relative z-20 flex min-w-0 shrink-0 items-center"
->
-  <div
-    className="
+        <Link
+          to="/"
+          aria-label="TrustSend"
+          className="relative z-20 flex min-w-0 shrink-0 items-center"
+        >
+          <div
+            className="
       flex h-12 w-[135px] items-center justify-start
       overflow-visible
       sm:h-13 sm:w-[150px]
@@ -156,14 +156,14 @@ export function Nav() {
       lg:h-15 lg:w-[180px]
       xl:w-[195px]
     "
-  >
-    <img
-      src="/assets/icons/logo.png"
-      alt="TrustSend"
-      className="block h-full w-full object-contain object-left"
-    />
-  </div>
-</Link>
+          >
+            <img
+              src="/assets/icons/logo.png"
+              alt="TrustSend"
+              className="block h-full w-full object-contain object-left"
+            />
+          </div>
+        </Link>
 
         {/* ---------- Navigation : centrée ---------- */}
         <nav
@@ -208,18 +208,16 @@ export function Nav() {
                   {menu && (
                     <ChevronDown
                       size={14}
-                      className={`shrink-0 opacity-60 transition-transform duration-200 ${
-                        isActive ? "-rotate-180" : ""
-                      }`}
+                      className={`shrink-0 opacity-60 transition-transform duration-200 ${isActive ? "-rotate-180" : ""
+                        }`}
                     />
                   )}
 
                   <span
-                    className={`absolute inset-x-0 -bottom-0.5 h-px origin-left bg-brand transition-transform duration-300 ${
-                      isActive
+                    className={`absolute inset-x-0 -bottom-0.5 h-px origin-left bg-brand transition-transform duration-300 ${isActive
                         ? "scale-x-100"
                         : "scale-x-0 group-hover:scale-x-100"
-                    }`}
+                      }`}
                   />
                 </NavItemLink>
               );
@@ -262,22 +260,20 @@ export function Nav() {
                 >
                   <button
                     onClick={() => switchLang("fr")}
-                    className={`block w-full px-3 py-2 text-left text-sm font-medium hover:bg-surface ${
-                      i18n.language.startsWith("fr")
+                    className={`block w-full px-3 py-2 text-left text-sm font-medium hover:bg-surface ${i18n.language.startsWith("fr")
                         ? "text-brand"
                         : "text-ink"
-                    }`}
+                      }`}
                   >
                     Français
                   </button>
 
                   <button
                     onClick={() => switchLang("en")}
-                    className={`block w-full px-3 py-2 text-left text-sm font-medium hover:bg-surface ${
-                      i18n.language.startsWith("en")
+                    className={`block w-full px-3 py-2 text-left text-sm font-medium hover:bg-surface ${i18n.language.startsWith("en")
                         ? "text-brand"
                         : "text-ink"
-                    }`}
+                      }`}
                   >
                     English
                   </button>
