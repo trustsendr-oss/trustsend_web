@@ -96,11 +96,10 @@ export function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 z-50 ${
-        solid
-          ? "border-b border-surface-2/80 bg-white/85 backdrop-blur-md supports-[backdrop-filter]:bg-white/70"
-          : "border-b border-transparent bg-transparent"
-      }`}
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${solid
+        ? "border-b border-surface-2/80 bg-white/85 backdrop-blur-md supports-[backdrop-filter]:bg-white/70"
+        : "border-b border-transparent bg-transparent"
+        }`}
       onMouseLeave={scheduleClose}
     >
       <AnimatePresence>
@@ -132,59 +131,122 @@ export function Nav() {
         )}
       </AnimatePresence>
 
-      <div className="relative mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:h-20">
-        {/* ---------- Logo ---------- */}
-        
+      {/* ---------- Main Navbar ---------- */}
+      <div
+        className="
+          mx-auto grid h-16 w-full max-w-7xl
+          grid-cols-[auto_minmax(0,1fr)_auto]
+          items-center gap-2
+          px-3 sm:px-4 md:px-6
+          lg:h-20
+        "
+      >
+        {/* ---------- Logo : toujours à gauche ---------- */}
+       <Link
+  to="/"
+  aria-label="TrustSend"
+  className="relative z-20 flex min-w-0 shrink-0 items-center"
+>
+  <div
+    className="
+      flex h-12 w-[135px] items-center justify-start
+      overflow-visible
+      sm:h-13 sm:w-[150px]
+      md:h-14 md:w-[165px]
+      lg:h-15 lg:w-[180px]
+      xl:w-[195px]
+    "
+  >
+    <img
+      src="/assets/icons/logo.png"
+      alt="TrustSend"
+      className="block h-full w-full object-contain object-left"
+    />
+  </div>
+</Link>
 
-        {/* ---------- Navigation, centrée optiquement ---------- */}
-        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 xl:flex">
-          {navLinks.map((link) => {
-            const menu = navMegaMenus[link.label];
-            const isActive = activeMenu === link.label;
-            return (
-              <NavItemLink
-                key={link.label}
-                href={link.href}
-                onMouseEnter={() => {
-                  if (menu) {
-                    cancelClose();
-                    setActiveMenu(link.label);
-                  }
-                }}
-                onFocus={() => menu && setActiveMenu(link.label)}
-                className="group relative flex items-center gap-1 py-2 text-sm font-medium text-muted-2 transition-colors hover:text-ink focus-visible:outline-none focus-visible:text-ink"
-                aria-expanded={menu ? isActive : undefined}
-              >
-                {link.label}
-                {menu && (
-                  <ChevronDown
-                    size={14}
-                    className={`opacity-60 transition-transform duration-200 ${
-                      isActive ? "-rotate-180" : ""
+        {/* ---------- Navigation : centrée ---------- */}
+        <nav
+          className="
+            hidden min-w-0 items-center justify-center
+            gap-4 overflow-hidden
+            px-2
+            xl:flex
+            2xl:gap-7
+          "
+          aria-label="Main navigation"
+        >
+          <div className="flex min-w-0 max-w-full items-center justify-center gap-4 2xl:gap-7">
+            {navLinks.map((link) => {
+              const menu = navMegaMenus[link.label];
+              const isActive = activeMenu === link.label;
+
+              return (
+                <NavItemLink
+                  key={link.label}
+                  href={link.href}
+                  onMouseEnter={() => {
+                    if (menu) {
+                      cancelClose();
+                      setActiveMenu(link.label);
+                    }
+                  }}
+                  onFocus={() => menu && setActiveMenu(link.label)}
+                  className="
+                    group relative flex shrink-0 items-center gap-1
+                    whitespace-nowrap py-2
+                    text-sm font-medium text-muted-2
+                    transition-colors
+                    hover:text-ink
+                    focus-visible:text-ink
+                    focus-visible:outline-none
+                  "
+                  aria-expanded={menu ? isActive : undefined}
+                >
+                  {link.label}
+
+                  {menu && (
+                    <ChevronDown
+                      size={14}
+                      className={`shrink-0 opacity-60 transition-transform duration-200 ${
+                        isActive ? "-rotate-180" : ""
+                      }`}
+                    />
+                  )}
+
+                  <span
+                    className={`absolute inset-x-0 -bottom-0.5 h-px origin-left bg-brand transition-transform duration-300 ${
+                      isActive
+                        ? "scale-x-100"
+                        : "scale-x-0 group-hover:scale-x-100"
                     }`}
                   />
-                )}
-                <span
-                  className={`absolute inset-x-0 -bottom-0.5 h-px origin-left bg-brand transition-transform duration-300 ${
-                    isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                  }`}
-                />
-              </NavItemLink>
-            );
-          })}
+                </NavItemLink>
+              );
+            })}
+          </div>
         </nav>
 
-        {/* ---------- Actions ---------- */}
-        <div className="hidden items-center gap-1 xl:flex">
-          <div className="relative" ref={langRef}>
+        {/* ---------- Actions : toujours à droite ---------- */}
+        <div className="relative z-20 flex shrink-0 items-center justify-end gap-1.5 sm:gap-2">
+          {/* Language */}
+          <div className="relative hidden lg:block" ref={langRef}>
             <button
               onClick={() => setLangOpen((o) => !o)}
               aria-expanded={langOpen}
-              className="flex items-center gap-1 rounded-full px-2.5 py-2 text-sm font-medium text-muted-2 transition-colors hover:bg-surface hover:text-ink"
+              aria-haspopup="menu"
+              className="
+                flex items-center gap-1 rounded-full
+                px-2 py-2
+                text-sm font-medium text-muted-2
+                transition-colors
+                hover:bg-surface hover:text-ink
+              "
             >
-              {i18n.language.startsWith("en") ? "EN" : "FR"}{" "}
+              {i18n.language.startsWith("en") ? "EN" : "FR"}
               <ChevronDown size={14} className="opacity-60" />
             </button>
+
             <AnimatePresence>
               {langOpen && (
                 <motion.div
@@ -192,20 +254,29 @@ export function Nav() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute right-0 top-full mt-2 w-28 overflow-hidden rounded-xl border border-surface-2 bg-white py-1 shadow-pop"
+                  className="
+                    absolute right-0 top-full z-50 mt-2
+                    w-28 overflow-hidden rounded-xl
+                    border border-surface-2 bg-white py-1 shadow-pop
+                  "
                 >
                   <button
                     onClick={() => switchLang("fr")}
                     className={`block w-full px-3 py-2 text-left text-sm font-medium hover:bg-surface ${
-                      i18n.language.startsWith("fr") ? "text-brand" : "text-ink"
+                      i18n.language.startsWith("fr")
+                        ? "text-brand"
+                        : "text-ink"
                     }`}
                   >
                     Français
                   </button>
+
                   <button
                     onClick={() => switchLang("en")}
                     className={`block w-full px-3 py-2 text-left text-sm font-medium hover:bg-surface ${
-                      i18n.language.startsWith("en") ? "text-brand" : "text-ink"
+                      i18n.language.startsWith("en")
+                        ? "text-brand"
+                        : "text-ink"
                     }`}
                   >
                     English
@@ -215,35 +286,64 @@ export function Nav() {
             </AnimatePresence>
           </div>
 
-          <span aria-hidden className="mx-2 h-4 w-px bg-surface-2" />
+          {/* Separator */}
+          <span
+            aria-hidden
+            className="hidden h-4 w-px bg-surface-2 lg:block"
+          />
 
+          {/* Login */}
           <AuthLink
             to="/login"
-            className="rounded-full px-3 py-2 text-sm font-semibold text-ink transition-colors hover:text-brand"
+            className="
+              shrink-0 whitespace-nowrap
+              rounded-full px-2.5 py-2
+              text-xs font-semibold text-ink
+              transition-colors hover:text-brand
+              sm:px-3 sm:text-sm
+            "
           >
             {t("nav.login")}
           </AuthLink>
+
+          {/* Sign Up */}
           <AuthLink
             to="/signup"
-            className="group ml-1 flex items-center gap-1.5 rounded bg-accent px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+            className="
+              group flex shrink-0 items-center gap-1
+              whitespace-nowrap rounded-lg
+              bg-accent px-2.5 py-2
+              text-xs font-semibold text-white
+              transition-colors hover:bg-brand-dark
+              sm:gap-1.5 sm:px-4 sm:py-2.5 sm:text-sm
+            "
           >
-            {t("nav.signup")}
+            <span>{t("nav.signup")}</span>
             <ArrowRight
-              size={15}
-              className="transition-transform duration-300 group-hover:translate-x-0.5"
+              size={14}
+              className="
+                hidden transition-transform duration-300
+                group-hover:translate-x-0.5 sm:block
+              "
             />
           </AuthLink>
-        </div>
 
-        {/* ---------- Déclencheur mobile ---------- */}
-        <button
-          className="-mr-2 flex h-10 w-10 items-center justify-center rounded-lg text-ink transition-colors hover:bg-surface xl:hidden"
-          onClick={() => setOpen((o) => !o)}
-          aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
-          aria-expanded={open}
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+          {/* Mobile menu */}
+          <button
+            className="
+              flex h-9 w-9 shrink-0 items-center justify-center
+              rounded-lg text-ink transition-colors hover:bg-surface
+              xl:hidden
+              sm:h-10 sm:w-10
+            "
+            onClick={() => setOpen((o) => !o)}
+            aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
+            aria-expanded={open}
+            aria-controls="trustsend-mobile-menu"
+          >
+            {open ? <X size={21} /> : <Menu size={21} />}
+          </button>
+        </div>
       </div>
 
       {/* ---------- Mega menu (desktop) ---------- */}
@@ -289,6 +389,7 @@ export function Nav() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
+            id="trustsend-mobile-menu"
             className="overflow-hidden border-t border-surface-2 bg-white xl:hidden"
           >
             <div className="flex max-h-[calc(100dvh-4rem)] flex-col overflow-y-auto px-6 py-5">
@@ -494,7 +595,7 @@ function MegaMenuPanel({
 
       {/* ---------- Promo rail ---------- */}
       <div className="group relative min-h-[280px] overflow-hidden rounded-2xl bg-brand">
-        
+
         {/* Background Image */}
         <img
           src={cardmaprBg}
@@ -580,9 +681,8 @@ function MegaMenuPanel({
               )}
 
               <p
-                className={`font-display text-[17px] font-semibold text-white ${
-                  menu.promo.eyebrow ? "mt-1" : "mt-3"
-                }`}
+                className={`font-display text-[17px] font-semibold text-white ${menu.promo.eyebrow ? "mt-1" : "mt-3"
+                  }`}
               >
                 {menu.promo.heading}
               </p>
