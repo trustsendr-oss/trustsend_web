@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "login": "Kokota",
+    "signup": "Kofungola compte",
+    "openMenu": "Fungola menu",
+    "closeMenu": "Kanga menu"
+  },
+  "footer": {
+    "terms": "Mibeko ya kosalela",
+    "privacy": "Politiki ya kobatela makambo ya moto",
+    "rights": "Makoki nyonso ebombami"
+  }
+}

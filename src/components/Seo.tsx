@@ -63,23 +63,14 @@ export function Seo({ title, description, keywords, image, robots, pathname }: S
 
     setCanonicalLink(`https://trustsend.africa${pathname}`);
 
+    const canonicalUrl = `https://trustsend.africa${pathname}`;
     const schema = {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "TrustSend",
-      url: "https://trustsend.africa",
-      logo: "https://trustsend.africa/favicon.svg",
-      description,
-      areaServed: "Africa and international markets",
-      sameAs: [
-        "https://www.linkedin.com",
-        "https://www.x.com",
+      "@graph": [
+        { "@type": ["Organization", "FinancialService"], "@id": "https://trustsend.africa/#organization", name: "TrustSend", url: "https://trustsend.africa", logo: "https://trustsend.africa/android-chrome-512x512.png", description: "TrustSend is a financial technology company, not a bank.", areaServed: "Africa and international markets", contactPoint: { "@type": "ContactPoint", contactType: "customer support", url: "https://trustsend.africa/contact", areaServed: "Worldwide" } },
+        { "@type": "WebSite", "@id": "https://trustsend.africa/#website", url: "https://trustsend.africa/", name: "TrustSend", publisher: { "@id": "https://trustsend.africa/#organization" }, inLanguage: ["fr", "en", "ln", "sw"] },
+        { "@type": pathname === "/contact" ? "ContactPage" : "WebPage", "@id": `${canonicalUrl}#webpage`, url: canonicalUrl, name: title, description, isPartOf: { "@id": "https://trustsend.africa/#website" }, about: { "@id": "https://trustsend.africa/#organization" } },
       ],
-      contactPoint: {
-        "@type": "ContactPoint",
-        contactType: "sales",
-        areaServed: "Worldwide",
-      },
     };
 
     addJsonLd(schema);

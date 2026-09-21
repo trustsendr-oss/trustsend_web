@@ -26,6 +26,9 @@ import { WebhooksPage } from "./pages/dashboard/WebhooksPage";
 import { ProfilePage } from "./pages/dashboard/ProfilePage";
 import { NotificationsPage } from "./pages/dashboard/NotificationsPage";
 import { KycPage } from "./pages/dashboard/KycPage";
+import { Legal } from "./pages/Legal";
+import { InstallApp } from "./components/InstallApp";
+import { Contact } from "./pages/Contact";
 import { Seo } from "./components/Seo";
 import {
   BUSINESS_ORIGIN,
@@ -50,6 +53,24 @@ const seoConfig: Record<string, { title: string; description: string; keywords: 
       "Découvrez les tarifs TrustSend pour les paiements, les transferts, le payroll et les solutions de fintech adaptées aux entreprises.",
     keywords: "tarifs fintech, prix paiement entreprise, payroll pricing, transferts prix, carte virtuelle prix",
     image: "/assets/images/crypto-hero.avif",
+    robots: "index,follow",
+  },
+  "/privacy": {
+    title: "Politique de confidentialité | TrustSend",
+    description: "Consultez la politique de confidentialité de TrustSend.",
+    keywords: "confidentialité TrustSend, données personnelles, privacy policy",
+    robots: "index,follow",
+  },
+  "/terms": {
+    title: "Conditions d’utilisation | TrustSend",
+    description: "Consultez les conditions d’utilisation des services TrustSend.",
+    keywords: "conditions TrustSend, termes utilisation, conditions fintech",
+    robots: "index,follow",
+  },
+  "/contact": {
+    title: "Support et contact | TrustSend",
+    description: "Créez un ticket et contactez l’équipe Support TrustSend.",
+    keywords: "support TrustSend, contact TrustSend, ticket paiement, assistance fintech",
     robots: "index,follow",
   },
   "/agents": {
@@ -127,6 +148,9 @@ function App() {
           <>
             <Route path="/" element={<Home />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/privacy" element={<Legal kind="privacy" />} />
+            <Route path="/terms" element={<Legal kind="terms" />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/agents" element={<Agents />} />
             <Route path="/transferts-internationaux" element={<InternationalTransfer />} />
             <Route path="/cartes-virtuelles" element={<VirtualCards />} />
@@ -183,6 +207,7 @@ function App() {
           </>
         )}
       </Routes>
+      <InstallApp />
     </>
   );
 }

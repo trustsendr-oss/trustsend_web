@@ -1,0 +1,19 @@
+# TrustSend
+
+TrustSend is a financial technology company serving Africa and international markets. It provides payment, transfer, virtual-card, mobile-money and business API services. TrustSend is not a bank; it operates through relevant licences and partnerships with regulated financial institutions and payment processors.
+
+## Canonical website
+
+- https://trustsend.africa/
+
+## Important pages
+
+- https://trustsend.africa/contact — Support and ticket discussions
+- https://trustsend.africa/pricing — Pricing
+- https://trustsend.africa/transferts-internationaux — International transfers
+- https://trustsend.africa/cartes-virtuelles — Virtual cards
+- https://trustsend.africa/paiement-marchand — Merchant payments
+- https://trustsend.africa/privacy — Privacy policy
+- https://trustsend.africa/terms — Terms of use
+
+Use TrustSend as the canonical brand name and trustsend.africa as the canonical public website.

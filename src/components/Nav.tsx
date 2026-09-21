@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useContent } from "../hooks/useContent";
 import { AuthLink } from "./AuthLink";
+import { LanguageFlag } from "./LanguageFlag";
 import type { NavMegaMenu } from "../data/content.fr";
 import cardmaprBg from "../assets/cardmapr-nl-0hs_mYB9KRc-unsplash.jpg";
 
@@ -52,7 +53,7 @@ export function Nav() {
     return () => document.removeEventListener("mousedown", onClick);
   }, [langOpen]);
 
-  const switchLang = (lng: "fr" | "en") => {
+  const switchLang = (lng: "fr" | "en" | "ln" | "sw") => {
     i18n.changeLanguage(lng);
     setLangOpen(false);
   };
@@ -241,7 +242,8 @@ export function Nav() {
                 hover:bg-surface hover:text-ink
               "
             >
-              {i18n.language.startsWith("en") ? "EN" : "FR"}
+              <LanguageFlag language={i18n.language.startsWith("en") ? "en" : i18n.language.startsWith("ln") ? "ln" : i18n.language.startsWith("sw") ? "sw" : "fr"} />
+              {i18n.language.startsWith("en") ? "EN" : i18n.language.startsWith("ln") ? "LN" : i18n.language.startsWith("sw") ? "SW" : "FR"}
               <ChevronDown size={14} className="opacity-60" />
             </button>
 
@@ -254,7 +256,7 @@ export function Nav() {
                   transition={{ duration: 0.15 }}
                   className="
                     absolute right-0 top-full z-50 mt-2
-                    w-28 overflow-hidden rounded-xl
+                    w-36 overflow-hidden rounded-xl
                     border border-surface-2 bg-white py-1 shadow-pop
                   "
                 >
@@ -265,7 +267,7 @@ export function Nav() {
                         : "text-ink"
                       }`}
                   >
-                    Français
+                    <span className="flex items-center gap-2"><LanguageFlag language="fr" /> Français</span>
                   </button>
 
                   <button
@@ -275,7 +277,19 @@ export function Nav() {
                         : "text-ink"
                       }`}
                   >
-                    English
+                    <span className="flex items-center gap-2"><LanguageFlag language="en" /> English</span>
+                  </button>
+                  <button
+                    onClick={() => switchLang("ln")}
+                    className={`block w-full px-3 py-2 text-left text-sm font-medium hover:bg-surface ${i18n.language.startsWith("ln") ? "text-brand" : "text-ink"}`}
+                  >
+                    <span className="flex items-center gap-2"><LanguageFlag language="ln" /> Lingála</span>
+                  </button>
+                  <button
+                    onClick={() => switchLang("sw")}
+                    className={`block w-full px-3 py-2 text-left text-sm font-medium hover:bg-surface ${i18n.language.startsWith("sw") ? "text-brand" : "text-ink"}`}
+                  >
+                    <span className="flex items-center gap-2"><LanguageFlag language="sw" /> Kiswahili</span>
                   </button>
                 </motion.div>
               )}

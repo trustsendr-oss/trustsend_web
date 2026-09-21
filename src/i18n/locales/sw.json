@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "login": "Ingia",
+    "signup": "Fungua akaunti",
+    "openMenu": "Fungua menyu",
+    "closeMenu": "Funga menyu"
+  },
+  "footer": {
+    "terms": "Masharti ya matumizi",
+    "privacy": "Sera ya faragha",
+    "rights": "Haki zote zimehifadhiwa"
+  }
+}
