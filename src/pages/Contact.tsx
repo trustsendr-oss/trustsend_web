@@ -1,5 +1,5 @@
 import { CheckCircle2, MessageCircle, Send, Ticket } from "lucide-react";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { Footer } from "../components/Footer";
 import { Nav } from "../components/Nav";
 
@@ -10,7 +10,7 @@ export function Contact() {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  const submit = (event:any) => {
     event.preventDefault();
     const id = `TS-${Date.now().toString(36).toUpperCase()}`;
     setTicket(id);
