@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "../lib/api";
 import type {
+  KycBusinessType,
   KycDocumentField,
   KycStatusData,
   KycSubmitResult,
@@ -22,6 +23,8 @@ export function useKycStatus() {
 export interface SubmitKycPayload {
   verification_type: KycVerificationType;
   provider?: string;
+  business_name: string;
+  business_type: KycBusinessType;
   documents: Partial<Record<KycDocumentField, File>>;
 }
 
@@ -32,6 +35,8 @@ export function useSubmitKyc() {
       const formData = new FormData();
       formData.append("verification_type", payload.verification_type);
       if (payload.provider) formData.append("provider", payload.provider);
+      formData.append("business_name", payload.business_name);
+      formData.append("business_type", payload.business_type);
       for (const [field, file] of Object.entries(payload.documents)) {
         if (file) formData.append(field, file);
       }

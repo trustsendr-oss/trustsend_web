@@ -310,6 +310,12 @@
       "planGate": {
         "bannerTitle": "Vous êtes sur le plan gratuit.",
         "bannerDesc": "Passez à un plan payant pour profiter pleinement de TrustSend.",
+        "currentTitle": "Plan actuel : {{name}}",
+        "nextBilling": "Prochaine facturation de maintenance le {{date}}.",
+        "activeDesc": "Votre plan est actif.",
+        "pastDue": "Paiement en retard — rechargez votre portefeuille pour conserver votre plan.",
+        "changePlan": "Changer de plan",
+        "currentPlan": "Plan actuel",
         "viewPlans": "Voir les plans",
         "hide": "Masquer",
         "plansError": "Impossible de charger les plans disponibles.",
@@ -346,7 +352,7 @@
     },
     "kyc": {
       "title": "Vérification KYC",
-      "subtitle": "Envoyez une pièce d'identité pour activer entièrement votre compte business.",
+      "subtitle": "Vérifiez votre entreprise pour activer entièrement votre compte business.",
       "error": "Impossible de charger le statut KYC.",
       "submittedOn": "Soumis le {{date}}",
       "approvedOn": "Approuvé le {{date}}",
@@ -398,7 +404,7 @@
       "providerPlaceholder": "ex. Sumsub",
       "submitTitle": "Soumettre ma vérification",
       "resubmitTitle": "Soumettre à nouveau",
-      "submitDesc": "Choisissez votre pièce d'identité et envoyez-en une copie lisible.",
+      "submitDesc": "Renseignez votre entreprise et joignez des copies lisibles des documents demandés.",
       "submit": "Soumettre",
       "submitting": "Envoi…",
       "submitError": "Impossible de soumettre la vérification.",
@@ -417,7 +423,36 @@
         "address": "Facture ou relevé récent à votre adresse",
         "liveness": "Une photo de vous prise sur le moment",
         "pep_screening": "Contrôle automatique, aucun document requis"
-      }
+      },
+      "formProgress": "{{done}} sur {{total}} étapes complétées",
+      "required": "Requis",
+      "optional": "Facultatif",
+      "businessStep": "Informations de l'entreprise",
+      "businessNameLabel": "Nom de l'entreprise",
+      "businessNamePlaceholder": "ex. Tuma Plus SARL",
+      "businessNameHint": "Tel qu'il figure sur vos documents officiels.",
+      "businessTypeLabel": "Type d'entreprise",
+      "businessType": {
+        "company": "Entreprise enregistrée",
+        "startup": "Startup"
+      },
+      "businessTypeDesc": {
+        "company": "Société immatriculée au RCCM.",
+        "startup": "Jeune entreprise pas encore immatriculée."
+      },
+      "identityStep": "Identité du représentant",
+      "companyDocsStep": "Documents de l'entreprise",
+      "extraDocsStep": "Documents complémentaires",
+      "extraDocsDesc": "Tout document utile à la vérification (statuts, attestation, etc.). Non obligatoire.",
+      "rccm": "RCCM (Registre du commerce)",
+      "proofOfAddress3m": "Justificatif de domicile de moins de 3 mois",
+      "proofOfAddressHint": "Facture d'eau, d'électricité ou relevé bancaire daté de moins de 3 mois.",
+      "rccmOptionalHint": "Si votre startup est déjà immatriculée, joignez aussi votre RCCM.",
+      "businessNameShort": "Entreprise",
+      "chooseBusinessTypeFirst": "Choisissez d'abord le type d'entreprise à l'étape 1.",
+      "businessStepDesc": "Qui êtes-vous ? Ces informations doivent correspondre à vos documents officiels.",
+      "identityStepDesc": "La pièce d'identité de la personne qui représente l'entreprise.",
+      "companyDocsStepDesc": "Les documents demandés dépendent du type d'entreprise choisi."
     },
     "notifications": {
       "title": "Notifications",

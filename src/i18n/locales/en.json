@@ -310,6 +310,12 @@
       "planGate": {
         "bannerTitle": "You're on the free plan.",
         "bannerDesc": "Upgrade to a paid plan to get the most out of TrustSend.",
+        "currentTitle": "Current plan: {{name}}",
+        "nextBilling": "Next maintenance billing on {{date}}.",
+        "activeDesc": "Your plan is active.",
+        "pastDue": "Payment past due — top up your wallet to keep your plan.",
+        "changePlan": "Change plan",
+        "currentPlan": "Current plan",
         "viewPlans": "View plans",
         "hide": "Hide",
         "plansError": "Unable to load available plans.",
@@ -346,7 +352,7 @@
     },
     "kyc": {
       "title": "KYC Verification",
-      "subtitle": "Upload an identity document to fully activate your business account.",
+      "subtitle": "Verify your business to fully activate your business account.",
       "error": "Couldn't load your KYC status.",
       "submittedOn": "Submitted on {{date}}",
       "approvedOn": "Approved on {{date}}",
@@ -398,7 +404,7 @@
       "providerPlaceholder": "e.g. Sumsub",
       "submitTitle": "Submit your verification",
       "resubmitTitle": "Submit again",
-      "submitDesc": "Choose your identity document and upload a clear copy.",
+      "submitDesc": "Tell us about your business and attach clear copies of the requested documents.",
       "submit": "Submit",
       "submitting": "Submitting…",
       "submitError": "Couldn't submit your verification.",
@@ -417,7 +423,36 @@
         "address": "Recent bill or statement showing your address",
         "liveness": "A live photo of yourself",
         "pep_screening": "Automatic check, no document needed"
-      }
+      },
+      "formProgress": "{{done}} of {{total}} steps completed",
+      "required": "Required",
+      "optional": "Optional",
+      "businessStep": "Business information",
+      "businessNameLabel": "Business name",
+      "businessNamePlaceholder": "e.g. Tuma Plus Ltd",
+      "businessNameHint": "As it appears on your official documents.",
+      "businessTypeLabel": "Business type",
+      "businessType": {
+        "company": "Registered company",
+        "startup": "Startup"
+      },
+      "businessTypeDesc": {
+        "company": "Company registered with the RCCM.",
+        "startup": "Young business not yet registered."
+      },
+      "identityStep": "Representative's identity",
+      "companyDocsStep": "Business documents",
+      "extraDocsStep": "Additional documents",
+      "extraDocsDesc": "Any document that helps the review (articles of association, certificates, etc.). Not required.",
+      "rccm": "RCCM (Trade register)",
+      "proofOfAddress3m": "Proof of address (less than 3 months old)",
+      "proofOfAddressHint": "Water or electricity bill, or bank statement, dated within the last 3 months.",
+      "rccmOptionalHint": "If your startup is already registered, attach your RCCM too.",
+      "businessNameShort": "Business",
+      "chooseBusinessTypeFirst": "Choose your business type in step 1 first.",
+      "businessStepDesc": "Who are you? This must match your official documents.",
+      "identityStepDesc": "The ID of the person representing the business.",
+      "companyDocsStepDesc": "The documents requested depend on the business type you chose."
     },
     "notifications": {
       "title": "Notifications",

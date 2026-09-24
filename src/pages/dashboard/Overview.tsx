@@ -33,7 +33,7 @@ import { useTransactions } from "../../hooks/useTransactions";
 import { useKycStatus } from "../../hooks/useKyc";
 import { isSandbox } from "../../lib/domains";
 import { ButtonSpinner, LoadingSpinner } from "../../components/LoadingSpinner";
-import { planErrorMessage, usePlans, useSubscribePlan } from "../../hooks/usePlans";
+import { planErrorMessage, useActivePlan, usePlans, useSubscribePlan } from "../../hooks/usePlans";
 import { getStoredBusiness } from "../../lib/session";
 import { formatMinorUnits } from "../../lib/format";
 import { TransactionRow } from "../../components/dashboard/TransactionRow";
@@ -251,8 +251,11 @@ function KycOnboardingView({ kyc }: { kyc: KycStatusData }) {
  * Souscrire débite immédiatement le prix du plan depuis le wallet du
  * business — d'où la confirmation par PIN, comme pour un retrait. */
 function PlanPrompt() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const plans = usePlans();
+  const activePlan = useActivePlan();
+  const current = activePlan.data ?? null;
+  const pastDue = current?.payment_status === "past_due";
   const subscribe = useSubscribePlan();
   const wallets = useWallets();
   const navigate = useNavigate();
@@ -288,19 +291,56 @@ function PlanPrompt() {
     if (subscribe.isError) subscribe.reset();
   };
 
+  // Évite d'afficher « plan gratuit » le temps de charger le plan actif.
+  if (activePlan.isLoading) return null;
+
   return (
     <div>
       <button
         type="button"
         onClick={() => setExpanded((e) => !e)}
         aria-expanded={expanded}
-        className="flex w-full flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl bg-brand-light/60 px-5 py-3.5 text-start text-sm transition-colors hover:bg-brand-light"
+        className={`flex w-full flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl px-5 py-3.5 text-start text-sm transition-colors ${
+          pastDue ? "bg-amber-50 hover:bg-amber-100" : "bg-brand-light/60 hover:bg-brand-light"
+        }`}
       >
-        <CreditCard size={16} className="shrink-0 text-brand" />
-        <span className="font-semibold text-ink">{t("dashboard.overview.planGate.bannerTitle")}</span>
-        <span className="text-muted-2">{t("dashboard.overview.planGate.bannerDesc")}</span>
+        {pastDue ? (
+          <AlertTriangle size={16} className="shrink-0 text-amber-600" />
+        ) : current ? (
+          <CheckCircle2 size={16} className="shrink-0 text-accent" />
+        ) : (
+          <CreditCard size={16} className="shrink-0 text-brand" />
+        )}
+        {current ? (
+          <>
+            <span className="font-semibold text-ink">
+              {t("dashboard.overview.planGate.currentTitle", { name: current.name })}
+            </span>
+            <span className={pastDue ? "text-amber-700" : "text-muted-2"}>
+              {pastDue
+                ? t("dashboard.overview.planGate.pastDue")
+                : current.next_maintenance_billing_at
+                  ? t("dashboard.overview.planGate.nextBilling", {
+                      date: new Date(current.next_maintenance_billing_at).toLocaleDateString(
+                        i18n.language.startsWith("en") ? "en-US" : "fr-FR",
+                        { day: "numeric", month: "long", year: "numeric" },
+                      ),
+                    })
+                  : t("dashboard.overview.planGate.activeDesc")}
+            </span>
+          </>
+        ) : (
+          <>
+            <span className="font-semibold text-ink">{t("dashboard.overview.planGate.bannerTitle")}</span>
+            <span className="text-muted-2">{t("dashboard.overview.planGate.bannerDesc")}</span>
+          </>
+        )}
         <span className="ms-auto flex shrink-0 items-center gap-1 text-sm font-semibold text-brand">
-          {expanded ? t("dashboard.overview.planGate.hide") : t("dashboard.overview.planGate.viewPlans")}
+          {expanded
+            ? t("dashboard.overview.planGate.hide")
+            : current
+              ? t("dashboard.overview.planGate.changePlan")
+              : t("dashboard.overview.planGate.viewPlans")}
           <ChevronDown
             size={14}
             className={`transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
@@ -320,12 +360,23 @@ function PlanPrompt() {
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {plans.data.map((plan) => {
                 const isSubscribingThis = subscribe.isPending && selectedPlanId === plan.id;
+                const isCurrent = current?.id === plan.id;
                 const grantedFeatures = Object.entries(plan.features)
                   .filter(([, granted]) => granted)
                   .map(([key]) => key);
                 return (
-                  <div key={plan.id} className={`flex h-full flex-col p-6 ${card}`}>
-                    <h3 className="font-display text-lg font-semibold text-ink">{plan.name}</h3>
+                  <div
+                    key={plan.id}
+                    className={`flex h-full flex-col p-6 ${card} ${isCurrent ? "border-accent ring-1 ring-accent" : ""}`}
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="font-display text-lg font-semibold text-ink">{plan.name}</h3>
+                      {isCurrent && (
+                        <span className="shrink-0 rounded-full bg-accent-light px-2.5 py-0.5 text-xs font-semibold text-accent">
+                          {t("dashboard.overview.planGate.currentPlan")}
+                        </span>
+                      )}
+                    </div>
                     {plan.description && (
                       <p className="mt-1 text-sm text-muted">{plan.description}</p>
                     )}
@@ -355,12 +406,14 @@ function PlanPrompt() {
                     <button
                       type="button"
                       onClick={() => openPinFor(plan)}
-                      disabled={subscribe.isPending}
+                      disabled={subscribe.isPending || isCurrent}
                       aria-busy={isSubscribingThis || undefined}
                       className="mt-6 flex h-10 items-center justify-center gap-1.5 rounded-full bg-brand px-5 text-sm font-semibold text-white transition-colors hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       {isSubscribingThis ? (
                         <ButtonSpinner label={t("dashboard.overview.planGate.subscribing")} size={16} />
+                      ) : isCurrent ? (
+                        t("dashboard.overview.planGate.currentPlan")
                       ) : (
                         t("dashboard.overview.planGate.subscribe")
                       )}

@@ -139,6 +139,8 @@ export type KycDocumentField =
   | "representative_id_back"
   | "other";
 
+export type KycBusinessType = "company" | "startup";
+
 export interface KycNotStarted {
   status: "not_started";
   message: string;
@@ -149,6 +151,8 @@ export interface KycRecord {
   status: "pending" | "approved" | "rejected";
   verification_type: string;
   provider: string | null;
+  business_name?: string | null;
+  business_type?: KycBusinessType | null;
   documents: string[];
   submitted_at: string;
   decided_at: string | null;
