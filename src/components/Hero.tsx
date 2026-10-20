@@ -6,7 +6,7 @@ import { useContent } from "../hooks/useContent";
 import { Reveal } from "./Reveal";
 import heroAsset from "../assets/hero.png";
 import patternAsset from "../assets/Group.png";
-import bgAsset from "../assets/bg.png";
+import bgAsset from "../assets/hero_woman.webp";
 import bgAsset2 from "../assets/bg_2.png";
 
 const SLIDE_COUNT = 2;
@@ -178,7 +178,7 @@ export function Hero() {
                   <motion.img
                     key={capIndex}
                     src={bgAsset}
-                    alt="Aperçu de l'application TrustSend"
+                    alt="Aperçu de l'application Reemite"
                     className="mx-auto hidden lg:block aspect-[5/4] w-full select-none object-contain lg:scale-125 lg:h-[60vh]"
                   />
 
@@ -263,7 +263,7 @@ export function Hero() {
 
                   <img
                     src={bgAsset2}
-                    alt="TrustSend : paiements, cartes et mobile money en Afrique"
+                    alt="Reemite : paiements, cartes et mobile money en Afrique"
                     className="mx-auto hidden lg:block  aspect-[5/4] w-full select-none object-contain lg:scale-125 lg:h-[60vh]"
                   />
                 </div>

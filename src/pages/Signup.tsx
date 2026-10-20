@@ -23,11 +23,9 @@ type Step = (typeof STEPS)[number];
 
 function Logo() {
   return (
-    <Link to="/" aria-label="TrustSend" className="inline-block">
-      {/* Le PNG est un carré avec beaucoup de marge blanche : on recadre sur le lockup */}
-      <div className="h-9 w-28 overflow-hidden">
-        <img src="/assets/icons/logo.png" alt="TrustSend" className="h-full w-full object-cover object-[center_48%]" />
-      </div>
+    <Link to="/" aria-label="Reemite" className="inline-block">
+      {/* Logo recadré au plus près (2133×600) : affiché entier, à sa hauteur. */}
+      <img src="/assets/icons/logo.png" alt="Reemite" className="h-9 w-auto" />
     </Link>
   );
 }

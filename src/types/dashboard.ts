@@ -37,7 +37,13 @@ export interface Wallet {
   updated_at: string;
 }
 
-export type TransactionType = "mobile_money_deposit" | "mobile_money_payout" | "fx_swap";
+export type TransactionType =
+  | "mobile_money_deposit"
+  | "mobile_money_payout"
+  | "fx_swap"
+  | "business_plan_subscription"
+  | "business_plan_maintenance_fee"
+  | "sandbox_funding";
 export type TransactionStatus = "initiated" | "pending" | "completed" | "failed";
 
 export interface Transaction {

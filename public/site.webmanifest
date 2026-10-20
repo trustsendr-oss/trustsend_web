@@ -1,12 +1,12 @@
 {
-  "name": "TrustSend — Payments and financial services",
-  "short_name": "TrustSend",
-  "description": "Manage payments, transfers and financial services with TrustSend.",
+  "name": "Reemite — Payments and financial services",
+  "short_name": "Reemite",
+  "description": "Manage payments, transfers and financial services with Reemite.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "theme_color": "#0d1b2a",
+  "theme_color": "#1E1872",
   "background_color": "#ffffff",
   "icons": [
     { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },

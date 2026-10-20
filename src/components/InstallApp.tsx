@@ -5,10 +5,10 @@ import { useTranslation } from "react-i18next";
 type InstallPromptEvent = Event & { prompt: () => Promise<void>; userChoice: Promise<{ outcome: "accepted" | "dismissed" }> };
 
 const copy = {
-  fr: { title: "Installer TrustSend", body: "Accédez plus vite à TrustSend depuis votre appareil.", action: "Installer", close: "Fermer" },
-  en: { title: "Install TrustSend", body: "Get faster access to TrustSend from your device.", action: "Install", close: "Close" },
-  ln: { title: "Kotya TrustSend", body: "Kota na TrustSend noki na aparɛyi na yo.", action: "Kotya", close: "Kanga" },
-  sw: { title: "Sakinisha TrustSend", body: "Fikia TrustSend kwa haraka kutoka kwenye kifaa chako.", action: "Sakinisha", close: "Funga" },
+  fr: { title: "Installer Reemite", body: "Accédez plus vite à Reemite depuis votre appareil.", action: "Installer", close: "Fermer" },
+  en: { title: "Install Reemite", body: "Get faster access to Reemite from your device.", action: "Install", close: "Close" },
+  ln: { title: "Kotya Reemite", body: "Kota na Reemite noki na aparɛyi na yo.", action: "Kotya", close: "Kanga" },
+  sw: { title: "Sakinisha Reemite", body: "Fikia Reemite kwa haraka kutoka kwenye kifaa chako.", action: "Sakinisha", close: "Funga" },
 };
 
 export function InstallApp() {

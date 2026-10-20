@@ -24,7 +24,7 @@ export const navMegaMenus: Record<string, NavMegaMenu> = {
           {
             label: "Cryptocurrencies",
             href: "/cryptomonnaies",
-            desc: "Buy, hold and spend crypto directly from your TrustSend wallet.",
+            desc: "Buy, hold and spend crypto directly from your Reemite wallet.",
             icon: "/assets/icons/products/x.svg",
           },
           {
@@ -58,7 +58,7 @@ export const navMegaMenus: Record<string, NavMegaMenu> = {
     ],
     promo: {
       eyebrow: "New",
-      heading: "TrustSend Virtual Cards",
+      heading: "Reemite Virtual Cards",
       desc: "Create a virtual card in seconds for all your online payments.",
       cta: "Discover cards",
       icon: "/assets/icons/products/capital.svg",
@@ -72,7 +72,7 @@ export const navMegaMenus: Record<string, NavMegaMenu> = {
         items: [
           {
             label: "Local Transfer",
-            desc: "Send funds instantly to any TrustSend wallet.",
+            desc: "Send funds instantly to any Reemite wallet.",
             icon: "/assets/icons/products/route.svg",
           },
           {
@@ -83,7 +83,7 @@ export const navMegaMenus: Record<string, NavMegaMenu> = {
           },
           {
             label: "Wallet to Wallet Swap",
-            desc: "Exchange funds between two TrustSend wallets instantly.",
+            desc: "Exchange funds between two Reemite wallets instantly.",
             icon: "/assets/icons/products/x.svg",
           },
         ],
@@ -94,7 +94,7 @@ export const navMegaMenus: Record<string, NavMegaMenu> = {
           {
             label: "Agent Deposit",
             href: "/agents",
-            desc: "Deposit cash at a TrustSend agent near you.",
+            desc: "Deposit cash at a Reemite agent near you.",
             icon: "/assets/icons/products/smartcollect.svg",
           },
           {
@@ -114,7 +114,7 @@ export const navMegaMenus: Record<string, NavMegaMenu> = {
     promo: {
       kind: "quote",
       heading: "",
-      desc: "Sending money to my family used to take days. With TrustSend transfers, it arrives in seconds, just like Wave.",
+      desc: "Sending money to my family used to take days. With Reemite transfers, it arrives in seconds, just like Wave.",
       cta: "Send now",
       quote: { name: "N. Gitau", title: "Customer", company: "Diaspora" },
     },
@@ -132,7 +132,7 @@ export const navMegaMenus: Record<string, NavMegaMenu> = {
           },
           {
             label: "Savings Goals",
-            desc: "Set a goal and let TrustSend set money aside for you.",
+            desc: "Set a goal and let Reemite set money aside for you.",
             icon: "/assets/icons/products/capital.svg",
           },
           {
@@ -180,12 +180,12 @@ export const navMegaMenus: Record<string, NavMegaMenu> = {
           {
             label: "Become an Agent",
             href: "/agents",
-            desc: "Join the TrustSend agent network and earn a commission on every deposit and withdrawal.",
+            desc: "Join the Reemite agent network and earn a commission on every deposit and withdrawal.",
             icon: "/assets/icons/products/route.svg",
           },
           {
             label: "Referral Program",
-            desc: "Refer TrustSend to merchants and earn on every transaction.",
+            desc: "Refer Reemite to merchants and earn on every transaction.",
             icon: "/assets/icons/products/capital.svg",
           },
         ],
@@ -218,9 +218,9 @@ export const navMegaMenus: Record<string, NavMegaMenu> = {
       heading: "Built for developers",
       desc: "Integrate cards, payments and transfers in an afternoon with our SDKs.",
       cta: "Read the docs",
-      code: `const TrustSend = require("TrustSend")(apiKey);
+      code: `const Reemite = require("Reemite")(apiKey);
 
-const transfer = await TrustSend.transfers.create({
+const transfer = await Reemite.transfers.create({
   amount: 50,
   currency: "USD",
   destination: "wallet_98213",
@@ -311,10 +311,10 @@ export const featureTabs: {
     label: "Crypto & Swap",
     heading: "Cryptocurrencies & Swap",
     description:
-      "Manage your digital assets and exchange funds between TrustSend wallets, without going through a bank.",
+      "Manage your digital assets and exchange funds between Reemite wallets, without going through a bank.",
     bullets: [
       { label: "Crypto wallet", desc: "Buy, hold and convert your crypto at the best market rate." },
-      { label: "Wallet to Wallet Swap", desc: "Instantly transfer funds from one TrustSend wallet to another." },
+      { label: "Wallet to Wallet Swap", desc: "Instantly transfer funds from one Reemite wallet to another." },
     ],
     variant: "payments",
     icon: "/assets/icons/products/x.svg",
@@ -338,7 +338,7 @@ export const featureTabs: {
     heading: "Local & International Transfers",
     description: "Send money instantly, at home or abroad, as simply as Wave.",
     bullets: [
-      { label: "Local Transfer", desc: "Send funds instantly to any TrustSend wallet." },
+      { label: "Local Transfer", desc: "Send funds instantly to any Reemite wallet." },
       { label: "International Transfer", desc: "Send and receive money from abroad with no hidden fees." },
     ],
     variant: "payouts",
@@ -350,7 +350,7 @@ export const featureTabs: {
     heading: "Withdraw & Deposit",
     description: "Convert your digital money to cash and back, at an agent or via Mobile Money.",
     bullets: [
-      { label: "Agent network", desc: "Deposit or withdraw cash at a TrustSend agent near you." },
+      { label: "Agent network", desc: "Deposit or withdraw cash at a Reemite agent near you." },
       { label: "Mobile Money", desc: "Top up or withdraw directly from your Mobile Money account." },
     ],
     variant: "banking",
@@ -391,7 +391,7 @@ export const industries: {
     count: "+ 12,000 merchants",
     icon: "/assets/icons/products/paymentpages.svg",
     photo:
-      "/assets/images/dev-showcase.webp",
+      "/assets/images/industry-merchants.webp",
     logos: ["Nova", "Loopay", "Bluewave"],
   },
   {
@@ -404,33 +404,33 @@ export const industries: {
     count: "+ 300 institutions",
     icon: "/assets/icons/products/invoices.svg",
     photo:
-      "/assets/images/team-laptop.jpg",
+      "/assets/images/industry-schools.webp",
     logos: ["Orbit", "Vantik", "Northstar"],
   },
   {
     name: "Diaspora",
     headingLead: "Send money to your",
     headingHighlight: "family, wherever they are",
-    blurb: "Instant international transfers to any TrustSend wallet.",
+    blurb: "Instant international transfers to any Reemite wallet.",
     detail:
       "Send money from abroad in seconds, with transparent fees and a clear exchange rate, as simply as Wave.",
     count: "+ 2,800 families connected",
     icon: "/assets/icons/products/capital.svg",
     photo:
-      "/assets/images/team-handshake.jpg",
+      "/assets/images/industry-diaspora.webp",
     logos: ["Fintra", "Corelink", "Meridian"],
   },
   {
     name: "Agents",
     headingLead: "Grow your business as a",
-    headingHighlight: "TrustSend agent",
+    headingHighlight: "Reemite agent",
     blurb: "Earn a commission on every deposit and withdrawal at your point of sale.",
     detail:
-      "Join the TrustSend agent network, process your customers' deposits and withdrawals, and get your commission automatically.",
+      "Join the Reemite agent network, process your customers' deposits and withdrawals, and get your commission automatically.",
     count: "+ 5,000 active agents",
     icon: "/assets/icons/products/route.svg",
     photo:
-      "/assets/images/developer-desk.jpg",
+      "/assets/images/industry-agents.webp",
     logos: ["Zenpay", "Cobalt", "Driftly"],
   },
   {
@@ -443,7 +443,7 @@ export const industries: {
     count: "+ 45,000 members",
     icon: "/assets/icons/products/x-club.svg",
     photo:
-      "/assets/images/team-meeting.webp",
+      "/assets/images/industry-savings.webp",
     logos: ["Lumen", "Parallel", "Corelink"],
   },
 ];
@@ -481,14 +481,14 @@ export const devCards = [
 ];
 
 export const codeSamples: Record<string, string> = {
-  "CURL": `curl -X POST https://api.TrustSend.com/v1/payments \\
+  "CURL": `curl -X POST https://api.reemite.com/v1/payments \\
   -u key_live_xxxxx: \\
   -d amount=50 \\
   -d currency="USD" \\
   -d receipt="qwsaq1" \\
   -d partial_payment=true \\
   -d first_payment_min_amount=20`,
-  "JAVA": `TrustSendClient client = new TrustSendClient(apiKey);
+  "JAVA": `ReemiteClient client = new ReemiteClient(apiKey);
 
 JSONObject paymentRequest = new JSONObject();
 paymentRequest.put("amount", 50);
@@ -498,9 +498,9 @@ paymentRequest.put("partial_payment", true);
 paymentRequest.put("first_payment_min_amount", 20);
 
 Payment payment = client.payments.create(paymentRequest);`,
-  "Python": `import TrustSend
+  "Python": `import Reemite
 
-client = TrustSend.Client(api_key=API_KEY)
+client = Reemite.Client(api_key=API_KEY)
 
 payment = client.payment.create({
     "amount": 50,
@@ -509,7 +509,7 @@ payment = client.payment.create({
     "partial_payment": True,
     "first_payment_min_amount": 20,
 })`,
-  "PHP": `$api = new TrustSend\\Api($apiKey);
+  "PHP": `$api = new Reemite\\Api($apiKey);
 
 $payment = $api->payment->create([
   "amount"                   => 50,
@@ -518,9 +518,9 @@ $payment = $api->payment->create([
   "partial_payment"          => true,
   "first_payment_min_amount" => 20,
 ]);`,
-  "NODE JS": `const TrustSend = require("TrustSend")(apiKey);
+  "NODE JS": `const Reemite = require("Reemite")(apiKey);
 
-const payment = await TrustSend.payments.create({
+const payment = await Reemite.payments.create({
   amount: 50,
   currency: "USD",
   receipt: "qwsaq1",
@@ -552,7 +552,7 @@ export const noCodeExamples: { icon: string; title: string; subtitle: string }[]
   },
 ];
 
-// Fictional testimonials illustrating how TrustSend products are used (cards,
+// Fictional testimonials illustrating how Reemite products are used (cards,
 // Likelemba, agents, transfers). Names and companies are generic examples,
 // not real customers.
 export const testimonials: {
@@ -563,23 +563,23 @@ export const testimonials: {
 }[] = [
   {
     quote:
-      "With TrustSend virtual cards, my online subscriptions never get blocked anymore. I manage them all from my phone.",
+      "With Reemite virtual cards, my online subscriptions never get blocked anymore. I manage them all from my phone.",
     name: "A. Kariuki",
     title: "Founder",
     company: "Boutique A",
   },
   {
     quote:
-      "Our Likelemba used to run on WhatsApp and a notebook. With TrustSend, every contribution is logged and no one can dispute it anymore.",
+      "Our Likelemba used to run on WhatsApp and a notebook. With Reemite, every contribution is logged and no one can dispute it anymore.",
     name: "D. Mensah",
     title: "Group treasurer",
     company: "Group B",
   },
   {
     quote:
-      "As a TrustSend agent, I handle deposits and withdrawals all day. The commission lands automatically, no manual calculations.",
+      "As a Reemite agent, I handle deposits and withdrawals all day. The commission lands automatically, no manual calculations.",
     name: "N. Achieng",
-    title: "TrustSend Agent",
+    title: "Reemite Agent",
     company: "Point C",
   },
   {
@@ -591,14 +591,14 @@ export const testimonials: {
   },
   {
     quote:
-      "Sending money to my family abroad used to take days. With TrustSend international transfers, it arrives in seconds.",
+      "Sending money to my family abroad used to take days. With Reemite international transfers, it arrives in seconds.",
     name: "N. Gitau",
     title: "Customer",
     company: "Diaspora E",
   },
   {
     quote:
-      "We integrated the TrustSend API for paying our in-store and online orders in a week, cards and Mobile Money included.",
+      "We integrated the Reemite API for paying our in-store and online orders in a week, cards and Mobile Money included.",
     name: "A. Njoroge",
     title: "Co-founder",
     company: "Commerce F",
@@ -607,39 +607,39 @@ export const testimonials: {
 
 export const faqs: { question: string; answer: string }[] = [
   {
-    question: "What is TrustSend?",
+    question: "What is Reemite?",
     answer:
-      "TrustSend is a business API that lets businesses and individuals issue virtual cards, accept payments, send and receive money, manage crypto, save as a group (Likelemba) and much more, from a single account.",
+      "Reemite is a business API that lets businesses and individuals issue virtual cards, accept payments, send and receive money, manage crypto, save as a group (Likelemba) and much more, from a single account.",
   },
   {
-    question: "What services does TrustSend offer?",
+    question: "What services does Reemite offer?",
     answer:
       "Virtual cards, cryptocurrencies, payments (subscriptions, school fees, in-store sales), local and international transfers, withdrawal and deposit via agents or Mobile Money, wallet-to-wallet swap, Likelemba savings and BGame — all in one platform.",
   },
   {
-    question: "How do TrustSend virtual cards work?",
+    question: "How do Reemite virtual cards work?",
     answer:
       "Generate a virtual Visa or Mastercard in seconds from the app, with customizable limits and the ability to freeze it instantly.",
   },
   {
-    question: "Can I buy and manage cryptocurrencies with TrustSend?",
+    question: "Can I buy and manage cryptocurrencies with Reemite?",
     answer:
-      "Yes. The TrustSend wallet lets you buy, hold and convert your crypto to cash, at the best market rate.",
+      "Yes. The Reemite wallet lets you buy, hold and convert your crypto to cash, at the best market rate.",
   },
   {
-    question: "How do I send money with TrustSend?",
+    question: "How do I send money with Reemite?",
     answer:
-      "Send funds instantly to any TrustSend wallet, locally or internationally, as simply as Wave.",
+      "Send funds instantly to any Reemite wallet, locally or internationally, as simply as Wave.",
   },
   {
     question: "How does withdrawal and deposit work?",
     answer:
-      "Visit a TrustSend agent near you, or use your Mobile Money account, to deposit or withdraw cash in minutes.",
+      "Visit a Reemite agent near you, or use your Mobile Money account, to deposit or withdraw cash in minutes.",
   },
   {
     question: "What is Wallet to Wallet Swap?",
     answer:
-      "Swap lets you instantly transfer funds between two TrustSend wallets, without going through a bank.",
+      "Swap lets you instantly transfer funds between two Reemite wallets, without going through a bank.",
   },
   {
     question: "How does Likelemba savings work?",
@@ -652,22 +652,22 @@ export const faqs: { question: string; answer: string }[] = [
       "BGame is our mini-games and rewards space: play, earn bonuses, and boost your savings with every transaction.",
   },
   {
-    question: "Is TrustSend safe and secure?",
+    question: "Is Reemite safe and secure?",
     answer:
-      "Yes. TrustSend uses encryption and tokenisation so your sensitive data never travels in plain text, and every transaction is tracked.",
+      "Yes. Reemite uses encryption and tokenisation so your sensitive data never travels in plain text, and every transaction is tracked.",
   },
   {
-    question: "Is TrustSend regulated?",
+    question: "Is Reemite regulated?",
     answer:
-      "TrustSend operates as a licensed payment institution in each market where the platform is available.",
+      "Reemite operates as a licensed payment institution in each market where the platform is available.",
   },
   {
-    question: "How do I become a TrustSend agent?",
+    question: "How do I become a Reemite agent?",
     answer:
       "Sign up from the app, complete verification of your point of sale, and start processing deposits and withdrawals within 48 hours.",
   },
   {
-    question: "How do I integrate the TrustSend API into my business?",
+    question: "How do I integrate the Reemite API into my business?",
     answer:
       "Create a free developer account, generate your API keys in test mode, and follow our documentation to integrate payments, cards and transfers in a few hours.",
   },
@@ -776,13 +776,13 @@ export const footerColumns: {
 ];
 
 // ---------------------------------------------------------------------------
-// Agents page — TrustSend cash-in / cash-out network
+// Agents page — Reemite cash-in / cash-out network
 // ---------------------------------------------------------------------------
 export const agentsPage = {
   hero: {
-    eyebrow: "TrustSend agent network",
+    eyebrow: "Reemite agent network",
     title: "Turn your shop into a",
-    titleAccent: "TrustSend cash point",
+    titleAccent: "Reemite cash point",
     subtitle:
       "Handle your customers' deposits and withdrawals, earn a commission on every operation and bring more people through your door, every single day.",
     ctaPrimary: "Become an agent",
@@ -868,20 +868,20 @@ export const agentsPage = {
   },
   testimonial: {
     quote:
-      "As a TrustSend agent, I handle deposits and withdrawals all day long. The commission lands automatically, with no manual maths.",
+      "As a Reemite agent, I handle deposits and withdrawals all day long. The commission lands automatically, with no manual maths.",
     name: "J. Mwamba",
-    role: "TrustSend agent, Kinshasa",
+    role: "Reemite agent, Kinshasa",
   },
   faq: {
     title: "Agent questions",
     items: [
       {
-        q: "Who can become a TrustSend agent?",
+        q: "Who can become a Reemite agent?",
         a: "Any adult running a shop or a regular commercial activity, with a valid ID document.",
       },
       {
         q: "Do I need starting capital?",
-        a: "Joining is free. All you need is a float — cash and a TrustSend balance to serve your customers.",
+        a: "Joining is free. All you need is a float — cash and a Reemite balance to serve your customers.",
       },
       {
         q: "When is the commission paid?",
@@ -925,7 +925,7 @@ export const transfersPage = {
     desc: "Estimate the amount delivered in real time. The exact rate is confirmed before you send.",
     youSend: "You send",
     theyGet: "Your recipient gets",
-    feeLabel: "TrustSend fee",
+    feeLabel: "Reemite fee",
     rateLabel: "Rate applied",
     deliveryLabel: "Estimated delivery",
     delivery: "under 5 minutes",
@@ -944,7 +944,7 @@ export const transfersPage = {
       },
       {
         icon: "Wallet",
-        title: "TrustSend wallet",
+        title: "Reemite wallet",
         desc: "Instant delivery into the wallet, ready to spend or save.",
       },
       {
@@ -955,7 +955,7 @@ export const transfersPage = {
       {
         icon: "Store",
         title: "Cash at an agent",
-        desc: "Cash pickup at one of the TrustSend agents in the neighbourhood.",
+        desc: "Cash pickup at one of the Reemite agents in the neighbourhood.",
       },
       {
         icon: "CreditCard",
@@ -965,7 +965,7 @@ export const transfersPage = {
       {
         icon: "Bitcoin",
         title: "Cryptocurrencies",
-        desc: "Convert and receive in stablecoins from your TrustSend wallet.",
+        desc: "Convert and receive in stablecoins from your Reemite wallet.",
       },
     ],
   },
@@ -979,11 +979,11 @@ export const transfersPage = {
       },
       {
         title: "Add the recipient",
-        desc: "Mobile Money number, bank account or TrustSend ID — once, then saved for next time.",
+        desc: "Mobile Money number, bank account or Reemite ID — once, then saved for next time.",
       },
       {
         title: "Pay and track",
-        desc: "Pay by card, bank transfer or TrustSend balance and follow the transfer until delivery.",
+        desc: "Pay by card, bank transfer or Reemite balance and follow the transfer until delivery.",
       },
     ],
   },
@@ -1016,7 +1016,7 @@ export const transfersPage = {
   },
   testimonial: {
     quote:
-      "Sending money to my family used to take days. With TrustSend transfers, it arrives in seconds, just like Wave.",
+      "Sending money to my family used to take days. With Reemite transfers, it arrives in seconds, just like Wave.",
     name: "N. Gitau",
     role: "Diaspora customer, London",
     photo:
@@ -1031,11 +1031,11 @@ export const transfersPage = {
       },
       {
         q: "How long does a transfer take?",
-        a: "Most transfers to Mobile Money or a TrustSend wallet arrive in under five minutes. Bank transfers can take up to one business day.",
+        a: "Most transfers to Mobile Money or a Reemite wallet arrive in under five minutes. Bank transfers can take up to one business day.",
       },
       {
-        q: "Does my recipient need a TrustSend account?",
-        a: "No. They can receive straight to their Mobile Money, their bank account, or as cash at a TrustSend agent.",
+        q: "Does my recipient need a Reemite account?",
+        a: "No. They can receive straight to their Mobile Money, their bank account, or as cash at a Reemite agent.",
       },
       {
         q: "What is the sending limit?",
@@ -1069,7 +1069,7 @@ export const virtualCardsPage = {
     title: "A Visa or Mastercard card",
     titleAccent: "in seconds",
     subtitle:
-      "Create, top up and freeze your virtual cards from your TrustSend account, for your online purchases and your team's.",
+      "Create, top up and freeze your virtual cards from your Reemite account, for your online purchases and your team's.",
   },
   features: {
     title: "Everything you need to pay online",
@@ -1171,7 +1171,7 @@ export const virtualCardsPage = {
     items: [
       {
         q: "Do I need a bank account?",
-        a: "No. Your TrustSend wallet is enough: top it up by Mobile Money, at an agent or by bank transfer.",
+        a: "No. Your Reemite wallet is enough: top it up by Mobile Money, at an agent or by bank transfer.",
       },
       {
         q: "Can I create several cards?",
@@ -1307,7 +1307,7 @@ export const cryptoPage = {
   },
   market: {
     eyebrow: "Market",
-    title: "Assets available on TrustSend",
+    title: "Assets available on Reemite",
     subtitle: "Buy from $1, with no foreign bank account needed.",
     stableTitle: "Stablecoins",
     stableSubtitle:
@@ -1330,7 +1330,7 @@ export const cryptoPage = {
       {
         icon: "ArrowLeftRight",
         title: "Instant buy & sell",
-        desc: "Pay by Mobile Money or from your TrustSend balance and get your crypto in seconds.",
+        desc: "Pay by Mobile Money or from your Reemite balance and get your crypto in seconds.",
       },
       {
         icon: "Repeat",
@@ -1350,7 +1350,7 @@ export const cryptoPage = {
       {
         icon: "Send",
         title: "Send to someone",
-        desc: "Transfer crypto to another TrustSend wallet or to an external address.",
+        desc: "Transfer crypto to another Reemite wallet or to an external address.",
       },
       {
         icon: "CreditCard",
@@ -1422,15 +1422,15 @@ export const cryptoPage = {
     items: [
       {
         q: "What is the minimum amount?",
-        a: "You can buy from $1 equivalent, paid by Mobile Money or from your TrustSend balance.",
+        a: "You can buy from $1 equivalent, paid by Mobile Money or from your Reemite balance.",
       },
       {
         q: "Can I cash out in local currency?",
-        a: "Yes. Sell your crypto in the app and collect the money on your Mobile Money or at a TrustSend agent.",
+        a: "Yes. Sell your crypto in the app and collect the money on your Mobile Money or at a Reemite agent.",
       },
       {
         q: "Who holds my crypto?",
-        a: "Your assets are held by TrustSend, mostly in cold storage, and stay available to sell or withdraw at any time.",
+        a: "Your assets are held by Reemite, mostly in cold storage, and stay available to sell or withdraw at any time.",
       },
       {
         q: "Can I send to an external wallet?",
@@ -1455,7 +1455,7 @@ export const merchantPage = {
     title: "Take payments",
     titleAccent: "without a card terminal",
     subtitle:
-      "QR code, payment link or shop page: your customers pay by Mobile Money, card or TrustSend balance, and you are credited in real time.",
+      "QR code, payment link or shop page: your customers pay by Mobile Money, card or Reemite balance, and you are credited in real time.",
     photo: "/assets/images/merchant-hero.webp",
   },
   channels: {
@@ -1501,7 +1501,7 @@ export const merchantPage = {
     desc: "No terminal to rent, no paper to print every day: one QR covers all your sales.",
     items: [
       { title: "Display your QR", desc: "On the counter, in the window or on your phone screen." },
-      { title: "The customer scans", desc: "From TrustSend or their usual Mobile Money app." },
+      { title: "The customer scans", desc: "From Reemite or their usual Mobile Money app." },
       { title: "Instant confirmation", desc: "You and your cashier get the notification at the same moment." },
       { title: "Balance credited", desc: "The money lands in your wallet, ready to withdraw or reuse." },
     ],
@@ -1568,8 +1568,8 @@ export const merchantPage = {
         a: "Immediately. The amount lands on your merchant balance as soon as the customer confirms the payment.",
       },
       {
-        q: "Do my customers need TrustSend?",
-        a: "No. They can pay from their usual Mobile Money app, by card, or from their TrustSend wallet.",
+        q: "Do my customers need Reemite?",
+        a: "No. They can pay from their usual Mobile Money app, by card, or from their Reemite wallet.",
       },
       {
         q: "Can I have several outlets?",

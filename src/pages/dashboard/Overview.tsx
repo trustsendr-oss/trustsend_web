@@ -37,8 +37,11 @@ import { planErrorMessage, useActivePlan, usePlans, useSubscribePlan } from "../
 import { getStoredBusiness } from "../../lib/session";
 import { formatMinorUnits } from "../../lib/format";
 import { TransactionRow } from "../../components/dashboard/TransactionRow";
+import { TransactionDetails } from "../../components/dashboard/TransactionDetails";
+import { useOperators } from "../../hooks/usePaymentMethods";
+import { metaString } from "../../lib/transactions";
 import { PinModal } from "../../components/dashboard/PinModal";
-import type { KycStatusData, Plan } from "../../types/dashboard";
+import type { KycStatusData, Plan, Transaction } from "../../types/dashboard";
 
 const keyUpdates = [
   {
@@ -454,6 +457,12 @@ export function Overview() {
   const overview = useOverview();
   const wallets = useWallets();
   const txs = useTransactions(1, 5);
+  const operators = useOperators();
+  const [selectedTx, setSelectedTx] = useState<Transaction | null>(null);
+  const operatorOf = (tx: Transaction) => {
+    const code = metaString(tx, "provider_code");
+    return code ? operators.get(code) : undefined;
+  };
   const kyc = useKycStatus();
   const updatesRef = useRef<HTMLDivElement>(null);
 
@@ -485,14 +494,14 @@ export function Overview() {
           <div className="flex flex-wrap items-center gap-3">
             <Link
               to="/dashboard/deposit"
-              className="inline-flex h-12 items-center gap-2.5 rounded-2xl bg-brand-light px-5 text-sm font-semibold text-brand shadow-card transition-shadow hover:shadow-pop"
+              className="inline-flex h-8 items-center gap-2.5 rounded bg-brand px-5 text-sm font-semibold text-white  transition-shadow hover:shadow-pop"
             >
               <ArrowDownToLine size={18} />
               {t("dashboard.overview.deposit")}
             </Link>
             <Link
               to="/dashboard/withdraw"
-              className="inline-flex h-10 items-center gap-2 rounded-full border border-black/10 px-4 text-sm font-semibold text-ink transition-colors hover:bg-surface"
+              className="inline-flex h-8 items-center gap-2 rounded border border-black/10 px-4 text-sm font-semibold text-ink transition-colors hover:bg-surface"
             >
               <ArrowUpFromLine size={16} />
               {t("dashboard.overview.withdraw")}
@@ -626,7 +635,13 @@ export function Overview() {
         ) : txs.data && txs.data.data.length > 0 ? (
           <ul className="divide-y divide-black/[0.06] border-t border-black/[0.06]">
             {txs.data.data.map((tx) => (
-              <TransactionRow key={tx.transaction_id} tx={tx} />
+              <TransactionRow
+                key={tx.transaction_id}
+                tx={tx}
+                operator={operatorOf(tx)}
+                selected={selectedTx?.transaction_id === tx.transaction_id}
+                onSelect={setSelectedTx}
+              />
             ))}
           </ul>
         ) : (
@@ -635,6 +650,12 @@ export function Overview() {
           </p>
         )}
       </section>
+
+      <TransactionDetails
+        tx={selectedTx}
+        operator={selectedTx ? operatorOf(selectedTx) : undefined}
+        onClose={() => setSelectedTx(null)}
+      />
 
       {/* Actualités clés */}
       <section className="mt-8">

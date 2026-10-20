@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { AlertCircle, ArrowRight, CheckCircle2, Info } from "lucide-react";
+import { AlertCircle, ArrowRight, CheckCircle2, ChevronDown, Info, Phone } from "lucide-react";
 import { ButtonSpinner, LoadingSpinner } from "../LoadingSpinner";
 import type { UseMutationResult } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -12,6 +12,7 @@ import type { MobileMoneyOperationResult, Wallet } from "../../types/dashboard";
 import { formatMinorUnits } from "../../lib/format";
 import { LiveStatusCheck } from "./LiveStatusCheck";
 import { PinModal } from "./PinModal";
+import { OutlinedField, outlinedControl } from "./OutlinedField";
 
 export interface MobileMoneyPreview {
   wallet?: Wallet;
@@ -24,10 +25,19 @@ export interface MobileMoneyPreview {
   canSubmit: boolean;
 }
 
-const inputClasses =
-  "w-full rounded-md border border-surface-2 bg-white px-3.5 py-2.5 text-sm text-ink outline-none transition-shadow duration-150 placeholder:text-muted-2 focus:border-ink focus:ring-4 focus:ring-ink/[0.08] disabled:cursor-not-allowed disabled:bg-surface disabled:opacity-60";
-
-const selectClasses = inputClasses;
+function StepTitle({ step, title, desc }: { step: number; title: string; desc: string }) {
+  return (
+    <div className="flex items-start gap-3">
+      <span className="mt-px flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">
+        {step}
+      </span>
+      <div>
+        <h2 className="font-display text-[15px] font-semibold text-ink sm:text-base">{title}</h2>
+        <p className="mt-0.5 text-xs text-muted sm:text-sm">{desc}</p>
+      </div>
+    </div>
+  );
+}
 
 function newIdempotencyKey() {
   return crypto.randomUUID();
@@ -202,8 +212,10 @@ export function MobileMoneyForm({
 
   if (mutation.isSuccess) {
     return (
-      <div className="rounded-2xl border border-surface-2 bg-white p-6 text-center">
-        <CheckCircle2 size={36} className="mx-auto text-accent" />
+      <div className="rounded-2xl border border-surface-2 bg-white p-8 text-center shadow-card">
+        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50">
+          <CheckCircle2 size={30} className="text-emerald-600" />
+        </span>
         <p className="mt-3 font-display text-lg font-semibold text-ink">{t("dashboard.mobileMoneyForm.success")}</p>
         <p className="mt-1 text-sm text-muted">
           {t("dashboard.mobileMoneyForm.status")} : <span className="font-semibold text-ink">{mutation.data.status}</span>
@@ -246,146 +258,185 @@ export function MobileMoneyForm({
       <form
         id={formId}
         onSubmit={onSubmit}
-        className="space-y-4 rounded-2xl border border-surface-2 bg-white p-6"
+        className="rounded-2xl border border-surface-2 bg-white shadow-card"
       >
-      <div>
-        <label className="mb-2 block text-sm font-medium text-ink" htmlFor="country">
-          {t("dashboard.mobileMoneyForm.country")}
-        </label>
-        <ImageSelect
-          id="country"
-          options={countryOptions}
-          value={countryCode}
-          onChange={onCountryChange}
-          placeholder={t("dashboard.mobileMoneyForm.countryPlaceholder")}
-        />
-      </div>
+        <section className="p-4 sm:p-6">
+          <StepTitle
+            step={1}
+            title={t("dashboard.mobileMoneyForm.sectionMethod")}
+            desc={t("dashboard.mobileMoneyForm.sectionMethodDesc")}
+          />
+          <div className="mt-5 grid gap-4 sm:gap-5 sm:grid-cols-2">
+            <OutlinedField label={t("dashboard.mobileMoneyForm.country")} htmlFor="country" filled={!!countryCode}>
+              <ImageSelect
+                id="country"
+                bare
+                options={countryOptions}
+                value={countryCode}
+                onChange={onCountryChange}
+                placeholder={t("dashboard.mobileMoneyForm.countryPlaceholder")}
+              />
+            </OutlinedField>
 
-      <div>
-        <label className="mb-2 block text-sm font-medium text-ink" htmlFor="currency">
-          {t("dashboard.mobileMoneyForm.currency")}
-        </label>
-        <select
-          id="currency"
-          required
-          disabled={!country}
-          value={currencyCode}
-          onChange={(e) => onCurrencyChange(e.target.value)}
-          className={selectClasses}
-        >
-          <option value="">{t("dashboard.mobileMoneyForm.currencyPlaceholder")}</option>
-          {currencies.map((c) => (
-            <option key={c.currency} value={c.currency}>
-              {c.displayName} ({c.currency})
-            </option>
-          ))}
-        </select>
-      </div>
+            <OutlinedField
+              label={t("dashboard.mobileMoneyForm.currency")}
+              htmlFor="currency"
+              filled={!!currencyCode}
+              disabled={!country}
+            >
+              <select
+                id="currency"
+                required
+                disabled={!country}
+                value={currencyCode}
+                onChange={(e) => onCurrencyChange(e.target.value)}
+                className={`${outlinedControl} pe-10`}
+              >
+                <option value="" disabled hidden />
+                {currencies.map((c) => (
+                  <option key={c.currency} value={c.currency}>
+                    {c.displayName} ({c.currency})
+                  </option>
+                ))}
+              </select>
+              <ChevronDown
+                size={16}
+                className="pointer-events-none absolute end-3.5 top-1/2 z-[1] -translate-y-1/2 text-muted-2"
+              />
+            </OutlinedField>
 
-      <div>
-        <label className="mb-2 block text-sm font-medium text-ink" htmlFor="provider">
-          {t("dashboard.mobileMoneyForm.provider")}
-        </label>
-        <ImageSelect
-          id="provider"
-          options={providerOptions}
-          value={providerCode}
-          onChange={setProviderCode}
-          placeholder={t("dashboard.mobileMoneyForm.providerPlaceholder")}
-          disabled={!currencyCode}
-        />
-      </div>
+            <div className="sm:col-span-2">
+              <OutlinedField
+                label={t("dashboard.mobileMoneyForm.provider")}
+                htmlFor="provider"
+                filled={!!providerCode}
+                disabled={!currencyCode}
+              >
+                <ImageSelect
+                  id="provider"
+                  bare
+                  options={providerOptions}
+                  value={providerCode}
+                  onChange={setProviderCode}
+                  placeholder={t("dashboard.mobileMoneyForm.providerPlaceholder")}
+                  disabled={!currencyCode}
+                />
+              </OutlinedField>
+            </div>
+          </div>
+        </section>
 
-      <div>
-        <label className="mb-2 block text-sm font-medium text-ink" htmlFor="phone">
-          {t("dashboard.mobileMoneyForm.phone")}
-        </label>
-        <input
-          id="phone"
-          type="tel"
-          required
-          value={phone}
-          onInput={(e) => setPhone(e.currentTarget.value.replace(/[^0-9]/g, ""))}
-          placeholder={country ? `${country.prefix}...` : "260763456789"}
-          className={inputClasses}
-        />
-        {country && (
-          <p className="mt-1 text-xs text-muted">
-            {t("dashboard.mobileMoneyForm.prefix", { country: country.displayName[lang], prefix: country.prefix })}
-          </p>
-        )}
-      </div>
+        <section className="border-t border-surface-2 p-4 sm:p-6">
+          <StepTitle
+            step={2}
+            title={t("dashboard.mobileMoneyForm.sectionDetails")}
+            desc={t("dashboard.mobileMoneyForm.sectionDetailsDesc")}
+          />
+          <div className="mt-5 grid gap-4 sm:gap-5 sm:grid-cols-2">
+            <OutlinedField
+              label={t("dashboard.mobileMoneyForm.phone")}
+              htmlFor="phone"
+              filled={!!phone}
+              start={<Phone size={16} className="text-muted-2" />}
+              helper={
+                country &&
+                t("dashboard.mobileMoneyForm.prefix", { country: country.displayName[lang], prefix: country.prefix })
+              }
+            >
+              <input
+                id="phone"
+                type="tel"
+                inputMode="numeric"
+                autoComplete="tel"
+                required
+                value={phone}
+                onInput={(e) => setPhone(e.currentTarget.value.replace(/[^0-9]/g, ""))}
+                placeholder={country ? `${country.prefix}…` : "260763456789"}
+                className={`${outlinedControl} ps-2.5 font-mono tracking-wide`}
+              />
+            </OutlinedField>
 
-      <div>
-        <label className="mb-2 block text-sm font-medium text-ink" htmlFor="amount">
-          {t("dashboard.mobileMoneyForm.amount")}
-        </label>
-        <input
-          id="amount"
-          type="number"
-          min="0"
-          step={activeConfig ? String(10 ** -amountDecimals) : "any"}
-          required
-          disabled={!activeConfig}
-          value={amount}
-          onInput={(e) => setAmount(e.currentTarget.value)}
-          placeholder="100"
-          className={selectClasses}
-        />
-        {activeConfig && (
-          <p className="mt-1 text-xs text-muted">
-            {t("dashboard.mobileMoneyForm.amountRange", {
-              min: activeConfig.minAmount,
-              max: activeConfig.maxAmount,
-              currency: currencyCode,
-            })}
-          </p>
-        )}
-        {operation === "PAYOUT" && wallets && currencyCode && (
-          <p className={`mt-1 text-xs ${insufficientBalance ? "text-red-600" : "text-muted"}`}>
-            {selectedWallet
-              ? t("dashboard.mobileMoneyForm.availableBalance", {
-                  balance: formatMinorUnits(selectedWallet.balance, selectedWallet.currency_code),
-                })
-              : t("dashboard.mobileMoneyForm.noWalletForCurrency")}
-          </p>
-        )}
-      </div>
+            <OutlinedField
+              label={t("dashboard.mobileMoneyForm.amount")}
+              htmlFor="amount"
+              filled={!!amount}
+              disabled={!activeConfig}
+              error={insufficientBalance && !!amount}
+              end={currencyCode || undefined}
+              helper={
+                <>
+                  {activeConfig && (
+                    <p>
+                      {t("dashboard.mobileMoneyForm.amountRange", {
+                        min: activeConfig.minAmount,
+                        max: activeConfig.maxAmount,
+                        currency: currencyCode,
+                      })}
+                    </p>
+                  )}
+                  {operation === "PAYOUT" && wallets && currencyCode && (
+                    <p className={insufficientBalance ? "text-red-600" : ""}>
+                      {selectedWallet
+                        ? t("dashboard.mobileMoneyForm.availableBalance", {
+                            balance: formatMinorUnits(selectedWallet.balance, selectedWallet.currency_code),
+                          })
+                        : t("dashboard.mobileMoneyForm.noWalletForCurrency")}
+                    </p>
+                  )}
+                </>
+              }
+            >
+              <input
+                id="amount"
+                type="number"
+                inputMode="decimal"
+                min="0"
+                step={activeConfig ? String(10 ** -amountDecimals) : "any"}
+                required
+                disabled={!activeConfig}
+                value={amount}
+                onInput={(e) => setAmount(e.currentTarget.value)}
+                placeholder="0"
+                className={`${outlinedControl} font-semibold tabular-nums`}
+              />
+            </OutlinedField>
+          </div>
 
-      {activeConfig && (
-        <p className="flex items-start gap-1.5 text-xs text-muted-2">
-          <Info size={13} className="mt-0.5 shrink-0" />
-          {t("dashboard.mobileMoneyForm.operatorFeesNotice")}
-        </p>
-      )}
-
-      {insufficientBalance && amount && (
-        <p className="flex items-center gap-1.5 rounded border border-red-200 bg-red-50 px-3.5 py-2.5 text-sm text-red-700">
-          <AlertCircle size={15} />
-          {selectedWallet
-            ? t("dashboard.mobileMoneyForm.insufficientBalanceWarning")
-            : t("dashboard.mobileMoneyForm.noWalletForCurrency")}
-        </p>
-      )}
-
-      {!hideSubmitButton && (
-        <button
-          type="submit"
-          disabled={mutation.isPending || !canSubmit}
-          aria-busy={mutation.isPending || undefined}
-          className="group flex w-full items-center justify-center gap-2 rounded bg-brand px-6 py-3.5 font-semibold text-white shadow-soft transition-colors hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {mutation.isPending ? (
-            <ButtonSpinner label={pendingLabel} />
-          ) : (
-            <>
-              {submitLabel}
-              <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5" />
-            </>
+          {activeConfig && (
+            <p className="mt-5 flex items-start gap-2 rounded-lg bg-surface px-3.5 py-2.5 text-xs text-muted-2">
+              <Info size={14} className="mt-px shrink-0 text-brand" />
+              {t("dashboard.mobileMoneyForm.operatorFeesNotice")}
+            </p>
           )}
-        </button>
-      )}
-    </form>
+
+          {insufficientBalance && amount && (
+            <p className="mt-4 flex items-center gap-1.5 rounded-lg border border-red-200 bg-red-50 px-3.5 py-2.5 text-sm text-red-700">
+              <AlertCircle size={15} />
+              {selectedWallet
+                ? t("dashboard.mobileMoneyForm.insufficientBalanceWarning")
+                : t("dashboard.mobileMoneyForm.noWalletForCurrency")}
+            </p>
+          )}
+
+          {!hideSubmitButton && (
+            <button
+              type="submit"
+              disabled={mutation.isPending || !canSubmit}
+              aria-busy={mutation.isPending || undefined}
+              className="group mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-brand px-6 py-3.5 font-semibold text-white shadow-soft transition-colors hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {mutation.isPending ? (
+                <ButtonSpinner label={pendingLabel} />
+              ) : (
+                <>
+                  {submitLabel}
+                  <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                </>
+              )}
+            </button>
+          )}
+        </section>
+      </form>
 
       <PinModal
         open={pinModalOpen}

@@ -21,7 +21,7 @@ import { WhatsAppButton } from "../components/WhatsAppButton";
 import { Reveal } from "../components/Reveal";
 import { useContent } from "../hooks/useContent";
 import { businessUrl } from "../lib/domains";
-import transferHero from "../assets/transfer_hero.png";
+import transferHero from "../assets/transfer_hero.webp";
 import patternAsset from "../assets/Group.png";
 import arcAsset from "../assets/Group (1).png";
 import loopPattern from "../assets/Group (2).png";
@@ -86,12 +86,14 @@ export function InternationalTransfer() {
               />
               <img
                 src={transferHero}
-                alt="Réseau de transferts internationaux TrustSend : mobile money, banques, cartes et wallets"
-                width={1889}
-                height={1532}
+                alt="Réseau de transferts internationaux Reemite : mobile money, banques, cartes et wallets"
+                width={1152}
+                height={864}
                 loading="eager"
                 decoding="async"
-                className="mx-auto block h-auto w-full max-w-full select-none object-contain"
+                // Rendu 3D sur fond blanc : la multiplication fond ce blanc dans le
+                // gris de la section, en gardant le relief et les ombres de la carte.
+                className="mx-auto block h-auto w-full max-w-full select-none object-contain mix-blend-multiply"
               />
             </div>
           </div>

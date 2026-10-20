@@ -145,7 +145,7 @@ export function Nav() {
         {/* ---------- Logo : toujours à gauche ---------- */}
         <Link
           to="/"
-          aria-label="TrustSend"
+          aria-label="Reemite"
           className="relative z-20 flex min-w-0 shrink-0 items-center"
         >
           <div
@@ -160,7 +160,7 @@ export function Nav() {
           >
             <img
               src="/assets/icons/logo.png"
-              alt="TrustSend"
+              alt="Reemite"
               className="block h-full w-full object-contain object-left"
             />
           </div>

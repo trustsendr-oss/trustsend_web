@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useContent } from "../hooks/useContent";
 import { Reveal } from "./Reveal";
-import multiDeviceAsset from "../assets/multi_device.png";
+import multiDeviceAsset from "../assets/multi_device.webp";
 
 export function FeatureBlocks() {
   const { t } = useTranslation();
@@ -53,7 +53,7 @@ export function FeatureBlocks() {
                 <div className="flex justify-center">
                   <img
                     src={multiDeviceAsset}
-                    alt="Aperçu de l'application TrustSend"
+                    alt="Aperçu de l'application Reemite"
                     className="block w-full max-w-[520px] select-none object-contain"
                   />
                 </div>

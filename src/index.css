@@ -5,7 +5,7 @@
   --color-brand-dark: #1e46d1;
   --color-brand-light: #eaf0ff;
   --color-link: #0099ff;
-  --color-accent: #0035DD;
+  --color-accent: #2563EB;
   --color-accent-light: #c6f076;
   --color-ink: #192839;
   --color-muted: #5d6d86;
@@ -29,6 +29,18 @@
   --shadow-pop: 0 8px 24px rgba(25, 40, 57, 0.16);
 
   --animate-marquee: marquee 32s linear infinite;
+  --animate-compose-in: compose-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes compose-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes marquee {

@@ -68,7 +68,7 @@ export function WebhooksPage() {
             required
             value={url}
             onInput={(e) => setUrl(e.currentTarget.value)}
-            placeholder="https://maboutique.com/webhooks/TrustSend"
+            placeholder="https://maboutique.com/webhooks/Reemite"
             className="w-full rounded border border-surface-2 bg-surface px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-muted focus:border-brand focus:bg-white focus:ring-4 focus:ring-brand-light"
           />
         </div>

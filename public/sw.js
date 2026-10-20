@@ -1,4 +1,4 @@
-const CACHE = "trustsend-shell-v1";
+const CACHE = "reemite-shell-v2";
 const APP_SHELL = ["/", "/site.webmanifest", "/android-chrome-192x192.png", "/android-chrome-512x512.png"];
 
 self.addEventListener("install", (event) => {

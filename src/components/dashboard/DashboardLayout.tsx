@@ -168,7 +168,7 @@ export function DashboardLayout() {
                 }`;
                 const content = (
                   <>
-                    <item.icon size={18} strokeWidth={active ? 2.25 : 1.75} className="shrink-0" />
+                    <item.icon size={18} color="#2563EB" fill="#2563EB" strokeWidth={active ? 2.25 : 1.75} className="shrink-0" />
                     {rail ? <span className="sr-only">{label}</span> : <span className="truncate">{label}</span>}
                   </>
                 );
@@ -230,7 +230,7 @@ export function DashboardLayout() {
             <Menu size={20} />
           </button>
           <Link to="/dashboard" className="flex h-12 items-center overflow-hidden">
-            <img src="/assets/icons/logo.png" alt="TrustSend" className="h-40 w-auto object-contain" />
+            <img src="/assets/icons/logo.png" alt="Reemite" className="h-9! w-auto max-w-none! object-contain sm:h-10!" />
           </Link>
         </div>
 
@@ -328,7 +328,7 @@ export function DashboardLayout() {
       <div className="flex min-h-0 flex-1">
         {/* ---------- Sidebar desktop (repliable en rail) ---------- */}
         <aside
-          className={`hidden shrink-0 flex-col transition-[width] duration-200 lg:flex ${
+          className={`hidden shrink-0 flex-col transition-[width] duration-200 lg:flex pt-8 ${
             collapsed ? "w-[72px]" : "w-64"
           }`}
         >

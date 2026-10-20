@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="14.08" fill="#1E1872"/><g transform="translate(8.96 8.96) scale(0.4608)">
+  <defs>
+    <linearGradient id="leg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#12A9FC"/>
+      <stop offset="1" stop-color="#0B86E3"/>
+    </linearGradient>
+    <linearGradient id="streak" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0" stop-color="#12A9FC" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#12A9FC" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="cut" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+      <rect x="-10" y="-10" width="120" height="120" fill="white"/>
+      <rect x="18" y="40.5" width="29.5" height="17" rx="3.2" fill="black" stroke="black" stroke-width="2.6"/><rect x="10.5" y="49.5" width="34.5" height="19" rx="3.6" fill="black" stroke="black" stroke-width="2.6"/><rect x="5" y="57.5" width="36.5" height="27" rx="4.6" fill="black" stroke="black" stroke-width="2.6"/>
+    </mask>
+  </defs><g mask="url(#cut)"><path d="M 24 57.5 Q 36 51 52 50.5 L 57 50.5 L 60.5 55 L 32 58.5 Z" fill="url(#streak)"/><path d="M 51 47.5 L 65 47.5 L 93 89 Q 95 92 91.4 92 L 81 92 Q 78.6 92 77.4 90.2 Z" fill="url(#leg)"/><path d="M 15 7 L 61 7 C 79 7 91 18.5 91 33 C 91 44.5 85.5 52.5 78 56.5 Q 74 58.6 70.6 55.4 L 64.4 49.6 Q 62 47.4 64.8 45.6 C 69.6 42.8 72 39.4 72 35 C 72 30 68 27 62 27 L 28.5 27 Q 25.5 27 23.4 24.9 L 12.6 14.2 Q 9.6 11.2 11.3 9 Q 12.6 7 15 7 Z" fill="#FFFFFF"/></g><rect x="18" y="40.5" width="29.5" height="17" rx="3.2" fill="#FFFFFF" stroke="#1E1872" stroke-width="2.6" paint-order="stroke"/><rect x="10.5" y="49.5" width="34.5" height="19" rx="3.6" fill="#FFFFFF" stroke="#1E1872" stroke-width="2.6" paint-order="stroke"/><rect x="5" y="57.5" width="36.5" height="27" rx="4.6" fill="#FFFFFF" stroke="#1E1872" stroke-width="2.6" paint-order="stroke"/><circle cx="28.699999999999996" cy="72.0" r="1.05" fill="#A7AFD6"/><circle cx="34.3" cy="72.0" r="2.5" fill="#1E1872"/></g></svg>

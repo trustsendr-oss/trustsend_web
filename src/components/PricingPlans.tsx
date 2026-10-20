@@ -66,7 +66,7 @@ export function PricingPlans() {
               />
               <img
                 src="/assets/home/pg-graphic.png"
-                alt="Passerelle de paiement TrustSend connectée aux différents moyens de paiement"
+                alt="Passerelle de paiement Reemite connectée aux différents moyens de paiement"
                 width={1020}
                 height={960}
                 loading="eager"

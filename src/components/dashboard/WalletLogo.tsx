@@ -21,7 +21,7 @@ export function WalletLogo({ wallet, className = "h-10 w-10" }: { wallet: Wallet
       src={src}
       alt={wallet.currency_code}
       onError={() => setFailed(true)}
-      className={`shrink-0 rounded-full border border-surface-2 object-cover ${className}`}
+      className={`aspect-square shrink-0 rounded-full border border-surface-2 object-cover ${className}`}
     />
   );
 }

@@ -4,18 +4,18 @@
     "slideNext": "Next slide",
     "headline": "Pay. Send. Receive.",
     "headlineAccent": "Simply.",
-    "subtext": "With TrustSend, your phone becomes your wallet to pay, transfer and receive money with total ease.",
+    "subtext": "With Reemite, your phone becomes your wallet to pay, transfer and receive money with total ease.",
     "ctaStart": "Get started now",
     "ctaLearnMore": "Learn more",
     "availablePayments": "Available payments",
     "whatToDo": "What do you want to do?",
     "showLabel": "Show {{label}}",
     "ctaSignupNow": "Sign up now",
-    "poweredBy": "Powered by TrustSend"
+    "poweredBy": "Powered by Reemite"
   },
   "nav": {
     "banner": {
-      "message": "TrustSend is now available in your country!",
+      "message": "Reemite is now available in your country!",
       "cta": "Learn more",
       "close": "Dismiss banner"
     },
@@ -32,7 +32,7 @@
     "title": "Compatible with all Mobile Money providers in Africa"
   },
   "platformStandards": {
-    "eyebrow": "The TrustSend Standard",
+    "eyebrow": "The Reemite Standard",
     "title": "The same benefits, everywhere, for everyone",
     "subtitle": "Our commitment to every user, without exception."
   },
@@ -42,7 +42,7 @@
   },
   "industryGrid": {
     "title": "Built for every kind of user",
-    "subtitle": "Merchant, school, agent, or savings group: TrustSend adapts to how you actually manage your money.",
+    "subtitle": "Merchant, school, agent, or savings group: Reemite adapts to how you actually manage your money.",
     "seeSolutions": "See solutions"
   },
   "featureBlocks": {
@@ -107,7 +107,7 @@
   "devShowcase": {
     "eyebrow": "For developers",
     "title": "Simple tools. Powerful integrations.",
-    "subtitle": "Everything you need to integrate TrustSend cards, payments and transfers into your products.",
+    "subtitle": "Everything you need to integrate Reemite cards, payments and transfers into your products.",
     "example": "example"
   },
   "noCodeShowcase": {
@@ -115,7 +115,7 @@
     "subtitle": "Pay, send, get paid or save as a group in seconds — no website and no developer needed."
   },
   "testimonials": {
-    "title": "TrustSend grows with you!",
+    "title": "Reemite grows with you!",
     "subtitle": "Trusted by those who move money every day",
     "prev": "Previous testimonial",
     "next": "Next testimonial",
@@ -130,12 +130,12 @@
     "reject": "Reject"
   },
   "ctaBanner": {
-    "title": "Grow your business with TrustSend",
+    "title": "Grow your business with Reemite",
     "subtitle": "Virtual cards, payments, local and international transfers, withdrawals and deposits via agents or Mobile Money, crypto, Likelemba savings and BGame — your entire financial business from a single platform.",
     "cta": "Sign up now"
   },
   "footer": {
-    "legal": "TrustSend Technologies Ltd. · Registered office , Kinshasa, DR Congo · Reg. No. 19",
+    "legal": "Reemite Technologies Ltd. · Registered office , Kinshasa, DR Congo · Reg. No. 19",
     "rights": "All rights reserved.",
     "terms": "Terms",
     "privacy": "Privacy",
@@ -147,11 +147,11 @@
   "whatsapp": {
     "label": "Chat on WhatsApp",
     "close": "Close",
-    "title": "TrustSend Assistant",
+    "title": "Reemite Assistant",
     "status": "Typically replies in a few minutes",
     "message": "Hi! A question about payments, APIs or your account? Chat with our team on WhatsApp.",
     "cta": "Start a chat",
-    "prefill": "Hello TrustSend, I would like some information."
+    "prefill": "Hello Reemite, I would like some information."
   },
   "login": {
     "backHome": "Back to home",
@@ -173,13 +173,13 @@
     "terms": "Terms of Service",
     "and": "and our",
     "privacy": "Privacy Policy",
-    "quote": "\"TrustSend changed the way I manage my business's payments, transfers and savings, every day.\"",
-    "quoteAttribution": "Alice N. — Founder, TrustSend",
+    "quote": "\"Reemite changed the way I manage my business's payments, transfers and savings, every day.\"",
+    "quoteAttribution": "Alice N. — Founder, Reemite",
     "errorInvalidCredentials": "Incorrect email or password.",
     "errorPending": "Your account isn't active yet. It must be approved before you can log in.",
     "errorLocked": "Too many attempts. Try again in 15 minutes.",
     "errorGeneric": "Something went wrong, please try again.",
-    "sandboxNotice": "You are signing in to the sandbox, TrustSend's test environment."
+    "sandboxNotice": "You are signing in to the sandbox, Reemite's test environment."
   },
   "signup": {
     "title": "Create your account",
@@ -195,7 +195,7 @@
     "passwordPlaceholder": "8 characters minimum",
     "acceptTerms": "I accept the",
     "and": "and the",
-    "termsSuffix": "of TrustSend.",
+    "termsSuffix": "of Reemite.",
     "submit": "Create my business account",
     "submitting": "Creating account…",
     "sendCode": "Send code",
@@ -217,8 +217,8 @@
     "successCreated": "Account created",
     "successPendingBody": "{{name}} has been registered with the email {{email}}. Your account must be approved before you can log in.",
     "backToLogin": "Back to login",
-    "quote": "\"Within a week, we were already managing our cards, transfers and team savings from a single TrustSend account.\"",
-    "quoteAttribution": "Alice N. — Founder, TrustSend",
+    "quote": "\"Within a week, we were already managing our cards, transfers and team savings from a single Reemite account.\"",
+    "quoteAttribution": "Alice N. — Founder, Reemite",
     "sandboxNotice": "Sandbox account: activated immediately, fictitious money. For a real account, sign up at business.trustsend.africa.",
     "sandboxSuccessBody": "Your sandbox account {{name}} is active. Sign in with {{email}} to generate a test API key."
   },
@@ -309,7 +309,7 @@
       },
       "planGate": {
         "bannerTitle": "You're on the free plan.",
-        "bannerDesc": "Upgrade to a paid plan to get the most out of TrustSend.",
+        "bannerDesc": "Upgrade to a paid plan to get the most out of Reemite.",
         "currentTitle": "Current plan: {{name}}",
         "nextBilling": "Next maintenance billing on {{date}}.",
         "activeDesc": "Your plan is active.",
@@ -344,11 +344,82 @@
     },
     "transactions": {
       "title": "Transactions",
-      "subtitle": "History of mobile money deposits and withdrawals.",
+      "subtitle": "Full history of your deposits, withdrawals, swaps and payments.",
       "error": "Couldn't load the transactions.",
       "none": "No transactions yet.",
       "pageOf": "Page {{page}} of {{total}}",
-      "outOfTotal": "{{count}} total"
+      "outOfTotal": "{{count}} total",
+      "wallet": "Wallet",
+      "previous": "Previous page",
+      "next": "Next page",
+      "columns": {
+        "transaction": "Transaction",
+        "method": "Payment method",
+        "date": "Date",
+        "status": "Status",
+        "amount": "Amount"
+      },
+      "status": {
+        "completed": "Completed",
+        "failed": "Failed",
+        "pending": "Pending",
+        "initiated": "Initiated"
+      },
+      "types": {
+        "mobile_money_deposit": "Mobile Money deposit",
+        "mobile_money_payout": "Mobile Money withdrawal",
+        "fx_swap": "Currency swap",
+        "business_plan_subscription": "Plan subscription",
+        "business_plan_maintenance_fee": "Maintenance fee",
+        "sandbox_funding": "Sandbox funding"
+      },
+      "detail": {
+        "title": "Transaction details",
+        "close": "Close",
+        "copy": "Copy",
+        "failureReason": "Failure reason",
+        "paymentMethod": "Payment method",
+        "mobileMoney": "Mobile Money",
+        "country": "Country",
+        "payerPhone": "Payer number",
+        "recipientPhone": "Recipient number",
+        "swap": "Swap",
+        "debited": "Amount debited",
+        "credited": "Amount received",
+        "rate": "Applied rate",
+        "fee": "Fees",
+        "plan": "Plan",
+        "planCode": "Plan code",
+        "amounts": "Amounts",
+        "grossAmount": "Gross amount",
+        "netAmount": "Net amount",
+        "references": "References",
+        "transactionId": "Transaction ID",
+        "providerRef": "Operator ref.",
+        "ledgerEntry": "Ledger entry",
+        "processor": "Processor",
+        "timeline": "Timeline",
+        "createdAt": "Created",
+        "completedAt": "Completed",
+        "minimize": "Minimize",
+        "restore": "Restore",
+        "fullscreen": "Full screen",
+        "exitFullscreen": "Exit full screen"
+      },
+      "filters": {
+        "search": "Search",
+        "searchPlaceholder": "Search by transaction ID, phone, operator or operator ref…",
+        "type": "Type",
+        "status": "Status",
+        "currency": "Currency",
+        "allTypes": "All types",
+        "allStatuses": "All statuses",
+        "allCurrencies": "All currencies",
+        "from": "From",
+        "to": "To",
+        "reset": "Reset",
+        "noResults": "No transactions match these filters."
+      }
     },
     "kyc": {
       "title": "KYC Verification",
@@ -506,7 +577,7 @@
       "alreadyExists": "A {{currency}} wallet already existed.",
       "createError": "Couldn't create this wallet, please try again.",
       "addCurrency": "Add a currency",
-      "addCurrencySubtitle": "Currencies currently open on TrustSend.",
+      "addCurrencySubtitle": "Currencies currently open on Reemite.",
       "added": "Added",
       "searchCurrency": "Search a currency",
       "loadingCurrencies": "Loading currencies…",
@@ -528,7 +599,8 @@
       "previewBalance": "Current balance",
       "previewAmount": "Amount to deposit",
       "previewAfter": "Balance after deposit",
-      "newWalletNotice": "No wallet in this currency yet — it will be created automatically on your first deposit."
+      "newWalletNotice": "No wallet in this currency yet — it will be created automatically on your first deposit.",
+      "securityNote": "Secure operation, confirmed with your PIN."
     },
     "withdraw": {
       "title": "Withdraw",
@@ -621,7 +693,11 @@
       "errorLiveNotOwned": "This transaction doesn't belong to you.",
       "errorLiveNotFound": "Transaction not found.",
       "errorLiveUnavailable": "PawaPay is unreachable, or has no record of this transaction yet.",
-      "errorLiveGeneric": "Couldn't check the status, please try again."
+      "errorLiveGeneric": "Couldn't check the status, please try again.",
+      "sectionMethod": "Payment method",
+      "sectionMethodDesc": "Choose the country, currency and mobile money operator.",
+      "sectionDetails": "Operation details",
+      "sectionDetailsDesc": "Enter the mobile money number and the amount."
     },
     "cards": {
       "title": "Cards",
@@ -667,7 +743,7 @@
     },
     "apiKeys": {
       "title": "API Keys",
-      "subtitle": "Use an API key to integrate TrustSend server-side.",
+      "subtitle": "Use an API key to integrate Reemite server-side.",
       "generate": "Generate a key",
       "generating": "Generating…",
       "copyNotice": "Copy this key now — it will never be shown again.",
@@ -749,7 +825,7 @@
       "pinChangeSuccess": "PIN code changed successfully.",
       "welcome": "Welcome, {{name}}",
       "welcomeDesc": "Manage your info, account security and settings.",
-      "accountInfoDesc": "Details used to identify your business on TumaPlus.",
+      "accountInfoDesc": "Details used to identify your business on Reemite.",
       "securityDesc": "Settings and recommendations to help keep your account secure.",
       "email": "Email",
       "password": "Password",

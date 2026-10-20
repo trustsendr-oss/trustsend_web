@@ -10,7 +10,7 @@ function DashboardChrome({ children }: { children: ReactNode }) {
             T+
           </span>
           <span className="font-display font-bold text-sm text-ink">
-            TrustSend
+            Reemite
           </span>
         </div>
         <div className="flex items-center gap-1.5 text-xs font-medium text-accent">

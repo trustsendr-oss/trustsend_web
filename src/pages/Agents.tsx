@@ -17,9 +17,9 @@ import { useContent } from "../hooks/useContent";
 import { businessUrl } from "../lib/domains";
 import arcAsset from "../assets/Group (1).png";
 import loopPattern from "../assets/Group (2).png";
-import agentHero from "../assets/agent_hero.png";
+import agentHero from "../assets/agent_hero.webp";
 import networkVisual from "../assets/bg_2.png";
-import walletVisual from "../assets/multi_device.png";
+import walletVisual from "../assets/multi_device.webp";
 import africaCard from "../assets/africa_card.png";
 
 const icons: Record<string, ComponentType<{ size?: number; className?: string }>> = {
@@ -69,7 +69,7 @@ export function Agents() {
             {/* Image (mobile / tablette) */}
             <img
               src={agentHero}
-              alt="Agents TrustSend servant des clients dans un point Mobile Money"
+              alt="Agents Reemite servant des clients dans un point Mobile Money"
               className="mt-12 block w-full select-none rounded-4xl object-cover lg:hidden"
             />
           </div>

@@ -65,7 +65,7 @@ export function VirtualCards() {
               />
               <img
                 src={"/assets/images/bank-card.webp"}
-                alt="Carte virtuelle TrustSend créée depuis le tableau de bord"
+                alt="Carte virtuelle Reemite créée depuis le tableau de bord"
                 loading="eager"
                 decoding="async"
                 className="mx-auto block h-auto w-full max-w-full select-none object-contain"

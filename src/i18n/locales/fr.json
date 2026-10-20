@@ -4,18 +4,18 @@
     "slideNext": "Slide suivante",
     "headline": "Payez. Envoyez. Recevez.",
     "headlineAccent": "Simplement.",
-    "subtext": "Avec TrustSend, votre mobile devient votre portefeuille pour payer, transférer et recevoir de l'argent en toute simplicité.",
+    "subtext": "Avec Reemite, votre mobile devient votre portefeuille pour payer, transférer et recevoir de l'argent en toute simplicité.",
     "ctaStart": "Commencer maintenant",
     "ctaLearnMore": "En savoir plus",
     "availablePayments": "Paiements disponibles",
     "whatToDo": "Que voulez-vous faire ?",
     "showLabel": "Afficher {{label}}",
     "ctaSignupNow": "S'inscrire maintenant",
-    "poweredBy": "Powered by TrustSend"
+    "poweredBy": "Powered by Reemite"
   },
   "nav": {
     "banner": {
-      "message": "TrustSend est désormais disponible dans votre pays !",
+      "message": "Reemite est désormais disponible dans votre pays !",
       "cta": "En savoir plus",
       "close": "Fermer la bannière"
     },
@@ -32,7 +32,7 @@
     "title": "Compatible avec tous les Mobile Money d'Afrique"
   },
   "platformStandards": {
-    "eyebrow": "Le Standard TrustSend",
+    "eyebrow": "Le Standard Reemite",
     "title": "Les mêmes avantages, partout, pour tout le monde",
     "subtitle": "Notre engagement envers chaque utilisateur, sans exception."
   },
@@ -42,7 +42,7 @@
   },
   "industryGrid": {
     "title": "Adapté à chaque profil d'utilisateur",
-    "subtitle": "Commerçant, école, agent ou groupe d'épargne : TrustSend s'adapte à la façon dont vous gérez réellement votre argent.",
+    "subtitle": "Commerçant, école, agent ou groupe d'épargne : Reemite s'adapte à la façon dont vous gérez réellement votre argent.",
     "seeSolutions": "Voir les solutions"
   },
   "featureBlocks": {
@@ -107,7 +107,7 @@
   "devShowcase": {
     "eyebrow": "Pour les développeurs",
     "title": "Des outils simples. Des intégrations puissantes.",
-    "subtitle": "Tout ce qu'il faut pour intégrer cartes, paiements et transferts TrustSend dans vos produits.",
+    "subtitle": "Tout ce qu'il faut pour intégrer cartes, paiements et transferts Reemite dans vos produits.",
     "example": "exemple"
   },
   "noCodeShowcase": {
@@ -115,7 +115,7 @@
     "subtitle": "Payer, envoyer, encaisser ou épargner en groupe : quelques secondes suffisent, sans site web ni développeur."
   },
   "testimonials": {
-    "title": "TrustSend grandit avec vous !",
+    "title": "Reemite grandit avec vous !",
     "subtitle": "Adopté par ceux qui font bouger l'argent chaque jour",
     "prev": "Témoignage précédent",
     "next": "Témoignage suivant",
@@ -130,12 +130,12 @@
     "reject": "Refuser"
   },
   "ctaBanner": {
-    "title": "Boostez votre business avec TrustSend",
+    "title": "Boostez votre business avec Reemite",
     "subtitle": "Cartes virtuelles, paiements, transferts locaux et internationaux, retrait et dépôt via agents ou Mobile Money, cryptos, épargne Likelemba et BGame — tout votre business financier depuis une seule plateforme.",
     "cta": "S'inscrire maintenant"
   },
   "footer": {
-    "legal": "TrustSend Technologies Ltd. · Siège social gombe, Kinshasa, RD Congo · N° Reg. 19",
+    "legal": "Reemite Technologies Ltd. · Siège social gombe, Kinshasa, RD Congo · N° Reg. 19",
     "rights": "Tous droits réservés.",
     "terms": "Conditions",
     "privacy": "Confidentialité",
@@ -147,11 +147,11 @@
   "whatsapp": {
     "label": "Discuter sur WhatsApp",
     "close": "Fermer",
-    "title": "Assistant TrustSend",
+    "title": "Assistant Reemite",
     "status": "Répond généralement en quelques minutes",
     "message": "Bonjour ! Une question sur les paiements, les APIs ou votre compte ? Discutez avec notre équipe sur WhatsApp.",
     "cta": "Démarrer la discussion",
-    "prefill": "Bonjour TrustSend, je souhaite avoir des informations."
+    "prefill": "Bonjour Reemite, je souhaite avoir des informations."
   },
   "login": {
     "backHome": "Retour à l'accueil",
@@ -173,13 +173,13 @@
     "terms": "Conditions d'utilisation",
     "and": "et notre",
     "privacy": "Politique de confidentialité",
-    "quote": "\"TrustSend a changé la façon dont je gère les paiements, les transferts et l'épargne de mon business, au quotidien.\"",
-    "quoteAttribution": "Alice N. — Fondatrice, TrustSend",
+    "quote": "\"Reemite a changé la façon dont je gère les paiements, les transferts et l'épargne de mon business, au quotidien.\"",
+    "quoteAttribution": "Alice N. — Fondatrice, Reemite",
     "errorInvalidCredentials": "E-mail ou mot de passe incorrect.",
     "errorPending": "Votre compte n'est pas encore actif. Il doit être approuvé avant de pouvoir vous connecter.",
     "errorLocked": "Trop de tentatives. Réessayez dans 15 minutes.",
     "errorGeneric": "Une erreur est survenue, veuillez réessayer.",
-    "sandboxNotice": "Vous vous connectez à la sandbox, l'environnement de test de TrustSend."
+    "sandboxNotice": "Vous vous connectez à la sandbox, l'environnement de test de Reemite."
   },
   "signup": {
     "title": "Créer un compte",
@@ -195,7 +195,7 @@
     "passwordPlaceholder": "8 caractères minimum",
     "acceptTerms": "J'accepte les",
     "and": "et la",
-    "termsSuffix": "de TrustSend.",
+    "termsSuffix": "de Reemite.",
     "submit": "Créer mon compte business",
     "submitting": "Création en cours…",
     "sendCode": "Envoyer le code",
@@ -217,8 +217,8 @@
     "successCreated": "Compte créé",
     "successPendingBody": "{{name}} a été enregistré avec l'e-mail {{email}}. Votre compte doit être approuvé avant de pouvoir vous connecter.",
     "backToLogin": "Retour à la connexion",
-    "quote": "\"En une semaine, on gérait déjà nos cartes, nos transferts et notre épargne d'équipe depuis un seul compte TrustSend.\"",
-    "quoteAttribution": "Alice N. — Fondatrice, TrustSend",
+    "quote": "\"En une semaine, on gérait déjà nos cartes, nos transferts et notre épargne d'équipe depuis un seul compte Reemite.\"",
+    "quoteAttribution": "Alice N. — Fondatrice, Reemite",
     "sandboxNotice": "Compte sandbox : activé immédiatement, argent fictif. Pour un vrai compte, inscrivez-vous sur business.trustsend.africa.",
     "sandboxSuccessBody": "Votre compte sandbox {{name}} est actif. Connectez-vous avec {{email}} pour générer une clé API de test."
   },
@@ -309,7 +309,7 @@
       },
       "planGate": {
         "bannerTitle": "Vous êtes sur le plan gratuit.",
-        "bannerDesc": "Passez à un plan payant pour profiter pleinement de TrustSend.",
+        "bannerDesc": "Passez à un plan payant pour profiter pleinement de Reemite.",
         "currentTitle": "Plan actuel : {{name}}",
         "nextBilling": "Prochaine facturation de maintenance le {{date}}.",
         "activeDesc": "Votre plan est actif.",
@@ -344,11 +344,82 @@
     },
     "transactions": {
       "title": "Transactions",
-      "subtitle": "Historique des dépôts et retraits mobile money.",
+      "subtitle": "Historique complet de vos dépôts, retraits, échanges et paiements.",
       "error": "Impossible de charger les transactions.",
       "none": "Aucune transaction pour le moment.",
       "pageOf": "Page {{page}} sur {{total}}",
-      "outOfTotal": "{{count}} au total"
+      "outOfTotal": "{{count}} au total",
+      "wallet": "Portefeuille",
+      "previous": "Page précédente",
+      "next": "Page suivante",
+      "columns": {
+        "transaction": "Transaction",
+        "method": "Moyen de paiement",
+        "date": "Date",
+        "status": "Statut",
+        "amount": "Montant"
+      },
+      "status": {
+        "completed": "Complété",
+        "failed": "Échoué",
+        "pending": "En attente",
+        "initiated": "Initié"
+      },
+      "types": {
+        "mobile_money_deposit": "Dépôt Mobile Money",
+        "mobile_money_payout": "Retrait Mobile Money",
+        "fx_swap": "Échange de devises",
+        "business_plan_subscription": "Abonnement au plan",
+        "business_plan_maintenance_fee": "Frais de maintenance",
+        "sandbox_funding": "Crédit sandbox"
+      },
+      "detail": {
+        "title": "Détail de la transaction",
+        "close": "Fermer",
+        "copy": "Copier",
+        "failureReason": "Motif de l'échec",
+        "paymentMethod": "Moyen de paiement",
+        "mobileMoney": "Mobile Money",
+        "country": "Pays",
+        "payerPhone": "Numéro payeur",
+        "recipientPhone": "Numéro bénéficiaire",
+        "swap": "Échange",
+        "debited": "Montant débité",
+        "credited": "Montant reçu",
+        "rate": "Taux appliqué",
+        "fee": "Frais",
+        "plan": "Plan",
+        "planCode": "Code du plan",
+        "amounts": "Montants",
+        "grossAmount": "Montant brut",
+        "netAmount": "Montant net",
+        "references": "Références",
+        "transactionId": "ID transaction",
+        "providerRef": "Réf. opérateur",
+        "ledgerEntry": "Écriture comptable",
+        "processor": "Prestataire",
+        "timeline": "Chronologie",
+        "createdAt": "Créée le",
+        "completedAt": "Finalisée le",
+        "minimize": "Réduire",
+        "restore": "Restaurer",
+        "fullscreen": "Plein écran",
+        "exitFullscreen": "Quitter le plein écran"
+      },
+      "filters": {
+        "search": "Rechercher",
+        "searchPlaceholder": "Rechercher par n° de transaction, téléphone, opérateur ou réf. opérateur…",
+        "type": "Type",
+        "status": "Statut",
+        "currency": "Devise",
+        "allTypes": "Tous les types",
+        "allStatuses": "Tous les statuts",
+        "allCurrencies": "Toutes les devises",
+        "from": "Du",
+        "to": "Au",
+        "reset": "Réinitialiser",
+        "noResults": "Aucune transaction ne correspond à ces critères."
+      }
     },
     "kyc": {
       "title": "Vérification KYC",
@@ -506,7 +577,7 @@
       "alreadyExists": "Un portefeuille {{currency}} existait déjà.",
       "createError": "Impossible de créer ce portefeuille, veuillez réessayer.",
       "addCurrency": "Ajouter une devise",
-      "addCurrencySubtitle": "Devises actuellement ouvertes sur TrustSend.",
+      "addCurrencySubtitle": "Devises actuellement ouvertes sur Reemite.",
       "added": "Ajouté",
       "searchCurrency": "Rechercher une devise",
       "loadingCurrencies": "Chargement des devises…",
@@ -528,7 +599,8 @@
       "previewBalance": "Solde actuel",
       "previewAmount": "Montant à déposer",
       "previewAfter": "Solde après dépôt",
-      "newWalletNotice": "Aucun portefeuille dans cette devise — il sera créé automatiquement lors du premier dépôt."
+      "newWalletNotice": "Aucun portefeuille dans cette devise — il sera créé automatiquement lors du premier dépôt.",
+      "securityNote": "Opération sécurisée, confirmée par votre code PIN."
     },
     "withdraw": {
       "title": "Retrait",
@@ -621,7 +693,11 @@
       "errorLiveNotOwned": "Cette transaction ne vous appartient pas.",
       "errorLiveNotFound": "Transaction introuvable.",
       "errorLiveUnavailable": "PawaPay est injoignable, ou n'a encore aucune trace de cette transaction.",
-      "errorLiveGeneric": "Impossible de vérifier le statut, veuillez réessayer."
+      "errorLiveGeneric": "Impossible de vérifier le statut, veuillez réessayer.",
+      "sectionMethod": "Moyen de paiement",
+      "sectionMethodDesc": "Choisissez le pays, la devise et l'opérateur mobile money.",
+      "sectionDetails": "Détails de l'opération",
+      "sectionDetailsDesc": "Indiquez le numéro mobile money et le montant."
     },
     "cards": {
       "title": "Cartes",
@@ -667,7 +743,7 @@
     },
     "apiKeys": {
       "title": "Clés API",
-      "subtitle": "Utilisez une clé API pour intégrer TrustSend côté serveur.",
+      "subtitle": "Utilisez une clé API pour intégrer Reemite côté serveur.",
       "generate": "Générer une clé",
       "generating": "Génération…",
       "copyNotice": "Copiez cette clé maintenant — elle ne sera plus jamais affichée.",
@@ -749,7 +825,7 @@
       "pinChangeSuccess": "Code PIN changé avec succès.",
       "welcome": "Bienvenue, {{name}}",
       "welcomeDesc": "Gérez vos informations, la sécurité de votre compte et vos paramètres.",
-      "accountInfoDesc": "Informations utilisées pour identifier votre entreprise sur TumaPlus.",
+      "accountInfoDesc": "Informations utilisées pour identifier votre entreprise sur Reemite.",
       "securityDesc": "Paramètres et recommandations pour protéger votre compte.",
       "email": "E-mail",
       "password": "Mot de passe",
