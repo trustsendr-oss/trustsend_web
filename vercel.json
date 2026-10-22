@@ -6,9 +6,9 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [{ "type": "host", "value": "reemite.com" }],
-      "destination": "https://www.reemite.com/:path*",
+      "destination": "https://www.reemite.com/$1",
       "permanent": true
     },
     {
