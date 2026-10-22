@@ -4,9 +4,11 @@
  * le même build Vercel — ce module décide quelles routes monter selon l'hôte courant et
  * fabrique les liens croisés entre les deux domaines.
  *
- * L'ancien domaine trustsend.africa est toujours servi par ce build : un visiteur qui y arrive
- * reste dessus et parle à l'API du même domaine, sinon le cookie de session (SameSite=Lax) ne
- * suivrait pas les requêtes.
+ * L'ancien domaine trustsend.africa reste servi pour l'espace client (business., sandbox.) : un
+ * visiteur qui y arrive reste dessus et parle à l'API du même domaine, sinon le cookie de session
+ * (SameSite=Lax) ne suivrait pas les requêtes. Le site vitrine www.trustsend.africa, lui, est
+ * redirigé en 301 vers www.reemite.com (vercel.json) : les liens vers la vitrine pointent donc
+ * toujours sur reemite.com.
  *
  * Les redirections « dures » se font en amont dans vercel.json (règles conditionnées par hôte) ;
  * ce fichier est la seconde barrière, côté client, et la source de vérité pour les liens.
@@ -28,7 +30,7 @@ export const isProductionHost =
   isLegacyHost || hostname === PRIMARY_DOMAIN || hostname.endsWith(`.${PRIMARY_DOMAIN}`);
 
 export const BUSINESS_HOST = `business.${ROOT_DOMAIN}`;
-export const MARKETING_HOST = `www.${ROOT_DOMAIN}`;
+export const MARKETING_HOST = `www.${PRIMARY_DOMAIN}`;
 export const SANDBOX_HOST = `sandbox.${ROOT_DOMAIN}`;
 
 export const BUSINESS_ORIGIN = `https://${BUSINESS_HOST}`;

@@ -49,6 +49,12 @@
       "permanent": false
     },
     {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.trustsend.africa" }],
+      "destination": "https://www.reemite.com/:path*",
+      "permanent": true
+    },
+    {
       "source": "/",
       "has": [{ "type": "host", "value": "business.reemite.com" }],
       "destination": "/dashboard",
@@ -81,7 +87,7 @@
     {
       "source": "/:path(pricing|agents|transferts-internationaux|cartes-virtuelles|cryptomonnaies|paiement-marchand)",
       "has": [{ "type": "host", "value": "sandbox.trustsend.africa" }],
-      "destination": "https://www.trustsend.africa/:path",
+      "destination": "https://www.reemite.com/:path",
       "permanent": false
     },
     {
@@ -93,7 +99,7 @@
     {
       "source": "/:path(pricing|agents|transferts-internationaux|cartes-virtuelles|cryptomonnaies|paiement-marchand)",
       "has": [{ "type": "host", "value": "business.trustsend.africa" }],
-      "destination": "https://www.trustsend.africa/:path",
+      "destination": "https://www.reemite.com/:path",
       "permanent": false
     }
   ],
