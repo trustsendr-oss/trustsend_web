@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useHref, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   ArrowRight,
@@ -14,6 +14,9 @@ import {
 import { useContent } from "../hooks/useContent";
 import { AuthLink } from "./AuthLink";
 import { LanguageFlag } from "./LanguageFlag";
+import { rememberLanguage } from "../i18n";
+import { languageFromPath, localizedPath } from "../lib/languageRoutes";
+import { PRERENDER_ROUTES } from "../seo";
 import type { NavMegaMenu } from "../data/content.fr";
 import cardmaprBg from "../assets/cardmapr-nl-0hs_mYB9KRc-unsplash.jpg";
 
@@ -53,9 +56,20 @@ export function Nav() {
     return () => document.removeEventListener("mousedown", onClick);
   }, [langOpen]);
 
+  const location = useLocation();
+  const urlLanguage = languageFromPath(useHref("/"));
+
+  // Sur les pages publiques, français et anglais ont chacun leur URL (/pricing ↔ /en/pricing) ;
+  // le lingala et le swahili se traduisent sur l'URL française
   const switchLang = (lng: "fr" | "en" | "ln" | "sw") => {
-    i18n.changeLanguage(lng);
     setLangOpen(false);
+    const target = lng === "en" ? "en" : "fr";
+    if (target !== urlLanguage && PRERENDER_ROUTES.includes(location.pathname)) {
+      rememberLanguage(lng);
+      window.location.assign(localizedPath(location.pathname, target) + location.search + location.hash);
+      return;
+    }
+    i18n.changeLanguage(lng);
   };
 
   useEffect(() => {
@@ -409,13 +423,13 @@ export function Nav() {
                 return (
                   <div key={link.label} className="border-b border-surface-2/60 last:border-0">
                     <div className="flex items-center">
-                      <a
+                      <NavItemLink
                         href={link.href}
                         className="flex-1 py-3.5 text-[15px] font-medium text-ink"
                         onClick={() => setOpen(false)}
                       >
                         {link.label}
-                      </a>
+                      </NavItemLink>
                       {menu && (
                         <button
                           onClick={() =>

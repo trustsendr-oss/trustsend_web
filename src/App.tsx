@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useHref, useLocation } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Pricing } from "./pages/Pricing";
 import { Agents } from "./pages/Agents";
@@ -31,7 +31,7 @@ import { Legal } from "./pages/Legal";
 import { InstallApp } from "./components/InstallApp";
 import { Contact } from "./pages/Contact";
 import { Seo } from "./components/Seo";
-import { resolveSeo } from "./seo";
+import { languageFromPath } from "./lib/languageRoutes";
 import {
   BUSINESS_ORIGIN,
   MARKETING_ORIGIN,
@@ -41,18 +41,12 @@ import {
 
 function App() {
   const location = useLocation();
-  const currentSeo = resolveSeo(location.pathname);
+  // Le basename du routeur porte la langue de l'URL : "/en" pour l'anglais
+  const urlLanguage = languageFromPath(useHref("/"));
 
   return (
     <>
-      <Seo
-        title={currentSeo.title}
-        description={currentSeo.description}
-        keywords={currentSeo.keywords}
-        image={currentSeo.image}
-        robots={currentSeo.robots}
-        pathname={location.pathname}
-      />
+      <Seo pathname={location.pathname} lang={urlLanguage} />
 
       <Routes>
         {/* ---------- Site vitrine (www) ---------- */}

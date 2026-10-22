@@ -47,14 +47,13 @@ export function PricingPlans() {
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
           <Reveal>
             <span className="text-sm font-semibold tracking-wide text-brand">
-              Tarification API
+              {t("pricingHeader.eyebrow")}
             </span>
             <h1 className="mt-3 font-display text-3xl font-bold text-balance text-ink lg:text-4xl">
-              Frais d'installation API
+              {t("pricingHeader.title")}
             </h1>
             <p className="mt-4 max-w-md text-lg text-muted">
-              Un frais unique selon votre marché, réglé une seule fois lors de
-              l'intégration à votre plateforme.
+              {t("pricingHeader.subtitle")}
             </p>
           </Reveal>
 
@@ -66,7 +65,7 @@ export function PricingPlans() {
               />
               <img
                 src="/assets/home/pg-graphic.png"
-                alt="Passerelle de paiement Reemite connectée aux différents moyens de paiement"
+                alt={t("pricingHeader.imageAlt")}
                 width={1020}
                 height={960}
                 loading="eager"
@@ -186,8 +185,7 @@ export function PricingPlans() {
 
           <Reveal delay={0.2} className="mt-10">
             <p className="mx-auto max-w-lg text-center text-sm leading-relaxed text-muted">
-              Les frais de maintenance couvrent le support et le fonctionnement
-              continu de votre intégration API.
+              {t("pricingHeader.maintenanceNote")}
             </p>
           </Reveal>
         </div>

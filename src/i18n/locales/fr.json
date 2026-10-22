@@ -933,5 +933,42 @@
     "loading": "Chargement des offres…",
     "error": "Impossible de charger les offres pour le moment. Réessayez dans quelques instants.",
     "empty": "Aucune offre n'est disponible pour le moment."
+  },
+  "contactPage": {
+    "eyebrow": "Support Reemite",
+    "title": "Comment pouvons-nous vous aider ?",
+    "intro": "Créez un ticket pour démarrer une discussion avec notre équipe. Vous serez redirigé vers notre canal WhatsApp sécurisé avec votre référence de ticket.",
+    "created": "Ticket créé",
+    "referenceBefore": "Votre référence est",
+    "referenceAfter": ". Continuez la discussion dans WhatsApp.",
+    "open": "Ouvrir la discussion",
+    "another": "Créer un autre ticket",
+    "name": "Nom complet",
+    "email": "Adresse e-mail",
+    "subject": "Sujet",
+    "chooseSubject": "Choisissez un sujet",
+    "subjects": [
+      "Compte et vérification",
+      "Paiement ou transfert",
+      "Carte virtuelle",
+      "Question commerciale",
+      "Autre demande"
+    ],
+    "message": "Votre message",
+    "messagePlaceholder": "Décrivez votre demande sans partager de mot de passe, code PIN ou données de carte.",
+    "submit": "Créer le ticket et discuter",
+    "followTitle": "Un suivi simple",
+    "followBody": "Conservez votre référence de ticket pour faciliter le suivi de votre demande.",
+    "chatTitle": "Discussion directe",
+    "chatBody": "Notre canal WhatsApp permet de poursuivre rapidement la conversation avec l’équipe Support.",
+    "whatsappTicket": "Bonjour Reemite,\n\nTicket : {{id}}\nSujet : {{subject}}\n\n{{message}}",
+    "whatsappFollowUp": "Bonjour Reemite, mon ticket est {{id}}."
+  },
+  "pricingHeader": {
+    "eyebrow": "Tarification API",
+    "title": "Frais d'installation API",
+    "subtitle": "Un frais unique selon votre marché, réglé une seule fois lors de l'intégration à votre plateforme.",
+    "imageAlt": "Passerelle de paiement Reemite connectée aux différents moyens de paiement",
+    "maintenanceNote": "Les frais de maintenance couvrent le support et le fonctionnement continu de votre intégration API."
   }
 }

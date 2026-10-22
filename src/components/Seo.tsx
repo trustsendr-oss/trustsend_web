@@ -1,14 +1,12 @@
 import { useEffect } from "react";
 import { CANONICAL_ORIGIN } from "../lib/domains";
-import { buildSchema } from "../seo";
+import { buildSchema, resolveSeo } from "../seo";
+import type { UrlLanguage } from "../lib/languageRoutes";
 
 type SeoProps = {
-  title: string;
-  description: string;
-  keywords: string;
-  image: string;
-  robots: string;
+  /** Chemin sans préfixe de langue ("/pricing"). */
   pathname: string;
+  lang: UrlLanguage;
 };
 
 function setMetaTag(selector: string, attribute: "name" | "property", value: string, content: string) {
@@ -35,6 +33,19 @@ function setCanonicalLink(url: string) {
   link.href = url;
 }
 
+// Versions linguistiques de la page : remplacées à chaque navigation
+function setAlternateLinks(alternates: { lang: string; url: string }[], xDefault: string) {
+  document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach((link) => link.remove());
+  const links = alternates.length ? [...alternates, { lang: "x-default", url: xDefault }] : [];
+  for (const { lang, url } of links) {
+    const link = document.createElement("link");
+    link.rel = "alternate";
+    link.hreflang = lang;
+    link.href = url;
+    document.head.appendChild(link);
+  }
+}
+
 function addJsonLd(data: Record<string, unknown>) {
   let script = document.head.querySelector('script[data-seo="organization"]') as HTMLScriptElement | null;
 
@@ -48,27 +59,29 @@ function addJsonLd(data: Record<string, unknown>) {
   script.textContent = JSON.stringify(data);
 }
 
-export function Seo({ title, description, keywords, image, robots, pathname }: SeoProps) {
+export function Seo({ pathname, lang }: SeoProps) {
   useEffect(() => {
+    const { title, description, keywords, image, robots, url, alternates, xDefault } = resolveSeo(pathname, lang);
+    const imageUrl = image.startsWith("http") ? image : `${CANONICAL_ORIGIN}${image}`;
+
     document.title = title;
 
     setMetaTag('meta[name="description"]', "name", "description", description);
     setMetaTag('meta[name="keywords"]', "name", "keywords", keywords);
     setMetaTag('meta[name="robots"]', "name", "robots", robots);
+    setMetaTag('meta[property="og:locale"]', "property", "og:locale", lang === "en" ? "en_US" : "fr_FR");
     setMetaTag('meta[property="og:title"]', "property", "og:title", title);
     setMetaTag('meta[property="og:description"]', "property", "og:description", description);
-    setMetaTag('meta[property="og:image"]', "property", "og:image", image);
-    setMetaTag('meta[property="og:url"]', "property", "og:url", `${CANONICAL_ORIGIN}${pathname}`);
+    setMetaTag('meta[property="og:image"]', "property", "og:image", imageUrl);
+    setMetaTag('meta[property="og:url"]', "property", "og:url", url);
     setMetaTag('meta[name="twitter:title"]', "name", "twitter:title", title);
     setMetaTag('meta[name="twitter:description"]', "name", "twitter:description", description);
-    setMetaTag('meta[name="twitter:image"]', "name", "twitter:image", image);
+    setMetaTag('meta[name="twitter:image"]', "name", "twitter:image", imageUrl);
 
-    setCanonicalLink(`${CANONICAL_ORIGIN}${pathname}`);
-
-    const schema = buildSchema(pathname);
-
-    addJsonLd(schema);
-  }, [title, description, keywords, image, robots, pathname]);
+    setCanonicalLink(url);
+    setAlternateLinks(alternates, xDefault);
+    addJsonLd(buildSchema(pathname, lang));
+  }, [pathname, lang]);
 
   return null;
 }

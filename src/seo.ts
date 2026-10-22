@@ -1,5 +1,7 @@
 import { CANONICAL_ORIGIN } from "./lib/domains";
-import { faqs } from "./data/content.fr";
+import { faqs as faqsFr } from "./data/content.fr";
+import { faqs as faqsEn } from "./data/content.en";
+import { languageFromPath, localizedPath, type UrlLanguage } from "./lib/languageRoutes";
 
 /**
  * Configuration SEO par route : utilisée côté client par <Seo /> (navigation SPA) et au build
@@ -106,7 +108,64 @@ export const seoConfig: Record<string, SeoEntry> = {
   },
 };
 
-/** Pages publiques du site vitrine, générées en HTML au build. */
+/** Version anglaise des pages publiques (servies sous /en). */
+export const seoConfigEn: Record<string, SeoEntry> = {
+  "/": {
+    title: "Reemite | Payments, transfers and payroll for businesses",
+    description:
+      "Reemite helps businesses manage payments, international transfers, virtual cards and payroll across Africa and worldwide.",
+    keywords: "business payments, payroll, international transfers, virtual cards, payment API, Africa fintech",
+  },
+  "/pricing": {
+    title: "Reemite pricing | Payments and fintech for businesses",
+    description:
+      "Explore Reemite pricing for payments, transfers, payroll and fintech solutions built for businesses.",
+    keywords: "fintech pricing, business payment fees, payroll pricing, transfer fees, virtual card pricing",
+  },
+  "/privacy": {
+    title: "Privacy policy | Reemite",
+    description: "Read the Reemite privacy policy.",
+    keywords: "Reemite privacy, personal data, privacy policy",
+  },
+  "/terms": {
+    title: "Terms of use | Reemite",
+    description: "Read the terms of use of Reemite services.",
+    keywords: "Reemite terms, terms of use, fintech terms",
+  },
+  "/contact": {
+    title: "Support and contact | Reemite",
+    description: "Open a ticket and get in touch with the Reemite Support team.",
+    keywords: "Reemite support, contact Reemite, payment ticket, fintech help",
+  },
+  "/agents": {
+    title: "Reemite agents | Payment and integration solutions",
+    description:
+      "Payment, integration and automation solutions for agents, partners and businesses that want to grow faster.",
+    keywords: "fintech agents, payment partners, API integration, fintech solutions, business growth",
+  },
+  "/transferts-internationaux": {
+    title: "International transfers | Reemite",
+    description: "Send and receive money across borders with fast, affordable and secure international transfers.",
+    keywords: "international transfers, send money, mobile money, Africa transfers, global payments",
+  },
+  "/cartes-virtuelles": {
+    title: "Virtual cards | Reemite",
+    description: "Create and manage virtual cards for purchases, subscriptions and business spending, securely.",
+    keywords: "virtual cards, digital payments, business card, spend card, VCC",
+  },
+  "/cryptomonnaies": {
+    title: "Crypto & digital payments | Reemite",
+    description: "Access crypto payments, stablecoins and digital financial flows through a modern fintech platform.",
+    keywords: "cryptocurrencies, crypto payments, stablecoins, crypto fintech, enterprise blockchain",
+  },
+  "/paiement-marchand": {
+    title: "Merchant payments | Reemite",
+    description: "Give your customers a secure, fast payment experience suited to your business, online or in store.",
+    keywords: "merchant payments, business checkout, payment acceptance, Africa ecommerce, online payments",
+  },
+};
+
+/** Pages publiques du site vitrine, générées en HTML au build (en français à la racine, en anglais sous /en). */
 export const PRERENDER_ROUTES = [
   "/",
   "/pricing",
@@ -120,26 +179,44 @@ export const PRERENDER_ROUTES = [
   "/paiement-marchand",
 ];
 
-export function resolveSeo(pathname: string) {
-  const seo = seoConfig[pathname] ?? seoConfig["/"];
+/** Langues indexées : chacune a sa propre URL, reliée aux autres par hreflang. */
+export const INDEXED_LANGUAGES: UrlLanguage[] = ["fr", "en"];
+
+/** Toutes les URL pré-rendues : /pricing, /en/pricing, etc. */
+export const PRERENDER_URLS = INDEXED_LANGUAGES.flatMap((lang) =>
+  PRERENDER_ROUTES.map((route) => localizedPath(route, lang)),
+);
+
+/** SEO d'une page ; pathname sans préfixe de langue ("/pricing"). */
+export function resolveSeo(pathname: string, lang: UrlLanguage = "fr") {
+  const base = seoConfig[pathname] ?? seoConfig["/"];
+  const translated = lang === "en" ? seoConfigEn[pathname] : undefined;
+  const seo = { ...base, ...translated };
+  const canonicalOf = (l: UrlLanguage) => `${CANONICAL_ORIGIN}${localizedPath(pathname, l)}`;
+  // Une page sans version anglaise n'annonce pas d'alternative
+  const hasEnglish = pathname in seoConfigEn;
   return {
     ...seo,
+    lang,
     image: seo.image ?? DEFAULT_SEO_IMAGE,
     robots: seo.robots ?? "index,follow",
-    url: `${CANONICAL_ORIGIN}${pathname === "/" ? "/" : pathname}`,
+    url: canonicalOf(lang),
+    alternates: hasEnglish ? INDEXED_LANGUAGES.map((l) => ({ lang: l, url: canonicalOf(l) })) : [],
+    xDefault: canonicalOf("fr"),
   };
 }
 
 /** Données structurées schema.org de la page. */
-export function buildSchema(pathname: string) {
-  const { title, description, url } = resolveSeo(pathname);
+export function buildSchema(pathname: string, lang: UrlLanguage = "fr") {
+  const { title, description, url } = resolveSeo(pathname, lang);
+  const faqs = lang === "en" ? faqsEn : faqsFr;
   return {
     "@context": "https://schema.org",
     "@graph": [
       { "@type": ["Organization", "FinancialService"], "@id": `${CANONICAL_ORIGIN}/#organization`, name: "Reemite", url: CANONICAL_ORIGIN, logo: `${CANONICAL_ORIGIN}/android-chrome-512x512.png`, description: "Reemite is a financial technology company, not a bank.", areaServed: "Africa and international markets", contactPoint: { "@type": "ContactPoint", contactType: "customer support", url: `${CANONICAL_ORIGIN}/contact`, areaServed: "Worldwide" } },
       { "@type": "WebSite", "@id": `${CANONICAL_ORIGIN}/#website`, url: `${CANONICAL_ORIGIN}/`, name: "Reemite", publisher: { "@id": `${CANONICAL_ORIGIN}/#organization` }, inLanguage: ["fr", "en", "ln", "sw"] },
-      { "@type": pathname === "/contact" ? "ContactPage" : "WebPage", "@id": `${url}#webpage`, url, name: title, description, isPartOf: { "@id": `${CANONICAL_ORIGIN}/#website` }, about: { "@id": `${CANONICAL_ORIGIN}/#organization` } },
-      // FAQ de l'accueil (version française, celle du HTML pré-rendu)
+      { "@type": pathname === "/contact" ? "ContactPage" : "WebPage", "@id": `${url}#webpage`, url, name: title, description, inLanguage: lang, isPartOf: { "@id": `${CANONICAL_ORIGIN}/#website` }, about: { "@id": `${CANONICAL_ORIGIN}/#organization` } },
+      // FAQ de l'accueil, dans la langue de la page
       ...(pathname === "/"
         ? [{ "@type": "FAQPage", "@id": `${url}#faq`, mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer } })) }]
         : []),
@@ -151,14 +228,17 @@ function escapeHtml(value: string) {
   return value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-/** Balises <head> de la page, écrites dans le HTML pré-rendu (lisibles sans JavaScript). */
-export function renderHeadTags(pathname: string) {
-  const seo = resolveSeo(pathname);
+/** Balises <head> de la page (lisibles sans JavaScript) ; url avec préfixe de langue ("/en/pricing"). */
+export function renderHeadTags(url: string) {
+  const lang = languageFromPath(url);
+  const pathname = lang === "en" ? url.slice(3) || "/" : url;
+  const seo = resolveSeo(pathname, lang);
   const title = escapeHtml(seo.title);
   const description = escapeHtml(seo.description);
   // Les robots de partage (WhatsApp, Facebook, LinkedIn) exigent une URL d'image absolue
   const image = escapeHtml(seo.image.startsWith("http") ? seo.image : `${CANONICAL_ORIGIN}${seo.image}`);
-  const schema = JSON.stringify(buildSchema(pathname)).replace(/</g, "\\u003c");
+  const schema = JSON.stringify(buildSchema(pathname, lang)).replace(/</g, "\\u003c");
+  const ogLocale = lang === "en" ? "en_US" : "fr_FR";
 
   return [
     `<title>${title}</title>`,
@@ -166,6 +246,9 @@ export function renderHeadTags(pathname: string) {
     `<meta name="keywords" content="${escapeHtml(seo.keywords)}" />`,
     `<meta name="robots" content="${seo.robots}" />`,
     `<link rel="canonical" href="${seo.url}" />`,
+    ...seo.alternates.map((a) => `<link rel="alternate" hreflang="${a.lang}" href="${a.url}" />`),
+    ...(seo.alternates.length ? [`<link rel="alternate" hreflang="x-default" href="${seo.xDefault}" />`] : []),
+    `<meta property="og:locale" content="${ogLocale}" />`,
     `<meta property="og:title" content="${title}" />`,
     `<meta property="og:description" content="${description}" />`,
     `<meta property="og:image" content="${image}" />`,
@@ -175,4 +258,22 @@ export function renderHeadTags(pathname: string) {
     `<meta name="twitter:image" content="${image}" />`,
     `<script type="application/ld+json" data-seo="organization">${schema}</script>`,
   ].join("\n  ");
+}
+
+/** sitemap.xml : chaque page avec ses versions linguistiques (xhtml:link hreflang). */
+export function renderSitemap(lastmod: string) {
+  const entries = PRERENDER_ROUTES.flatMap((route) => {
+    const { alternates } = resolveSeo(route);
+    const links = alternates.map((a) => `    <xhtml:link rel="alternate" hreflang="${a.lang}" href="${a.url}" />`);
+    return (alternates.length ? alternates : [{ url: resolveSeo(route).url }]).map(
+      (a) => [`  <url>`, `    <loc>${a.url}</loc>`, `    <lastmod>${lastmod}</lastmod>`, ...links, `  </url>`].join("\n"),
+    );
+  });
+  return [
+    `<?xml version="1.0" encoding="UTF-8"?>`,
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">`,
+    ...entries,
+    `</urlset>`,
+    ``,
+  ].join("\n");
 }

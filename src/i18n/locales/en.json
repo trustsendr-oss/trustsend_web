@@ -933,5 +933,42 @@
     "loading": "Loading plans…",
     "error": "Plans could not be loaded right now. Please try again in a moment.",
     "empty": "No plan is available at the moment."
+  },
+  "contactPage": {
+    "eyebrow": "Reemite Support",
+    "title": "How can we help?",
+    "intro": "Open a ticket to start a conversation with our team. You will be redirected to our secure WhatsApp channel with your ticket reference.",
+    "created": "Ticket created",
+    "referenceBefore": "Your reference is",
+    "referenceAfter": ". Continue the conversation on WhatsApp.",
+    "open": "Open the conversation",
+    "another": "Create another ticket",
+    "name": "Full name",
+    "email": "Email address",
+    "subject": "Subject",
+    "chooseSubject": "Choose a subject",
+    "subjects": [
+      "Account and verification",
+      "Payment or transfer",
+      "Virtual card",
+      "Sales question",
+      "Other request"
+    ],
+    "message": "Your message",
+    "messagePlaceholder": "Describe your request without sharing any password, PIN code or card details.",
+    "submit": "Create the ticket and chat",
+    "followTitle": "Simple follow-up",
+    "followBody": "Keep your ticket reference to make it easier to follow up on your request.",
+    "chatTitle": "Direct conversation",
+    "chatBody": "Our WhatsApp channel lets you quickly continue the conversation with the Support team.",
+    "whatsappTicket": "Hello Reemite,\n\nTicket: {{id}}\nSubject: {{subject}}\n\n{{message}}",
+    "whatsappFollowUp": "Hello Reemite, my ticket is {{id}}."
+  },
+  "pricingHeader": {
+    "eyebrow": "API pricing",
+    "title": "API setup fee",
+    "subtitle": "A one-time fee based on your market, paid once when integrating with your platform.",
+    "imageAlt": "Reemite payment gateway connected to multiple payment methods",
+    "maintenanceNote": "Maintenance fees cover support and the ongoing operation of your API integration."
   }
 }

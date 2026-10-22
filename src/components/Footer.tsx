@@ -28,7 +28,10 @@ export function Footer() {
 type FooterLinkItem = ReturnType<typeof useContent>["footerColumns"][number]["links"][number];
 
 function FooterLink({ link }: { link: FooterLinkItem }) {
-  return <a href={link.href ?? "#"} className="inline-flex max-w-full items-center gap-1.5 text-sm text-muted transition-colors hover:text-brand"><span className="truncate">{link.label}</span>{link.badge && <span className="shrink-0 rounded bg-accent-light/50 px-1.5 py-0.5 text-[10px] font-bold text-accent">{link.badge}</span>}</a>;
+  const className = "inline-flex max-w-full items-center gap-1.5 text-sm text-muted transition-colors hover:text-brand";
+  const content = <><span className="truncate">{link.label}</span>{link.badge && <span className="shrink-0 rounded bg-accent-light/50 px-1.5 py-0.5 text-[10px] font-bold text-accent">{link.badge}</span>}</>;
+  // Lien interne via le routeur : garde le préfixe de langue (/en)
+  return link.href?.startsWith("/") ? <Link to={link.href} className={className}>{content}</Link> : <a href={link.href ?? "#"} className={className}>{content}</a>;
 }
 
 function SocialIcon({ icon: Icon, label }: (typeof socials)[number]) {
