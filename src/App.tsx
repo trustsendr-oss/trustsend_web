@@ -31,6 +31,7 @@ import { Legal } from "./pages/Legal";
 import { InstallApp } from "./components/InstallApp";
 import { Contact } from "./pages/Contact";
 import { Seo } from "./components/Seo";
+import { resolveSeo } from "./seo";
 import {
   BUSINESS_ORIGIN,
   MARKETING_ORIGIN,
@@ -38,99 +39,9 @@ import {
   showMarketingRoutes,
 } from "./lib/domains";
 
-const seoConfig: Record<string, { title: string; description: string; keywords: string; image?: string; robots?: string }> = {
-  "/": {
-    title: "Reemite | Paiements, transferts et payroll pour les entreprises",
-    description:
-      "Reemite aide les entreprises à gérer les paiements, les transferts internationaux, les cartes virtuelles et le payroll en Afrique et à l'international.",
-    keywords:
-      "paiements entreprises, payroll, transferts internationaux, cartes virtuelles, API de paiement, fintech Afrique",
-    image: "/assets/images/crypto-hero.avif",
-    robots: "index,follow",
-  },
-  "/pricing": {
-    title: "Tarifs Reemite | Paiements et fintech pour entreprises",
-    description:
-      "Découvrez les tarifs Reemite pour les paiements, les transferts, le payroll et les solutions de fintech adaptées aux entreprises.",
-    keywords: "tarifs fintech, prix paiement entreprise, payroll pricing, transferts prix, carte virtuelle prix",
-    image: "/assets/images/crypto-hero.avif",
-    robots: "index,follow",
-  },
-  "/privacy": {
-    title: "Politique de confidentialité | Reemite",
-    description: "Consultez la politique de confidentialité de Reemite.",
-    keywords: "confidentialité Reemite, données personnelles, privacy policy",
-    robots: "index,follow",
-  },
-  "/terms": {
-    title: "Conditions d’utilisation | Reemite",
-    description: "Consultez les conditions d’utilisation des services Reemite.",
-    keywords: "conditions Reemite, termes utilisation, conditions fintech",
-    robots: "index,follow",
-  },
-  "/contact": {
-    title: "Support et contact | Reemite",
-    description: "Créez un ticket et contactez l’équipe Support Reemite.",
-    keywords: "support Reemite, contact Reemite, ticket paiement, assistance fintech",
-    robots: "index,follow",
-  },
-  "/agents": {
-    title: "Agents Reemite | Solutions de paiement et d'intégration",
-    description:
-      "Des solutions de paiement, d'intégration et d'automatisation pour les agents, partenaires et entreprises qui veulent croître plus vite.",
-    keywords: "agents fintech, partenaires paiement, intégration API, solutions fintech, business growth",
-    image: "/assets/images/crypto-hero.avif",
-    robots: "index,follow",
-  },
-  "/transferts-internationaux": {
-    title: "Transferts internationaux | Reemite",
-    description:
-      "Envoyez et recevez de l'argent à travers les frontières avec des transferts internationaux rapides, moins chers et sécurisés.",
-    keywords: "transferts internationaux, envoi d'argent, mobile money, transfer Afrique, paiement global",
-    image: "/assets/images/crypto-hero.avif",
-    robots: "index,follow",
-  },
-  "/cartes-virtuelles": {
-    title: "Cartes virtuelles | Reemite",
-    description:
-      "Créez et gérez des cartes virtuelles pour vos achats, abonnements et dépenses professionnelles en toute sécurité.",
-    keywords: "cartes virtuelles, paiement digital, carte entreprise, carte de dépenses, cartes VCC",
-    image: "/assets/images/crypto-hero.avif",
-    robots: "index,follow",
-  },
-  "/cryptomonnaies": {
-    title: "Crypto & paiements numériques | Reemite",
-    description:
-      "Accédez aux paiements crypto, aux stablecoins et aux flux financiers numériques via une solution fintech moderne.",
-    keywords: "cryptomonnaies, paiements crypto, stablecoins, fintech crypto, blockchain entreprise",
-    image: "/assets/images/crypto-hero.avif",
-    robots: "index,follow",
-  },
-  "/paiement-marchand": {
-    title: "Paiement marchand | Reemite",
-    description:
-      "Offrez à vos clients une expérience de paiement sécurisée, rapide et adaptée à votre activité en ligne ou hors ligne.",
-    keywords: "paiement marchand, checkout entreprise, acceptation de paiement, ecommerce Africa, paiement en ligne",
-    image: "/assets/images/crypto-hero.avif",
-    robots: "index,follow",
-  },
-  "/login": {
-    title: "Connexion Reemite",
-    description: "Connectez-vous à votre espace Reemite pour gérer vos paiements, comptes et dashboard.",
-    keywords: "connexion Reemite, espace client, dashboard paiement",
-    robots: "noindex,nofollow",
-  },
-  "/signup": {
-    title: "Créer un compte Reemite",
-    description: "Ouvrez votre compte Reemite pour accéder aux paiements, transferts et outils de gestion d'entreprise.",
-    keywords: "inscription Reemite, créer un compte fintech, signup entreprise",
-    robots: "noindex,nofollow",
-  },
-};
-
 function App() {
   const location = useLocation();
-  const currentSeo = seoConfig[location.pathname] ?? seoConfig["/"];
+  const currentSeo = resolveSeo(location.pathname);
 
   return (
     <>
@@ -138,8 +49,8 @@ function App() {
         title={currentSeo.title}
         description={currentSeo.description}
         keywords={currentSeo.keywords}
-        image={currentSeo.image ?? "/assets/images/crypto-hero.avif"}
-        robots={currentSeo.robots ?? "index,follow"}
+        image={currentSeo.image}
+        robots={currentSeo.robots}
         pathname={location.pathname}
       />
 

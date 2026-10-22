@@ -14,7 +14,7 @@ const copy = {
 export function InstallApp() {
   const { i18n } = useTranslation();
   const [prompt, setPrompt] = useState<InstallPromptEvent | null>(null);
-  const [dismissed, setDismissed] = useState(() => localStorage.getItem("trustsend-install-dismissed") === "1");
+  const [dismissed, setDismissed] = useState(() => typeof window !== "undefined" && localStorage.getItem("trustsend-install-dismissed") === "1");
   const language = i18n.language.startsWith("en") ? "en" : i18n.language.startsWith("ln") ? "ln" : i18n.language.startsWith("sw") ? "sw" : "fr";
   const text = copy[language];
 

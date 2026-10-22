@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { CANONICAL_ORIGIN } from "../lib/domains";
+import { buildSchema } from "../seo";
 
 type SeoProps = {
   title: string;
@@ -64,15 +65,7 @@ export function Seo({ title, description, keywords, image, robots, pathname }: S
 
     setCanonicalLink(`${CANONICAL_ORIGIN}${pathname}`);
 
-    const canonicalUrl = `${CANONICAL_ORIGIN}${pathname}`;
-    const schema = {
-      "@context": "https://schema.org",
-      "@graph": [
-        { "@type": ["Organization", "FinancialService"], "@id": `${CANONICAL_ORIGIN}/#organization`, name: "Reemite", url: CANONICAL_ORIGIN, logo: `${CANONICAL_ORIGIN}/android-chrome-512x512.png`, description: "Reemite is a financial technology company, not a bank.", areaServed: "Africa and international markets", contactPoint: { "@type": "ContactPoint", contactType: "customer support", url: `${CANONICAL_ORIGIN}/contact`, areaServed: "Worldwide" } },
-        { "@type": "WebSite", "@id": `${CANONICAL_ORIGIN}/#website`, url: `${CANONICAL_ORIGIN}/`, name: "Reemite", publisher: { "@id": `${CANONICAL_ORIGIN}/#organization` }, inLanguage: ["fr", "en", "ln", "sw"] },
-        { "@type": pathname === "/contact" ? "ContactPage" : "WebPage", "@id": `${canonicalUrl}#webpage`, url: canonicalUrl, name: title, description, isPartOf: { "@id": `${CANONICAL_ORIGIN}/#website` }, about: { "@id": `${CANONICAL_ORIGIN}/#organization` } },
-      ],
-    };
+    const schema = buildSchema(pathname);
 
     addJsonLd(schema);
   }, [title, description, keywords, image, robots, pathname]);
