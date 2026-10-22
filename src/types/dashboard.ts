@@ -110,6 +110,8 @@ export interface Profile {
   status: string;
   webhook_url: string | null;
   pin_set: boolean;
+  /** Code à 6 chiffres (et QR) par lequel les clients paient ce marchand ; null hors marchands. */
+  payment_code?: string | null;
   /** Environnement de l'API qui a répondu ; absent sur une API antérieure à la sandbox. */
   environment?: "sandbox" | "production";
   created_at: string;
@@ -120,7 +122,21 @@ export const WEBHOOK_EVENTS = [
   "mobile_money_deposit.failed",
   "mobile_money_payout.completed",
   "mobile_money_payout.failed",
+  "merchant_payment.completed",
 ] as const;
+
+export interface MerchantPayment {
+  id: string;
+  uuid: string;
+  status: string;
+  amount: string;
+  fee: string;
+  net_amount: string;
+  currency_code: string;
+  customer: { name: string | null; code: string } | null;
+  note: string | null;
+  created_at: string;
+}
 
 export type WebhookEvent = (typeof WEBHOOK_EVENTS)[number];
 

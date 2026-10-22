@@ -251,7 +251,8 @@
       "cards": "Cartes",
       "developers": "Développeurs",
       "apiKeys": "Clés API",
-      "webhooks": "Webhooks"
+      "webhooks": "Webhooks",
+      "merchantPayments": "Paiements marchands"
     },
     "overview": {
       "greeting": "Bonjour, {{name}} !",
@@ -778,7 +779,8 @@
       "createdOn": "Créé le {{date}}",
       "active": "Actif",
       "inactive": "Inactif",
-      "delete": "Supprimer"
+      "delete": "Supprimer",
+      "eventMerchantPayment": "Paiement marchand reçu"
     },
     "profile": {
       "loading": "Chargement…",
@@ -838,6 +840,23 @@
       "title": "Sandbox",
       "desc": "Environnement de test : l'argent est fictif et aucune opération n'est réelle.",
       "cta": "Passer en production"
+    },
+    "merchantPayments": {
+      "title": "Paiements marchands",
+      "subtitle": "Les paiements de vos clients par code marchand ou QR code depuis l'application Reemite.",
+      "yourCode": "Votre code marchand",
+      "codeHelp": "Affichez ce code ou ce QR code à votre caisse. Vos clients paient sans frais ; 1 % est prélevé sur chaque paiement reçu.",
+      "downloadQr": "Télécharger le QR code",
+      "qrLabel": "QR code de paiement du marchand {{code}}",
+      "loading": "Chargement…",
+      "error": "Impossible de charger vos paiements.",
+      "none": "Aucun paiement reçu pour l'instant.",
+      "date": "Date",
+      "customer": "Client",
+      "note": "Note",
+      "amount": "Montant",
+      "fee": "Frais (1 %)",
+      "net": "Reçu"
     }
   },
   "pricing": {

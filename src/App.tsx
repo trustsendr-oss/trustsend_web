@@ -23,6 +23,7 @@ import { CardsPage } from "./pages/dashboard/CardsPage";
 import { CreateCardPage } from "./pages/dashboard/CreateCardPage";
 import { CardDetailPage } from "./pages/dashboard/CardDetailPage";
 import { WebhooksPage } from "./pages/dashboard/WebhooksPage";
+import { MerchantPaymentsPage } from "./pages/dashboard/MerchantPaymentsPage";
 import { ProfilePage } from "./pages/dashboard/ProfilePage";
 import { NotificationsPage } from "./pages/dashboard/NotificationsPage";
 import { KycPage } from "./pages/dashboard/KycPage";
@@ -180,6 +181,7 @@ function App() {
             >
               <Route index element={<Overview />} />
               <Route path="transactions" element={<TransactionsPage />} />
+              <Route path="merchant-payments" element={<MerchantPaymentsPage />} />
               <Route path="wallet" element={<WalletPage />} />
               <Route path="wallet/new" element={<AddWalletPage />} />
               <Route path="deposit" element={<DepositPage />} />

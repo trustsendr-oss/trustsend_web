@@ -15,6 +15,7 @@ const eventLabelKeys: Record<WebhookEvent, string> = {
   "mobile_money_deposit.failed": "eventDepositFailed",
   "mobile_money_payout.completed": "eventPayoutCompleted",
   "mobile_money_payout.failed": "eventPayoutFailed",
+  "merchant_payment.completed": "eventMerchantPayment",
 };
 
 export function WebhooksPage() {

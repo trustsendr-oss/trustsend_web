@@ -251,7 +251,8 @@
       "cards": "Cards",
       "developers": "Developers",
       "apiKeys": "API Keys",
-      "webhooks": "Webhooks"
+      "webhooks": "Webhooks",
+      "merchantPayments": "Merchant payments"
     },
     "overview": {
       "greeting": "Hello, {{name}}!",
@@ -778,7 +779,8 @@
       "createdOn": "Created on {{date}}",
       "active": "Active",
       "inactive": "Inactive",
-      "delete": "Delete"
+      "delete": "Delete",
+      "eventMerchantPayment": "Merchant payment received"
     },
     "profile": {
       "loading": "Loading…",
@@ -838,6 +840,23 @@
       "title": "Sandbox",
       "desc": "Test environment: money is fictitious and no operation is real.",
       "cta": "Go to production"
+    },
+    "merchantPayments": {
+      "title": "Merchant payments",
+      "subtitle": "Payments your customers make with your merchant code or QR code from the Reemite app.",
+      "yourCode": "Your merchant code",
+      "codeHelp": "Show this code or QR code at your till. Customers pay no fees; 1% is deducted from each payment you receive.",
+      "downloadQr": "Download QR code",
+      "qrLabel": "Payment QR code for merchant {{code}}",
+      "loading": "Loading…",
+      "error": "Unable to load your payments.",
+      "none": "No payments received yet.",
+      "date": "Date",
+      "customer": "Customer",
+      "note": "Note",
+      "amount": "Amount",
+      "fee": "Fee (1%)",
+      "net": "Received"
     }
   },
   "pricing": {
