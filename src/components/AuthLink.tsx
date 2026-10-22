@@ -4,7 +4,7 @@ import { businessUrl, showBusinessRoutes } from "../lib/domains";
 
 /**
  * Lien vers l'espace client : navigation SPA quand on est déjà sur le bon hôte (dev ou
- * business.trustsend.africa), lien classique vers l'autre domaine depuis le site vitrine.
+ * business.reemite.com), lien classique vers l'autre domaine depuis le site vitrine.
  */
 export function AuthLink({
   to,

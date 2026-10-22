@@ -239,7 +239,7 @@ export const navMegaMenus: Record<string, NavMegaMenu> = {
           },
           {
             label: "Environnement Sandbox",
-            href: "https://sandbox.trustsend.africa/signup",
+            href: "https://sandbox.reemite.com/signup",
             desc: "Testez votre intégration avec des données fictives avant le passage en production.",
             icon: "/assets/icons/develop/integrations.svg",
           },

@@ -219,7 +219,7 @@
     "backToLogin": "Back to login",
     "quote": "\"Within a week, we were already managing our cards, transfers and team savings from a single Reemite account.\"",
     "quoteAttribution": "Alice N. — Founder, Reemite",
-    "sandboxNotice": "Sandbox account: activated immediately, fictitious money. For a real account, sign up at business.trustsend.africa.",
+    "sandboxNotice": "Sandbox account: activated immediately, fictitious money. For a real account, sign up at business.reemite.com.",
     "sandboxSuccessBody": "Your sandbox account {{name}} is active. Sign in with {{email}} to generate a test API key."
   },
   "dashboard": {

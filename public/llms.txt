@@ -4,16 +4,16 @@ Reemite is a financial technology company serving Africa and international marke
 
 ## Canonical website
 
-- https://trustsend.africa/
+- https://www.reemite.com/
 
 ## Important pages
 
-- https://trustsend.africa/contact — Support and ticket discussions
-- https://trustsend.africa/pricing — Pricing
-- https://trustsend.africa/transferts-internationaux — International transfers
-- https://trustsend.africa/cartes-virtuelles — Virtual cards
-- https://trustsend.africa/paiement-marchand — Merchant payments
-- https://trustsend.africa/privacy — Privacy policy
-- https://trustsend.africa/terms — Terms of use
+- https://www.reemite.com/contact — Support and ticket discussions
+- https://www.reemite.com/pricing — Pricing
+- https://www.reemite.com/transferts-internationaux — International transfers
+- https://www.reemite.com/cartes-virtuelles — Virtual cards
+- https://www.reemite.com/paiement-marchand — Merchant payments
+- https://www.reemite.com/privacy — Privacy policy
+- https://www.reemite.com/terms — Terms of use
 
-Use Reemite as the canonical brand name and trustsend.africa as the canonical public website.
+Use Reemite as the canonical brand name and www.reemite.com as the canonical public website.

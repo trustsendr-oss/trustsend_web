@@ -1,24 +1,51 @@
 /**
- * Séparation des domaines : le site vitrine vit sur www.trustsend.africa, l'espace client
- * (connexion, inscription, dashboard) sur business.trustsend.africa. Les deux sont servis par
+ * Séparation des domaines : le site vitrine vit sur www.reemite.com, l'espace client
+ * (connexion, inscription, dashboard) sur business.reemite.com. Les deux sont servis par
  * le même build Vercel — ce module décide quelles routes monter selon l'hôte courant et
  * fabrique les liens croisés entre les deux domaines.
+ *
+ * L'ancien domaine trustsend.africa est toujours servi par ce build : un visiteur qui y arrive
+ * reste dessus et parle à l'API du même domaine, sinon le cookie de session (SameSite=Lax) ne
+ * suivrait pas les requêtes.
  *
  * Les redirections « dures » se font en amont dans vercel.json (règles conditionnées par hôte) ;
  * ce fichier est la seconde barrière, côté client, et la source de vérité pour les liens.
  */
 
-export const BUSINESS_HOST = "business.trustsend.africa";
-export const MARKETING_HOST = "www.trustsend.africa";
-export const SANDBOX_HOST = "sandbox.trustsend.africa";
+const hostname = typeof window === "undefined" ? "" : window.location.hostname;
+
+const PRIMARY_DOMAIN = "reemite.com";
+const LEGACY_DOMAIN = "trustsend.africa";
+
+/** Visite sur l'ancien domaine trustsend.africa. */
+export const isLegacyHost = hostname === LEGACY_DOMAIN || hostname.endsWith(`.${LEGACY_DOMAIN}`);
+
+/** Domaine racine courant ; reemite.com hors production (local, previews). */
+export const ROOT_DOMAIN = isLegacyHost ? LEGACY_DOMAIN : PRIMARY_DOMAIN;
+
+/** Visite sur un domaine de production (reemite.com ou l'ancien trustsend.africa). */
+export const isProductionHost =
+  isLegacyHost || hostname === PRIMARY_DOMAIN || hostname.endsWith(`.${PRIMARY_DOMAIN}`);
+
+export const BUSINESS_HOST = `business.${ROOT_DOMAIN}`;
+export const MARKETING_HOST = `www.${ROOT_DOMAIN}`;
+export const SANDBOX_HOST = `sandbox.${ROOT_DOMAIN}`;
 
 export const BUSINESS_ORIGIN = `https://${BUSINESS_HOST}`;
 export const MARKETING_ORIGIN = `https://${MARKETING_HOST}`;
 
-/** API de la sandbox : comptes, clés et argent de test, totalement séparés de la production. */
-export const SANDBOX_API_BASE_URL = "https://sandbox-api.trustsend.africa/api/v1";
+/** Adresse publique de référence du site (canonical, Open Graph, données structurées). */
+export const CANONICAL_ORIGIN = `https://www.${PRIMARY_DOMAIN}`;
 
-const hostname = typeof window === "undefined" ? "" : window.location.hostname;
+/** API de production du domaine courant. */
+export const API_BASE_URL = isLegacyHost
+  ? `https://api.${LEGACY_DOMAIN}/api/v1`
+  : `https://api.${PRIMARY_DOMAIN}/api/v1`;
+
+/** API de la sandbox : comptes, clés et argent de test, totalement séparés de la production. */
+export const SANDBOX_API_BASE_URL = isLegacyHost
+  ? `https://sandbox-api.${LEGACY_DOMAIN}/api/v1`
+  : `https://api-sandbox.${PRIMARY_DOMAIN}/api/v1`;
 
 /** En développement (localhost, IP locale, preview Vercel) tout reste accessible sur un seul hôte. */
 export const isLocalHost =

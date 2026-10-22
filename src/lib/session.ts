@@ -4,8 +4,8 @@ const BUSINESS_KEY = "TrustSend_business";
 const EXPIRES_AT_KEY = "TrustSend_token_expires_at";
 const CSRF_KEY = "TrustSend_csrf_token";
 
-// Le cookie CSRF appartient au domaine de l'API (api.trustsend.africa) : depuis
-// business.trustsend.africa, document.cookie ne peut pas le lire. On conserve donc
+// Le cookie CSRF appartient au domaine de l'API (api.reemite.com) : depuis
+// business.reemite.com, document.cookie ne peut pas le lire. On conserve donc
 // le jeton renvoyé dans le corps des réponses de connexion et de rafraîchissement.
 export function storeCsrfToken(token: string | null | undefined): void {
   try {

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { CANONICAL_ORIGIN } from "../lib/domains";
 
 type SeoProps = {
   title: string;
@@ -56,20 +57,20 @@ export function Seo({ title, description, keywords, image, robots, pathname }: S
     setMetaTag('meta[property="og:title"]', "property", "og:title", title);
     setMetaTag('meta[property="og:description"]', "property", "og:description", description);
     setMetaTag('meta[property="og:image"]', "property", "og:image", image);
-    setMetaTag('meta[property="og:url"]', "property", "og:url", `https://trustsend.africa${pathname}`);
+    setMetaTag('meta[property="og:url"]', "property", "og:url", `${CANONICAL_ORIGIN}${pathname}`);
     setMetaTag('meta[name="twitter:title"]', "name", "twitter:title", title);
     setMetaTag('meta[name="twitter:description"]', "name", "twitter:description", description);
     setMetaTag('meta[name="twitter:image"]', "name", "twitter:image", image);
 
-    setCanonicalLink(`https://trustsend.africa${pathname}`);
+    setCanonicalLink(`${CANONICAL_ORIGIN}${pathname}`);
 
-    const canonicalUrl = `https://trustsend.africa${pathname}`;
+    const canonicalUrl = `${CANONICAL_ORIGIN}${pathname}`;
     const schema = {
       "@context": "https://schema.org",
       "@graph": [
-        { "@type": ["Organization", "FinancialService"], "@id": "https://trustsend.africa/#organization", name: "Reemite", url: "https://trustsend.africa", logo: "https://trustsend.africa/android-chrome-512x512.png", description: "Reemite is a financial technology company, not a bank.", areaServed: "Africa and international markets", contactPoint: { "@type": "ContactPoint", contactType: "customer support", url: "https://trustsend.africa/contact", areaServed: "Worldwide" } },
-        { "@type": "WebSite", "@id": "https://trustsend.africa/#website", url: "https://trustsend.africa/", name: "Reemite", publisher: { "@id": "https://trustsend.africa/#organization" }, inLanguage: ["fr", "en", "ln", "sw"] },
-        { "@type": pathname === "/contact" ? "ContactPage" : "WebPage", "@id": `${canonicalUrl}#webpage`, url: canonicalUrl, name: title, description, isPartOf: { "@id": "https://trustsend.africa/#website" }, about: { "@id": "https://trustsend.africa/#organization" } },
+        { "@type": ["Organization", "FinancialService"], "@id": `${CANONICAL_ORIGIN}/#organization`, name: "Reemite", url: CANONICAL_ORIGIN, logo: `${CANONICAL_ORIGIN}/android-chrome-512x512.png`, description: "Reemite is a financial technology company, not a bank.", areaServed: "Africa and international markets", contactPoint: { "@type": "ContactPoint", contactType: "customer support", url: `${CANONICAL_ORIGIN}/contact`, areaServed: "Worldwide" } },
+        { "@type": "WebSite", "@id": `${CANONICAL_ORIGIN}/#website`, url: `${CANONICAL_ORIGIN}/`, name: "Reemite", publisher: { "@id": `${CANONICAL_ORIGIN}/#organization` }, inLanguage: ["fr", "en", "ln", "sw"] },
+        { "@type": pathname === "/contact" ? "ContactPage" : "WebPage", "@id": `${canonicalUrl}#webpage`, url: canonicalUrl, name: title, description, isPartOf: { "@id": `${CANONICAL_ORIGIN}/#website` }, about: { "@id": `${CANONICAL_ORIGIN}/#organization` } },
       ],
     };
 

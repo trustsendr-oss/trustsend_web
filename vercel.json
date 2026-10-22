@@ -6,9 +6,27 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "reemite.com" }],
+      "destination": "https://www.reemite.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/login",
+      "has": [{ "type": "host", "value": "www.reemite.com" }],
+      "destination": "https://business.reemite.com/login",
+      "permanent": false
+    },
+    {
       "source": "/login",
       "has": [{ "type": "host", "value": "www.trustsend.africa" }],
       "destination": "https://business.trustsend.africa/login",
+      "permanent": false
+    },
+    {
+      "source": "/signup",
+      "has": [{ "type": "host", "value": "www.reemite.com" }],
+      "destination": "https://business.reemite.com/signup",
       "permanent": false
     },
     {
@@ -19,13 +37,31 @@
     },
     {
       "source": "/dashboard/:path*",
+      "has": [{ "type": "host", "value": "www.reemite.com" }],
+      "destination": "https://business.reemite.com/dashboard/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard/:path*",
       "has": [{ "type": "host", "value": "www.trustsend.africa" }],
       "destination": "https://business.trustsend.africa/dashboard/:path*",
       "permanent": false
     },
     {
       "source": "/",
+      "has": [{ "type": "host", "value": "business.reemite.com" }],
+      "destination": "/dashboard",
+      "permanent": false
+    },
+    {
+      "source": "/",
       "has": [{ "type": "host", "value": "business.trustsend.africa" }],
+      "destination": "/dashboard",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "sandbox.reemite.com" }],
       "destination": "/dashboard",
       "permanent": false
     },
@@ -37,8 +73,20 @@
     },
     {
       "source": "/:path(pricing|agents|transferts-internationaux|cartes-virtuelles|cryptomonnaies|paiement-marchand)",
+      "has": [{ "type": "host", "value": "sandbox.reemite.com" }],
+      "destination": "https://www.reemite.com/:path",
+      "permanent": false
+    },
+    {
+      "source": "/:path(pricing|agents|transferts-internationaux|cartes-virtuelles|cryptomonnaies|paiement-marchand)",
       "has": [{ "type": "host", "value": "sandbox.trustsend.africa" }],
       "destination": "https://www.trustsend.africa/:path",
+      "permanent": false
+    },
+    {
+      "source": "/:path(pricing|agents|transferts-internationaux|cartes-virtuelles|cryptomonnaies|paiement-marchand)",
+      "has": [{ "type": "host", "value": "business.reemite.com" }],
+      "destination": "https://www.reemite.com/:path",
       "permanent": false
     },
     {
@@ -57,21 +105,38 @@
   "headers": [
     {
       "source": "/assets/:file(.+\\.(?:js|css|woff2))",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     },
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
       ]
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "business.reemite.com" }],
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
     },
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "business.trustsend.africa" }],
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "sandbox.reemite.com" }],
       "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
     },
     {
