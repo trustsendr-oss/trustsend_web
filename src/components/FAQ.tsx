@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useContent } from "../hooks/useContent";
@@ -27,6 +27,8 @@ export function FAQ() {
                 <div className="py-5">
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${i}`}
                     className="w-full flex items-center justify-between gap-4 text-left"
                   >
                     <span className="font-display font-semibold text-ink">
@@ -40,21 +42,19 @@ export function FAQ() {
                       <ChevronDown size={20} />
                     </motion.span>
                   </button>
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <p className="pt-3 text-muted leading-relaxed">
-                          {faq.answer}
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  {/* Toujours dans le DOM (indexé par les moteurs), replié visuellement */}
+                  <motion.div
+                    id={`faq-answer-${i}`}
+                    initial={false}
+                    animate={isOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                    inert={!isOpen}
+                  >
+                    <p className="pt-3 text-muted leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </motion.div>
                 </div>
               </Reveal>
             );

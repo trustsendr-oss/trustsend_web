@@ -1,4 +1,5 @@
 import { CANONICAL_ORIGIN } from "./lib/domains";
+import { faqs } from "./data/content.fr";
 
 /**
  * Configuration SEO par route : utilisée côté client par <Seo /> (navigation SPA) et au build
@@ -13,7 +14,7 @@ export type SeoEntry = {
   robots?: string;
 };
 
-export const DEFAULT_SEO_IMAGE = "/assets/images/crypto-hero.avif";
+export const DEFAULT_SEO_IMAGE = "/og-image.png";
 
 export const seoConfig: Record<string, SeoEntry> = {
   "/": {
@@ -22,7 +23,7 @@ export const seoConfig: Record<string, SeoEntry> = {
       "Reemite aide les entreprises à gérer les paiements, les transferts internationaux, les cartes virtuelles et le payroll en Afrique et à l'international.",
     keywords:
       "paiements entreprises, payroll, transferts internationaux, cartes virtuelles, API de paiement, fintech Afrique",
-    image: "/assets/images/crypto-hero.avif",
+    image: "/og-image.png",
     robots: "index,follow",
   },
   "/pricing": {
@@ -30,7 +31,7 @@ export const seoConfig: Record<string, SeoEntry> = {
     description:
       "Découvrez les tarifs Reemite pour les paiements, les transferts, le payroll et les solutions de fintech adaptées aux entreprises.",
     keywords: "tarifs fintech, prix paiement entreprise, payroll pricing, transferts prix, carte virtuelle prix",
-    image: "/assets/images/crypto-hero.avif",
+    image: "/og-image.png",
     robots: "index,follow",
   },
   "/privacy": {
@@ -56,7 +57,7 @@ export const seoConfig: Record<string, SeoEntry> = {
     description:
       "Des solutions de paiement, d'intégration et d'automatisation pour les agents, partenaires et entreprises qui veulent croître plus vite.",
     keywords: "agents fintech, partenaires paiement, intégration API, solutions fintech, business growth",
-    image: "/assets/images/crypto-hero.avif",
+    image: "/og-image.png",
     robots: "index,follow",
   },
   "/transferts-internationaux": {
@@ -64,7 +65,7 @@ export const seoConfig: Record<string, SeoEntry> = {
     description:
       "Envoyez et recevez de l'argent à travers les frontières avec des transferts internationaux rapides, moins chers et sécurisés.",
     keywords: "transferts internationaux, envoi d'argent, mobile money, transfer Afrique, paiement global",
-    image: "/assets/images/crypto-hero.avif",
+    image: "/og-image.png",
     robots: "index,follow",
   },
   "/cartes-virtuelles": {
@@ -72,7 +73,7 @@ export const seoConfig: Record<string, SeoEntry> = {
     description:
       "Créez et gérez des cartes virtuelles pour vos achats, abonnements et dépenses professionnelles en toute sécurité.",
     keywords: "cartes virtuelles, paiement digital, carte entreprise, carte de dépenses, cartes VCC",
-    image: "/assets/images/crypto-hero.avif",
+    image: "/og-image.png",
     robots: "index,follow",
   },
   "/cryptomonnaies": {
@@ -80,7 +81,7 @@ export const seoConfig: Record<string, SeoEntry> = {
     description:
       "Accédez aux paiements crypto, aux stablecoins et aux flux financiers numériques via une solution fintech moderne.",
     keywords: "cryptomonnaies, paiements crypto, stablecoins, fintech crypto, blockchain entreprise",
-    image: "/assets/images/crypto-hero.avif",
+    image: "/og-image.png",
     robots: "index,follow",
   },
   "/paiement-marchand": {
@@ -88,7 +89,7 @@ export const seoConfig: Record<string, SeoEntry> = {
     description:
       "Offrez à vos clients une expérience de paiement sécurisée, rapide et adaptée à votre activité en ligne ou hors ligne.",
     keywords: "paiement marchand, checkout entreprise, acceptation de paiement, ecommerce Africa, paiement en ligne",
-    image: "/assets/images/crypto-hero.avif",
+    image: "/og-image.png",
     robots: "index,follow",
   },
   "/login": {
@@ -138,6 +139,10 @@ export function buildSchema(pathname: string) {
       { "@type": ["Organization", "FinancialService"], "@id": `${CANONICAL_ORIGIN}/#organization`, name: "Reemite", url: CANONICAL_ORIGIN, logo: `${CANONICAL_ORIGIN}/android-chrome-512x512.png`, description: "Reemite is a financial technology company, not a bank.", areaServed: "Africa and international markets", contactPoint: { "@type": "ContactPoint", contactType: "customer support", url: `${CANONICAL_ORIGIN}/contact`, areaServed: "Worldwide" } },
       { "@type": "WebSite", "@id": `${CANONICAL_ORIGIN}/#website`, url: `${CANONICAL_ORIGIN}/`, name: "Reemite", publisher: { "@id": `${CANONICAL_ORIGIN}/#organization` }, inLanguage: ["fr", "en", "ln", "sw"] },
       { "@type": pathname === "/contact" ? "ContactPage" : "WebPage", "@id": `${url}#webpage`, url, name: title, description, isPartOf: { "@id": `${CANONICAL_ORIGIN}/#website` }, about: { "@id": `${CANONICAL_ORIGIN}/#organization` } },
+      // FAQ de l'accueil (version française, celle du HTML pré-rendu)
+      ...(pathname === "/"
+        ? [{ "@type": "FAQPage", "@id": `${url}#faq`, mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer } })) }]
+        : []),
     ],
   };
 }

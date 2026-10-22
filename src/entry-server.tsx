@@ -7,6 +7,7 @@ import "./i18n";
 import App from "./App";
 
 export { PRERENDER_ROUTES, renderHeadTags } from "./seo";
+export { CANONICAL_ORIGIN } from "./lib/domains";
 
 /** Rendu HTML d'une page, utilisé au build par scripts/prerender.mjs. */
 export function render(url: string) {
