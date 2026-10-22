@@ -33,7 +33,7 @@ export function Testimonials() {
       />
       <div className="relative mx-auto max-w-3xl px-6 text-center">
         <Reveal>
-          <h2 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-ink">
+          <h2 className="font-display font-bold text-[1.75rem] leading-[1.15] tracking-tight text-balance sm:text-3xl lg:text-4xl text-ink">
             {t("testimonials.title")}
           </h2>
           <p className="mt-2 text-muted">

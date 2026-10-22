@@ -11,7 +11,9 @@
     "whatToDo": "What do you want to do?",
     "showLabel": "Show {{label}}",
     "ctaSignupNow": "Sign up now",
-    "poweredBy": "Powered by Reemite"
+    "poweredBy": "Powered by Reemite",
+    "downloadOn": "Download on the",
+    "getItOn": "Get it on"
   },
   "nav": {
     "banner": {
@@ -55,8 +57,8 @@
   },
   "africaAPIs": {
     "eyebrow": "Pan-African Coverage",
-    "title": "Payment APIs connecting all of Africa",
-    "subtitle": "A unified infrastructure to integrate payments, collections, and virtual cards across the entire continent.",
+    "title": "One API. The whole continent.",
+    "subtitle": "Mobile Money, banks and cards in 20+ African countries, through a single integration.",
     "description": "Whether you are a fintech, e-commerce platform, or enterprise, our APIs give you instant access to all Mobile Money operators, banking rails, and local payment methods anywhere in Africa.",
     "badge": "1 single continental integration",
     "features": {
@@ -102,6 +104,14 @@
     "codeSnippet": {
       "copy": "Copy payload",
       "copied": "Copied to clipboard!"
+    },
+    "mapLabel": "Map of African countries covered by Reemite",
+    "live": {
+      "routed": "Routed via {{operator}}"
+    },
+    "legend": {
+      "covered": "Covered countries",
+      "soon": "Coming soon"
     }
   },
   "devShowcase": {
@@ -130,9 +140,61 @@
     "reject": "Reject"
   },
   "ctaBanner": {
-    "title": "Grow your business with Reemite",
-    "subtitle": "Virtual cards, payments, local and international transfers, withdrawals and deposits via agents or Mobile Money, crypto, Likelemba savings and BGame — your entire financial business from a single platform.",
-    "cta": "Sign up now"
+    "title": "Get your money moving.",
+    "subtitle": "Collect, pay, transfer and save from a single Reemite account.",
+    "cta": "Sign up now",
+    "feedLabel": "Examples of activity on Reemite",
+    "feed": [
+      {
+        "icon": "in",
+        "title": "Payment received",
+        "meta": "Orange Money",
+        "amount": "+25,000 XOF"
+      },
+      {
+        "icon": "card",
+        "title": "Virtual card created",
+        "meta": "Visa •••• 4821",
+        "amount": "Active"
+      },
+      {
+        "icon": "send",
+        "title": "Transfer sent",
+        "meta": "To Nairobi",
+        "amount": "−150 USD"
+      },
+      {
+        "icon": "group",
+        "title": "Likelemba",
+        "meta": "12/12 members paid in",
+        "amount": "+600 USD"
+      },
+      {
+        "icon": "agent",
+        "title": "Agent withdrawal",
+        "meta": "Kinshasa, Gombe",
+        "amount": "−50,000 CDF"
+      },
+      {
+        "icon": "swap",
+        "title": "Crypto swap",
+        "meta": "BTC → USDT",
+        "amount": "+142 USDT"
+      },
+      {
+        "icon": "qr",
+        "title": "QR payment",
+        "meta": "Neighbourhood shop",
+        "amount": "−8,500 CDF"
+      },
+      {
+        "icon": "save",
+        "title": "Savings goal reached",
+        "meta": "Back to school",
+        "amount": "100%"
+      }
+    ],
+    "activity": "Activity"
   },
   "footer": {
     "legal": "Reemite Technologies Ltd. · Registered office , Kinshasa, DR Congo · Reg. No. 19",

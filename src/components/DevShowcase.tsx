@@ -17,12 +17,12 @@ export function DevShowcase() {
       <div className="mx-auto max-w-6xl px-6">
 
         {/* Header */}
-        <Reveal className="mx-auto mb-10 max-w-2xl text-center sm:mb-12">
+        <Reveal className="mb-10 max-w-2xl sm:mx-auto sm:mb-12 sm:text-center">
           <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent-light">
             {t("devShowcase.eyebrow")}
           </p>
 
-          <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">
+          <h2 className="font-display text-[1.75rem] font-bold leading-[1.15] tracking-tight text-balance sm:text-3xl lg:text-4xl">
             {t("devShowcase.title")}
           </h2>
 
@@ -90,7 +90,7 @@ export function DevShowcase() {
                   <button
                     key={language}
                     onClick={() => setLang(language)}
-                    className={`px-3 py-2.5 text-xs font-medium transition-colors ${
+                    className={`shrink-0 whitespace-nowrap px-3 py-2.5 text-xs font-medium transition-colors ${
                       lang === language
                         ? "border-b-2 border-accent-light text-accent-light"
                         : "text-white/40 hover:text-white/70"

@@ -14,9 +14,11 @@ export function IndustryGrid() {
   return (
     <section className="py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <Reveal className="text-center max-w-2xl mx-auto">
-          <h2 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-ink bg-amber-200/45">
-            {t("industryGrid.title")}
+        <Reveal className="max-w-2xl sm:mx-auto sm:text-center">
+          <h2 className="font-display font-bold text-[1.75rem] leading-[1.15] tracking-tight text-balance sm:text-3xl lg:text-4xl text-ink">
+            <span className="bg-amber-200/45 box-decoration-clone px-1.5">
+              {t("industryGrid.title")}
+            </span>
           </h2>
           <p className="mt-4 text-muted text-base sm:text-lg">
             {t("industryGrid.subtitle")}

@@ -13,8 +13,8 @@ export function FAQ() {
   return (
     <section className="py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-3xl px-6">
-        <Reveal className="text-center">
-          <h2 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-ink">
+        <Reveal className="sm:text-center">
+          <h2 className="font-display font-bold text-[1.75rem] leading-[1.15] tracking-tight text-balance sm:text-3xl lg:text-4xl text-ink">
             {t("faq.title")}
           </h2>
         </Reveal>

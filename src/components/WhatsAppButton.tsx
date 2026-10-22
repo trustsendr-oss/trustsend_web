@@ -19,9 +19,9 @@ export function WhatsAppButton() {
   const href = `https://wa.me/${PHONE}?text=${encodeURIComponent(t("whatsapp.prefill"))}`;
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
+    <div className="fixed bottom-4 right-4 z-40 sm:bottom-6 sm:right-6 flex flex-col items-end gap-3">
       {open && (
-        <div className="w-72 rounded-3xl bg-white shadow-pop border border-black/5 overflow-hidden">
+        <div className="w-[min(18rem,calc(100vw-2rem))] rounded-3xl bg-white shadow-pop border border-black/5 overflow-hidden">
           <div className="bg-[#25D366] text-white px-5 py-4 flex items-start gap-3">
             <span className="shrink-0 mt-0.5">
               <WhatsAppIcon size={22} />
@@ -51,7 +51,7 @@ export function WhatsAppButton() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-label={open ? t("whatsapp.close") : t("whatsapp.label")}
-        className="group flex items-center gap-2 rounded-full bg-[#25D366] text-white p-4 shadow-pop hover:bg-[#1ebe5b] transition-colors"
+        className="group flex items-center gap-2 rounded-full bg-[#25D366] text-white p-3 shadow-pop sm:p-4 hover:bg-[#1ebe5b] transition-colors"
       >
         {open ? <X size={26} /> : <WhatsAppIcon />}
       </button>

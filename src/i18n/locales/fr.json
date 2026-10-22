@@ -11,7 +11,9 @@
     "whatToDo": "Que voulez-vous faire ?",
     "showLabel": "Afficher {{label}}",
     "ctaSignupNow": "S'inscrire maintenant",
-    "poweredBy": "Powered by Reemite"
+    "poweredBy": "Powered by Reemite",
+    "downloadOn": "Télécharger sur",
+    "getItOn": "Disponible sur"
   },
   "nav": {
     "banner": {
@@ -55,8 +57,8 @@
   },
   "africaAPIs": {
     "eyebrow": "Couverture Panafricaine",
-    "title": "Des APIs de paiement connectées à toute l'Afrique",
-    "subtitle": "Une infrastructure unifiée pour intégrer vos paiements, encaissements et cartes virtuelles à l'échelle du continent.",
+    "title": "Une API. Tout le continent.",
+    "subtitle": "Mobile Money, banques et cartes dans plus de 20 pays africains, à travers une seule intégration.",
     "description": "Que vous soyez une fintech, une plateforme e-commerce ou une grande entreprise, nos APIs vous permettent d'accéder instantanément à tous les opérateurs de Mobile Money, réseaux bancaires et solutions de paiement locaux partout en Afrique.",
     "badge": "1 seule intégration continentale",
     "features": {
@@ -102,6 +104,14 @@
     "codeSnippet": {
       "copy": "Copier la requête",
       "copied": "Copié dans le presse-papiers !"
+    },
+    "mapLabel": "Carte des pays africains couverts par Reemite",
+    "live": {
+      "routed": "Routé via {{operator}}"
+    },
+    "legend": {
+      "covered": "Pays couverts",
+      "soon": "Bientôt"
     }
   },
   "devShowcase": {
@@ -130,9 +140,61 @@
     "reject": "Refuser"
   },
   "ctaBanner": {
-    "title": "Boostez votre business avec Reemite",
-    "subtitle": "Cartes virtuelles, paiements, transferts locaux et internationaux, retrait et dépôt via agents ou Mobile Money, cryptos, épargne Likelemba et BGame — tout votre business financier depuis une seule plateforme.",
-    "cta": "S'inscrire maintenant"
+    "title": "Faites bouger votre argent.",
+    "subtitle": "Encaissez, payez, transférez et épargnez depuis un seul compte Reemite.",
+    "cta": "S'inscrire maintenant",
+    "feedLabel": "Exemples d'activité sur Reemite",
+    "feed": [
+      {
+        "icon": "in",
+        "title": "Paiement reçu",
+        "meta": "Orange Money",
+        "amount": "+25 000 XOF"
+      },
+      {
+        "icon": "card",
+        "title": "Carte virtuelle créée",
+        "meta": "Visa •••• 4821",
+        "amount": "Active"
+      },
+      {
+        "icon": "send",
+        "title": "Transfert envoyé",
+        "meta": "Vers Nairobi",
+        "amount": "−150 USD"
+      },
+      {
+        "icon": "group",
+        "title": "Likelemba",
+        "meta": "12/12 membres ont cotisé",
+        "amount": "+600 USD"
+      },
+      {
+        "icon": "agent",
+        "title": "Retrait chez un agent",
+        "meta": "Kinshasa, Gombe",
+        "amount": "−50 000 CDF"
+      },
+      {
+        "icon": "swap",
+        "title": "Swap crypto",
+        "meta": "BTC → USDT",
+        "amount": "+142 USDT"
+      },
+      {
+        "icon": "qr",
+        "title": "Paiement QR",
+        "meta": "Boutique du quartier",
+        "amount": "−8 500 CDF"
+      },
+      {
+        "icon": "save",
+        "title": "Objectif d'épargne atteint",
+        "meta": "Rentrée scolaire",
+        "amount": "100 %"
+      }
+    ],
+    "activity": "Activité"
   },
   "footer": {
     "legal": "Reemite Technologies Ltd. · Siège social gombe, Kinshasa, RD Congo · N° Reg. 19",

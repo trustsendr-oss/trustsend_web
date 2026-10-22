@@ -306,7 +306,7 @@ export function Nav() {
           <AuthLink
             to="/login"
             className="
-              shrink-0 whitespace-nowrap
+              hidden shrink-0 whitespace-nowrap sm:inline-flex
               rounded-full px-2.5 py-2
               text-xs font-semibold text-ink
               transition-colors hover:text-brand
