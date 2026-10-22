@@ -47,7 +47,7 @@ export function FeatureTabs() {
         </Reveal>
 
         <div className="mt-10 sm:mt-14 grid lg:grid-cols-2 gap-10 sm:gap-12 items-center ">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={tab.id}
               initial={{ opacity: 0, y: 16 }}
@@ -74,7 +74,7 @@ export function FeatureTabs() {
             </motion.div>
           </AnimatePresence>
 
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={tab.id + "-mockup"}
               initial={{ opacity: 0, scale: 0.97 }}

@@ -45,7 +45,7 @@ export function IndustryGrid() {
         </Reveal>
 
         <div className="mt-10 sm:mt-12">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={ind.name}
               initial={{ opacity: 0, y: 16 }}

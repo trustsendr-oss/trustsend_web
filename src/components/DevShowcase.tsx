@@ -103,7 +103,7 @@ export function DevShowcase() {
 
               {/* Code */}
               <div className="min-h-[220px] overflow-x-auto p-4 sm:min-h-[280px] sm:p-5">
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="wait" initial={false}>
                   <motion.pre
                     key={lang}
                     initial={{ opacity: 0, y: 5 }}

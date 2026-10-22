@@ -47,7 +47,7 @@ export function Testimonials() {
             alt=""
             className="mx-auto h-8 opacity-40"
           />
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 12 }}

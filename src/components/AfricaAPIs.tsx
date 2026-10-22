@@ -109,7 +109,7 @@ function arcPath(x: number, y: number) {
   return `M${CORE.x} ${CORE.y} Q${mx} ${my - dist * 0.35} ${x} ${y}`;
 }
 
-function CoverageMap({ active }: { active: number }) {
+function CoverageMap({ active, cycled }: { active: number; cycled: boolean }) {
   const { t } = useTranslation();
   const reduceMotion = useReducedMotion();
   const route = ROUTES[active];
@@ -154,7 +154,7 @@ function CoverageMap({ active }: { active: number }) {
           className="stroke-accent"
           strokeWidth={3}
           strokeLinecap="round"
-          initial={{ pathLength: reduceMotion ? 1 : 0 }}
+          initial={cycled && !reduceMotion ? { pathLength: 0 } : false}
           animate={{ pathLength: 1 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         />
@@ -207,7 +207,7 @@ function CoverageMap({ active }: { active: number }) {
       {/* Étiquette de la ville active */}
       <motion.div
         key={route.city}
-        initial={{ opacity: 0, y: 6 }}
+        initial={cycled ? { opacity: 0, y: 6 } : false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         className="pointer-events-none absolute -translate-x-1/2 -translate-y-full whitespace-nowrap rounded-full bg-white px-3 py-1 text-xs font-semibold text-ink shadow-pop"
@@ -223,7 +223,7 @@ function CoverageMap({ active }: { active: number }) {
 }
 
 // Requête API unifiée, synchronisée avec la route active
-function ApiCard({ route }: { route: Route }) {
+function ApiCard({ route, cycled }: { route: Route; cycled: boolean }) {
   const { t } = useTranslation();
   return (
     <div className="overflow-hidden rounded-2xl bg-brand font-mono text-xs leading-6 text-white/80 shadow-pop">
@@ -240,7 +240,7 @@ function ApiCard({ route }: { route: Route }) {
       </div>
       <motion.div
         key={route.city}
-        initial={{ opacity: 0 }}
+        initial={cycled ? { opacity: 0 } : false}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
         className="px-4 py-3"
@@ -273,11 +273,16 @@ export function AfricaAPIs() {
   const { t } = useTranslation();
   const reduceMotion = useReducedMotion();
   const [active, setActive] = useState(0);
+  // Premier affichage statique (HTML pré-rendu visible), animations à partir de la 1re rotation
+  const [cycled, setCycled] = useState(false);
 
   useEffect(() => {
     if (reduceMotion) return;
     const id = setInterval(
-      () => setActive((i) => (i + 1) % ROUTES.length),
+      () => {
+        setCycled(true);
+        setActive((i) => (i + 1) % ROUTES.length);
+      },
       ROUTE_INTERVAL,
     );
     return () => clearInterval(id);
@@ -320,11 +325,11 @@ export function AfricaAPIs() {
         {/* Scène : la carte porte la section */}
         <Reveal delay={0.1}>
           <div className="relative mt-12 overflow-hidden rounded-[2rem] border border-surface-2 bg-surface px-5 pb-6 pt-10 sm:mt-16 sm:px-10 sm:pb-10 lg:px-14">
-            <CoverageMap active={active} />
+            <CoverageMap active={active} cycled={cycled} />
 
             <div className="mt-6 flex flex-col gap-5 lg:contents">
               <div className="lg:absolute lg:bottom-10 lg:left-14 lg:w-[280px]">
-                <ApiCard route={ROUTES[active]} />
+                <ApiCard route={ROUTES[active]} cycled={cycled} />
               </div>
 
               {/* Légende de la carte */}

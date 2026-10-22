@@ -117,7 +117,7 @@ export function Hero() {
           className="pointer-events-none absolute right-4 bottom-24 hidden w-40 select-none opacity-30 md:block lg:bottom-20 lg:w-56"
         />
 
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
           {/* =========================================================
               SLIDE 1 — MOBILE MONEY
           ========================================================= */}
@@ -308,6 +308,7 @@ export function Hero() {
               </Reveal>
             </motion.div>
           )}
+        </AnimatePresence>
 
           {/* =========================================================
               RECOMMENDATIONS
@@ -329,7 +330,6 @@ export function Hero() {
               </div>
             </div>
           </Reveal>
-        </AnimatePresence>
       </div>
     </section>
   );
