@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useContent } from "../hooks/useContent";
 import { Reveal } from "./Reveal";
-import loopPattern from "../assets/Group (2).png";
+// import loopPattern from "assets/images/figure-get-card.webp";
 
 export function Testimonials() {
   const { t } = useTranslation();
@@ -26,7 +26,7 @@ export function Testimonials() {
   return (
     <section id="temoignages" className="relative scroll-mt-16 overflow-hidden py-16 lg:scroll-mt-20 sm:py-20 lg:py-24 bg-brand-light/40">
       <img
-        src={loopPattern}
+        src="/assets/images/figure-get-card.webp"
         alt=""
         aria-hidden
         className="pointer-events-none absolute left-30 top-1/2 hidden w-[520px] max-w-none -translate-y-1/2 select-none opacity-25 lg:block"

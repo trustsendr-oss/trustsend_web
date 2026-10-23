@@ -87,10 +87,6 @@ export function FeatureTabs() {
               className="order-1 lg:order-2"
             >
                <motion.img
-                    // key={capIndex}
-                    // initial={{ opacity: 0, y: 16 }}
-                    // animate={{ opacity: 1, y: 0 }}
-                    // transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                     src={virtualCardAsset}
                     alt="Aperçu de l'application Reemite"
                     className="mx-auto block aspect-[5/4] w-full select-none object-contain"
