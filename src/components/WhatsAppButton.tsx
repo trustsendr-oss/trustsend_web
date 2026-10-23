@@ -2,7 +2,7 @@ import { useState } from "react";
 import { MessageCircle, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-const PHONE = "243972716360";
+const PHONE = "256795533410";
 
 function WhatsAppIcon({ size = 26 }: { size?: number }) {
   return (

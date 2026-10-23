@@ -961,6 +961,13 @@
     "followBody": "Keep your ticket reference to make it easier to follow up on your request.",
     "chatTitle": "Direct conversation",
     "chatBody": "Our WhatsApp channel lets you quickly continue the conversation with the Support team.",
+    "contactDetailsTitle": "Our contact details",
+    "whatsappChannel": "Reemite WhatsApp Channel",
+    "whatsappChannelCta": "Follow our news and announcements",
+    "supportWhatsapp": "Reemite | WhatsApp Support",
+    "officePhone": "Reemite | Office",
+    "officeEmail": "Office email",
+    "supportEmail": "Support email",
     "whatsappTicket": "Hello Reemite,\n\nTicket: {{id}}\nSubject: {{subject}}\n\n{{message}}",
     "whatsappFollowUp": "Hello Reemite, my ticket is {{id}}."
   },
