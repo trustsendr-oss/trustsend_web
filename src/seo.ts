@@ -20,11 +20,11 @@ export const DEFAULT_SEO_IMAGE = "/og-image.png";
 
 export const seoConfig: Record<string, SeoEntry> = {
   "/": {
-    title: "Reemite | Paiements, transferts et payroll pour les entreprises",
+    title: "Reemite | Dépôt, retrait gratuit partout en RDC",
     description:
-      "Reemite aide les entreprises à gérer les paiements, les transferts internationaux, les cartes virtuelles et le payroll en Afrique et à l'international.",
+      "Dépôt et retrait gratuit chez un agent Reemite partout en RDC, cartes virtuelles et transferts internationaux. Trouvez un agent près de vous ou devenez agent.",
     keywords:
-      "paiements entreprises, payroll, transferts internationaux, cartes virtuelles, API de paiement, fintech Afrique",
+      "dépôt d'argent, retrait gratuit, agent Reemite, carte virtuelle, transfert international, réseau d'agents, mobile money, Afrique",
     image: "/og-image.png",
     robots: "index,follow",
   },
@@ -55,10 +55,10 @@ export const seoConfig: Record<string, SeoEntry> = {
     robots: "index,follow",
   },
   "/agents": {
-    title: "Agents Reemite | Solutions de paiement et d'intégration",
+    title: "Réseau d'agents Reemite | Devenez agent",
     description:
-      "Des solutions de paiement, d'intégration et d'automatisation pour les agents, partenaires et entreprises qui veulent croître plus vite.",
-    keywords: "agents fintech, partenaires paiement, intégration API, solutions fintech, business growth",
+      "Rejoignez le réseau d'agents Reemite : proposez dépôts, retraits, cartes virtuelles et transferts internationaux à vos clients et gagnez des commissions.",
+    keywords: "devenir agent, réseau d'agents, agent de dépôt et retrait, point de service, commissions agent, Reemite",
     image: "/og-image.png",
     robots: "index,follow",
   },
@@ -111,10 +111,10 @@ export const seoConfig: Record<string, SeoEntry> = {
 /** Version anglaise des pages publiques (servies sous /en). */
 export const seoConfigEn: Record<string, SeoEntry> = {
   "/": {
-    title: "Reemite | Payments, transfers and payroll for businesses",
+    title: "Reemite | Deposits, free withdrawals anywhere in the DRC",
     description:
-      "Reemite helps businesses manage payments, international transfers, virtual cards and payroll across Africa and worldwide.",
-    keywords: "business payments, payroll, international transfers, virtual cards, payment API, Africa fintech",
+      "Deposit cash and withdraw for free at a Reemite agent anywhere in the DRC, buy virtual cards and send money abroad. Find an agent near you or become one.",
+    keywords: "cash deposit, free withdrawal, Reemite agent, virtual card, international transfer, agent network, mobile money, Africa",
   },
   "/pricing": {
     title: "Reemite pricing | Payments and fintech for businesses",
@@ -138,10 +138,10 @@ export const seoConfigEn: Record<string, SeoEntry> = {
     keywords: "Reemite support, contact Reemite, payment ticket, fintech help",
   },
   "/agents": {
-    title: "Reemite agents | Payment and integration solutions",
+    title: "Reemite agent network | Become an agent",
     description:
-      "Payment, integration and automation solutions for agents, partners and businesses that want to grow faster.",
-    keywords: "fintech agents, payment partners, API integration, fintech solutions, business growth",
+      "Join the Reemite agent network: offer deposits, withdrawals, virtual cards and international transfers to your customers and earn commissions.",
+    keywords: "become an agent, agent network, cash deposit and withdrawal agent, service point, agent commissions, Reemite",
   },
   "/transferts-internationaux": {
     title: "International transfers | Reemite",
