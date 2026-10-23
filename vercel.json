@@ -49,9 +49,9 @@
       "permanent": false
     },
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.trustsend.africa" }],
-      "destination": "https://www.reemite.com/:path*",
+      "destination": "https://www.reemite.com/$1",
       "permanent": true
     },
     {
