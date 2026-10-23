@@ -61,13 +61,12 @@ function addJsonLd(data: Record<string, unknown>) {
 
 export function Seo({ pathname, lang }: SeoProps) {
   useEffect(() => {
-    const { title, description, keywords, image, robots, url, alternates, xDefault } = resolveSeo(pathname, lang);
+    const { title, description, image, robots, url, alternates, xDefault } = resolveSeo(pathname, lang);
     const imageUrl = image.startsWith("http") ? image : `${CANONICAL_ORIGIN}${image}`;
 
     document.title = title;
 
     setMetaTag('meta[name="description"]', "name", "description", description);
-    setMetaTag('meta[name="keywords"]', "name", "keywords", keywords);
     setMetaTag('meta[name="robots"]', "name", "robots", robots);
     setMetaTag('meta[property="og:locale"]', "property", "og:locale", lang === "en" ? "en_US" : "fr_FR");
     setMetaTag('meta[property="og:title"]', "property", "og:title", title);

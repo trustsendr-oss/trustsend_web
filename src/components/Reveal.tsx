@@ -36,7 +36,7 @@ export function Reveal({
       ref={ref}
       className={className}
       initial={false}
-      animate={hidden ? { opacity: 0, y } : { opacity: 1, y: 0 }}
+      animate={hidden ? { opacity: 0, y, scale: 0.985 } : { opacity: 1, y: 0, scale: 1 }}
       transition={hidden ? { duration: 0 } : { duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}

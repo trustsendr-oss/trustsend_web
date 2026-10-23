@@ -20,11 +20,11 @@ export const DEFAULT_SEO_IMAGE = "/og-image.png";
 
 export const seoConfig: Record<string, SeoEntry> = {
   "/": {
-    title: "Reemite | Dépôt, retrait gratuit partout en RDC",
+    title: "Reemite | Paiements et fintech en Afrique",
     description:
-      "Dépôt et retrait gratuit chez un agent Reemite partout en RDC, cartes virtuelles et transferts internationaux. Trouvez un agent près de vous ou devenez agent.",
+      "Paiements, transferts internationaux, cartes virtuelles et dépôts ou retraits en RDC via les agents Reemite. Une fintech africaine fondée par Prince Muloko et Prince Lulinda.",
     keywords:
-      "dépôt d'argent, retrait gratuit, agent Reemite, carte virtuelle, transfert international, réseau d'agents, mobile money, Afrique",
+      "Reemite, finance en Afrique, paiements en Afrique, fintech africaine, Prince Muloko, Prince Lulinda, transferts internationaux, cartes virtuelles, réseau d'agents",
     image: "/og-image.png",
     robots: "index,follow",
   },
@@ -111,10 +111,10 @@ export const seoConfig: Record<string, SeoEntry> = {
 /** Version anglaise des pages publiques (servies sous /en). */
 export const seoConfigEn: Record<string, SeoEntry> = {
   "/": {
-    title: "Reemite | Deposits, free withdrawals anywhere in the DRC",
+    title: "Reemite | Payments and fintech in Africa",
     description:
-      "Deposit cash and withdraw for free at a Reemite agent anywhere in the DRC, buy virtual cards and send money abroad. Find an agent near you or become one.",
-    keywords: "cash deposit, free withdrawal, Reemite agent, virtual card, international transfer, agent network, mobile money, Africa",
+      "Payments, international transfers, virtual cards and cash deposits or withdrawals in the DRC through Reemite agents. An African fintech founded by Prince Muloko and Prince Lulinda.",
+    keywords: "Reemite, finance in Africa, African payments, African fintech, Prince Muloko, Prince Lulinda, international transfers, virtual cards, agent network",
   },
   "/pricing": {
     title: "Reemite pricing | Payments and fintech for businesses",
@@ -210,10 +210,15 @@ export function resolveSeo(pathname: string, lang: UrlLanguage = "fr") {
 export function buildSchema(pathname: string, lang: UrlLanguage = "fr") {
   const { title, description, url } = resolveSeo(pathname, lang);
   const faqs = lang === "en" ? faqsEn : faqsFr;
+  const organizationDescription = lang === "en"
+    ? "Reemite builds financial technology solutions to support African businesses and communities, with a vision to contribute to the transformation of Africa through finance and the mining industry."
+    : "Reemite développe des solutions technologiques financières pour soutenir les entreprises et les communautés africaines, avec la vision de contribuer à transformer l’Afrique grâce à la finance et à l’industrie minière.";
+  const founderDescription = lang === "en" ? "Founder of Reemite." : "Fondateur de Reemite.";
+  const cofounderDescription = lang === "en" ? "Co-founder of Reemite." : "Co-fondateur de Reemite.";
   return {
     "@context": "https://schema.org",
     "@graph": [
-      { "@type": ["Organization", "FinancialService"], "@id": `${CANONICAL_ORIGIN}/#organization`, name: "Reemite", url: CANONICAL_ORIGIN, logo: `${CANONICAL_ORIGIN}/android-chrome-512x512.png`, description: "Reemite is a financial technology company, not a bank.", areaServed: "Africa and international markets", contactPoint: { "@type": "ContactPoint", contactType: "customer support", url: `${CANONICAL_ORIGIN}/contact`, areaServed: "Worldwide" } },
+      { "@type": ["Organization", "FinancialService"], "@id": `${CANONICAL_ORIGIN}/#organization`, name: "Reemite", url: CANONICAL_ORIGIN, logo: `${CANONICAL_ORIGIN}/android-chrome-512x512.png`, description: organizationDescription, founder: [{ "@type": "Person", "@id": `${CANONICAL_ORIGIN}/#prince-muloko`, name: "Prince Muloko", description: founderDescription }, { "@type": "Person", "@id": `${CANONICAL_ORIGIN}/#prince-lulinda`, name: "Prince Lulinda", description: cofounderDescription }], areaServed: "Africa and international markets", contactPoint: { "@type": "ContactPoint", contactType: "customer support", url: `${CANONICAL_ORIGIN}/contact`, areaServed: "Worldwide" } },
       { "@type": "WebSite", "@id": `${CANONICAL_ORIGIN}/#website`, url: `${CANONICAL_ORIGIN}/`, name: "Reemite", publisher: { "@id": `${CANONICAL_ORIGIN}/#organization` }, inLanguage: ["fr", "en", "ln", "sw"] },
       { "@type": pathname === "/contact" ? "ContactPage" : "WebPage", "@id": `${url}#webpage`, url, name: title, description, inLanguage: lang, isPartOf: { "@id": `${CANONICAL_ORIGIN}/#website` }, about: { "@id": `${CANONICAL_ORIGIN}/#organization` } },
       // FAQ de l'accueil, dans la langue de la page
@@ -243,7 +248,6 @@ export function renderHeadTags(url: string) {
   return [
     `<title>${title}</title>`,
     `<meta name="description" content="${description}" />`,
-    `<meta name="keywords" content="${escapeHtml(seo.keywords)}" />`,
     `<meta name="robots" content="${seo.robots}" />`,
     `<link rel="canonical" href="${seo.url}" />`,
     ...seo.alternates.map((a) => `<link rel="alternate" hreflang="${a.lang}" href="${a.url}" />`),

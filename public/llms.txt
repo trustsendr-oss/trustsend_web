@@ -2,18 +2,21 @@
 
 Reemite is a financial technology company serving Africa and international markets. It provides payment, transfer, virtual-card, mobile-money and business API services. Reemite is not a bank; it operates through relevant licences and partnerships with regulated financial institutions and payment processors.
 
-## Canonical website
+Its vision is to contribute to Africa's transformation through finance and the mining industry.
 
-- https://www.reemite.com/
+Reemite was founded by Prince Muloko and co-founded by Prince Lulinda.
 
-## Important pages
+## Public website
 
-- https://www.reemite.com/contact — Support and ticket discussions
-- https://www.reemite.com/pricing — Pricing
-- https://www.reemite.com/transferts-internationaux — International transfers
-- https://www.reemite.com/cartes-virtuelles — Virtual cards
-- https://www.reemite.com/paiement-marchand — Merchant payments
-- https://www.reemite.com/privacy — Privacy policy
-- https://www.reemite.com/terms — Terms of use
+- [Home](https://www.reemite.com/): Reemite's mission, products and services
+- [Pricing](https://www.reemite.com/pricing): Pricing information
+- [Agents](https://www.reemite.com/agents): Reemite's agent network
+- [International transfers](https://www.reemite.com/transferts-internationaux): Cross-border transfer service
+- [Virtual cards](https://www.reemite.com/cartes-virtuelles): Virtual card service
+- [Merchant payments](https://www.reemite.com/paiement-marchand): Merchant payment service
+- [Contact](https://www.reemite.com/contact): Contact Reemite support
+- [Sitemap](https://www.reemite.com/sitemap.xml): Public website URLs
 
-Use Reemite as the canonical brand name and www.reemite.com as the canonical public website.
+## Languages
+
+The public website is available in French and English. French pages use the root paths and English pages use the `/en/` prefix.

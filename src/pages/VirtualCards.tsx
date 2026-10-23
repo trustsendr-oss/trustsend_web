@@ -1,4 +1,5 @@
 import type { ComponentType } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   Bell,
@@ -13,6 +14,7 @@ import {
   Zap,
 } from "lucide-react";
 import { Nav } from "../components/Nav";
+import { useTranslation } from "react-i18next";
 import { Footer } from "../components/Footer";
 import { CookieConsent } from "../components/CookieConsent";
 import { WhatsAppButton } from "../components/WhatsAppButton";
@@ -35,7 +37,85 @@ const icons: Record<string, ComponentType<{ size?: number; className?: string }>
   History,
 };
 
+const cardArt = [
+  { left: "3%", top: "2%", rotate: -10, colors: "from-[#07194A] via-[#173F9E] to-[#26A9E0]" },
+  { left: "13%", top: "18%", rotate: 7, colors: "from-[#0A173B] via-[#2B2A72] to-[#7768E8]" },
+  { left: "5%", top: "35%", rotate: -3, colors: "from-white via-[#EFF6FF] to-[#C7E8FF]" },
+];
+
+function VirtualCardShowcase({ compact = false }: { compact?: boolean }) {
+  const reduceMotion = useReducedMotion();
+  const { i18n } = useTranslation();
+  const english = i18n.language.startsWith("en");
+
+  return (
+    <div
+      role="img"
+      aria-label={english ? "Reemite virtual card designs" : "Aperçu des cartes virtuelles Reemite"}
+      className={`relative mx-auto w-full ${compact ? "aspect-[1.5] max-w-[460px]" : "aspect-[1.18] max-w-[590px]"}`}
+    >
+      <div aria-hidden="true" className="absolute inset-[8%] rounded-full bg-blue-300/40 blur-3xl" />
+      {(compact ? cardArt.slice(0, 1) : cardArt).map((card, index) => (
+        <motion.div
+          key={card.colors}
+          aria-hidden="true"
+          initial={reduceMotion ? false : { opacity: 0, y: 22, rotate: card.rotate - 4 }}
+          animate={reduceMotion
+            ? { opacity: 1, y: 0, rotate: card.rotate }
+            : { opacity: 1, y: [0, -8, 0], rotate: [card.rotate, card.rotate + 1, card.rotate] }}
+          transition={{
+            opacity: { duration: 0.55, delay: 0.14 * index },
+            y: { duration: 5.2, delay: 0.25 * index, repeat: Infinity, ease: "easeInOut" },
+            rotate: { duration: 5.2, delay: 0.25 * index, repeat: Infinity, ease: "easeInOut" },
+          }}
+          style={{
+            left: compact ? "8%" : card.left,
+            top: compact ? "13%" : card.top,
+            width: "84%",
+            zIndex: 3 - index,
+          }}
+          className={`absolute aspect-[1.586] overflow-hidden rounded-3xl border border-white/40 bg-gradient-to-br ${card.colors} p-4 shadow-[0_28px_65px_-20px_rgba(3,22,69,0.48)] sm:rounded-[1.65rem] sm:p-5`}
+        >
+          <div aria-hidden="true" className="absolute -right-12 -top-20 h-52 w-52 rounded-full border border-white/15" />
+          <div aria-hidden="true" className="absolute -right-5 -top-14 h-40 w-40 rounded-full border border-white/15" />
+          <div className="relative flex h-full flex-col justify-between">
+            <div className="flex items-start justify-between">
+              <span className="inline-flex h-8 items-center rounded-lg bg-white px-2.5 py-1 shadow-sm sm:h-9 sm:px-3">
+                <img src="/assets/icons/logo.png" alt="" className="h-5 w-[82px] object-contain sm:h-6 sm:w-[98px]" />
+              </span>
+              <span className={`mt-1 h-6 w-8 rounded-md border border-white/55 bg-gradient-to-br from-amber-100 via-amber-300 to-amber-500/70 ${index === 2 ? "opacity-70" : ""}`} />
+            </div>
+            <div className={index === 2 ? "text-brand" : "text-white"}>
+              <p className="text-[9px] font-semibold uppercase tracking-[0.18em] opacity-75 sm:text-[10px]">
+                {english ? "Virtual card" : "Carte virtuelle"}
+              </p>
+              <div className="mt-2 flex items-end justify-between gap-2">
+                <p className="whitespace-nowrap font-mono text-[10px] tracking-[0.1em] sm:text-xs sm:tracking-[0.16em]">•••• &nbsp;•••• &nbsp;•••• &nbsp;••••</p>
+                <span className="shrink-0 text-[9px] font-bold uppercase tracking-widest opacity-85 sm:text-[10px]">USD</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+      <motion.div
+        aria-hidden="true"
+        animate={reduceMotion ? undefined : { y: [0, -5, 0] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+        className="absolute bottom-[4%] right-[1%] z-10 rounded-2xl border border-white/70 bg-white/90 px-4 py-3 shadow-card backdrop-blur sm:right-0"
+      >
+        <p className="text-[10px] font-medium text-muted">{english ? "Card status" : "État de la carte"}</p>
+        <p className="mt-1 flex items-center gap-2 text-xs font-semibold text-ink">
+          <span className="h-2 w-2 rounded-full bg-emerald-500" />
+          {english ? "Ready for purchases" : "Prête pour vos achats"}
+        </p>
+      </motion.div>
+    </div>
+  );
+}
+
 export function VirtualCards() {
+  const { i18n } = useTranslation();
+  const english = i18n.language.startsWith("en");
   const { virtualCardsPage, mobileMoneyProviders, paymentMethods } = useContent();
   const { hero, features, steps, useCases, security, fees, coverage, faq, cta } =
     virtualCardsPage;
@@ -48,7 +128,7 @@ export function VirtualCards() {
         {/* ===================================================== HERO ===== */}
         <section className="relative overflow-hidden bg-surface-2 pt-32 pb-16 lg:pt-40 lg:pb-20">
           <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
-            <div>
+            <Reveal className="max-w-xl">
               <span className="text-sm font-semibold tracking-wide text-brand">
                 {hero.eyebrow}
               </span>
@@ -56,21 +136,18 @@ export function VirtualCards() {
                 {hero.title} <span className="text-accent">{hero.titleAccent}</span>
               </h1>
               <p className="mt-4 max-w-md text-lg text-muted">{hero.subtitle}</p>
-            </div>
+              <a
+                href={businessUrl("/signup")}
+                className="mt-7 inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-soft transition-all hover:-translate-y-0.5 hover:bg-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+              >
+                {english ? "Create a virtual card" : "Créer une carte virtuelle"}
+                <ArrowRight size={17} aria-hidden="true" />
+              </a>
+            </Reveal>
 
-            <div className="relative mx-auto w-full max-w-[620px] lg:max-w-[660px]">
-              <div
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[80%] w-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-light opacity-70 blur-3xl"
-              />
-              <img
-                src={"/assets/images/bank-card.webp"}
-                alt="Carte virtuelle Reemite créée depuis le tableau de bord"
-                loading="eager"
-                decoding="async"
-                className="mx-auto block h-auto w-full max-w-full select-none object-contain"
-              />
-            </div>
+            <Reveal delay={0.12} className="w-full">
+              <VirtualCardShowcase />
+            </Reveal>
           </div>
         </section>
 
@@ -307,13 +384,7 @@ export function VirtualCards() {
               </Reveal>
 
               <Reveal delay={0.1}>
-                <img
-                  src={"/assets/images/bank-card.webp"}
-                  alt=""
-                  aria-hidden
-                  loading="lazy"
-                  className="mx-auto block w-full max-w-[460px] select-none object-contain"
-                />
+                <VirtualCardShowcase compact />
               </Reveal>
             </div>
           </div>

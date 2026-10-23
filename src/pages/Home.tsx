@@ -15,6 +15,7 @@ import { FAQ } from "../components/FAQ";
 import { CTABanner } from "../components/CTABanner";
 import { Footer } from "../components/Footer";
 import { WhatsAppButton } from "../components/WhatsAppButton";
+import { AboutReemite } from "../components/AboutReemite";
 
 export function Home() {
   return (
@@ -32,6 +33,7 @@ export function Home() {
         {/* <NoCodeShowcase /> */}
         <Testimonials />
         <FAQ />
+        <AboutReemite />
         <CTABanner />
       </main>
       <Footer />
