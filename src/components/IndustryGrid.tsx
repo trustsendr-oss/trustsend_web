@@ -4,15 +4,20 @@ import { ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useContent } from "../hooks/useContent";
 import { Reveal } from "./Reveal";
+import { useHashTab } from "../hooks/useHashTab";
+
+// Ancres des profils, dans l'ordre de `industries` : "/#profil-ecoles" ouvre l'onglet Écoles
+const PROFILE_SLUGS = ["commercants", "ecoles", "diaspora", "agents", "epargne"];
 
 export function IndustryGrid() {
   const { t } = useTranslation();
   const { industries } = useContent();
   const [active, setActive] = useState(0);
   const ind = industries[active];
+  useHashTab("profil", PROFILE_SLUGS, setActive);
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24">
+    <section id="profils" data-anchor-prefix="profil" className="scroll-mt-16 py-16 sm:py-20 lg:scroll-mt-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal className="max-w-2xl sm:mx-auto sm:text-center">
           <h2 className="font-display font-bold text-[1.75rem] leading-[1.15] tracking-tight text-balance sm:text-3xl lg:text-4xl text-ink">

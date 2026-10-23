@@ -13,7 +13,7 @@ export function DevShowcase() {
   const [lang, setLang] = useState(languages[0]);
 
   return (
-    <section id="developers" className="bg-brand py-14 text-white sm:py-20">
+    <section id="developers" className="scroll-mt-16 lg:scroll-mt-20 bg-brand py-14 text-white sm:py-20">
       <div className="mx-auto max-w-6xl px-6">
 
         {/* Header */}

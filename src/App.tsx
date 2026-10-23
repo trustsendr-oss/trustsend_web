@@ -31,6 +31,7 @@ import { Legal } from "./pages/Legal";
 import { InstallApp } from "./components/InstallApp";
 import { Contact } from "./pages/Contact";
 import { Seo } from "./components/Seo";
+import { ScrollManager } from "./components/ScrollManager";
 import { languageFromPath } from "./lib/languageRoutes";
 import {
   BUSINESS_ORIGIN,
@@ -47,6 +48,7 @@ function App() {
   return (
     <>
       <Seo pathname={location.pathname} lang={urlLanguage} />
+      <ScrollManager />
 
       <Routes>
         {/* ---------- Site vitrine (www) ---------- */}

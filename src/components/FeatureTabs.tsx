@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useContent } from "../hooks/useContent";
 import { Reveal } from "./Reveal";
+import { useHashTab } from "../hooks/useHashTab";
 import virtualCardAsset from "../assets/virtual_card.webp";
 
 export function FeatureTabs() {
@@ -10,9 +11,11 @@ export function FeatureTabs() {
   const { featureTabs } = useContent();
   const [active, setActive] = useState(0);
   const tab = featureTabs[active];
+  // "/#solution-epargne-bgame" ouvre l'onglet correspondant
+  useHashTab("solution", featureTabs.map((f) => f.id), setActive);
 
   return (
-    <section id="solutions" className="py-16 sm:py-20 lg:py-24 bg-surface">
+    <section id="solutions" data-anchor-prefix="solution" className="scroll-mt-16 lg:scroll-mt-20 py-16 sm:py-20 lg:py-24 bg-surface">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal className="max-w-2xl sm:mx-auto sm:text-center">
           <h2 className="font-display font-bold text-[1.75rem] leading-[1.15] tracking-tight text-balance sm:text-3xl lg:text-4xl text-ink">

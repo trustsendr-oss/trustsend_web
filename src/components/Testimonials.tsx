@@ -24,7 +24,7 @@ export function Testimonials() {
   const current = testimonials[index];
 
   return (
-    <section className="relative overflow-hidden py-16 sm:py-20 lg:py-24 bg-brand-light/40">
+    <section id="temoignages" className="relative scroll-mt-16 overflow-hidden py-16 lg:scroll-mt-20 sm:py-20 lg:py-24 bg-brand-light/40">
       <img
         src={loopPattern}
         alt=""
