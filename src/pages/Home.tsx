@@ -9,7 +9,6 @@ import { AfricaAPIs } from "../components/AfricaAPIs";
 import { DevShowcase } from "../components/DevShowcase";
 import { Testimonials } from "../components/Testimonials";
 import { FAQ } from "../components/FAQ";
-import { CTABanner } from "../components/CTABanner";
 import { Footer } from "../components/Footer";
 import { WhatsAppButton } from "../components/WhatsAppButton";
 import { AboutReemite } from "../components/AboutReemite";
@@ -29,10 +28,8 @@ export function Home() {
         <Testimonials />
         <FAQ />
         <AboutReemite />
-        {/* <CTABanner / */}
       </main>
       <Footer />
-      {/* <AskAssistant /> */}
       <WhatsAppButton />
       <CookieConsent />
     </div>
