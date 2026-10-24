@@ -20,9 +20,9 @@ export const DEFAULT_SEO_IMAGE = "/og-image.png";
 
 export const seoConfig: Record<string, SeoEntry> = {
   "/": {
-    title: "Reemite | Paiements et fintech en Afrique",
+    title: "Reemite | Dépôt, retrait gratuit partout en RDC",
     description:
-      "Paiements, transferts internationaux, cartes virtuelles et dépôts ou retraits en RDC via les agents Reemite. Une fintech africaine fondée par Prince Muloko et Prince Lulinda.",
+      "Dépôt et retrait gratuit chez un agent Reemite partout en RDC, cartes virtuelles et transferts internationaux. Trouvez un agent près de vous ou devenez agent.",
     keywords:
       "Reemite, finance en Afrique, paiements en Afrique, fintech africaine, Prince Muloko, Prince Lulinda, transferts internationaux, cartes virtuelles, réseau d'agents",
     image: "/og-image.png",
@@ -111,9 +111,9 @@ export const seoConfig: Record<string, SeoEntry> = {
 /** Version anglaise des pages publiques (servies sous /en). */
 export const seoConfigEn: Record<string, SeoEntry> = {
   "/": {
-    title: "Reemite | Payments and fintech in Africa",
+    title: "Reemite | Deposits, free withdrawals anywhere in the DRC",
     description:
-      "Payments, international transfers, virtual cards and cash deposits or withdrawals in the DRC through Reemite agents. An African fintech founded by Prince Muloko and Prince Lulinda.",
+      "Deposit cash and withdraw for free at a Reemite agent anywhere in the DRC, buy virtual cards and send money abroad. Find an agent near you or become one.",
     keywords: "Reemite, finance in Africa, African payments, African fintech, Prince Muloko, Prince Lulinda, international transfers, virtual cards, agent network",
   },
   "/pricing": {
