@@ -277,8 +277,8 @@ export const platformStandards: { icon: string; label: string }[] = [
   { icon: "Wallet", label: "An account with no deposit or withdrawal fees" },
   { icon: "Percent", label: "Money transfers for just 1%" },
   { icon: "Receipt", label: "Fee-free bill payments" },
-  { icon: "Smartphone", label: "Instant airtime top-up on every network" },
-  { icon: "Phone", label: "A single, free contact number" },
+  { icon: "Card", label: "A virtual card for just $5" },
+  { icon: "Savings", label: "Group savings with Likelemba" },
   { icon: "ShieldCheck", label: "Security to international standards" },
 ];
 

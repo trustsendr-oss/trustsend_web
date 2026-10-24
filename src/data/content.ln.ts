@@ -35,7 +35,7 @@ export const platformStandards = [
   { icon: "Wallet", label: "Compte ezangi mbongo ya dépôt to retrait" },
   { icon: "Percent", label: "Kotinda mbongo na 1% kaka" },
   { icon: "Receipt", label: "Kofuta factures ezangi frais" },
-  { icon: "Smartphone", label: "Kozwa crédit noki na réseau nyonso" },
-  { icon: "Phone", label: "Numéro moko ya ofele" },
+  { icon: "Card", label: "Carte virtuelle na 5$ kaka" },
+  { icon: "Savings", label: "Kobomba mbongo elongo na Likelemba" },
   { icon: "ShieldCheck", label: "Bobateli na standard ya mokili" },
 ];

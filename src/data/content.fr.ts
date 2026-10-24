@@ -310,8 +310,8 @@ export const platformStandards: { icon: string; label: string }[] = [
   { icon: "Wallet", label: "Un compte sans frais de dépôt ou retrait" },
   { icon: "Percent", label: "Des transferts d'argent à seulement 1%" },
   { icon: "Receipt", label: "Le paiement de factures sans frais" },
-  { icon: "Smartphone", label: "L'achat de crédit instantané tous réseaux" },
-  { icon: "Phone", label: "Un numéro de contact unique et gratuit" },
+  { icon: "Card", label: "Une carte virtuelle à seulement 5$" },
+  { icon: "Savings", label: "L'épargne collective avec Likelemba" },
   { icon: "ShieldCheck", label: "Un système de sécurité aux standards internationaux" },
 ];
 

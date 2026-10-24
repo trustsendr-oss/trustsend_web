@@ -35,7 +35,7 @@ export const platformStandards = [
   { icon: "Wallet", label: "Akaunti isiyo na ada za kuweka au kutoa" },
   { icon: "Percent", label: "Uhamisho wa pesa kwa 1% tu" },
   { icon: "Receipt", label: "Malipo ya bili bila ada" },
-  { icon: "Smartphone", label: "Nunua muda wa maongezi papo hapo kwenye mtandao wowote" },
-  { icon: "Phone", label: "Namba moja ya mawasiliano bila malipo" },
+  { icon: "Card", label: "Kadi ya mtandaoni kwa $5 tu" },
+  { icon: "Savings", label: "Akiba ya pamoja na Likelemba" },
   { icon: "ShieldCheck", label: "Usalama wa viwango vya kimataifa" },
 ];

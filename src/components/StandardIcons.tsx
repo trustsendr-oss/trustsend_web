@@ -61,28 +61,25 @@ export function ReceiptIcon({ className }: IconProps) {
   );
 }
 
-export function AirtimeIcon({ className }: IconProps) {
+export function CardIcon({ className }: IconProps) {
   return (
     <Frame className={className}>
-      <rect x="13" y="4" width="22" height="40" rx="4.5" fill={BLUE} />
-      <rect x="16.5" y="9" width="15" height="26" rx="2" fill="#fff" strokeWidth={1.5} />
-      <path d="M22 39.5h4" stroke="#fff" />
-      <path d="M25.5 12.5 19 23h5l-1.5 8.5L29 21h-5z" fill={LIME} strokeWidth={1.5} />
+      <rect x="5" y="11" width="38" height="26" rx="4.5" fill={BLUE} />
+      <path d="M5 18.5h38" stroke={NAVY} strokeWidth={4} />
+      <rect x="10" y="25" width="8" height="6" rx="1.5" fill={LIME} strokeWidth={1.5} />
+      <path d="M28 30h9" stroke="#fff" />
     </Frame>
   );
 }
 
-export function SupportIcon({ className }: IconProps) {
+export function SavingsIcon({ className }: IconProps) {
   return (
     <Frame className={className}>
-      <path d="M23 5h16a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4h-5l-5 4.5V22h-6a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4z" fill={LIME} />
-      <circle cx="26" cy="13.5" r="1.3" fill={NAVY} stroke="none" />
-      <circle cx="31" cy="13.5" r="1.3" fill={NAVY} stroke="none" />
-      <circle cx="36" cy="13.5" r="1.3" fill={NAVY} stroke="none" />
-      <path
-        d="M31 37.1v3.7a2.5 2.5 0 0 1-2.7 2.5 24.5 24.5 0 0 1-10.7-3.8 24 24 0 0 1-7.4-7.4 24.5 24.5 0 0 1-3.8-10.8A2.5 2.5 0 0 1 8.9 18.6h3.7a2.5 2.5 0 0 1 2.5 2.1 15.9 15.9 0 0 0 .9 3.5 2.5 2.5 0 0 1-.6 2.6l-1.6 1.6a19.8 19.8 0 0 0 7.4 7.4l1.6-1.6a2.5 2.5 0 0 1 2.6-.6 15.9 15.9 0 0 0 3.5.9 2.5 2.5 0 0 1 2.1 2.5z"
-        fill={BLUE}
-      />
+      <circle cx="16" cy="12" r="4.5" fill={LIME} />
+      <circle cx="32" cy="12" r="4.5" fill={LIME} />
+      <rect x="7" y="22" width="34" height="20" rx="5" fill={BLUE} />
+      <path d="M18 22v-2.5a6 6 0 0 1 12 0V22" />
+      <circle cx="24" cy="32" r="3.5" fill="#fff" />
     </Frame>
   );
 }
