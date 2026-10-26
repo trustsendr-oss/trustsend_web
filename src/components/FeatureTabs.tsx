@@ -4,13 +4,41 @@ import { useTranslation } from "react-i18next";
 import { useContent } from "../hooks/useContent";
 import { Reveal } from "./Reveal";
 import { useHashTab } from "../hooks/useHashTab";
-import virtualCardAsset from "../assets/virtual_card.webp";
+import cryptoSwapImage from "../assets/crypto-swap-topup.jpeg";
+
+const featureImages: Record<string, { src: string; alt: string }> = {
+  "cartes-virtuelles": {
+    src: "/assets/images/figure-get-card.webp",
+    alt: "Carte virtuelle Reemite",
+  },
+  "cryptos-swap": {
+    src: cryptoSwapImage,
+    alt: "Recharger un compte Reemite en USDT sur BNB Smart Chain",
+  },
+  paiements: {
+    src: "/assets/images/merchant-qr.webp",
+    alt: "Paiement marchand par QR code",
+  },
+  transferts: {
+    src: "/assets/images/industry-diaspora.webp",
+    alt: "Transfert d’argent vers les proches",
+  },
+  "retrait-depot": {
+    src: "/assets/images/industry-agents.webp",
+    alt: "Dépôt et retrait auprès d’un agent",
+  },
+  "epargne-bgame": {
+    src: "/assets/images/industry-savings.webp",
+    alt: "Épargne collective et Likelemba",
+  },
+};
 
 export function FeatureTabs() {
   const { t } = useTranslation();
   const { featureTabs } = useContent();
   const [active, setActive] = useState(0);
   const tab = featureTabs[active];
+  const featureImage = featureImages[tab.id] ?? featureImages["cartes-virtuelles"];
   // "/#solution-epargne-bgame" ouvre l'onglet correspondant
   useHashTab("solution", featureTabs.map((f) => f.id), setActive);
 
@@ -80,17 +108,17 @@ export function FeatureTabs() {
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={tab.id + "-mockup"}
-              initial={{ opacity: 0, scale: 0.97 }}
+              initial={{ opacity: 0, y: 12, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.97 }}
+              exit={{ opacity: 0, y: -8, scale: 0.98 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               className="order-1 lg:order-2"
             >
-               <motion.img
-                    src={virtualCardAsset}
-                    alt="Aperçu de l'application Reemite"
-                    className="mx-auto block aspect-[5/4] w-full select-none object-contain"
-                  />
+              <motion.img
+                src={featureImage.src}
+                alt={featureImage.alt}
+                className="mx-auto block aspect-[5/4] w-full select-none rounded-xl object-contain"
+              />
             </motion.div>
           </AnimatePresence>
         </div>
