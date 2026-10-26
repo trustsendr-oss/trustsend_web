@@ -799,16 +799,19 @@
     },
     "createCard": {
       "back": "Back to cards",
-      "title": "Create a card",
-      "subtitle": "The card is funded from one of your USD wallets.",
+      "title": "New virtual card",
+      "subtitle": "The card is funded from your USD wallet.",
       "wallet": "Source wallet",
-      "walletPlaceholder": "Select a wallet",
       "noUsdWallet": "You need an active USD wallet to issue a card.",
       "brand": "Network",
-      "amount": "Initial amount (USD)",
-      "availableBalance": "Available balance: {{balance}}",
-      "submit": "Create card",
-      "submitting": "Creating…"
+      "amount": "Amount to load",
+      "submit": "Continue",
+      "insufficient": "Insufficient balance in this wallet.",
+      "loaded": "Loaded on card",
+      "debited": "Debited from wallet",
+      "remaining": "Remaining balance",
+      "edit": "Edit",
+      "confirm": "Confirm and create"
     },
     "cardDetail": {
       "back": "Back to cards",

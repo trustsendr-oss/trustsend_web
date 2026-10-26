@@ -1152,7 +1152,7 @@ export const virtualCardsPage = {
     eyebrow: "Fees",
     title: "Simple fees, stated upfront",
     rows: [
-      { label: "Creating a virtual card", value: "$1" },
+      { label: "Creating a virtual card", value: "$5" },
       { label: "Topping up the card", value: "1.5%" },
       { label: "Online payment", value: "$0" },
       { label: "Currency conversion", value: "1%" },

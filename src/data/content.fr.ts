@@ -1186,7 +1186,7 @@ export const virtualCardsPage = {
     eyebrow: "Frais",
     title: "Des frais simples et annoncés",
     rows: [
-      { label: "Création d'une carte virtuelle", value: "1 $" },
+      { label: "Création d'une carte virtuelle", value: "5 $" },
       { label: "Rechargement de la carte", value: "1,5 %" },
       { label: "Paiement en ligne", value: "0 $" },
       { label: "Conversion de devise", value: "1 %" },
