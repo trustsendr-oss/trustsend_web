@@ -18,11 +18,23 @@ export type SeoEntry = {
 
 export const DEFAULT_SEO_IMAGE = "/og-image.png";
 
+const googleVerification = import.meta.env.VITE_GOOGLE_SITE_VERIFICATION?.trim();
+const bingVerification =
+  import.meta.env.VITE_BING_SITE_VERIFICATION?.trim() || "A998CC0DF022F0DBC705B89989B5443E";
+const yandexVerification = import.meta.env.VITE_YANDEX_VERIFICATION?.trim();
+
+/** Optional ownership verification codes from Google, Bing, and Yandex webmaster consoles. */
+export const SEARCH_VERIFICATION_META: { name: string; content: string }[] = [
+  ...(googleVerification ? [{ name: "google-site-verification", content: googleVerification }] : []),
+  ...(bingVerification ? [{ name: "msvalidate.01", content: bingVerification }] : []),
+  ...(yandexVerification ? [{ name: "yandex-verification", content: yandexVerification }] : []),
+];
+
 export const seoConfig: Record<string, SeoEntry> = {
   "/": {
-    title: "Reemite | Dépôt, retrait gratuit partout en RDC",
+    title: "Reemite | Paiements, transferts et API fintech en RDC",
     description:
-      "Dépôt et retrait gratuit chez un agent Reemite partout en RDC, cartes virtuelles et transferts internationaux. Trouvez un agent près de vous ou devenez agent.",
+      "Reemite réunit paiements, transferts locaux et internationaux, cartes virtuelles et API fintech pour les particuliers et entreprises en RDC.",
     keywords:
       "Reemite, finance en Afrique, paiements en Afrique, fintech africaine, Prince Muloko, Prince Lulinda, transferts internationaux, cartes virtuelles, réseau d'agents",
     image: "/og-image.png",
@@ -111,9 +123,9 @@ export const seoConfig: Record<string, SeoEntry> = {
 /** Version anglaise des pages publiques (servies sous /en). */
 export const seoConfigEn: Record<string, SeoEntry> = {
   "/": {
-    title: "Reemite | Deposits, free withdrawals anywhere in the DRC",
+    title: "Reemite | Payments, Transfers and Fintech APIs in the DRC",
     description:
-      "Deposit cash and withdraw for free at a Reemite agent anywhere in the DRC, buy virtual cards and send money abroad. Find an agent near you or become one.",
+      "Reemite brings together payments, local and international transfers, virtual cards and fintech APIs for individuals and businesses in the DRC.",
     keywords: "Reemite, finance in Africa, African payments, African fintech, Prince Muloko, Prince Lulinda, international transfers, virtual cards, agent network",
   },
   "/pricing": {
@@ -211,8 +223,8 @@ export function buildSchema(pathname: string, lang: UrlLanguage = "fr") {
   const { title, description, url } = resolveSeo(pathname, lang);
   const faqs = lang === "en" ? faqsEn : faqsFr;
   const organizationDescription = lang === "en"
-    ? "Reemite builds financial technology solutions to support African businesses and communities, with a vision to contribute to the transformation of Africa through finance and the mining industry."
-    : "Reemite développe des solutions technologiques financières pour soutenir les entreprises et les communautés africaines, avec la vision de contribuer à transformer l’Afrique grâce à la finance et à l’industrie minière.";
+    ? "Reemite is a financial technology platform for payments, local and international transfers, virtual cards, crypto services and business APIs, serving individuals and businesses in the DRC and across Africa."
+    : "Reemite est une plateforme de technologie financière proposant paiements, transferts locaux et internationaux, cartes virtuelles, services crypto et API aux particuliers et aux entreprises en RDC et en Afrique.";
   const founderDescription = lang === "en" ? "Founder of Reemite." : "Fondateur de Reemite.";
   const cofounderDescription = lang === "en" ? "Co-founder of Reemite." : "Co-fondateur de Reemite.";
   const princeMulokoBiography =
@@ -251,6 +263,7 @@ export function renderHeadTags(url: string) {
     `<title>${title}</title>`,
     `<meta name="description" content="${description}" />`,
     `<meta name="robots" content="${seo.robots}" />`,
+    ...SEARCH_VERIFICATION_META.map(({ name, content }) => `<meta name="${name}" content="${escapeHtml(content)}" />`),
     `<link rel="canonical" href="${seo.url}" />`,
     ...seo.alternates.map((a) => `<link rel="alternate" hreflang="${a.lang}" href="${a.url}" />`),
     ...(seo.alternates.length ? [`<link rel="alternate" hreflang="x-default" href="${seo.xDefault}" />`] : []),

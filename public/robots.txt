@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Allow ChatGPT Search to discover and cite public Reemite pages.
+User-agent: OAI-SearchBot
+Allow: /
+
 Sitemap: https://www.reemite.com/sitemap.xml

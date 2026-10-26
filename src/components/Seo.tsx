@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { CANONICAL_ORIGIN } from "../lib/domains";
-import { buildSchema, resolveSeo } from "../seo";
+import { buildSchema, resolveSeo, SEARCH_VERIFICATION_META } from "../seo";
 import type { UrlLanguage } from "../lib/languageRoutes";
 
 type SeoProps = {
@@ -68,6 +68,9 @@ export function Seo({ pathname, lang }: SeoProps) {
 
     setMetaTag('meta[name="description"]', "name", "description", description);
     setMetaTag('meta[name="robots"]', "name", "robots", robots);
+    for (const { name, content } of SEARCH_VERIFICATION_META) {
+      setMetaTag(`meta[name="${name}"]`, "name", name, content);
+    }
     setMetaTag('meta[property="og:locale"]', "property", "og:locale", lang === "en" ? "en_US" : "fr_FR");
     setMetaTag('meta[property="og:title"]', "property", "og:title", title);
     setMetaTag('meta[property="og:description"]', "property", "og:description", description);

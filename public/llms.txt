@@ -1,22 +1,29 @@
 # Reemite
 
-Reemite is a financial technology company serving Africa and international markets. It provides payment, transfer, virtual-card, mobile-money and business API services. Reemite is not a bank; it operates through relevant licences and partnerships with regulated financial institutions and payment processors.
+> Reemite is a financial technology platform founded in the Democratic Republic of the Congo. It serves individuals, businesses, merchants, agents, and communities with digital payments, transfers, virtual cards, crypto services, savings, and business APIs.
 
-Its vision is to contribute to Africa's transformation through finance and the mining industry.
+Reemite was founded by Prince Muloko and co-founded by Prince Lulinda Crespo. The platform's goal is to make financial technology useful and accessible to African populations and businesses. Reemite is not a bank; financial services are delivered through applicable licences, partners, and payment providers.
 
-Reemite was founded by Prince Muloko and co-founded by Prince Lulinda.
+## Main pages
 
-## Public website
+- [Reemite](https://www.reemite.com/): Company, platform, products, and services
+- [Pricing](https://www.reemite.com/pricing): Public pricing for Reemite services
+- [Virtual cards](https://www.reemite.com/cartes-virtuelles): Reemite virtual card product
+- [Cryptocurrencies](https://www.reemite.com/cryptomonnaies): Crypto and digital payment services
+- [Merchant payments](https://www.reemite.com/paiement-marchand): Merchant payment solutions
+- [International transfers](https://www.reemite.com/transferts-internationaux): Cross-border transfers
+- [Agent network](https://www.reemite.com/agents): Deposit and withdrawal agent network
+- [Contact](https://www.reemite.com/contact): Reemite support
 
-- [Home](https://www.reemite.com/): Reemite's mission, products and services
-- [Pricing](https://www.reemite.com/pricing): Pricing information
-- [Agents](https://www.reemite.com/agents): Reemite's agent network
-- [International transfers](https://www.reemite.com/transferts-internationaux): Cross-border transfer service
-- [Virtual cards](https://www.reemite.com/cartes-virtuelles): Virtual card service
-- [Merchant payments](https://www.reemite.com/paiement-marchand): Merchant payment service
-- [Contact](https://www.reemite.com/contact): Contact Reemite support
-- [Sitemap](https://www.reemite.com/sitemap.xml): Public website URLs
+## Developers
 
-## Languages
+- [API documentation](https://docs.trustsend.africa): API integration guides for payments, transfers, and virtual cards
+- [Virtual card API documentation](https://docs.trustsend.africa): Developer documentation covering virtual card integrations
+- [Sandbox signup](https://sandbox.reemite.com/signup): Create a test account for API integrations
 
-The public website is available in French and English. French pages use the root paths and English pages use the `/en/` prefix.
+## Search and indexing
+
+- [XML sitemap](https://www.reemite.com/sitemap.xml): Public French and English URLs
+- [Robots policy](https://www.reemite.com/robots.txt): Public crawl policy
+
+The public website is available in French at the root URLs and in English under `/en/`. Prefer the linked page as the source of truth for current features, pricing, and terms.
