@@ -4,6 +4,7 @@ import { Hero } from "../components/Hero";
 import { LogoMarquee } from "../components/LogoMarquee";
 import { PlatformStandards } from "../components/PlatformStandards";
 import { FeatureTabs } from "../components/FeatureTabs";
+import { CurrencyShowcase } from "../components/CurrencyShowcase";
 import { IndustryGrid } from "../components/IndustryGrid";
 import { AfricaAPIs } from "../components/AfricaAPIs";
 import { DevShowcase } from "../components/DevShowcase";
@@ -22,6 +23,7 @@ export function Home() {
         <LogoMarquee />
         <PlatformStandards />
         <FeatureTabs />
+        <CurrencyShowcase />
         <IndustryGrid />
         <AfricaAPIs />
         <DevShowcase />

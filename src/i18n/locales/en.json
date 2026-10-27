@@ -42,6 +42,29 @@
     "title": "One single platform for all your business money",
     "subtitle": "From collecting a simple payment to fully managing your treasury, everything lives in the same account."
   },
+  "currencyShowcase": {
+    "eyebrow": "Borderless payments",
+    "title": "Your payments move with your business, everywhere.",
+    "description": "Manage collections and transfers in the currencies of your markets, all from one platform.",
+    "bulletPayments": "Local and international payments together in one place",
+    "bulletMobileMoney": "Mobile Money options built for multiple African markets",
+    "bulletRates": "Review fees and the exchange rate before confirming a transaction",
+    "currenciesTitle": "Currencies for your markets",
+    "currenciesNote": "Examples only. Availability depends on country and service.",
+    "cta": "Explore transfers",
+    "imageAlt": "Shopkeeper using her phone in a store",
+    "marketBadge": "Africa and beyond",
+    "countries": {
+      "drc": "DR Congo",
+      "rwanda": "Rwanda",
+      "burundi": "Burundi",
+      "kenya": "Kenya",
+      "westAfrica": "West Africa",
+      "centralAfrica": "Central Africa",
+      "usa": "United States",
+      "eurozone": "Eurozone"
+    }
+  },
   "industryGrid": {
     "title": "Built for every kind of user",
     "subtitle": "Merchant, school, agent, or savings group: Reemite adapts to how you actually manage your money.",

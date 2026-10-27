@@ -42,6 +42,29 @@
     "title": "Une seule plateforme pour tout l'argent de votre business",
     "subtitle": "De l'encaissement d'un simple paiement à la gestion complète de votre trésorerie, tout vit dans le même compte."
   },
+  "currencyShowcase": {
+    "eyebrow": "Paiements sans frontières",
+    "title": "Vos paiements suivent votre activité, partout.",
+    "description": "Gérez vos encaissements et transferts dans les devises de vos marchés, depuis une seule plateforme.",
+    "bulletPayments": "Des paiements locaux et internationaux réunis au même endroit",
+    "bulletMobileMoney": "Des moyens Mobile Money adaptés à plusieurs marchés africains",
+    "bulletRates": "Consultez les frais et le taux avant de confirmer une opération",
+    "currenciesTitle": "Des devises pour vos marchés",
+    "currenciesNote": "Exemples indicatifs. La disponibilité dépend du pays et du service.",
+    "cta": "Découvrir les transferts",
+    "imageAlt": "Commerçante utilisant son téléphone dans son magasin",
+    "marketBadge": "Afrique et international",
+    "countries": {
+      "drc": "RDC",
+      "rwanda": "Rwanda",
+      "burundi": "Burundi",
+      "kenya": "Kenya",
+      "westAfrica": "Afrique de l’Ouest",
+      "centralAfrica": "Afrique centrale",
+      "usa": "États-Unis",
+      "eurozone": "Zone euro"
+    }
+  },
   "industryGrid": {
     "title": "Adapté à chaque profil d'utilisateur",
     "subtitle": "Commerçant, école, agent ou groupe d'épargne : Reemite s'adapte à la façon dont vous gérez réellement votre argent.",
