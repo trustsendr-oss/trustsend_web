@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#1E1872" />
+  <title>Invitation likiliba · Reemite</title>
+  <meta property="og:title" content="Vous êtes invité dans une likiliba" />
+  <meta property="og:description" content="Ouvrez l'invitation dans l'app Reemite pour rejoindre le groupe." />
+  <meta property="og:image" content="https://www.reemite.com/og-image.png" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /*
+     * Page d'atterrissage d'un lien d'invitation likiliba.
+     * Avec l'app installée sur Android, le lien n'arrive jamais ici : le système
+     * l'ouvre directement dans l'app (App Links, /.well-known/assetlinks.json).
+     * Ici : sans l'app, sur iPhone, ou depuis un ordinateur.
+     */
+    :root {
+      --brand: #1E1872;
+      --ink: #192839;
+      --muted: #5d6d86;
+      --line: #e3e8ef;
+      --surface: #f8fafc;
+      --bg: #ffffff;
+      --on-brand: #ffffff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --brand: #8f88ff;
+        --ink: #eef1f6;
+        --muted: #9aa7bb;
+        --line: #26304a;
+        --surface: #141a2b;
+        --bg: #0b1020;
+        --on-brand: #0b1020;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    main { width: 100%; max-width: 420px; }
+    .brand {
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.2px;
+      color: var(--brand);
+      margin: 0 0 40px;
+    }
+    h1 {
+      font-size: 24px;
+      line-height: 1.25;
+      letter-spacing: -0.4px;
+      font-weight: 700;
+      margin: 0 0 12px;
+    }
+    p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.55; }
+    .steps {
+      margin: 28px 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+    .steps li {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14.5px;
+      line-height: 1.45;
+    }
+    .steps b {
+      flex: none;
+      width: 22px;
+      color: var(--brand);
+      font-variant-numeric: tabular-nums;
+    }
+    .actions { display: grid; gap: 10px; }
+    .button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 52px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+    }
+    .primary { background: var(--brand); color: var(--on-brand); }
+    .secondary { border: 1px solid var(--line); color: var(--ink); background: var(--surface); }
+    .note { margin-top: 20px; font-size: 13px; }
+    .hidden { display: none; }
+    .error { color: #c2410c; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="brand">Reemite</p>
+
+    <div id="invite">
+      <h1 data-i18n="title">Vous êtes invité dans une likiliba</h1>
+      <p data-i18n="lead">Une likiliba est une tontine privée : chacun cotise à tour de rôle et reçoit la cagnotte à son tour. On la rejoint depuis l'app Reemite.</p>
+
+      <ol class="steps">
+        <li><b>1</b><span data-i18n="step1">Ouvrez l'invitation dans l'app.</span></li>
+        <li><b>2</b><span data-i18n="step2">Lisez les règles du groupe, puis acceptez.</span></li>
+        <li><b>3</b><span data-i18n="step3">L'organisateur confirme votre place.</span></li>
+      </ol>
+
+      <div class="actions">
+        <a id="open" class="button primary" href="#" data-i18n="open">Ouvrir dans Reemite</a>
+        <a id="install" class="button secondary" href="https://play.google.com/store/apps/details?id=com.reemite.app" data-i18n="install">Installer l'app</a>
+      </div>
+      <p class="note" data-i18n="note">Après l'installation, rouvrez ce lien : l'invitation s'ouvrira dans l'app.</p>
+    </div>
+
+    <div id="invalid" class="hidden">
+      <h1 data-i18n="invalidTitle">Lien d'invitation incomplet</h1>
+      <p class="error" data-i18n="invalidLead">Ce lien ne contient pas d'invitation. Demandez à l'organisateur de vous le renvoyer.</p>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var EN = {
+        title: "You're invited to a likiliba",
+        lead: "A likiliba is a private savings circle: everyone contributes in turn and receives the pot in turn. You join it from the Reemite app.",
+        step1: "Open the invitation in the app.",
+        step2: "Read the group's rules, then accept.",
+        step3: "The organiser confirms your place.",
+        open: "Open in Reemite",
+        install: "Install the app",
+        note: "After installing, open this link again: the invitation will open in the app.",
+        invalidTitle: "Incomplete invitation link",
+        invalidLead: "This link carries no invitation. Ask the organiser to send it again."
+      };
+      if ((navigator.language || "fr").slice(0, 2) !== "fr") {
+        document.documentElement.lang = "en";
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          var text = EN[el.getAttribute("data-i18n")];
+          if (text) el.textContent = text;
+        });
+      }
+
+      var token = new URLSearchParams(window.location.search).get("token") || "";
+      // Un jeton d'invitation : lettres, chiffres, tirets et soulignés. Le reste
+      // n'est pas une invitation, et ne finit pas dans une URL d'app.
+      if (!/^[A-Za-z0-9_-]{8,200}$/.test(token)) {
+        document.getElementById("invite").classList.add("hidden");
+        document.getElementById("invalid").classList.remove("hidden");
+        return;
+      }
+
+      var path = "likiliba/join?token=" + encodeURIComponent(token);
+      var store = document.getElementById("install").href;
+      var android = /Android/i.test(navigator.userAgent);
+      // Android : un intent ouvre l'app si elle est là, sinon le Play Store.
+      // Ailleurs : le schéma de l'app (trustsend://), qui ne fait rien sans elle.
+      document.getElementById("open").href = android
+        ? "intent://" + path + "#Intent;scheme=trustsend;package=com.reemite.app;S.browser_fallback_url=" + encodeURIComponent(store) + ";end"
+        : "trustsend://" + path;
+    })();
+  </script>
+</body>
+</html>

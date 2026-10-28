@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.reemite.app",
+      "sha256_cert_fingerprints": [
+        "45:96:2F:E5:92:3B:91:30:4C:0E:E7:8F:92:A7:CB:EB:A7:64:09:10:59:D2:C3:F7:D1:77:1E:14:E1:D8:F4:D3"
+      ]
+    }
+  }
+]
