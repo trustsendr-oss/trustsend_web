@@ -1,18 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { Footer } from "../components/Footer";
 import { Nav } from "../components/Nav";
+import { accountDeletion, privacy, type LegalCopy } from "../data/legal-privacy";
 
-type LegalKind = "privacy" | "terms";
+type LegalKind = "privacy" | "terms" | "deletion";
 
-type LegalCopy = {
-  eyebrow: string;
-  title: string;
-  updated: string;
-  intro: string;
-  sections: { title: string; body: string }[];
-};
-
-const copy: Record<string, Record<LegalKind, LegalCopy>> = {
+const copy: Record<string, Record<"privacy" | "terms", LegalCopy>> = {
   fr: {
     privacy: {
       eyebrow: "Informations juridiques",
@@ -55,10 +48,48 @@ const copy: Record<string, Record<LegalKind, LegalCopy>> = {
   },
 };
 
+/**
+ * La politique de confidentialité et la suppression de compte n'existent qu'en français et en
+ * anglais : un texte juridique doit être exact. Le lingala renvoie au français, le swahili à
+ * l'anglais, langues de travail des pays concernés.
+ */
+function contentFor(kind: LegalKind, language: string): LegalCopy {
+  if (kind === "terms") return copy[language].terms;
+  const legal = language === "en" || language === "sw" ? "en" : "fr";
+  return kind === "privacy" ? privacy[legal] : accountDeletion[legal];
+}
+
 export function Legal({ kind }: { kind: LegalKind }) {
   const { i18n } = useTranslation();
   const language = i18n.language.startsWith("en") ? "en" : i18n.language.startsWith("ln") ? "ln" : i18n.language.startsWith("sw") ? "sw" : "fr";
-  const content = copy[language][kind];
+  const content = contentFor(kind, language);
 
-  return <div className="min-h-screen overflow-x-hidden bg-white"><Nav /><main className="mx-auto max-w-3xl px-5 pb-20 pt-32 sm:px-6 sm:pt-40"><p className="text-sm font-semibold text-brand">{content.eyebrow}</p><h1 className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">{content.title}</h1><p className="mt-5 text-base leading-7 text-muted-2">{content.intro}</p><p className="mt-4 text-sm text-muted">{content.updated}</p><div className="mt-12 space-y-10">{content.sections.map((section) => <section key={section.title}><h2 className="text-xl font-semibold text-ink">{section.title}</h2><p className="mt-3 text-base leading-7 text-muted-2">{section.body}</p></section>)}</div></main><Footer /></div>;
+  return (
+    <div className="min-h-screen overflow-x-hidden bg-white">
+      <Nav />
+      <main className="mx-auto max-w-3xl px-5 pb-20 pt-32 sm:px-6 sm:pt-40">
+        <p className="text-sm font-semibold text-brand">{content.eyebrow}</p>
+        <h1 className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">{content.title}</h1>
+        <p className="mt-5 text-base leading-7 text-muted-2">{content.intro}</p>
+        <p className="mt-4 text-sm text-muted">{content.updated}</p>
+        <div className="mt-12 space-y-10">
+          {content.sections.map((section) => (
+            <section key={section.title}>
+              <h2 className="text-xl font-semibold text-ink">{section.title}</h2>
+              {section.body ? <p className="mt-3 text-base leading-7 text-muted-2">{section.body}</p> : null}
+              {section.items ? (
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-7 text-muted-2 marker:text-brand">
+                  {section.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              ) : null}
+              {section.after ? <p className="mt-3 text-base leading-7 text-muted-2">{section.after}</p> : null}
+            </section>
+          ))}
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
 }

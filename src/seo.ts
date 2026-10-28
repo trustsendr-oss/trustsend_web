@@ -50,8 +50,15 @@ export const seoConfig: Record<string, SeoEntry> = {
   },
   "/privacy": {
     title: "Politique de confidentialité | Reemite",
-    description: "Consultez la politique de confidentialité de Reemite.",
+    description:
+      "Quelles données l’application Reemite collecte, pourquoi, avec qui elles sont partagées, combien de temps elles sont conservées et comment exercer vos droits.",
     keywords: "confidentialité Reemite, données personnelles, privacy policy",
+    robots: "index,follow",
+  },
+  "/account-deletion": {
+    title: "Suppression de compte | Reemite",
+    description: "Comment demander la suppression de votre compte Reemite, et ce qui est supprimé ou conservé.",
+    keywords: "supprimer compte Reemite, suppression de compte, données personnelles",
     robots: "index,follow",
   },
   "/terms": {
@@ -136,8 +143,14 @@ export const seoConfigEn: Record<string, SeoEntry> = {
   },
   "/privacy": {
     title: "Privacy policy | Reemite",
-    description: "Read the Reemite privacy policy.",
+    description:
+      "What data the Reemite app collects, why, who it is shared with, how long it is kept and how to exercise your rights.",
     keywords: "Reemite privacy, personal data, privacy policy",
+  },
+  "/account-deletion": {
+    title: "Account deletion | Reemite",
+    description: "How to request deletion of your Reemite account, and what is deleted or kept.",
+    keywords: "delete Reemite account, account deletion, personal data",
   },
   "/terms": {
     title: "Terms of use | Reemite",
@@ -182,6 +195,7 @@ export const PRERENDER_ROUTES = [
   "/",
   "/pricing",
   "/privacy",
+  "/account-deletion",
   "/terms",
   "/contact",
   "/agents",
