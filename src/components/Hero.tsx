@@ -96,17 +96,11 @@ export function Hero() {
 
       <div className="relative mx-auto max-w-7xl px-5 pt-8 sm:px-8 sm:pt-0 lg:px-10 bg-[#020D30]">
         {/* Illustration décorative */}
-        <motion.img
+        <img
           src={heroAsset}
           alt=""
           aria-hidden
-          className="pointer-events-none absolute top-10 left-4 hidden w-36 select-none opacity-20 drop-shadow-[0_25px_60px_rgba(124,58,237,0.5)] sm:block md:right-10 lg:top-0 lg:w-52"
-          animate={{ y: [0, -16, 0] }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          className="pointer-events-none absolute top-10 left-4 hidden w-36 select-none opacity-10 drop-shadow-[0_25px_60px_rgba(124,58,237,0.5)] sm:block md:right-10 lg:top-0 lg:w-82"
         />
 
         {/* Pattern décoratif */}

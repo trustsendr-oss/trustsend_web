@@ -110,7 +110,7 @@ export const navMegaMenus: Record<string, NavMegaMenu> = {
           {
             label: "Transfert International",
             href: "/transferts-internationaux",
-            desc: "Recevez et envoyez de l'argent depuis l'étranger, aussi simplement qu'avec Wave.",
+            desc: "Recevez et envoyez de l'argent depuis l'étranger, aussi simplement avec Reemite.",
             icon: "/assets/icons/products/capital.svg",
           },
           {

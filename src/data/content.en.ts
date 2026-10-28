@@ -1016,7 +1016,7 @@ export const transfersPage = {
   },
   testimonial: {
     quote:
-      "Sending money to my family used to take days. With Reemite transfers, it arrives in seconds, just like Wave.",
+      "Sending money to my family used to take days. With Reemite transfers, it arrives in seconds.",
     name: "N. Gitau",
     role: "Diaspora customer, London",
     photo:
