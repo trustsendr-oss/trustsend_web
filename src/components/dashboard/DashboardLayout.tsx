@@ -144,33 +144,24 @@ export function DashboardLayout() {
 
   const renderNav = (rail: boolean) => (
     <>
-      <nav className="flex-1 overflow-y-auto pe-3 pb-4">
+      <nav className="flex-1 overflow-y-auto px-3 pb-4">
         {visibleNavSections.map((section, i) => (
-          <div key={i} className={i > 0 ? "mt-4" : undefined}>
-            {section.headingKey &&
-              (rail ? (
-                <div className="mx-auto mb-2 h-px w-8 bg-black/10" />
-              ) : (
-                <p className="mb-1 ps-7 text-[11px] font-semibold uppercase tracking-wider text-muted">
-                  {t(`dashboard.nav.${section.headingKey}`)}
-                </p>
-              ))}
-            <div className="space-y-0.5">
+          <div key={i} className={i > 0 ? "mt-6" : undefined}>
+            {section.headingKey && !rail && (
+              <p className="mb-1 px-3 text-xs text-muted">
+                {t(`dashboard.nav.${section.headingKey}`)}
+              </p>
+            )}
+            <div>
               {section.items.map((item) => {
                 const active = item.to === location.pathname;
                 const label = t(`dashboard.nav.${item.key}`);
-                const className = `flex h-9 items-center gap-4 text-sm transition-colors ${
-                  rail
-                    ? "mx-auto w-12 justify-center rounded-full"
-                    : "rounded-e-full ps-7 pe-4"
-                } ${
-                  active
-                    ? "bg-brand-light font-semibold text-brand"
-                    : "font-medium text-ink hover:bg-black/[0.05]"
-                }`;
+                const className = `flex h-9 items-center gap-3 rounded-md text-sm text-ink ${
+                  rail ? "mx-auto w-10 justify-center" : "px-3"
+                } ${active ? "bg-black/[0.06] font-medium" : "hover:bg-black/[0.03]"}`;
                 const content = (
                   <>
-                    <item.icon size={18} color="#2563EB" fill="#2563EB" strokeWidth={active ? 2.25 : 1.75} className="shrink-0" />
+                    <item.icon size={18} strokeWidth={1.5} aria-hidden="true" className="shrink-0" />
                     {rail ? <span className="sr-only">{label}</span> : <span className="truncate">{label}</span>}
                   </>
                 );
@@ -195,20 +186,20 @@ export function DashboardLayout() {
         ))}
       </nav>
 
-      <div className="pe-3 pb-4">
+      <div className="px-3 pb-4">
         <button
           onClick={handleLogout}
           disabled={logout.isPending}
           aria-busy={logout.isPending || undefined}
           title={rail ? t("dashboard.logout") : undefined}
-          className={`flex h-9 items-center gap-4 text-sm font-medium text-muted-2 transition-colors hover:bg-black/[0.05] hover:text-ink disabled:opacity-60 ${
-            rail ? "mx-auto w-12 justify-center rounded-full" : "w-full rounded-e-full ps-7 pe-4"
+          className={`flex h-9 items-center gap-3 rounded-md text-sm text-ink hover:bg-black/[0.03] disabled:opacity-60 ${
+            rail ? "mx-auto w-10 justify-center" : "w-full px-3"
           }`}
         >
           {logout.isPending ? (
             <Loader2 size={18} className="shrink-0 animate-spin" aria-hidden="true" />
           ) : (
-            <LogOut size={18} strokeWidth={1.75} className="shrink-0" />
+            <LogOut size={18} strokeWidth={1.5} className="shrink-0" aria-hidden="true" />
           )}
           <span className={rail ? "sr-only" : "truncate"}>
             {logout.isPending ? t("dashboard.loggingOut") : t("dashboard.logout")}
@@ -330,8 +321,8 @@ export function DashboardLayout() {
       <div className="flex min-h-0 flex-1">
         {/* ---------- Sidebar desktop (repliable en rail) ---------- */}
         <aside
-          className={`hidden shrink-0 flex-col transition-[width] duration-200 lg:flex pt-8 ${
-            collapsed ? "w-[72px]" : "w-64"
+          className={`hidden shrink-0 flex-col pt-2 transition-[width] duration-200 lg:flex ${
+            collapsed ? "w-[72px]" : "w-60"
           }`}
         >
           {renderNav(collapsed)}
