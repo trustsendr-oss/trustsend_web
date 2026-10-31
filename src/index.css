@@ -53,9 +53,19 @@
 }
 
 .testimonial-section {
+  padding-block: clamp(4rem, 8vh, 7rem);
   background:
     radial-gradient(ellipse at 50% 50%, rgba(234, 240, 255, 0.62), transparent 68%),
     #fff;
+}
+
+@media (min-width: 1024px) {
+  .testimonial-section {
+    display: flex;
+    min-height: 100svh;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .testimonial-gallery {
@@ -108,12 +118,36 @@
 }
 
 .testimonial-card {
-  min-height: 180px;
-  padding: 1.25rem;
-  border: 1px solid rgba(25, 40, 57, 0.06);
-  border-radius: 1.25rem;
+  min-height: 240px;
+  padding: 1.5rem;
+  border: 2px solid rgba(25, 40, 57, 0.13);
+  border-radius: 1.5rem;
   background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 6px 24px rgba(8, 13, 41, 0.045);
+  box-shadow: 0 10px 32px rgba(8, 13, 41, 0.075);
+}
+
+@media (min-width: 640px) {
+  .testimonial-card {
+    min-height: 270px;
+    padding: 1.75rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .testimonial-card {
+    min-height: 280px;
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .testimonial-gallery {
+    height: 720px;
+  }
+
+  .testimonial-card {
+    min-height: 340px;
+  }
 }
 
 .testimonial-card-list > li:nth-child(3n + 2) .testimonial-card {
@@ -126,13 +160,15 @@
 
 .testimonial-quote-mark {
   color: #7699ee;
+  width: 28px;
+  height: 28px;
 }
 
 .testimonial-quote {
-  margin: 0.85rem 0 1.25rem;
+  margin: 1rem 0 1.5rem;
   color: var(--color-ink);
-  font-size: 0.9rem;
-  line-height: 1.65;
+  font-size: 1rem;
+  line-height: 1.75;
 }
 
 .testimonial-author {
@@ -143,8 +179,8 @@
 
 .testimonial-avatar {
   display: grid;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3rem;
+  height: 3rem;
   flex: 0 0 auto;
   place-items: center;
   border-radius: 9999px;
@@ -163,14 +199,14 @@
 
 .testimonial-author-name {
   color: var(--color-ink);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 700;
 }
 
 .testimonial-author-role {
   overflow: hidden;
   color: var(--color-muted);
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   text-overflow: ellipsis;
   white-space: nowrap;
 }

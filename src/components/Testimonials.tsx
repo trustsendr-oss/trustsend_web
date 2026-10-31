@@ -70,16 +70,16 @@ export function Testimonials() {
     <section
       id="temoignages"
       data-paused={paused}
-      className="testimonial-section relative scroll-mt-16 overflow-hidden py-16 sm:py-20 lg:scroll-mt-20 lg:py-24"
+      className="testimonial-section relative scroll-mt-16 overflow-hidden lg:scroll-mt-20"
     >
       <div className="testimonial-heading relative z-10 mx-auto max-w-3xl px-5 text-center sm:px-6">
-        <h2 className="font-display text-[1.75rem] font-bold leading-[1.15] tracking-tight text-balance text-ink sm:text-3xl lg:text-4xl">
+        <h2 className="font-display text-[2rem] font-bold leading-[1.12] tracking-tight text-balance text-ink sm:text-4xl lg:text-5xl">
           {t("testimonials.title")}
         </h2>
-        <p className="mt-3 text-sm text-muted sm:text-base">
+        <p className="mt-4 text-base text-muted sm:text-lg">
           {t("testimonials.subtitle")}
         </p>
-        <p className="mt-2 text-xs font-medium text-muted">
+        <p className="mt-3 text-sm font-medium text-muted">
           {t("testimonials.note")}
         </p>
         <button
@@ -87,19 +87,19 @@ export function Testimonials() {
           onClick={() => setPaused((value) => !value)}
           aria-pressed={paused}
           aria-label={paused ? t("testimonials.resumeMotion") : t("testimonials.pauseMotion")}
-          className="testimonial-motion-button mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-surface-2 bg-white px-4 py-2 text-sm font-medium text-muted-2 transition-colors hover:border-brand/25 hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+          className="testimonial-motion-button mt-6 inline-flex min-h-12 items-center gap-2 rounded-full border border-surface-2 bg-white px-5 py-2.5 text-sm font-medium text-muted-2 transition-colors hover:border-brand/25 hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
         >
           {paused ? <Play size={15} aria-hidden="true" /> : <Pause size={15} aria-hidden="true" />}
           <span>{paused ? t("testimonials.resumeMotion") : t("testimonials.pauseMotion")}</span>
         </button>
       </div>
 
-      <div className="testimonial-gallery relative mx-auto mt-8 grid h-[440px] max-w-7xl grid-cols-1 gap-5 px-5 sm:mt-10 sm:h-[480px] sm:px-6 lg:mt-12 lg:h-[520px] lg:grid-cols-3 lg:gap-6 lg:px-8">
-        <div className="testimonial-mobile-column sm:hidden">
+      <div className="testimonial-gallery relative mx-auto mt-10 grid h-[520px] w-full max-w-[1600px] grid-cols-1 gap-5 px-5 sm:mt-12 sm:h-[620px] sm:px-8 lg:mt-14 lg:h-[680px] lg:grid-cols-3 lg:gap-7 lg:px-10 2xl:h-[720px] 2xl:grid-cols-4 2xl:gap-8">
+        <div className="testimonial-mobile-column col-span-full sm:hidden">
           <TestimonialColumn items={testimonials} direction="up" duration={38} />
         </div>
 
-        <div className="testimonial-breakpoint-columns hidden grid-cols-2 gap-5 sm:grid lg:hidden">
+        <div className="testimonial-breakpoint-columns col-span-full hidden grid-cols-2 gap-5 sm:grid lg:hidden">
           <TestimonialColumn
             items={splitTestimonials(testimonials, 2, 0)}
             direction="up"
@@ -112,7 +112,7 @@ export function Testimonials() {
           />
         </div>
 
-        <div className="testimonial-breakpoint-columns hidden grid-cols-3 gap-6 lg:grid">
+        <div className="testimonial-breakpoint-columns col-span-full hidden grid-cols-3 gap-7 lg:grid 2xl:hidden">
           <TestimonialColumn
             items={splitTestimonials(testimonials, 3, 0)}
             direction="up"
@@ -127,6 +127,29 @@ export function Testimonials() {
             items={splitTestimonials(testimonials, 3, 2)}
             direction="up"
             duration={44}
+          />
+        </div>
+
+        <div className="testimonial-breakpoint-columns col-span-full hidden grid-cols-4 gap-8 2xl:grid">
+          <TestimonialColumn
+            items={splitTestimonials(testimonials, 4, 0)}
+            direction="up"
+            duration={42}
+          />
+          <TestimonialColumn
+            items={splitTestimonials(testimonials, 4, 1)}
+            direction="down"
+            duration={48}
+          />
+          <TestimonialColumn
+            items={splitTestimonials(testimonials, 4, 2)}
+            direction="up"
+            duration={44}
+          />
+          <TestimonialColumn
+            items={splitTestimonials(testimonials, 4, 3)}
+            direction="down"
+            duration={46}
           />
         </div>
       </div>
