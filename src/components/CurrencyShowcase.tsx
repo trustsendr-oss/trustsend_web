@@ -19,11 +19,30 @@ function CurrencyFlag({ flag }: { flag: string }) {
 
   switch (flag) {
     case "cd":
-      return <svg {...common}><circle cx="18" cy="18" r="18" fill="#00A3E0" /><path d="M-3 31 31-3h8L5 41z" fill="#F7D618" /><path d="M-3 29 29-3h5L2 34z" fill="#CE1021" /><path d="m10 4 1.7 4.3 4.6.3-3.5 2.9 1.2 4.5-4-2.5-3.9 2.5 1.2-4.5-3.5-2.9 4.6-.3z" fill="#F7D618" /></svg>;
+      return (
+        <svg {...common}>
+          <circle cx="18" cy="18" r="18" fill="#00A3E0" />
+          <path d="M-4 30 29-3h12L7 41H-4z" fill="#F7D618" />
+          <path d="M-4 27 26-3h8L4 39h-8z" fill="#CE1021" />
+          <path d="m10 3 1.8 4.2 4.6.4-3.5 3 1.1 4.5-4-2.4-4 2.4 1.2-4.5-3.5-3 4.6-.4z" fill="#F7D618" />
+        </svg>
+      );
     case "rw":
       return <svg {...common}><circle cx="18" cy="18" r="18" fill="#2060AD" /><path d="M0 19h36v8H0z" fill="#FAD201" /><path d="M0 27h36v9H0z" fill="#00A650" /><circle cx="27" cy="9" r="4" fill="#FAD201" /><path d="m27 2 .8 4.4L31 3l-1.8 4.2 4.4-.6-4 2 3.5 2.8-4.4-1-.1 4.4-1.6-4.1-2.4 3.7.6-4.4-4.2 1.7 3-3.3-4.4-.8 4.3-.9-3.2-3.1 4.2 1.5z" fill="#FAD201" /></svg>;
     case "bi":
-      return <svg {...common}><circle cx="18" cy="18" r="18" fill="#1EB53A" /><path d="M-3 32 32-3h7L4 39zM-3 4 32 39h7L4-3z" fill="#fff" /><path d="M-1 31 31-1h4L3 35zM-1 5 31 37h4L3 1z" fill="#CE1126" /><circle cx="18" cy="18" r="7" fill="#fff" /><circle cx="18" cy="18" r="5.5" fill="#CE1126" /><g fill="#fff"><path d="m18 13 .7 1.6 1.7.1-1.3 1.1.4 1.7-1.5-.9-1.5.9.4-1.7-1.3-1.1 1.7-.1zM14.5 18.5l.7 1.6 1.7.1-1.3 1.1.4 1.7-1.5-.9-1.5.9.4-1.7-1.3-1.1 1.7-.1zM21.5 18.5l.7 1.6 1.7.1-1.3 1.1.4 1.7-1.5-.9-1.5.9.4-1.7-1.3-1.1 1.7-.1z" /></g></svg>;
+      return (
+        <svg {...common}>
+          <circle cx="18" cy="18" r="18" fill="#1EB53A" />
+          <path d="M-2-2h40L18 18zM-2 38h40L18 18z" fill="#CE1126" />
+          <path d="M-3-3 18 18 39 39h-6L-3 3zM39-3 18 18-3 39v-6L33-3z" fill="#fff" />
+          <circle cx="18" cy="18" r="8" fill="#fff" />
+          <g fill="#CE1126" stroke="#1EB53A" strokeWidth=".55">
+            <path d="m18 4 .9 2 2.2.2-1.7 1.4.6 2.1-2-1.1-2 1.1.6-2.1-1.7-1.4 2.2-.2z" />
+            <path d="m11.5 17 .9 2 2.2.2-1.7 1.4.6 2.1-2-1.1-2 1.1.6-2.1-1.7-1.4 2.2-.2z" />
+            <path d="m24.5 17 .9 2 2.2.2-1.7 1.4.6 2.1-2-1.1-2 1.1.6-2.1-1.7-1.4 2.2-.2z" />
+          </g>
+        </svg>
+      );
     case "ke":
       return <svg {...common}><circle cx="18" cy="18" r="18" fill="#fff" /><path d="M0 0h36v11H0z" fill="#000" /><path d="M0 12h36v2H0zM0 22h36v2H0z" fill="#fff" /><path d="M0 14h36v8H0z" fill="#BB0000" /><path d="M0 25h36v11H0z" fill="#006600" /><path d="M18 10c-5 4-5 12 0 16 5-4 5-12 0-16z" fill="#fff" /><path d="M18 12c-3.2 3-3.2 9 0 12 3.2-3 3.2-9 0-12z" fill="#BB0000" /><path d="M18 12v12" stroke="#000" strokeWidth="1.2" /></svg>;
     case "ci":

@@ -46,10 +46,22 @@ export function Footer() {
   }));
   const language = i18n.language.startsWith("ln") ? "ln" : i18n.language.startsWith("sw") ? "sw" : i18n.language.startsWith("en") ? "en" : "fr";
   const disclosure = {
-    fr: "Reemite est une entreprise de technologie financière, et non une banque. Nous opérons au moyen de licences détenues sur nos marchés et de partenariats avec des institutions financières et processeurs de paiement dûment agréés et réglementés.",
-    en: "Reemite is a financial technology company, not a bank. We operate through licences held across our markets and through partnerships with fully licensed, nationally regulated financial institutions and payment processors.",
-    ln: "Reemite ezali kompani ya technologie financière, kasi ezali banki te. Tosalaka na nzela ya licences mpe boyokani na institutions financières na processeurs ya paiement oyo ezali na ndingisa.",
-    sw: "Reemite ni kampuni ya teknolojia ya fedha, si benki. Tunafanya kazi kupitia leseni na ubia na taasisi za kifedha na wachakataji wa malipo wenye leseni na wanaodhibitiwa.",
+    fr: {
+      services: "Reemite est une entreprise de technologie financière, et non une banque. Nous n’acceptons pas de dépôts et n’exerçons pas d’activités bancaires traditionnelles. Tous les services financiers sont fournis par l’intermédiaire d’institutions partenaires agréées dans leurs juridictions respectives. Les fonds sont détenus par nos institutions partenaires réglementées, et non par Reemite.",
+      cards: "Les cartes prépayées, de débit et de crédit Reemite sont émises par nos banques partenaires émettrices conformément à une licence de Visa Inc. et Mastercard.",
+    },
+    en: {
+      services: "Reemite is a financial technology company, not a bank. We do not accept deposits or engage in traditional banking activities. All financial services are provided through licensed partner institutions in their respective jurisdictions. Funds are held by our regulated partner institutions, not by Reemite.",
+      cards: "Reemite prepaid, debit, and credit cards are issued by our issuing bank partners pursuant to a license from Visa Inc. and Mastercard.",
+    },
+    ln: {
+      services: "Reemite ezali kompanyi ya technologie ya mbongo, kasi ezali banki te. Tozwaka ba dépôt te mpe tosalaka misala ya bonkoko ya banki te. Misala nyonso ya mbongo epesamaka na nzela ya ba institution partenaires oyo ezali na ndingisa na mikili na bango. Mbongo ebombamaka na ba institution partenaires na biso oyo etambwisami na mibeko, kasi na Reemite te.",
+      cards: "Bakarte ya Reemite ya kofuta liboso, ya débit mpe ya crédit ebimisamaka na banki partenaires na biso oyo ebimisaka bakarte, na ndingisa ya Visa Inc. mpe Mastercard.",
+    },
+    sw: {
+      services: "Reemite ni kampuni ya teknolojia ya fedha, si benki. Hatupokei amana wala kufanya shughuli za kawaida za benki. Huduma zote za kifedha hutolewa kupitia taasisi washirika zilizo na leseni katika maeneo yao husika. Fedha huhifadhiwa na taasisi washirika wetu zinazodhibitiwa, si Reemite.",
+      cards: "Kadi za Reemite za kulipia kabla, za benki na za mkopo hutolewa na benki washirika wetu watoa kadi kwa mujibu wa leseni kutoka Visa Inc. na Mastercard.",
+    },
   }[language];
 
   return <footer className="w-full overflow-hidden border-t border-surface-2 bg-surface pb-8 pt-14 sm:pt-20"><div className="mx-auto w-full max-w-7xl px-5 sm:px-6">
@@ -57,7 +69,7 @@ export function Footer() {
     <div className="divide-y divide-surface-2 border-y border-surface-2 sm:hidden">{footerColumns.map((col) => <details key={col.title} className="group"><summary className="flex cursor-pointer list-none items-center justify-between py-4 text-sm font-semibold text-ink [&::-webkit-details-marker]:hidden">{col.title}<ChevronDown size={18} className="text-muted transition-transform duration-200 group-open:rotate-180" aria-hidden /></summary><ul className="grid grid-cols-2 gap-x-4 gap-y-3 pb-5">{col.links.map((link) => <li key={link.label} className="min-w-0"><FooterLink link={link} /></li>)}</ul></details>)}</div>
     <div className="hidden grid-cols-3 gap-x-8 gap-y-10 sm:grid lg:grid-cols-6">{footerColumns.map((col) => <div key={col.title} className="min-w-0"><h4 className="mb-4 text-xs font-bold uppercase tracking-wide text-ink">{col.title}</h4><ul className="space-y-3">{col.links.map((link) => <li key={link.label}><FooterLink link={link} /></li>)}</ul></div>)}</div>
     <div className="mt-12 border-t border-surface-2 pt-8 sm:mt-16"><div className="grid grid-cols-2 items-center gap-x-3 gap-y-7 lg:grid-cols-[1fr_auto_1fr] lg:gap-10"><div className="flex items-center justify-end gap-3 lg:justify-start">{socials.slice(0, 3).map((social) => <SocialIcon key={social.label} {...social} />)}</div><div className="order-first col-span-2 flex items-center justify-center lg:order-none lg:col-span-1"><Link to="/" aria-label="Reemite" className="rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"><img src="/assets/icons/logo.png" alt="Reemite" className="h-10 w-[125px] object-contain sm:h-11 sm:w-[140px] lg:h-12 lg:w-[155px]" /></Link></div><div className="flex items-center justify-start gap-3 lg:justify-end">{socials.slice(3).map((social) => <SocialIcon key={social.label} {...social} />)}</div></div></div>
-    <div className="mt-8 text-center text-xs leading-relaxed text-muted"><p>{t("footer.legal")}</p><p className="mx-auto mt-3 max-w-4xl">{disclosure}</p><p className="mt-2">© 2026 Reemite. {t("footer.rights")} · <Link to="/contact" className="transition-colors hover:text-brand">Support</Link> · <Link to="/terms" className="transition-colors hover:text-brand">{t("footer.terms")}</Link> · <Link to="/privacy" className="transition-colors hover:text-brand">{t("footer.privacy")}</Link> · <Link to="/account-deletion" className="transition-colors hover:text-brand">{t("footer.accountDeletion")}</Link> · <Link to="/contact" className="transition-colors hover:text-brand">{t("footer.responsibleDisclosure")}</Link></p></div>
+    <div className="mt-8 text-center text-xs leading-relaxed text-muted"><p>{t("footer.legal")}</p><div className="mx-auto mt-3 max-w-4xl space-y-2"><p>{disclosure.services}</p><p>{disclosure.cards}</p></div><p className="mt-2">© 2026 Reemite. {t("footer.rights")} · <Link to="/contact" className="transition-colors hover:text-brand">Support</Link> · <Link to="/terms" className="transition-colors hover:text-brand">{t("footer.terms")}</Link> · <Link to="/privacy" className="transition-colors hover:text-brand">{t("footer.privacy")}</Link> · <Link to="/account-deletion" className="transition-colors hover:text-brand">{t("footer.accountDeletion")}</Link> · <Link to="/contact" className="transition-colors hover:text-brand">{t("footer.responsibleDisclosure")}</Link></p></div>
   </div></footer>;
 }
 
