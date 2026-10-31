@@ -1,6 +1,5 @@
-import { useState } from "react";
 import type { CSSProperties } from "react";
-import { Pause, Play, Quote } from "lucide-react";
+import { Quote, Star } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useContent } from "../hooks/useContent";
 
@@ -11,10 +10,12 @@ function TestimonialColumn({
   items,
   direction,
   duration,
+  ratingLabel,
 }: {
   items: Testimonial[];
   direction: Direction;
   duration: number;
+  ratingLabel: string;
 }) {
   const renderCards = () => (
     <ul className="testimonial-card-list">
@@ -22,13 +23,28 @@ function TestimonialColumn({
         <li key={testimonial.name}>
           <article className="testimonial-card">
             <Quote className="testimonial-quote-mark" size={23} strokeWidth={2} aria-hidden="true" />
+            <div
+              className="testimonial-rating"
+              role="img"
+              aria-label={ratingLabel}
+            >
+              {Array.from({ length: 5 }, (_, index) => (
+                <Star key={index} size={17} strokeWidth={1.75} aria-hidden="true" />
+              ))}
+            </div>
             <blockquote className="testimonial-quote">
               “{testimonial.quote}”
             </blockquote>
             <div className="testimonial-author">
-              <span className="testimonial-avatar" aria-hidden="true">
-                {testimonial.name.slice(0, 1)}
-              </span>
+              <img
+                className="testimonial-avatar"
+                src={testimonial.avatar}
+                alt=""
+                width="48"
+                height="48"
+                loading="lazy"
+                decoding="async"
+              />
               <span className="testimonial-author-copy">
                 <span className="testimonial-author-name">{testimonial.name}</span>
                 <span className="testimonial-author-role">
@@ -64,12 +80,11 @@ function splitTestimonials(items: Testimonial[], columns: number, column: number
 export function Testimonials() {
   const { t } = useTranslation();
   const { testimonials } = useContent();
-  const [paused, setPaused] = useState(false);
+  const ratingLabel = t("testimonials.rating", { rating: 5 });
 
   return (
     <section
       id="temoignages"
-      data-paused={paused}
       className="testimonial-section relative scroll-mt-16 overflow-hidden lg:scroll-mt-20"
     >
       <div className="testimonial-heading relative z-10 mx-auto max-w-3xl px-5 text-center sm:px-6">
@@ -79,24 +94,16 @@ export function Testimonials() {
         <p className="mt-4 text-base text-muted sm:text-lg">
           {t("testimonials.subtitle")}
         </p>
-        <p className="mt-3 text-sm font-medium text-muted">
-          {t("testimonials.note")}
-        </p>
-        <button
-          type="button"
-          onClick={() => setPaused((value) => !value)}
-          aria-pressed={paused}
-          aria-label={paused ? t("testimonials.resumeMotion") : t("testimonials.pauseMotion")}
-          className="testimonial-motion-button mt-6 inline-flex min-h-12 items-center gap-2 rounded-full border border-surface-2 bg-white px-5 py-2.5 text-sm font-medium text-muted-2 transition-colors hover:border-brand/25 hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
-        >
-          {paused ? <Play size={15} aria-hidden="true" /> : <Pause size={15} aria-hidden="true" />}
-          <span>{paused ? t("testimonials.resumeMotion") : t("testimonials.pauseMotion")}</span>
-        </button>
       </div>
 
       <div className="testimonial-gallery relative mx-auto mt-10 grid h-[520px] w-full max-w-[1600px] grid-cols-1 gap-5 px-5 sm:mt-12 sm:h-[620px] sm:px-8 lg:mt-14 lg:h-[680px] lg:grid-cols-3 lg:gap-7 lg:px-10 2xl:h-[720px] 2xl:grid-cols-4 2xl:gap-8">
         <div className="testimonial-mobile-column col-span-full sm:hidden">
-          <TestimonialColumn items={testimonials} direction="up" duration={38} />
+          <TestimonialColumn
+            items={testimonials}
+            direction="up"
+            duration={38}
+            ratingLabel={ratingLabel}
+          />
         </div>
 
         <div className="testimonial-breakpoint-columns col-span-full hidden grid-cols-2 gap-5 sm:grid lg:hidden">
@@ -104,11 +111,13 @@ export function Testimonials() {
             items={splitTestimonials(testimonials, 2, 0)}
             direction="up"
             duration={39}
+            ratingLabel={ratingLabel}
           />
           <TestimonialColumn
             items={splitTestimonials(testimonials, 2, 1)}
             direction="down"
             duration={45}
+            ratingLabel={ratingLabel}
           />
         </div>
 
@@ -117,16 +126,19 @@ export function Testimonials() {
             items={splitTestimonials(testimonials, 3, 0)}
             direction="up"
             duration={42}
+            ratingLabel={ratingLabel}
           />
           <TestimonialColumn
             items={splitTestimonials(testimonials, 3, 1)}
             direction="down"
             duration={48}
+            ratingLabel={ratingLabel}
           />
           <TestimonialColumn
             items={splitTestimonials(testimonials, 3, 2)}
             direction="up"
             duration={44}
+            ratingLabel={ratingLabel}
           />
         </div>
 
@@ -135,21 +147,25 @@ export function Testimonials() {
             items={splitTestimonials(testimonials, 4, 0)}
             direction="up"
             duration={42}
+            ratingLabel={ratingLabel}
           />
           <TestimonialColumn
             items={splitTestimonials(testimonials, 4, 1)}
             direction="down"
             duration={48}
+            ratingLabel={ratingLabel}
           />
           <TestimonialColumn
             items={splitTestimonials(testimonials, 4, 2)}
             direction="up"
             duration={44}
+            ratingLabel={ratingLabel}
           />
           <TestimonialColumn
             items={splitTestimonials(testimonials, 4, 3)}
             direction="down"
             duration={46}
+            ratingLabel={ratingLabel}
           />
         </div>
       </div>

@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { LanguageFlag } from "../LanguageFlag";
+import { languageCountryCode, languageForLocale } from "../../lib/languages";
 import { useLogout } from "../../hooks/useLogout";
 import { useProfile } from "../../hooks/useProfile";
 import { getStoredBusiness } from "../../lib/session";
@@ -87,6 +88,7 @@ function readCollapsed() {
 
 export function DashboardLayout() {
   const { t, i18n } = useTranslation();
+  const currentLanguage = languageForLocale(i18n.language);
   const business = getStoredBusiness();
   const navigate = useNavigate();
   const logout = useLogout();
@@ -258,8 +260,8 @@ export function DashboardLayout() {
               aria-expanded={langOpen}
               className="flex h-10 items-center gap-1 rounded-full px-3 text-sm font-medium text-muted-2 transition-colors hover:bg-black/[0.06] hover:text-ink"
             >
-              <LanguageFlag language={i18n.language.startsWith("en") ? "en" : i18n.language.startsWith("ln") ? "ln" : i18n.language.startsWith("sw") ? "sw" : "fr"} />
-              {i18n.language.startsWith("en") ? "EN" : i18n.language.startsWith("ln") ? "LN" : i18n.language.startsWith("sw") ? "SW" : "FR"}
+              <LanguageFlag language={currentLanguage} />
+              {languageCountryCode(currentLanguage)}
               <ChevronDown size={14} className="opacity-60" />
             </button>
             <AnimatePresence>

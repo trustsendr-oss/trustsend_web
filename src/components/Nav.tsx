@@ -14,6 +14,11 @@ import {
 import { useContent } from "../hooks/useContent";
 import { AuthLink } from "./AuthLink";
 import { LanguageFlag } from "./LanguageFlag";
+import {
+  languageCountryCode,
+  languageForLocale,
+  type Language,
+} from "../lib/languages";
 import { rememberLanguage } from "../i18n";
 import { languageFromPath, localizedPath } from "../lib/languageRoutes";
 import { PRERENDER_ROUTES } from "../seo";
@@ -22,8 +27,16 @@ import cardmaprBg from "../assets/cardmapr-nl-0hs_mYB9KRc-unsplash.jpg";
 
 const BANNER_KEY = "nav-banner-dismissed";
 
+const languageOptions: { language: Language; label: string }[] = [
+  { language: "fr", label: "Français" },
+  { language: "en", label: "English" },
+  { language: "ln", label: "Lingála" },
+  { language: "sw", label: "Kiswahili" },
+];
+
 export function Nav() {
   const { t, i18n } = useTranslation();
+  const currentLanguage = languageForLocale(i18n.language);
   const { navLinks, navMegaMenus } = useContent();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -208,9 +221,10 @@ export function Nav() {
                   }}
                   onFocus={() => menu && setActiveMenu(link.label)}
                   className="
+                    main-nav-link
                     group relative flex shrink-0 items-center gap-1
                     whitespace-nowrap py-2
-                    text-sm font-medium text-muted-2
+                    text-base font-bold text-muted-2 2xl:text-lg
                     transition-colors
                     hover:text-ink
                     focus-visible:text-ink
@@ -249,15 +263,16 @@ export function Nav() {
               aria-expanded={langOpen}
               aria-haspopup="menu"
               className="
+                main-nav-language
                 flex items-center gap-1 rounded-full
                 px-2 py-2
-                text-sm font-medium text-muted-2
+                text-sm font-bold text-muted-2
                 transition-colors
                 hover:bg-surface hover:text-ink
               "
             >
-              <LanguageFlag language={i18n.language.startsWith("en") ? "en" : i18n.language.startsWith("ln") ? "ln" : i18n.language.startsWith("sw") ? "sw" : "fr"} />
-              {i18n.language.startsWith("en") ? "EN" : i18n.language.startsWith("ln") ? "LN" : i18n.language.startsWith("sw") ? "SW" : "FR"}
+              <LanguageFlag language={currentLanguage} />
+              {languageCountryCode(currentLanguage)}
               <ChevronDown size={14} className="opacity-60" />
             </button>
 
@@ -276,7 +291,7 @@ export function Nav() {
                 >
                   <button
                     onClick={() => switchLang("fr")}
-                    className={`block w-full px-3 py-2 text-left text-sm font-medium hover:bg-surface ${i18n.language.startsWith("fr")
+                    className={`block w-full px-3 py-2 text-left text-sm font-semibold hover:bg-surface ${i18n.language.startsWith("fr")
                         ? "text-brand"
                         : "text-ink"
                       }`}
@@ -286,7 +301,7 @@ export function Nav() {
 
                   <button
                     onClick={() => switchLang("en")}
-                    className={`block w-full px-3 py-2 text-left text-sm font-medium hover:bg-surface ${i18n.language.startsWith("en")
+                    className={`block w-full px-3 py-2 text-left text-sm font-semibold hover:bg-surface ${i18n.language.startsWith("en")
                         ? "text-brand"
                         : "text-ink"
                       }`}
@@ -295,13 +310,13 @@ export function Nav() {
                   </button>
                   <button
                     onClick={() => switchLang("ln")}
-                    className={`block w-full px-3 py-2 text-left text-sm font-medium hover:bg-surface ${i18n.language.startsWith("ln") ? "text-brand" : "text-ink"}`}
+                    className={`block w-full px-3 py-2 text-left text-sm font-semibold hover:bg-surface ${i18n.language.startsWith("ln") ? "text-brand" : "text-ink"}`}
                   >
                     <span className="flex items-center gap-2"><LanguageFlag language="ln" /> Lingála</span>
                   </button>
                   <button
                     onClick={() => switchLang("sw")}
-                    className={`block w-full px-3 py-2 text-left text-sm font-medium hover:bg-surface ${i18n.language.startsWith("sw") ? "text-brand" : "text-ink"}`}
+                    className={`block w-full px-3 py-2 text-left text-sm font-semibold hover:bg-surface ${i18n.language.startsWith("sw") ? "text-brand" : "text-ink"}`}
                   >
                     <span className="flex items-center gap-2"><LanguageFlag language="sw" /> Kiswahili</span>
                   </button>
@@ -320,9 +335,10 @@ export function Nav() {
           <AuthLink
             to="/login"
             className="
+              main-nav-action
               hidden shrink-0 whitespace-nowrap sm:inline-flex
               rounded-full px-2.5 py-2
-              text-xs font-semibold text-ink
+              text-xs font-bold text-ink
               transition-colors hover:text-brand
               sm:px-3 sm:text-sm
             "
@@ -334,10 +350,11 @@ export function Nav() {
           <AuthLink
             to="/signup"
             className="
+              main-nav-action
               group flex shrink-0 items-center gap-1
               whitespace-nowrap rounded-lg
               bg-accent px-2.5 py-2
-              text-xs font-semibold text-white
+              text-xs font-bold text-white
               transition-colors hover:bg-brand-dark
               sm:gap-1.5 sm:px-4 sm:py-2.5 sm:text-sm
             "
@@ -504,6 +521,33 @@ export function Nav() {
                   </div>
                 );
               })}
+
+              <div
+                className="mt-5 grid grid-cols-2 gap-2"
+                role="group"
+                aria-label="Language"
+              >
+                {languageOptions.map(({ language, label }) => (
+                  <button
+                    key={language}
+                    type="button"
+                    onClick={() => switchLang(language)}
+                    aria-label={`${label} (${languageCountryCode(language)})`}
+                    aria-pressed={currentLanguage === language}
+                    className={`
+                      mobile-nav-language flex items-center justify-center gap-2
+                      rounded-lg border px-3 py-3 transition-colors
+                      ${currentLanguage === language
+                        ? "border-brand bg-brand-light text-brand"
+                        : "border-surface-2 text-ink hover:bg-surface"
+                      }
+                    `}
+                  >
+                    <LanguageFlag language={language} />
+                    <span>{label} ({languageCountryCode(language)})</span>
+                  </button>
+                ))}
+              </div>
 
               <div className="mt-5 flex items-center gap-3">
                 <AuthLink

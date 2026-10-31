@@ -148,11 +148,9 @@
     "subtitle": "Pay, send, get paid or save as a group in seconds — no website and no developer needed."
   },
   "testimonials": {
-    "title": "Reemite grows with you!",
-    "subtitle": "Trusted by those who move money every day",
-    "note": "Illustrative examples; names and organizations are fictional.",
-    "pauseMotion": "Pause animation",
-    "resumeMotion": "Resume animation",
+    "title": "Built for Growth, Proven by Customers",
+    "subtitle": "From freelancers to enterprises, Reemite helps thousands manage their money smarter and faster.",
+    "rating": "Illustrative rating: {{rating}} out of 5 stars",
     "prev": "Previous testimonial",
     "next": "Next testimonial",
     "goTo": "Testimonial from {{name}}"

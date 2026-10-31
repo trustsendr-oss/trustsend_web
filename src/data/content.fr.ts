@@ -594,6 +594,7 @@ export const testimonials: {
   name: string;
   title: string;
   company: string;
+  avatar: string;
 }[] = [
   {
     quote:
@@ -601,6 +602,7 @@ export const testimonials: {
     name: "A. Kariuki",
     title: "Fondatrice",
     company: "Boutique A",
+    avatar: "/assets/testimonials/kariuki.jpg",
   },
   {
     quote:
@@ -608,6 +610,7 @@ export const testimonials: {
     name: "D. Mensah",
     title: "Trésorière du groupe",
     company: "Groupe B",
+    avatar: "/assets/testimonials/mensah.jpg",
   },
   {
     quote:
@@ -615,6 +618,7 @@ export const testimonials: {
     name: "N. Achieng",
     title: "Agent Reemite",
     company: "Point C",
+    avatar: "/assets/testimonials/achieng.jpg",
   },
   {
     quote:
@@ -622,6 +626,7 @@ export const testimonials: {
     name: "D. Rawat",
     title: "Directeur",
     company: "École D",
+    avatar: "/assets/testimonials/rawat.jpg",
   },
   {
     quote:
@@ -629,6 +634,7 @@ export const testimonials: {
     name: "N. Gitau",
     title: "Cliente",
     company: "Diaspora E",
+    avatar: "/assets/testimonials/gitau.jpg",
   },
   {
     quote:
@@ -636,6 +642,7 @@ export const testimonials: {
     name: "A. Njoroge",
     title: "Co-fondateur",
     company: "Commerce F",
+    avatar: "/assets/testimonials/njoroge.jpg",
   },
 ];
 

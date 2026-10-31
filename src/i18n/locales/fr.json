@@ -148,11 +148,9 @@
     "subtitle": "Payer, envoyer, encaisser ou épargner en groupe : quelques secondes suffisent, sans site web ni développeur."
   },
   "testimonials": {
-    "title": "Reemite grandit avec vous !",
-    "subtitle": "Adopté par ceux qui font bouger l'argent chaque jour",
-    "note": "Exemples illustratifs ; noms et sociétés non réels.",
-    "pauseMotion": "Mettre en pause",
-    "resumeMotion": "Reprendre l’animation",
+    "title": "Conçue pour grandir, portée par nos clients",
+    "subtitle": "Des indépendants aux grandes entreprises, Reemite aide des milliers de personnes à mieux gérer leur argent, plus rapidement.",
+    "rating": "Note illustrative : {{rating}} étoiles sur 5",
     "prev": "Témoignage précédent",
     "next": "Témoignage suivant",
     "goTo": "Témoignage de {{name}}"
