@@ -150,6 +150,9 @@
   "testimonials": {
     "title": "Reemite grandit avec vous !",
     "subtitle": "Adopté par ceux qui font bouger l'argent chaque jour",
+    "note": "Exemples illustratifs ; noms et sociétés non réels.",
+    "pauseMotion": "Mettre en pause",
+    "resumeMotion": "Reprendre l’animation",
     "prev": "Témoignage précédent",
     "next": "Témoignage suivant",
     "goTo": "Témoignage de {{name}}"

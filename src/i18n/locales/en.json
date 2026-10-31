@@ -150,6 +150,9 @@
   "testimonials": {
     "title": "Reemite grows with you!",
     "subtitle": "Trusted by those who move money every day",
+    "note": "Illustrative examples; names and organizations are fictional.",
+    "pauseMotion": "Pause animation",
+    "resumeMotion": "Resume animation",
     "prev": "Previous testimonial",
     "next": "Next testimonial",
     "goTo": "Testimonial from {{name}}"
