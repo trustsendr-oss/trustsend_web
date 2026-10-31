@@ -70,7 +70,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative overflow-hidden pt-16 pb-12 sm:pt-28 sm:pb-14 lg:pt-30 lg:pb-16"
+      className="relative overflow-hidden bg-[#020D30] pt-16 pb-12 sm:pt-28 sm:pb-14 lg:pt-30 lg:pb-16"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -94,7 +94,7 @@ export function Hero() {
         <ChevronRight size={18} />
       </button>
 
-      <div className="relative mx-auto max-w-7xl px-5 pt-8 sm:px-8 sm:pt-0 lg:px-10 bg-[#020D30]">
+      <div className="relative mx-auto max-w-7xl px-5 pt-8 sm:px-8 sm:pt-0 lg:px-10">
         {/* Illustration décorative */}
         <img
           src={heroAsset}
@@ -211,7 +211,7 @@ export function Hero() {
                     key={capIndex}
                     src={bgAsset}
                     alt="Aperçu de l'application Reemite"
-                    className="mx-auto hidden lg:block aspect-[5/4] w-full select-none object-contain lg:scale-125 lg:h-[60vh]"
+                    className="mx-auto aspect-[5/4] w-full select-none object-contain lg:scale-125 lg:h-[60vh]"
                   />
 
                   {/* Indicateurs */}
@@ -296,7 +296,7 @@ export function Hero() {
                   <img
                     src={bgAsset2}
                     alt="Reemite : paiements, cartes et mobile money en Afrique"
-                    className="mx-auto hidden lg:block  aspect-[5/4] w-full select-none object-contain lg:scale-125 lg:h-[60vh]"
+                    className="mx-auto aspect-[5/4] w-full select-none object-contain lg:scale-125 lg:h-[60vh]"
                   />
                 </div>
               </Reveal>

@@ -239,13 +239,47 @@ export function buildSchema(pathname: string, lang: UrlLanguage = "fr") {
   const organizationDescription = lang === "en"
     ? "Reemite is a financial technology platform for payments, local and international transfers, virtual cards, crypto services and business APIs, serving individuals and businesses in the DRC and across Africa."
     : "Reemite est une plateforme de technologie financière proposant paiements, transferts locaux et internationaux, cartes virtuelles, services crypto et API aux particuliers et aux entreprises en RDC et en Afrique.";
-  const cofounderDescription = lang === "en" ? "Co-founder of Reemite." : "Co-fondateur de Reemite.";
+  const cofounderDescription = lang === "en"
+    ? "Co-founder and architect of Reemite, Prince Lulinda Crespo specializes in web development and artificial intelligence and contributes to the platform's design and technical architecture."
+    : "Cofondateur et architecte de Reemite, Prince Lulinda Crespo est spécialisé en développement web et en intelligence artificielle et contribue à la conception et à l’architecture technique de la plateforme.";
   const princeMulokoBiography =
     "Né le 27 décembre 1996 à Fizi, Prince Muloko est un entrepreneur congolais engagé dans l’innovation technologique, la santé et l’inclusion financière. Fils de Victorine Shabani et de Muloko Kipili, il a trois sœurs : Machozi Muloko BJ, Bora Muloko et Moza Muloko. À six ans, il part vivre chez son oncle Étienne Shabani, qui contribue à son éducation. À 18 ans, il quitte Fizi pour poursuivre des études universitaires à l’Université Espoir d’Afrique, au Burundi. Après ses études, il travaille comme contrôleur technicien à la Commission électorale nationale indépendante (CENI) de la République démocratique du Congo. En 2023, il quitte cette institution et se porte candidat à la députation nationale dans le territoire de Fizi, au Sud-Kivu, sous la bannière du RDT et le numéro 190. Il lance ensuite Living Tomorrow, un projet explorant l’utilisation de drones intelligents équipés d’intelligence artificielle pour acheminer du matériel médical et des poches de sang vers les patients des zones rurales, présenté lors d’un événement au Burundi en présence de la Fondation Mvura. Il conçoit également une couveuse néonatale connectée pour suivre la santé des nouveau-nés prématurés grâce à l’intelligence artificielle et à l’Internet des objets (IoT). En 2024, il crée LIPAXE, un projet d’inclusion financière dont le développement est confronté à des défis réglementaires et de marché ; il prend du recul pour préparer ses prochaines étapes. En 2026, il lance Reemite avec son cofondateur Prince Lulinda Crespo, spécialiste du développement web et de l’intelligence artificielle, qui contribue à la conception et à la structuration technique de la plateforme. À travers ses projets, Prince Muloko poursuit l’ambition de mettre l’innovation au service des populations, notamment dans la santé, la technologie et la finance.";
+  const princeMulokoId = `${CANONICAL_ORIGIN}/#prince-muloko`;
+  const princeLulindaId = `${CANONICAL_ORIGIN}/#prince-lulinda`;
   return {
     "@context": "https://schema.org",
     "@graph": [
-      { "@type": ["Organization", "FinancialService"], "@id": `${CANONICAL_ORIGIN}/#organization`, name: "Reemite", url: CANONICAL_ORIGIN, logo: `${CANONICAL_ORIGIN}/android-chrome-512x512.png`, description: organizationDescription, founder: [{ "@type": "Person", "@id": `${CANONICAL_ORIGIN}/#prince-muloko`, name: "Prince Muloko", description: princeMulokoBiography, birthDate: "1996-12-27", birthPlace: { "@type": "Place", name: "Fizi, République démocratique du Congo" }, knowsAbout: ["Innovation technologique", "Santé", "Inclusion financière", "Intelligence artificielle", "Internet des objets"] }, { "@type": "Person", "@id": `${CANONICAL_ORIGIN}/#prince-lulinda`, name: "Prince Lulinda", description: cofounderDescription }], areaServed: "Africa and international markets", contactPoint: { "@type": "ContactPoint", contactType: "customer support", url: `${CANONICAL_ORIGIN}/contact`, areaServed: "Worldwide" } },
+      {
+        "@type": ["Organization", "FinancialService"],
+        "@id": `${CANONICAL_ORIGIN}/#organization`,
+        name: "Reemite",
+        url: CANONICAL_ORIGIN,
+        logo: `${CANONICAL_ORIGIN}/android-chrome-512x512.png`,
+        description: organizationDescription,
+        founder: [{ "@id": princeMulokoId }, { "@id": princeLulindaId }],
+        areaServed: "Africa and international markets",
+        contactPoint: { "@type": "ContactPoint", contactType: "customer support", url: `${CANONICAL_ORIGIN}/contact`, areaServed: "Worldwide" },
+      },
+      {
+        "@type": "Person",
+        "@id": princeMulokoId,
+        name: "Prince Muloko",
+        description: princeMulokoBiography,
+        birthDate: "1996-12-27",
+        birthPlace: { "@type": "Place", name: "Fizi, République démocratique du Congo" },
+        knowsAbout: ["Innovation technologique", "Santé", "Inclusion financière", "Intelligence artificielle", "Internet des objets"],
+        sameAs: ["https://www.linkedin.com/in/prince-muloko-63b427198"],
+        worksFor: { "@id": `${CANONICAL_ORIGIN}/#organization` },
+      },
+      {
+        "@type": "Person",
+        "@id": princeLulindaId,
+        name: "Prince Lulinda Crespo",
+        description: cofounderDescription,
+        jobTitle: lang === "en" ? "Co-founder and Architect of Reemite" : "Cofondateur et architecte de Reemite",
+        knowsAbout: ["Web development", "Artificial intelligence", "Software architecture"],
+        worksFor: { "@id": `${CANONICAL_ORIGIN}/#organization` },
+      },
       { "@type": "WebSite", "@id": `${CANONICAL_ORIGIN}/#website`, url: `${CANONICAL_ORIGIN}/`, name: "Reemite", publisher: { "@id": `${CANONICAL_ORIGIN}/#organization` }, inLanguage: ["fr", "en", "ln", "sw"] },
       { "@type": pathname === "/contact" ? "ContactPage" : "WebPage", "@id": `${url}#webpage`, url, name: title, description, inLanguage: lang, isPartOf: { "@id": `${CANONICAL_ORIGIN}/#website` }, about: { "@id": `${CANONICAL_ORIGIN}/#organization` } },
       // FAQ de l'accueil, dans la langue de la page
