@@ -319,7 +319,6 @@ export function DashboardLayout() {
       </header>
 
       <div className="flex min-h-0 flex-1">
-        {/* ---------- Sidebar desktop (repliable en rail) ---------- */}
         <aside
           className={`hidden shrink-0 flex-col pt-2 transition-[width] duration-200 lg:flex ${
             collapsed ? "w-[72px]" : "w-60"
