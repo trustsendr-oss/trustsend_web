@@ -125,6 +125,13 @@ export const seoConfig: Record<string, SeoEntry> = {
     keywords: "inscription Reemite, créer un compte fintech, signup entreprise",
     robots: "noindex,nofollow",
   },
+  // Page d'un lien personnel envoyé par e-mail : jamais indexée.
+  "/invitation": {
+    title: "Invitation | Reemite",
+    description: "Rejoignez l'équipe d'une entreprise sur Reemite.",
+    keywords: "invitation équipe Reemite",
+    robots: "noindex,nofollow",
+  },
 };
 
 /** Version anglaise des pages publiques (servies sous /en). */

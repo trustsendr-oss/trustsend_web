@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { AlertCircle, Lock, X } from "lucide-react";
 import { ButtonSpinner } from "../LoadingSpinner";
 import { useTranslation } from "react-i18next";
+import { usePermissions } from "../../hooks/useMe";
 
 const PIN_LENGTH = 4;
 
@@ -19,6 +20,8 @@ export function PinModal({
   error?: string | null;
 }) {
   const { t } = useTranslation();
+  // Un membre confirme avec SON PIN Reemite, jamais celui de l'entreprise.
+  const { isMember } = usePermissions();
   const [pin, setPin] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -80,7 +83,11 @@ export function PinModal({
         <h2 id="pin-modal-title" className="mt-4 font-display text-lg font-bold text-ink">
           {t("dashboard.mobileMoneyForm.pinModalTitle")}
         </h2>
-        <p className="mt-1 text-sm text-muted">{t("dashboard.mobileMoneyForm.pinModalSubtitle")}</p>
+        <p className="mt-1 text-sm text-muted">
+          {isMember
+            ? t("dashboard.mobileMoneyForm.pinModalMemberSubtitle")
+            : t("dashboard.mobileMoneyForm.pinModalSubtitle")}
+        </p>
 
         <div className="relative mt-6">
           <input

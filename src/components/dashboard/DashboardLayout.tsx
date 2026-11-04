@@ -32,18 +32,22 @@ import { useLogout } from "../../hooks/useLogout";
 import { useProfile } from "../../hooks/useProfile";
 import { getStoredBusiness } from "../../lib/session";
 import { NotificationBell } from "./NotificationBell";
+import { BusinessSwitcher } from "./BusinessSwitcher";
+import { usePermissions } from "../../hooks/useMe";
+import type { DashboardPermission } from "../../types/auth";
 import { BUSINESS_ORIGIN, isSandbox } from "../../lib/domains";
 import "../../styles/geist.css";
 
-type NavItem = { key: string; icon: typeof Home; to?: string };
+/** `perm` : permission sans laquelle l'entrée est masquée (voir business_permissions.ts côté API). */
+type NavItem = { key: string; icon: typeof Home; to?: string; perm?: DashboardPermission };
 
 const navSections: { headingKey?: string; items: NavItem[] }[] = [
   {
     items: [
       { key: "overview", icon: Home, to: "/dashboard" },
-      { key: "kyc", icon: ShieldCheck, to: "/dashboard/kyc" },
-      { key: "transactions", icon: ArrowLeftRight, to: "/dashboard/transactions" },
-      { key: "merchantPayments", icon: Store, to: "/dashboard/merchant-payments" },
+      { key: "kyc", icon: ShieldCheck, to: "/dashboard/kyc", perm: "settings.manage" },
+      { key: "transactions", icon: ArrowLeftRight, to: "/dashboard/transactions", perm: "finance.read" },
+      { key: "merchantPayments", icon: Store, to: "/dashboard/merchant-payments", perm: "finance.read" },
       { key: "notifications", icon: Bell, to: "/dashboard/notifications" },
       { key: "accountSettings", icon: Settings, to: "/dashboard/profile" },
     ],
@@ -51,18 +55,18 @@ const navSections: { headingKey?: string; items: NavItem[] }[] = [
   {
     headingKey: "wallet",
     items: [
-      { key: "balance", icon: Wallet, to: "/dashboard/wallet" },
-      { key: "deposit", icon: ArrowDownToLine, to: "/dashboard/deposit" },
-      { key: "withdraw", icon: ArrowUpFromLine, to: "/dashboard/withdraw" },
-      { key: "swap", icon: Repeat, to: "/dashboard/swap" },
-      { key: "cards", icon: CreditCard, to: "/dashboard/cards" },
+      { key: "balance", icon: Wallet, to: "/dashboard/wallet", perm: "finance.read" },
+      { key: "deposit", icon: ArrowDownToLine, to: "/dashboard/deposit", perm: "money.move" },
+      { key: "withdraw", icon: ArrowUpFromLine, to: "/dashboard/withdraw", perm: "money.move" },
+      { key: "swap", icon: Repeat, to: "/dashboard/swap", perm: "money.move" },
+      { key: "cards", icon: CreditCard, to: "/dashboard/cards", perm: "finance.read" },
     ],
   },
   {
     headingKey: "developers",
     items: [
-      { key: "apiKeys", icon: KeyRound, to: "/dashboard/api-keys" },
-      { key: "webhooks", icon: WebhookIcon, to: "/dashboard/webhooks" },
+      { key: "apiKeys", icon: KeyRound, to: "/dashboard/api-keys", perm: "developers.manage" },
+      { key: "webhooks", icon: WebhookIcon, to: "/dashboard/webhooks", perm: "developers.manage" },
     ],
   },
 ];
@@ -92,7 +96,16 @@ export function DashboardLayout() {
   const logout = useLogout();
   const location = useLocation();
   const profile = useProfile();
-  const showPinBanner = profile.data && !profile.data.pin_set;
+  const { me, can } = usePermissions();
+  // Le PIN qui compte est celui de la personne connectée : celui de l'entreprise pour le
+  // propriétaire, le PIN personnel Reemite pour un membre — et seulement s'il déplace de l'argent.
+  const showPinBanner = !!me && !me.pin_set && can("money.move");
+  const navForRole = visibleNavSections
+    .map((section) => ({
+      ...section,
+      items: section.items.filter((item) => !item.perm || can(item.perm)),
+    }))
+    .filter((section) => section.items.length > 0);
   // L'hôte décide de l'API appelée ; la réponse de l'API dit dans quel environnement elle tourne.
   // S'ils divergent, l'utilisateur doit le savoir avant de faire quoi que ce soit.
   const environmentMismatch =
@@ -145,7 +158,7 @@ export function DashboardLayout() {
   const renderNav = (rail: boolean) => (
     <>
       <nav className="flex-1 overflow-y-auto px-3 pb-4">
-        {visibleNavSections.map((section, i) => (
+        {navForRole.map((section, i) => (
           <div key={i} className={i > 0 ? "mt-6" : undefined}>
             {section.headingKey && !rail && (
               <p className="mb-1 px-3 text-xs text-muted">
@@ -240,6 +253,7 @@ export function DashboardLayout() {
         </div>
 
         <div className="ms-auto flex items-center gap-1">
+          <BusinessSwitcher />
           <span className="me-2 hidden items-center gap-1.5 rounded-full border border-black/10 bg-white px-3 py-1.5 text-sm font-medium text-ink md:inline-flex">
             <span className={`h-2 w-2 rounded-full ${isSandbox ? "bg-amber-500" : "bg-accent"}`} />
             {isSandbox ? t("dashboard.sandboxMode") : t("dashboard.liveMode")}
@@ -384,7 +398,9 @@ export function DashboardLayout() {
             >
               <KeyRound size={15} className="shrink-0 text-amber-600" />
               <span className="font-medium text-ink">{t("dashboard.pinBanner.title")}</span>
-              <span className="text-muted">{t("dashboard.pinBanner.desc")}</span>
+              <span className="text-muted">
+                {me?.kind === "member" ? t("dashboard.pinBanner.memberDesc") : t("dashboard.pinBanner.desc")}
+              </span>
               <span className="ms-auto flex shrink-0 items-center gap-1 text-xs font-semibold text-amber-600">
                 {t("dashboard.pinBanner.cta")}
                 <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-0.5 rtl:rotate-180" />

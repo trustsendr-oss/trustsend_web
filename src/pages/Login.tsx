@@ -1,9 +1,10 @@
 import { useState, type FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { AlertCircle, Eye, EyeOff, FlaskConical, ShieldCheck } from "lucide-react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { AlertCircle, Building2, ChevronRight, Eye, EyeOff, FlaskConical, ShieldCheck } from "lucide-react";
 import { ButtonSpinner } from "../components/LoadingSpinner";
 import { useTranslation } from "react-i18next";
-import { useLogin, loginErrorMessage } from "../hooks/useLogin";
+import { useLogin, useMemberLogin, loginErrorMessage } from "../hooks/useLogin";
+import type { Membership } from "../types/auth";
 import { isSandbox } from "../lib/domains";
 import { AuthField } from "../components/auth/AuthField";
 import "../styles/geist.css";
@@ -16,7 +17,18 @@ export function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
-  const login = useLogin();
+  const ownerLogin = useLogin();
+  const memberLogin = useMemberLogin();
+  // Deux portes : le login de l'entreprise (propriétaire), ou le compte Reemite personnel d'un
+  // membre de l'équipe. Les identifiants ne sont pas les mêmes, on ne devine donc pas.
+  // `?mode=member` : le sélecteur de compte y mène pour se connecter avec son compte personnel.
+  const [searchParams] = useSearchParams();
+  const [mode, setMode] = useState<"owner" | "member">(
+    searchParams.get("mode") === "member" ? "member" : "owner",
+  );
+  // Membre de plusieurs entreprises : la connexion renvoie la liste, il en choisit une.
+  const [choices, setChoices] = useState<Membership[] | null>(null);
+  const login = mode === "owner" ? ownerLogin : memberLogin;
 
   const update =
     (field: keyof typeof form) => (e: FormEvent<HTMLInputElement>) => {
@@ -26,9 +38,30 @@ export function Login() {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    login.mutate(form, {
-      onSuccess: () => navigate("/dashboard"),
+    if (mode === "owner") {
+      ownerLogin.mutate(form, { onSuccess: () => navigate("/dashboard") });
+      return;
+    }
+    memberLogin.mutate(form, {
+      onSuccess: (result) => {
+        if (result.requires_business) setChoices(result.businesses);
+        else navigate("/dashboard");
+      },
     });
+  };
+
+  const chooseBusiness = (businessId: number) => {
+    memberLogin.mutate(
+      { ...form, business_id: businessId },
+      { onSuccess: (result) => !result.requires_business && navigate("/dashboard") },
+    );
+  };
+
+  const switchMode = (next: "owner" | "member") => {
+    setMode(next);
+    setChoices(null);
+    ownerLogin.reset();
+    memberLogin.reset();
   };
 
   return (
@@ -54,7 +87,84 @@ export function Login() {
           </div>
 
           {/* Colonne formulaire */}
+          {choices ? (
+            <div className="min-w-0 min-[52rem]:pt-[4.5rem]">
+              <h2 className="text-lg font-medium text-ink">{t("login.chooseBusiness")}</h2>
+              <p className="mt-1 text-sm text-muted-2">{t("login.chooseBusinessDesc")}</p>
+              <ul className="mt-5 divide-y divide-surface-2 overflow-hidden rounded-2xl border border-surface-2">
+                {choices.map((choice) => (
+                  <li key={choice.business.id}>
+                    <button
+                      type="button"
+                      onClick={() => chooseBusiness(choice.business.id)}
+                      disabled={memberLogin.isPending}
+                      aria-busy={
+                        (memberLogin.isPending &&
+                          memberLogin.variables?.business_id === choice.business.id) ||
+                        undefined
+                      }
+                      className="flex w-full items-center gap-3 px-4 py-3.5 text-start transition-colors hover:bg-surface focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent disabled:opacity-60"
+                    >
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-light text-brand">
+                        <Building2 size={18} aria-hidden />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-sm font-medium text-ink">
+                          {choice.business.name}
+                        </span>
+                        <span className="block text-xs text-muted">
+                          {t(`dashboard.team.roles.${choice.role}`)}
+                        </span>
+                      </span>
+                      {memberLogin.isPending &&
+                      memberLogin.variables?.business_id === choice.business.id ? (
+                        <ButtonSpinner label={t("login.submitting")} size={16} />
+                      ) : (
+                        <ChevronRight size={18} aria-hidden className="text-muted rtl:rotate-180" />
+                      )}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              {memberLogin.isError && (
+                <p role="alert" className="mt-4 flex items-start gap-2 text-sm leading-snug text-red-700">
+                  <AlertCircle size={17} aria-hidden className="mt-px shrink-0" />
+                  {loginErrorMessage(memberLogin.error, t)}
+                </p>
+              )}
+              <button
+                type="button"
+                onClick={() => setChoices(null)}
+                className="-ms-3 mt-6 inline-flex h-10 items-center rounded-full px-3 text-sm font-semibold text-accent transition-colors hover:bg-brand-light"
+              >
+                {t("login.back")}
+              </button>
+            </div>
+          ) : (
           <form onSubmit={onSubmit} className="min-w-0 min-[52rem]:pt-[4.5rem]">
+            <div
+              role="radiogroup"
+              aria-label={t("login.modeLabel")}
+              className="mb-6 grid grid-cols-2 gap-1 rounded-full bg-surface-2 p-1"
+            >
+              {(["owner", "member"] as const).map((m) => (
+                <button
+                  key={m}
+                  type="button"
+                  role="radio"
+                  aria-checked={mode === m}
+                  onClick={() => switchMode(m)}
+                  className={`h-9 rounded-full px-3 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+                    mode === m ? "bg-white text-ink shadow-card" : "text-muted-2 hover:text-ink"
+                  }`}
+                >
+                  {m === "owner" ? t("login.modeOwner") : t("login.modeMember")}
+                </button>
+              ))}
+            </div>
+            {mode === "member" && (
+              <p className="-mt-2 mb-6 text-sm text-muted-2">{t("login.memberHint")}</p>
+            )}
             <div className="space-y-6">
               <AuthField
                 id="email"
@@ -128,12 +238,14 @@ export function Login() {
 
             {/* Actions : secondaire au début, principale à la fin (comme Google) */}
             <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
+              {mode === "owner" && (
               <Link
-                to="/signup"
-                className="-ms-3 inline-flex h-10 items-center rounded-full px-3 text-sm font-semibold text-accent transition-colors hover:bg-brand-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-              >
-                {t("login.createAccount")}
-              </Link>
+                  to="/signup"
+                  className="-ms-3 inline-flex h-10 items-center rounded-full px-3 text-sm font-semibold text-accent transition-colors hover:bg-brand-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                >
+                  {t("login.createAccount")}
+                </Link>
+              )}
               <button
                 type="submit"
                 disabled={login.isPending}
@@ -148,6 +260,7 @@ export function Login() {
               </button>
             </div>
           </form>
+          )}
         </div>
       </main>
 

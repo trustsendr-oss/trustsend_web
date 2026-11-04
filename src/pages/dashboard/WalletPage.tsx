@@ -8,11 +8,13 @@ import { formatMinorUnits } from "../../lib/format";
 import { isSandbox } from "../../lib/domains";
 import { WalletLogo } from "../../components/dashboard/WalletLogo";
 import { SandboxFundDialog } from "../../components/dashboard/SandboxFundDialog";
+import { usePermissions } from "../../hooks/useMe";
 
 export function WalletPage() {
   const { t } = useTranslation();
   const wallets = useWallets();
   const [fundOpen, setFundOpen] = useState(false);
+  const canMove = usePermissions().can("money.move");
 
   return (
     <div>
@@ -22,7 +24,7 @@ export function WalletPage() {
           <p className="mt-1 text-muted">{t("dashboard.wallet.subtitle")}</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          {isSandbox && (
+          {isSandbox && canMove && (
             <button
               type="button"
               onClick={() => setFundOpen(true)}
@@ -33,13 +35,15 @@ export function WalletPage() {
               {t("dashboard.wallet.fund.button")}
             </button>
           )}
-          <Link
-            to="/dashboard/wallet/new"
-            className="inline-flex items-center gap-2 rounded bg-brand px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
-          >
-            <Plus size={16} />
-            {t("dashboard.wallet.addWallet")}
-          </Link>
+          {canMove && (
+            <Link
+              to="/dashboard/wallet/new"
+              className="inline-flex items-center gap-2 rounded bg-brand px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+            >
+              <Plus size={16} />
+              {t("dashboard.wallet.addWallet")}
+            </Link>
+          )}
         </div>
       </div>
 

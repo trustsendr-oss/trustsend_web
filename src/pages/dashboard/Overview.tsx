@@ -21,6 +21,10 @@ import {
   ShieldAlert,
   Ticket,
   XCircle,
+  Bell,
+  KeyRound,
+  Settings,
+  Webhook,
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
@@ -38,6 +42,7 @@ import { TransactionDetails } from "../../components/dashboard/TransactionDetail
 import { useOperators } from "../../hooks/usePaymentMethods";
 import { metaString } from "../../lib/transactions";
 import { PinModal } from "../../components/dashboard/PinModal";
+import { usePermissions } from "../../hooks/useMe";
 import type { KycStatusData, Plan, Transaction } from "../../types/dashboard";
 
 const keyUpdates = [
@@ -140,6 +145,7 @@ function KycOnboardingView({ kyc }: { kyc: KycStatusData }) {
     status === "pending" ? KYC_TONE.pending : status === "rejected" ? KYC_TONE.rejected : KYC_TONE.not_started;
   const submitted = status !== "not_started";
   const reviewed = status === "approved" || status === "rejected";
+  const { can } = usePermissions();
 
   const steps = [
     { key: "accountCreated", done: true },
@@ -166,13 +172,15 @@ function KycOnboardingView({ kyc }: { kyc: KycStatusData }) {
               </p>
             </div>
           </div>
-          <Link
-            to="/dashboard/kyc"
-            className={`inline-flex h-9 shrink-0 items-center gap-1.5 self-start rounded-md px-4 text-sm font-medium transition-colors ${tone.cta}`}
-          >
-            {t(`dashboard.overview.kycOnboarding.${status}Cta`)}
-            <ArrowRight size={14} className="rtl:rotate-180" />
-          </Link>
+          {can("settings.manage") && (
+            <Link
+              to="/dashboard/kyc"
+              className={`inline-flex h-9 shrink-0 items-center gap-1.5 self-start rounded-md px-4 text-sm font-medium transition-colors ${tone.cta}`}
+            >
+              {t(`dashboard.overview.kycOnboarding.${status}Cta`)}
+              <ArrowRight size={14} className="rtl:rotate-180" />
+            </Link>
+          )}
         </div>
 
         {/* Progression */}
@@ -258,6 +266,7 @@ function PlanPrompt() {
   const subscribe = useSubscribePlan();
   const wallets = useWallets();
   const navigate = useNavigate();
+  const { can } = usePermissions();
   const [expanded, setExpanded] = useState(false);
   const [selectedPlanId, setSelectedPlanId] = useState<number | null>(null);
   const [pinModalOpen, setPinModalOpen] = useState(false);
@@ -405,7 +414,8 @@ function PlanPrompt() {
                     <button
                       type="button"
                       onClick={() => openPinFor(plan)}
-                      disabled={subscribe.isPending || isCurrent}
+                      disabled={subscribe.isPending || isCurrent || !can("money.move")}
+                      title={can("money.move") ? undefined : t("dashboard.team.needsMoney")}
                       aria-busy={isSubscribingThis || undefined}
                       className="mt-6 flex h-9 items-center justify-center gap-1.5 rounded-md bg-brand px-4 text-sm font-medium text-white transition-colors hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-50"
                     >
@@ -448,8 +458,66 @@ function Stat({ label: text, value, hint }: { label: string; value: ReactNode; h
   );
 }
 
+/**
+ * L'accueil dépend de ce que le rôle peut voir : les comptes (soldes, transactions) pour qui lit
+ * les livres, des raccourcis vers ses outils pour les autres — un développeur ne voit pas l'argent.
+ */
 export function Overview() {
   const { t } = useTranslation();
+  const { can, isLoading } = usePermissions();
+  if (isLoading) return <LoadingSpinner label={t("dashboard.loading")} className="min-h-[50vh]" />;
+  return can("finance.read") ? <FinanceOverview /> : <RoleHome />;
+}
+
+/** Accueil d'un rôle sans accès aux comptes : qui on est ici, et où aller. */
+function RoleHome() {
+  const { t } = useTranslation();
+  const { can, me } = usePermissions();
+  const shortcuts = [
+    { to: "/dashboard/api-keys", icon: KeyRound, key: "apiKeys", show: can("developers.manage") },
+    { to: "/dashboard/webhooks", icon: Webhook, key: "webhooks", show: can("developers.manage") },
+    { to: "/dashboard/notifications", icon: Bell, key: "notifications", show: true },
+    { to: "/dashboard/profile", icon: Settings, key: "settings", show: true },
+  ].filter((s) => s.show);
+
+  return (
+    <div className="mx-auto max-w-5xl">
+      <Greeting />
+      {me && (
+        <p className="mt-4 text-sm text-muted-2">
+          {t("dashboard.roleHome.signedInAs", { role: t(`dashboard.team.roles.${me.role}`) })}
+        </p>
+      )}
+      <div className="mt-8 grid gap-3 sm:grid-cols-2">
+        {shortcuts.map((s) => (
+          <Link
+            key={s.key}
+            to={s.to}
+            className="group flex items-start gap-4 rounded-2xl border border-black/[0.08] bg-white p-5 transition-colors hover:border-black/20 hover:bg-surface/40"
+          >
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-light text-brand">
+              <s.icon size={18} aria-hidden />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-sm font-medium text-ink">{t(`dashboard.roleHome.${s.key}.title`)}</span>
+              <span className="mt-0.5 block text-sm text-muted-2">{t(`dashboard.roleHome.${s.key}.desc`)}</span>
+            </span>
+            <ArrowRight
+              size={16}
+              aria-hidden
+              className="mt-1 shrink-0 text-muted transition-transform group-hover:translate-x-0.5 rtl:rotate-180"
+            />
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FinanceOverview() {
+  const { t } = useTranslation();
+  const { can } = usePermissions();
+  const canMove = can("money.move");
   const overview = useOverview();
   const wallets = useWallets();
   const txs = useTransactions(1, 5);
@@ -511,25 +579,30 @@ export function Overview() {
                     {formatMinorUnits(w.balance, w.currency_code)}
                   </span>
                 ))}
-                <Link
-                  to="/dashboard/wallet/new"
-                  className="inline-flex items-center gap-1 text-muted transition-colors hover:text-ink"
-                >
-                  <Plus size={14} />
-                  {t("dashboard.overview.addWallet")}
-                </Link>
+                {canMove && (
+                  <Link
+                    to="/dashboard/wallet/new"
+                    className="inline-flex items-center gap-1 text-muted transition-colors hover:text-ink"
+                  >
+                    <Plus size={14} />
+                    {t("dashboard.overview.addWallet")}
+                  </Link>
+                )}
               </div>
             </>
           ) : (
             <p className="mt-3 text-sm text-muted">
               {t("dashboard.overview.noWallet")}{" "}
-              <Link to="/dashboard/wallet/new" className="font-medium text-ink underline underline-offset-2">
-                {t("dashboard.overview.addOne")}
-              </Link>
+              {canMove && (
+                <Link to="/dashboard/wallet/new" className="font-medium text-ink underline underline-offset-2">
+                  {t("dashboard.overview.addOne")}
+                </Link>
+              )}
             </p>
           )}
         </div>
 
+        {canMove && (
         <div className="flex shrink-0 items-center gap-2">
           <Link
             to="/dashboard/deposit"
@@ -546,6 +619,7 @@ export function Overview() {
             {t("dashboard.overview.withdraw")}
           </Link>
         </div>
+        )}
       </section>
 
       {/* Paiements des 30 derniers jours */}

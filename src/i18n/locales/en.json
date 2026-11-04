@@ -265,7 +265,15 @@
     "errorPending": "Your account isn't active yet. It must be approved before you can log in.",
     "errorLocked": "Too many attempts. Try again in 15 minutes.",
     "errorGeneric": "Something went wrong, please try again.",
-    "sandboxNotice": "You are signing in to the sandbox, Reemite's test environment."
+    "sandboxNotice": "You are signing in to the sandbox, Reemite's test environment.",
+    "modeLabel": "Account type",
+    "modeOwner": "Business account",
+    "modeMember": "Team member",
+    "memberHint": "Sign in with your personal Reemite account — the one you accepted the business's invitation with.",
+    "chooseBusiness": "Choose a business",
+    "chooseBusinessDesc": "Your account belongs to several teams. You can switch business at any time from the dashboard.",
+    "back": "Back",
+    "errorNotMember": "This account is not part of any business team."
   },
   "signup": {
     "title": "Create your account",
@@ -321,7 +329,8 @@
     "pinBanner": {
       "title": "Set up your PIN code",
       "desc": "A PIN code is required to make deposits, withdrawals and other operations on your account.",
-      "cta": "Set up my PIN"
+      "cta": "Set up my PIN",
+      "memberDesc": "Money movements are confirmed with your personal Reemite PIN. Set it in the Reemite app."
     },
     "nav": {
       "overview": "Overview",
@@ -784,7 +793,8 @@
       "sectionMethod": "Payment method",
       "sectionMethodDesc": "Choose the country, currency and mobile money operator.",
       "sectionDetails": "Operation details",
-      "sectionDetailsDesc": "Enter the mobile money number and the amount."
+      "sectionDetailsDesc": "Enter the mobile money number and the amount.",
+      "pinModalMemberSubtitle": "Enter your personal Reemite PIN to confirm."
     },
     "cards": {
       "title": "Cards",
@@ -921,7 +931,15 @@
       "email": "Email",
       "password": "Password",
       "notSet": "Not set",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "memberTitle": "Your access",
+      "memberDesc": "You act for this business with your personal Reemite account.",
+      "memberName": "Name",
+      "memberRole": "Role",
+      "memberPinSet": "Personal PIN set",
+      "memberPinNotSet": "Personal PIN not set",
+      "memberCredentialsNote": "Your password and PIN are those of your Reemite account: change them from the Reemite app. The business PIN stays with its main account.",
+      "team": "Team"
     },
     "sandboxMode": "Sandbox mode",
     "environmentMismatch": "Warning: this dashboard and the API are not in the same environment (sandbox / production). Do not perform any operation and contact support.",
@@ -946,6 +964,120 @@
       "amount": "Amount",
       "fee": "Fee (1%)",
       "net": "Received"
+    },
+    "forbidden": {
+      "title": "Access not allowed",
+      "desc": "Your role ({{role}}) does not give access to this page. Ask a business administrator if you need it.",
+      "back": "Back to overview"
+    },
+    "switcher": {
+      "label": "Current account: {{name}}. Switch account",
+      "heading": "Your businesses",
+      "error": "Could not switch business. Try again.",
+      "businessLogin": "Signed in with the business login",
+      "linkPersonal": "Link my personal account",
+      "linkPersonalDesc": "To move between businesses with a single account.",
+      "otherAccount": "Sign in with another account"
+    },
+    "team": {
+      "title": "Team",
+      "subtitle": "Invite the people who work with you. Each one signs in with their own Reemite account and confirms payments with their own PIN.",
+      "invite": "Invite",
+      "emailLabel": "Email address",
+      "roleLabel": "Role",
+      "inviteHelp": "They receive an email with a link valid for 7 days. If they already have a Reemite account they sign in with it; otherwise they create one from the link.",
+      "sendInvite": "Send invitation",
+      "sending": "Sending…",
+      "cancel": "Cancel",
+      "invitationSent": "Invitation sent to {{email}}",
+      "invitationResent": "Invitation sent again to {{email}}",
+      "invitationCancelled": "Invitation cancelled",
+      "loading": "Loading team…",
+      "loadError": "Could not load the team.",
+      "empty": "No one else has joined the team yet.",
+      "emptyManage": "It's just you for now. Invite a colleague to give them their own access.",
+      "unnamed": "No name",
+      "you": "(you)",
+      "saving": "Saving…",
+      "actionsFor": "Actions for {{name}}",
+      "roleChanged": "{{name}}'s role changed",
+      "suspend": "Suspend access",
+      "reactivate": "Restore access",
+      "remove": "Remove from team",
+      "confirmRemove": "Remove {{name}} from the team? Their access ends immediately.",
+      "suspended": "{{name}}'s access suspended",
+      "reactivated": "{{name}}'s access restored",
+      "removed": "{{name}} was removed from the team",
+      "pendingTitle": "Pending invitations",
+      "pendingDesc": "These people have not accepted yet.",
+      "expired": "Expired",
+      "expiresIn_one": "expires tomorrow",
+      "expiresIn_other": "expires in {{count}} days",
+      "resend": "Resend",
+      "cancelInvitation": "Cancel the invitation for {{email}}",
+      "legendTitle": "What each role can do",
+      "pinNote": "The business PIN never needs to be shared. A suspension takes effect immediately.",
+      "needsMoney": "Your role does not allow money movements.",
+      "status": {
+        "active": "Active",
+        "suspended": "Suspended",
+        "terminated": "Removed"
+      },
+      "roles": {
+        "owner": "Owner",
+        "admin": "Administrator",
+        "finance": "Finance",
+        "developer": "Developer",
+        "viewer": "Read only",
+        "branch_manager": "Branch manager",
+        "teller": "Teller",
+        "credit_officer": "Credit officer"
+      },
+      "roleDesc": {
+        "owner": "Every right, with their personal Reemite account. Appoints administrators and other owners.",
+        "admin": "Manages the team, settings, money and developer tools. Cannot appoint owners or administrators.",
+        "finance": "Sees everything; makes deposits, withdrawals, swaps and card payments.",
+        "developer": "Manages API keys and webhooks. Does not see balances or transactions.",
+        "viewer": "Sees balances, transactions and reports without changing anything.",
+        "branch_manager": "Reads the dashboard and supervises counters from the branch app.",
+        "teller": "Works a counter from the branch app.",
+        "credit_officer": "Follows their loan files from the branch app."
+      },
+      "errors": {
+        "generic": "Something went wrong. Try again.",
+        "invalidEmail": "Check the email address.",
+        "E_OWNER_ONLY": "Only an owner can appoint or change an owner or an administrator.",
+        "E_SELF_CHANGE": "You cannot change your own access.",
+        "E_ALREADY_STAFF": "This person is already on the team.",
+        "E_SESSION_OPEN": "This person has a cash drawer open: it must be closed first.",
+        "E_STAFF_TERMINATED": "This member was removed: their access can no longer be changed.",
+        "E_ROLE_FORBIDDEN": "Your role does not allow managing the team.",
+        "E_INVITATION_CLOSED": "This invitation is no longer pending."
+      },
+      "mainAccount": "Main account",
+      "mainAccountDesc": "The business's own login (signup email and password). The only one to manage the business PIN and password.",
+      "linkTitle": "One account for all your businesses.",
+      "linkDesc": "Invite your personal address as owner: you'll then move between businesses without signing in again.",
+      "linkAction": "Link my account"
+    },
+    "roleHome": {
+      "signedInAs": "You are signed in as {{role}}. Only your role's sections are shown.",
+      "apiKeys": {
+        "title": "API keys",
+        "desc": "Create and revoke your servers' keys."
+      },
+      "webhooks": {
+        "title": "Webhooks",
+        "desc": "Receive payment events on your server."
+      },
+      "notifications": {
+        "title": "Notifications",
+        "desc": "The business's announcements and alerts."
+      },
+      "settings": {
+        "title": "Settings",
+        "desc": "The business profile and your access."
+      }
     }
   },
   "pricing": {
@@ -1004,5 +1136,53 @@
     "subtitle": "A one-time fee based on your market, paid once when integrating with your platform.",
     "imageAlt": "Reemite payment gateway connected to multiple payment methods",
     "maintenanceNote": "Maintenance fees cover support and the ongoing operation of your API integration."
+  },
+  "invitation": {
+    "loading": "Loading invitation…",
+    "title": "Join {{business}}",
+    "byInviter": "{{inviter}} invites you to join the team on Reemite as {{role}}.",
+    "byBusiness": "You are invited to join the team on Reemite as {{role}}.",
+    "signInHint": "A Reemite account already exists for this address. Enter its password to accept.",
+    "createHint": "Create your Reemite account to join the team. You can use it in the app too.",
+    "fullName": "Full name",
+    "password": "Password",
+    "newPassword": "Choose a password",
+    "passwordHint": "At least 8 characters.",
+    "private": "Your password stays yours: the business never sees it.",
+    "accept": "Accept invitation",
+    "createAndJoin": "Create my account and join",
+    "joining": "One moment…",
+    "goToLogin": "Go to sign in",
+    "errors": {
+      "password": "Incorrect password.",
+      "locked": "Too many attempts. Try again in a few minutes.",
+      "accountExists": "An account already exists for this address: reload the page to sign in.",
+      "alreadyMember": "You are already on this team.",
+      "weakPassword": "Check the fields: the password needs at least 8 characters.",
+      "closed": "This invitation is no longer valid.",
+      "generic": "Something went wrong. Try again."
+    },
+    "closed": {
+      "invalid": {
+        "title": "Invalid invitation link",
+        "desc": "This link is incomplete or does not exist. Make sure you opened the full link from the email."
+      },
+      "accepted": {
+        "title": "Invitation already accepted",
+        "desc": "This invitation has already been used. Sign in by choosing “Team member”."
+      },
+      "revoked": {
+        "title": "Invitation cancelled",
+        "desc": "The business cancelled this invitation or sent a newer one. Check your latest emails."
+      },
+      "expired": {
+        "title": "Invitation expired",
+        "desc": "This link is no longer valid. Ask the business to invite you again."
+      },
+      "inactive": {
+        "title": "Business unavailable",
+        "desc": "This business is no longer active on Reemite."
+      }
+    }
   }
 }

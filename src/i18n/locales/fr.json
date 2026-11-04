@@ -265,7 +265,15 @@
     "errorPending": "Votre compte n'est pas encore actif. Il doit être approuvé avant de pouvoir vous connecter.",
     "errorLocked": "Trop de tentatives. Réessayez dans 15 minutes.",
     "errorGeneric": "Une erreur est survenue, veuillez réessayer.",
-    "sandboxNotice": "Vous vous connectez à la sandbox, l'environnement de test de Reemite."
+    "sandboxNotice": "Vous vous connectez à la sandbox, l'environnement de test de Reemite.",
+    "modeLabel": "Type de compte",
+    "modeOwner": "Compte entreprise",
+    "modeMember": "Membre d'équipe",
+    "memberHint": "Connectez-vous avec votre compte Reemite personnel, celui avec lequel vous avez accepté l'invitation de l'entreprise.",
+    "chooseBusiness": "Choisissez une entreprise",
+    "chooseBusinessDesc": "Votre compte fait partie de plusieurs équipes. Vous pourrez changer d'entreprise à tout moment depuis le dashboard.",
+    "back": "Retour",
+    "errorNotMember": "Ce compte ne fait partie d'aucune équipe d'entreprise."
   },
   "signup": {
     "title": "Créer un compte",
@@ -321,7 +329,8 @@
     "pinBanner": {
       "title": "Configurez votre code PIN",
       "desc": "Un code PIN est requis pour effectuer des dépôts, retraits et autres opérations sur votre compte.",
-      "cta": "Configurer mon PIN"
+      "cta": "Configurer mon PIN",
+      "memberDesc": "Les opérations d'argent se confirment avec votre PIN Reemite personnel. Définissez-le dans l'application Reemite."
     },
     "nav": {
       "overview": "Aperçu",
@@ -784,7 +793,8 @@
       "sectionMethod": "Moyen de paiement",
       "sectionMethodDesc": "Choisissez le pays, la devise et l'opérateur mobile money.",
       "sectionDetails": "Détails de l'opération",
-      "sectionDetailsDesc": "Indiquez le numéro mobile money et le montant."
+      "sectionDetailsDesc": "Indiquez le numéro mobile money et le montant.",
+      "pinModalMemberSubtitle": "Saisissez votre PIN Reemite personnel pour confirmer."
     },
     "cards": {
       "title": "Cartes",
@@ -921,7 +931,15 @@
       "email": "E-mail",
       "password": "Mot de passe",
       "notSet": "Non défini",
-      "cancel": "Annuler"
+      "cancel": "Annuler",
+      "memberTitle": "Votre accès",
+      "memberDesc": "Vous agissez pour cette entreprise avec votre compte Reemite personnel.",
+      "memberName": "Nom",
+      "memberRole": "Rôle",
+      "memberPinSet": "PIN personnel configuré",
+      "memberPinNotSet": "PIN personnel non configuré",
+      "memberCredentialsNote": "Votre mot de passe et votre PIN sont ceux de votre compte Reemite : modifiez-les depuis l'application Reemite. Le PIN de l'entreprise reste réservé à son compte principal.",
+      "team": "Équipe"
     },
     "sandboxMode": "Mode Sandbox",
     "environmentMismatch": "Attention : cet espace et l'API ne sont pas dans le même environnement (sandbox / production). N'effectuez aucune opération et contactez le support.",
@@ -946,6 +964,120 @@
       "amount": "Montant",
       "fee": "Frais (1 %)",
       "net": "Reçu"
+    },
+    "forbidden": {
+      "title": "Accès non autorisé",
+      "desc": "Votre rôle ({{role}}) ne donne pas accès à cette page. Demandez à un administrateur de l'entreprise si vous en avez besoin.",
+      "back": "Retour à l'aperçu"
+    },
+    "switcher": {
+      "label": "Compte actuel : {{name}}. Changer de compte",
+      "heading": "Vos entreprises",
+      "error": "Impossible de changer d'entreprise. Réessayez.",
+      "businessLogin": "Connecté avec le login de l'entreprise",
+      "linkPersonal": "Lier mon compte personnel",
+      "linkPersonalDesc": "Pour passer d'une entreprise à l'autre avec un seul compte.",
+      "otherAccount": "Se connecter avec un autre compte"
+    },
+    "team": {
+      "title": "Équipe",
+      "subtitle": "Invitez les personnes qui travaillent avec vous. Chacune se connecte avec son propre compte Reemite et confirme les paiements avec son propre PIN.",
+      "invite": "Inviter",
+      "emailLabel": "Adresse e-mail",
+      "roleLabel": "Rôle",
+      "inviteHelp": "La personne reçoit un e-mail avec un lien valable 7 jours. Si elle a déjà un compte Reemite, elle s'y connecte ; sinon elle en crée un depuis ce lien.",
+      "sendInvite": "Envoyer l'invitation",
+      "sending": "Envoi…",
+      "cancel": "Annuler",
+      "invitationSent": "Invitation envoyée à {{email}}",
+      "invitationResent": "Invitation renvoyée à {{email}}",
+      "invitationCancelled": "Invitation annulée",
+      "loading": "Chargement de l'équipe…",
+      "loadError": "Impossible de charger l'équipe.",
+      "empty": "Personne d'autre n'a encore rejoint l'équipe.",
+      "emptyManage": "Vous êtes seul pour l'instant. Invitez un collègue pour lui donner son propre accès.",
+      "unnamed": "Sans nom",
+      "you": "(vous)",
+      "saving": "Enregistrement…",
+      "actionsFor": "Actions pour {{name}}",
+      "roleChanged": "Rôle de {{name}} modifié",
+      "suspend": "Suspendre l'accès",
+      "reactivate": "Rétablir l'accès",
+      "remove": "Retirer de l'équipe",
+      "confirmRemove": "Retirer {{name}} de l'équipe ? Son accès sera coupé immédiatement.",
+      "suspended": "Accès de {{name}} suspendu",
+      "reactivated": "Accès de {{name}} rétabli",
+      "removed": "{{name}} a été retiré de l'équipe",
+      "pendingTitle": "Invitations en attente",
+      "pendingDesc": "Ces personnes n'ont pas encore accepté.",
+      "expired": "Expirée",
+      "expiresIn_one": "expire demain",
+      "expiresIn_other": "expire dans {{count}} jours",
+      "resend": "Renvoyer",
+      "cancelInvitation": "Annuler l'invitation de {{email}}",
+      "legendTitle": "Ce que chaque rôle peut faire",
+      "pinNote": "Le PIN de l'entreprise n'a jamais besoin d'être partagé. Une suspension prend effet immédiatement.",
+      "needsMoney": "Votre rôle ne permet pas les opérations d'argent.",
+      "status": {
+        "active": "Actif",
+        "suspended": "Suspendu",
+        "terminated": "Retiré"
+      },
+      "roles": {
+        "owner": "Propriétaire",
+        "admin": "Administrateur",
+        "finance": "Finance",
+        "developer": "Développeur",
+        "viewer": "Lecture seule",
+        "branch_manager": "Chef d'agence",
+        "teller": "Caissier",
+        "credit_officer": "Agent de crédit"
+      },
+      "roleDesc": {
+        "owner": "Tous les droits, avec son compte Reemite personnel. Nomme les administrateurs et les autres propriétaires.",
+        "admin": "Gère l'équipe, les paramètres, l'argent et les outils développeurs. Ne nomme ni propriétaire ni administrateur.",
+        "finance": "Consulte tout, fait les dépôts, retraits, échanges et paiements par carte.",
+        "developer": "Gère les clés API et les webhooks. Ne voit ni les soldes ni les transactions.",
+        "viewer": "Consulte soldes, transactions et rapports, sans rien modifier.",
+        "branch_manager": "Consulte le dashboard et supervise les guichets depuis l'application agence.",
+        "teller": "Travaille au guichet depuis l'application agence.",
+        "credit_officer": "Suit ses dossiers de crédit depuis l'application agence."
+      },
+      "errors": {
+        "generic": "Une erreur est survenue. Réessayez.",
+        "invalidEmail": "Vérifiez l'adresse e-mail.",
+        "E_OWNER_ONLY": "Seul un propriétaire peut nommer ou modifier un propriétaire ou un administrateur.",
+        "E_SELF_CHANGE": "Vous ne pouvez pas modifier votre propre accès.",
+        "E_ALREADY_STAFF": "Cette personne fait déjà partie de l'équipe.",
+        "E_SESSION_OPEN": "Cette personne a une caisse ouverte : elle doit d'abord la fermer.",
+        "E_STAFF_TERMINATED": "Ce membre a été retiré : son accès ne peut plus être modifié.",
+        "E_ROLE_FORBIDDEN": "Votre rôle ne permet pas de gérer l'équipe.",
+        "E_INVITATION_CLOSED": "Cette invitation n'est plus en attente."
+      },
+      "mainAccount": "Compte principal",
+      "mainAccountDesc": "Le login de l'entreprise (e-mail et mot de passe de l'inscription). Seul à gérer le PIN et le mot de passe de l'entreprise.",
+      "linkTitle": "Un seul compte pour toutes vos entreprises.",
+      "linkDesc": "Invitez votre adresse personnelle comme propriétaire : vous passerez ensuite d'une entreprise à l'autre sans changer de connexion.",
+      "linkAction": "Lier mon compte"
+    },
+    "roleHome": {
+      "signedInAs": "Vous êtes connecté en tant que {{role}}. Seules les sections de votre rôle sont affichées.",
+      "apiKeys": {
+        "title": "Clés API",
+        "desc": "Créez et révoquez les clés de vos serveurs."
+      },
+      "webhooks": {
+        "title": "Webhooks",
+        "desc": "Recevez les événements de paiement sur votre serveur."
+      },
+      "notifications": {
+        "title": "Notifications",
+        "desc": "Les annonces et alertes de l'entreprise."
+      },
+      "settings": {
+        "title": "Paramètres",
+        "desc": "Le profil de l'entreprise et votre accès."
+      }
     }
   },
   "pricing": {
@@ -1004,5 +1136,53 @@
     "subtitle": "Un frais unique selon votre marché, réglé une seule fois lors de l'intégration à votre plateforme.",
     "imageAlt": "Passerelle de paiement Reemite connectée aux différents moyens de paiement",
     "maintenanceNote": "Les frais de maintenance couvrent le support et le fonctionnement continu de votre intégration API."
+  },
+  "invitation": {
+    "loading": "Chargement de l'invitation…",
+    "title": "Rejoignez {{business}}",
+    "byInviter": "{{inviter}} vous invite à rejoindre l'équipe sur Reemite, en tant que {{role}}.",
+    "byBusiness": "Vous êtes invité à rejoindre l'équipe sur Reemite, en tant que {{role}}.",
+    "signInHint": "Un compte Reemite existe déjà pour cette adresse. Saisissez son mot de passe pour accepter.",
+    "createHint": "Créez votre compte Reemite pour rejoindre l'équipe. Il vous servira aussi dans l'application.",
+    "fullName": "Nom complet",
+    "password": "Mot de passe",
+    "newPassword": "Choisissez un mot de passe",
+    "passwordHint": "8 caractères minimum.",
+    "private": "Votre mot de passe reste personnel : l'entreprise ne le voit jamais.",
+    "accept": "Accepter l'invitation",
+    "createAndJoin": "Créer mon compte et rejoindre",
+    "joining": "Un instant…",
+    "goToLogin": "Aller à la connexion",
+    "errors": {
+      "password": "Mot de passe incorrect.",
+      "locked": "Trop de tentatives. Réessayez dans quelques minutes.",
+      "accountExists": "Un compte existe déjà pour cette adresse : rechargez la page pour vous connecter.",
+      "alreadyMember": "Vous faites déjà partie de cette équipe.",
+      "weakPassword": "Vérifiez les champs : le mot de passe doit faire au moins 8 caractères.",
+      "closed": "Cette invitation n'est plus valable.",
+      "generic": "Une erreur est survenue. Réessayez."
+    },
+    "closed": {
+      "invalid": {
+        "title": "Lien d'invitation invalide",
+        "desc": "Ce lien est incomplet ou n'existe pas. Vérifiez que vous avez ouvert le lien complet reçu par e-mail."
+      },
+      "accepted": {
+        "title": "Invitation déjà acceptée",
+        "desc": "Cette invitation a déjà été utilisée. Connectez-vous en choisissant « Membre d'équipe »."
+      },
+      "revoked": {
+        "title": "Invitation annulée",
+        "desc": "L'entreprise a annulé cette invitation ou en a envoyé une plus récente. Vérifiez vos derniers e-mails."
+      },
+      "expired": {
+        "title": "Invitation expirée",
+        "desc": "Ce lien n'est plus valable. Demandez à l'entreprise de vous inviter à nouveau."
+      },
+      "inactive": {
+        "title": "Entreprise indisponible",
+        "desc": "Cette entreprise n'est plus active sur Reemite."
+      }
+    }
   }
 }
