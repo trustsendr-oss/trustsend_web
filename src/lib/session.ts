@@ -1,6 +1,7 @@
-import type { Business, LoginResult } from "../types/auth";
+import type { Business, LoginResult, SessionKind } from "../types/auth";
 
 const BUSINESS_KEY = "TrustSend_business";
+const KIND_KEY = "TrustSend_session_kind";
 const EXPIRES_AT_KEY = "TrustSend_token_expires_at";
 const CSRF_KEY = "TrustSend_csrf_token";
 
@@ -27,8 +28,13 @@ export function getStoredCsrfToken(): string | null {
 // côté serveur) — ce code ne le voit jamais et ne le stocke jamais. Seul le profil business
 // (données d'affichage, pas un secret) et une estimation de l'expiration (pour l'UX) sont
 // mis en cache ici.
-export function storeSession(result: LoginResult): void {
+export function storeSession(result: LoginResult, kind: SessionKind = "owner"): void {
   storeCsrfToken(result.csrf_token);
+  try {
+    localStorage.setItem(KIND_KEY, kind);
+  } catch {
+    /* stockage indisponible */
+  }
   localStorage.setItem(BUSINESS_KEY, JSON.stringify(result.business));
   localStorage.setItem(
     EXPIRES_AT_KEY,
@@ -68,4 +74,21 @@ export function isSessionExpired(): boolean {
   const expiresAt = localStorage.getItem(EXPIRES_AT_KEY);
   if (!expiresAt) return true;
   return Date.now() >= Number(expiresAt);
+}
+
+/**
+ * Propriétaire ou membre : décide quels endpoints de refresh/logout appeler. Ce n'est qu'un
+ * aiguillage, pas une autorisation — le serveur vérifie le rôle à chaque requête.
+ */
+export function getSessionKind(): SessionKind {
+  try {
+    return localStorage.getItem(KIND_KEY) === "member" ? "member" : "owner";
+  } catch {
+    return "owner";
+  }
+}
+
+/** Préfixe des routes d'authentification pour la session en cours. */
+export function authPath(): string {
+  return getSessionKind() === "member" ? "/business/auth/member" : "/business/auth";
 }

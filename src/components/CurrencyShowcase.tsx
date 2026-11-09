@@ -90,7 +90,7 @@ export function CurrencyShowcase() {
               className="absolute bottom-0 right-0 h-[86%] w-[59%] rounded-tl-[6rem] object-cover object-[55%_center] sm:h-[90%] sm:w-[60%]"
             />
 
-            <div className="absolute left-3 top-4 w-[78%] rounded-2xl bg-white p-4 sm:-left-20 sm:-top-16 sm:w-[70%] sm:p-5 z-50">
+            <div className="absolute  left-3 top-4 w-[78%] rounded-xl bg-white p-4 sm:-left-20 sm:-top-16 sm:w-[70%] sm:p-5 z-50">
               <h3 className="mb-3 font-display text-sm font-bold text-ink sm:mb-4 sm:text-base">
                 {t("currencyShowcase.currenciesTitle")}
               </h3>
