@@ -20,6 +20,7 @@
 
   --font-display: "Inter Tight", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-nav: "Poppins", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Fragment Mono", ui-monospace, monospace;
   --font-signature: "Caveat", cursive;
   --font-serif: "Fraunces", "Georgia", serif;
@@ -71,6 +72,11 @@ body {
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.site-navbar,
+.site-navbar .font-display {
+  font-family: var(--font-nav);
 }
 
 img,

@@ -25,7 +25,6 @@ const BANNER_KEY = "nav-banner-dismissed";
 export function Nav() {
   const { t, i18n } = useTranslation();
   const { navLinks, navMegaMenus } = useContent();
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
@@ -72,13 +71,6 @@ export function Nav() {
     i18n.changeLanguage(lng);
   };
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   // Fermer le menu mobile avec Échap, et bloquer le scroll de fond
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -107,14 +99,9 @@ export function Nav() {
     closeTimer.current = setTimeout(() => setActiveMenu(null), 150);
   };
 
-  const solid = scrolled || open || activeMenu !== null;
-
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${solid
-        ? "border-b border-surface-2/80 bg-white/85 backdrop-blur-md supports-[backdrop-filter]:bg-white/70"
-        : "border-b border-transparent bg-transparent"
-        }`}
+      className="site-navbar fixed inset-x-0 top-0 z-50 border-b border-surface-2/80 bg-white/95 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-white/90"
       onMouseLeave={scheduleClose}
     >
       <AnimatePresence>
@@ -124,13 +111,13 @@ export function Nav() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="overflow-hidden bg-accent  text-white hidden md:block"
+            className="hidden overflow-hidden bg-brand text-white md:block"
           >
-            <div className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-6 py-2 text-sm font-medium">
+            <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-3 py-2 text-xs font-medium sm:gap-3 sm:px-6 sm:py-2.5 sm:text-base">
               <span className="text-center">{t("nav.banner.message")}</span>
               <a
                 href="#"
-                className="shrink-0 whitespace-nowrap font-bold underline underline-offset-2 hover:no-underline text-brand"
+                className="shrink-0 whitespace-nowrap font-bold text-white underline underline-offset-2 hover:no-underline"
               >
                 {t("nav.banner.cta")}
               </a>
@@ -210,7 +197,7 @@ export function Nav() {
                   className="
                     group relative flex shrink-0 items-center gap-1
                     whitespace-nowrap py-2
-                    text-sm font-medium text-muted-2
+                    text-xl font-semibold text-muted-2 2xl:text-2xl
                     transition-colors
                     hover:text-ink
                     focus-visible:text-ink
@@ -243,21 +230,21 @@ export function Nav() {
         {/* ---------- Actions : toujours à droite ---------- */}
         <div className="relative z-20 flex shrink-0 items-center justify-end gap-1.5 sm:gap-2">
           {/* Language */}
-          <div className="relative hidden lg:block" ref={langRef}>
+          <div className="relative" ref={langRef}>
             <button
               onClick={() => setLangOpen((o) => !o)}
               aria-expanded={langOpen}
               aria-haspopup="menu"
               className="
                 flex items-center gap-1 rounded-full
-                px-2 py-2
-                text-sm font-medium text-muted-2
+                px-2 py-2 max-sm:px-1.5
+                text-base font-medium text-muted-2
                 transition-colors
                 hover:bg-surface hover:text-ink
               "
             >
               <LanguageFlag language={i18n.language.startsWith("en") ? "en" : i18n.language.startsWith("ln") ? "ln" : i18n.language.startsWith("sw") ? "sw" : "fr"} />
-              {i18n.language.startsWith("en") ? "EN" : i18n.language.startsWith("ln") ? "LN" : i18n.language.startsWith("sw") ? "SW" : "FR"}
+              <span className="hidden sm:inline">{i18n.language.startsWith("en") ? "EN" : i18n.language.startsWith("ln") ? "LN" : i18n.language.startsWith("sw") ? "SW" : "FR"}</span>
               <ChevronDown size={14} className="opacity-60" />
             </button>
 
@@ -313,18 +300,16 @@ export function Nav() {
           {/* Separator */}
           <span
             aria-hidden
-            className="hidden h-4 w-px bg-surface-2 lg:block"
+            className="hidden h-4 w-px bg-surface-2 sm:block"
           />
 
           {/* Login */}
           <AuthLink
             to="/login"
-            className="
-              hidden shrink-0 whitespace-nowrap sm:inline-flex
-              rounded-full px-2.5 py-2
-              text-xs font-semibold text-ink
-              transition-colors hover:text-brand
-              sm:px-3 sm:text-sm
+              className="
+              hidden shrink-0 whitespace-nowrap rounded-lg border border-brand/25 bg-white px-4 py-2.5
+              text-xs font-semibold text-brand transition-colors hover:border-brand hover:bg-brand-light
+              sm:inline-flex sm:px-5 sm:text-base
             "
           >
             {t("nav.login")}
@@ -336,10 +321,10 @@ export function Nav() {
             className="
               group flex shrink-0 items-center gap-1
               whitespace-nowrap rounded-lg
-              bg-accent px-2.5 py-2
+              bg-brand px-2.5 py-2
               text-xs font-semibold text-white
               transition-colors hover:bg-brand-dark
-              sm:gap-1.5 sm:px-4 sm:py-2.5 sm:text-sm
+              sm:gap-1.5 sm:px-4 sm:py-2.5 sm:text-base
             "
           >
             <span>{t("nav.signup")}</span>
@@ -505,7 +490,30 @@ export function Nav() {
                 );
               })}
 
-              <div className="mt-5 flex items-center gap-3">
+              <div className="mt-5 rounded-2xl bg-surface p-3">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">{t("nav.language")}</p>
+                <div className="flex flex-wrap gap-2">
+                  {([
+                    ["fr", "Français"],
+                    ["en", "English"],
+                    ["ln", "Lingála"],
+                    ["sw", "Kiswahili"],
+                  ] as const).map(([language, label]) => (
+                    <button
+                      key={language}
+                      type="button"
+                      onClick={() => switchLang(language)}
+                      aria-pressed={i18n.language.startsWith(language)}
+                      className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold transition-colors ${i18n.language.startsWith(language) ? "border-brand bg-brand text-white" : "border-surface-2 bg-white text-ink hover:border-brand/40"}`}
+                    >
+                      <LanguageFlag language={language} />
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-4 flex items-center gap-3">
                 <AuthLink
                   to="/login"
                   onClick={() => setOpen(false)}
@@ -516,7 +524,7 @@ export function Nav() {
                 <AuthLink
                   to="/signup"
                   onClick={() => setOpen(false)}
-                  className="flex-1 rounded-full bg-brand py-3 text-center text-sm font-semibold text-white"
+                  className="flex-1 rounded-lg bg-brand py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
                 >
                   {t("nav.signup")}
                 </AuthLink>
