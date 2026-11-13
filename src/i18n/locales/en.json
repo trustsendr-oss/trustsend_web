@@ -153,7 +153,9 @@
     "subtitle": "Trusted by those who move money every day",
     "prev": "Previous testimonial",
     "next": "Next testimonial",
-    "goTo": "Testimonial from {{name}}"
+    "goTo": "Testimonial from {{name}}",
+    "pause": "Pause testimonials",
+    "play": "Resume testimonials"
   },
   "faq": {
     "title": "Frequently asked questions"

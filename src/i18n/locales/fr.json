@@ -153,7 +153,9 @@
     "subtitle": "Adopté par ceux qui font bouger l'argent chaque jour",
     "prev": "Témoignage précédent",
     "next": "Témoignage suivant",
-    "goTo": "Témoignage de {{name}}"
+    "goTo": "Témoignage de {{name}}",
+    "pause": "Mettre les témoignages en pause",
+    "play": "Reprendre les témoignages"
   },
   "faq": {
     "title": "Questions fréquentes"

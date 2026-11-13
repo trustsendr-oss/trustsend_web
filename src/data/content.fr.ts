@@ -594,48 +594,61 @@ export const testimonials: {
   name: string;
   title: string;
   company: string;
+  avatar: string;
 }[] = [
   {
     quote:
       "Avec les cartes virtuelles Reemite, mes abonnements en ligne ne bloquent plus jamais. Je les gère toutes depuis mon téléphone.",
-    name: "A. Kariuki",
+    name: "Amina Kariuki",
     title: "Fondatrice",
     company: "Boutique A",
+    avatar:
+      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
   },
   {
     quote:
       "Notre Likelemba tournait sur WhatsApp et un cahier. Avec Reemite, chaque cotisation est enregistrée et personne ne peut plus contester.",
-    name: "D. Mensah",
+    name: "Daniel Mensah",
     title: "Trésorière du groupe",
     company: "Groupe B",
+    avatar:
+      "https://images.unsplash.com/photo-1614023342667-6f060e9d1e04?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
   },
   {
     quote:
       "En tant qu'agent Reemite, je fais des dépôts et des retraits toute la journée. La commission tombe automatiquement, sans calcul à la main.",
-    name: "N. Achieng",
+    name: "Nia Achieng",
     title: "Agent Reemite",
     company: "Point C",
+    avatar:
+      "https://images.unsplash.com/photo-1563132337-f159f484226c?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
   },
   {
     quote:
       "Je collecte les frais de scolarité par lien de paiement. Plus de files d'attente le jour de la rentrée.",
-    name: "D. Rawat",
+    name: "David Okafor",
     title: "Directeur",
     company: "École D",
+    avatar:
+      "https://images.unsplash.com/photo-1605980776566-0486c3ac7617?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
   },
   {
     quote:
       "Envoyer de l'argent à ma famille à l'étranger prenait des jours avant. Avec le transfert international Reemite, ça arrive en quelques secondes.",
-    name: "N. Gitau",
+    name: "Grace Gitau",
     title: "Cliente",
     company: "Diaspora E",
+    avatar:
+      "https://images.unsplash.com/photo-1613876215075-276fd62c89a4?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
   },
   {
     quote:
       "On a intégré l'API Reemite pour le paiement de nos commandes en boutique et en ligne en une semaine, cartes et Mobile Money compris.",
-    name: "A. Njoroge",
+    name: "Abena Njoroge",
     title: "Co-fondateur",
     company: "Commerce F",
+    avatar:
+      "https://images.unsplash.com/photo-1562173650-f61426fbe683?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
   },
 ];
 

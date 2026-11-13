@@ -560,48 +560,61 @@ export const testimonials: {
   name: string;
   title: string;
   company: string;
+  avatar: string;
 }[] = [
   {
     quote:
       "With Reemite virtual cards, my online subscriptions never get blocked anymore. I manage them all from my phone.",
-    name: "A. Kariuki",
+    name: "Amina Kariuki",
     title: "Founder",
     company: "Boutique A",
+    avatar:
+      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
   },
   {
     quote:
       "Our Likelemba used to run on WhatsApp and a notebook. With Reemite, every contribution is logged and no one can dispute it anymore.",
-    name: "D. Mensah",
+    name: "Daniel Mensah",
     title: "Group treasurer",
     company: "Group B",
+    avatar:
+      "https://images.unsplash.com/photo-1614023342667-6f060e9d1e04?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
   },
   {
     quote:
       "As a Reemite agent, I handle deposits and withdrawals all day. The commission lands automatically, no manual calculations.",
-    name: "N. Achieng",
+    name: "Nia Achieng",
     title: "Reemite Agent",
     company: "Point C",
+    avatar:
+      "https://images.unsplash.com/photo-1563132337-f159f484226c?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
   },
   {
     quote:
       "I collect school fees through a payment link. No more queues on registration day.",
-    name: "D. Rawat",
+    name: "David Okafor",
     title: "Principal",
     company: "School D",
+    avatar:
+      "https://images.unsplash.com/photo-1605980776566-0486c3ac7617?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
   },
   {
     quote:
       "Sending money to my family abroad used to take days. With Reemite international transfers, it arrives in seconds.",
-    name: "N. Gitau",
+    name: "Grace Gitau",
     title: "Customer",
     company: "Diaspora E",
+    avatar:
+      "https://images.unsplash.com/photo-1613876215075-276fd62c89a4?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
   },
   {
     quote:
       "We integrated the Reemite API for paying our in-store and online orders in a week, cards and Mobile Money included.",
-    name: "A. Njoroge",
+    name: "Abena Njoroge",
     title: "Co-founder",
     company: "Commerce F",
+    avatar:
+      "https://images.unsplash.com/photo-1562173650-f61426fbe683?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
   },
 ];
 
