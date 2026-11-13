@@ -53,6 +53,71 @@
   }
 }
 
+@keyframes testimonials-scroll-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-33.333333%);
+  }
+}
+
+@keyframes testimonials-scroll-down {
+  from {
+    transform: translateY(-33.333333%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.testimonial-marquee {
+  height: min(72vh, 760px);
+  min-height: 480px;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+}
+
+.testimonial-marquee-track {
+  display: flex;
+  flex-direction: column;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.testimonial-marquee-track-up {
+  animation-name: testimonials-scroll-up;
+}
+
+.testimonial-marquee-track-down {
+  animation-name: testimonials-scroll-down;
+}
+
+.testimonial-marquee-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.testimonial-marquee:hover .testimonial-marquee-track,
+.testimonial-marquee:focus-within .testimonial-marquee-track {
+  animation-play-state: paused;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -127,6 +192,27 @@ textarea {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .testimonial-marquee {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .testimonial-marquee-track {
+    animation: none;
+    transform: none;
+  }
+
+  .testimonial-marquee-group[aria-hidden="true"] {
+    display: none;
+  }
+
+  .testimonial-marquee-group {
+    padding-bottom: 0;
   }
 
   .animate-marquee {

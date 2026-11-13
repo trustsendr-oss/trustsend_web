@@ -6,10 +6,10 @@ export type MockupVariant =
   | "checkout";
 
 export const navLinks = [
-  { label: "Paiements", href: "#paiements" },
+  { label: "Paiements", href: "/paiement-marchand" },
   { label: "Transferts", href: "/transferts-internationaux" },
   // { label: "Épargne & Jeux", href: "#epargne" },
-  { label: "Partenaires", href: "#partenaires" },
+  { label: "Partenaires", href: "/agents" },
   { label: "Tarifs", href: "/pricing" },
 
 ];
@@ -586,69 +586,75 @@ export const noCodeExamples: { icon: string; title: string; subtitle: string }[]
   },
 ];
 
-// Témoignages fictifs illustrant l'usage des produits Reemite (cartes,
-// Likelemba, agents, transferts). Noms et sociétés sont des exemples
-// génériques, pas de vrais clients.
+// Exemples fictifs uniquement : ces noms et citations ne sont pas de vrais avis clients.
 export const testimonials: {
   quote: string;
   name: string;
   title: string;
   company: string;
-  avatar: string;
 }[] = [
   {
     quote:
       "Avec les cartes virtuelles Reemite, mes abonnements en ligne ne bloquent plus jamais. Je les gère toutes depuis mon téléphone.",
-    name: "Amina Kariuki",
-    title: "Fondatrice",
-    company: "Boutique A",
-    avatar:
-      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
+    name: "Mombo Tshimanga",
+    title: "Responsable de boutique",
+    company: "Boutique indépendante",
   },
   {
     quote:
       "Notre Likelemba tournait sur WhatsApp et un cahier. Avec Reemite, chaque cotisation est enregistrée et personne ne peut plus contester.",
-    name: "Daniel Mensah",
-    title: "Trésorière du groupe",
-    company: "Groupe B",
-    avatar:
-      "https://images.unsplash.com/photo-1614023342667-6f060e9d1e04?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
+    name: "Bundule Myapi",
+    title: "Responsable du groupe",
+    company: "Groupe Likelemba",
   },
   {
     quote:
       "En tant qu'agent Reemite, je fais des dépôts et des retraits toute la journée. La commission tombe automatiquement, sans calcul à la main.",
-    name: "Nia Achieng",
+    name: "Mwangaza Kyalumbu",
     title: "Agent Reemite",
-    company: "Point C",
-    avatar:
-      "https://images.unsplash.com/photo-1563132337-f159f484226c?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
+    company: "Réseau d'agents",
   },
   {
     quote:
       "Je collecte les frais de scolarité par lien de paiement. Plus de files d'attente le jour de la rentrée.",
-    name: "David Okafor",
-    title: "Directeur",
-    company: "École D",
-    avatar:
-      "https://images.unsplash.com/photo-1605980776566-0486c3ac7617?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
+    name: "Mbataku Ponzo Michel",
+    title: "Responsable d'école",
+    company: "École",
   },
   {
     quote:
       "Envoyer de l'argent à ma famille à l'étranger prenait des jours avant. Avec le transfert international Reemite, ça arrive en quelques secondes.",
-    name: "Grace Gitau",
-    title: "Cliente",
-    company: "Diaspora E",
-    avatar:
-      "https://images.unsplash.com/photo-1613876215075-276fd62c89a4?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
+    name: "Kangulu Matatias",
+    title: "Membre de la diaspora",
+    company: "Transferts familiaux",
   },
   {
     quote:
       "On a intégré l'API Reemite pour le paiement de nos commandes en boutique et en ligne en une semaine, cartes et Mobile Money compris.",
-    name: "Abena Njoroge",
-    title: "Co-fondateur",
-    company: "Commerce F",
-    avatar:
-      "https://images.unsplash.com/photo-1562173650-f61426fbe683?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
+    name: "Serveillez Kumbuku",
+    title: "Partenaire commercial",
+    company: "Commerce",
+  },
+  {
+    quote:
+      "Dans notre groupe rural, les membres peuvent consulter au même endroit les cotisations du Likelemba. Cela nous aide à suivre ensemble le tour de chacun.",
+    name: "Masala Mwenyebato",
+    title: "Membre d'un groupe rural",
+    company: "Likelemba rural",
+  },
+  {
+    quote:
+      "Nos membres vivent dans différents villages. Rassembler l'historique des cotisations du Likelemba nous aide à suivre le cycle du groupe.",
+    name: "Exemple anonyme 1",
+    title: "Membre du groupe",
+    company: "Likelemba rural",
+  },
+  {
+    quote:
+      "Comme trésorier, je peux vérifier les cotisations et l'ordre des tours sans devoir tout reconstituer à partir du cahier.",
+    name: "Exemple anonyme 2",
+    title: "Trésorier du groupe",
+    company: "Likelemba rural",
   },
 ];
 

@@ -11,6 +11,7 @@ import "../styles/geist.css";
 import { Nav } from "../components/Nav";
 import { WhatsAppButton } from "../components/WhatsAppButton";
 import { CookieConsent } from "../components/CookieConsent";
+import { marketingUrl } from "../lib/domains";
 
 export function Login() {
   const { t } = useTranslation();
@@ -203,7 +204,7 @@ export function Login() {
                   }
                 />
                 <a
-                  href="#"
+                  href={marketingUrl("/contact")}
                   className="-ms-2 mt-2 inline-flex h-9 items-center rounded-full px-2 text-sm font-medium text-accent transition-colors hover:bg-brand-light"
                 >
                   {t("login.forgotPassword")}
@@ -267,11 +268,11 @@ export function Login() {
       {/* ---------- Pied de page hors carte ---------- */}
       <footer className="mt-4 w-full max-w-[28rem] px-2 text-xs leading-relaxed text-muted min-[52rem]:max-w-[65rem] min-[52rem]:text-end">
         {t("login.termsPrefix")}{" "}
-        <a href="#" className="font-medium text-ink underline-offset-2 hover:underline">
+        <a href={marketingUrl("/terms")} className="font-medium text-ink underline-offset-2 hover:underline">
           {t("login.terms")}
         </a>{" "}
         {t("login.and")}{" "}
-        <a href="#" className="font-medium text-ink underline-offset-2 hover:underline">
+        <a href={marketingUrl("/privacy")} className="font-medium text-ink underline-offset-2 hover:underline">
           {t("login.privacy")}
         </a>
         .

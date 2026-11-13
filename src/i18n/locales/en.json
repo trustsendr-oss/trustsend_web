@@ -150,7 +150,9 @@
   },
   "testimonials": {
     "title": "Reemite grows with you!",
-    "subtitle": "Trusted by those who move money every day",
+    "subtitle": "Illustrative examples of how people can use Reemite",
+    "examplesNotice": "Fictional examples: these testimonials and pseudonyms are not real customer reviews.",
+    "community": "Members of the Reemite community",
     "prev": "Previous testimonial",
     "next": "Next testimonial",
     "goTo": "Testimonial from {{name}}",

@@ -4,9 +4,9 @@ import type { NavMegaMenu } from "./content.fr";
 export * from "./content.en";
 
 export const navLinks = [
-  { label: "Malipo", href: "#payments" },
+  { label: "Malipo", href: "/paiement-marchand" },
   { label: "Uhamisho", href: "/transferts-internationaux" },
-  { label: "Washirika", href: "#partners" },
+  { label: "Washirika", href: "/agents" },
   { label: "Bei", href: "/pricing" },
 ];
 

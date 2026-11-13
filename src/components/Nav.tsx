@@ -14,10 +14,12 @@ import {
 import { useContent } from "../hooks/useContent";
 import { AuthLink } from "./AuthLink";
 import { LanguageFlag } from "./LanguageFlag";
-import { rememberLanguage } from "../i18n";
-import { languageFromPath, localizedPath } from "../lib/languageRoutes";
+import { rememberLanguage, supportedLanguages } from "../i18n";
+import { languageFromPath, localizedPath, AUTO_TRANSLATIONS_ENABLED } from "../lib/languageRoutes";
+import { loadAutomaticTranslationBundle } from "../lib/automaticTranslations";
 import { PRERENDER_ROUTES } from "../seo";
 import type { NavMegaMenu } from "../data/content.fr";
+import { marketingUrl, showMarketingRoutes } from "../lib/domains";
 import cardmaprBg from "../assets/cardmapr-nl-0hs_mYB9KRc-unsplash.jpg";
 
 const BANNER_KEY = "nav-banner-dismissed";
@@ -58,17 +60,19 @@ export function Nav() {
   const location = useLocation();
   const urlLanguage = languageFromPath(useHref("/"));
 
-  // Sur les pages publiques, français et anglais ont chacun leur URL (/pricing ↔ /en/pricing) ;
-  // le lingala et le swahili se traduisent sur l'URL française
-  const switchLang = (lng: "fr" | "en" | "ln" | "sw") => {
+  // Lingala et swahili utilisent une URL dédiée seulement quand leurs pages statiques sont générées.
+  const switchLang = async (lng: (typeof supportedLanguages)[number]) => {
     setLangOpen(false);
-    const target = lng === "en" ? "en" : "fr";
-    if (target !== urlLanguage && PRERENDER_ROUTES.includes(location.pathname)) {
+    const canUseLocalizedUrl = lng === "fr" || lng === "en" || AUTO_TRANSLATIONS_ENABLED;
+    if (canUseLocalizedUrl && lng !== urlLanguage && PRERENDER_ROUTES.includes(location.pathname)) {
       rememberLanguage(lng);
-      window.location.assign(localizedPath(location.pathname, target) + location.search + location.hash);
+      window.location.assign(localizedPath(location.pathname, lng) + location.search + location.hash);
       return;
     }
-    i18n.changeLanguage(lng);
+    if (AUTO_TRANSLATIONS_ENABLED && (lng === "ln" || lng === "sw")) {
+      await loadAutomaticTranslationBundle(lng);
+    }
+    await i18n.changeLanguage(lng);
   };
 
   // Fermer le menu mobile avec Échap, et bloquer le scroll de fond
@@ -116,7 +120,7 @@ export function Nav() {
             <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-3 py-2 text-xs font-medium sm:gap-3 sm:px-6 sm:py-2.5 sm:text-base">
               <span className="text-center">{t("nav.banner.message")}</span>
               <a
-                href="#"
+                href={marketingUrl("/pricing")}
                 className="shrink-0 whitespace-nowrap font-bold text-white underline underline-offset-2 hover:no-underline"
               >
                 {t("nav.banner.cta")}
@@ -369,7 +373,11 @@ export function Nav() {
               onMouseLeave={scheduleClose}
               className="pointer-events-auto border-b border-surface-2 bg-white shadow-pop max-w-5xl mx-auto rounded-b-xl"
             >
-              <MegaMenuPanel menu={navMegaMenus[activeMenu]} onNavigate={() => setActiveMenu(null)} />
+              <MegaMenuPanel
+                menu={navMegaMenus[activeMenu]}
+                fallbackHref={defaultMenuHref(activeMenu)}
+                onNavigate={() => setActiveMenu(null)}
+              />
             </motion.div>
           )}
         </AnimatePresence>
@@ -452,7 +460,7 @@ export function Nav() {
                                     {col.items.map((item) => (
                                       <NavItemLink
                                         key={item.label}
-                                        href={item.href}
+                                        href={item.href ?? defaultMenuHref(link.label)}
                                         onClick={() => setOpen(false)}
                                         className="flex items-start gap-3 rounded-lg py-2.5"
                                       >
@@ -547,8 +555,16 @@ function NavItemLink({
   href?: string;
   children: ReactNode;
 } & Omit<ComponentPropsWithoutRef<"a">, "href">) {
-  const target = href ?? "#";
+  const target = href ?? "/contact";
   if (target.startsWith("/")) {
+    if (!showMarketingRoutes) {
+      return (
+        <a href={marketingUrl(target)} {...props}>
+          {children}
+        </a>
+      );
+    }
+
     return (
       <Link to={target} {...props}>
         {children}
@@ -569,11 +585,19 @@ function NavItemLink({
   );
 }
 
+function defaultMenuHref(label: string) {
+  return /transfert|transfer|uhamisho|kotinda/i.test(label)
+    ? "/transferts-internationaux"
+    : "/paiement-marchand";
+}
+
 function MegaMenuPanel({
   menu,
+  fallbackHref,
   onNavigate,
 }: {
   menu: NavMegaMenu;
+  fallbackHref: string;
   onNavigate: () => void;
 }) {
   const { t } = useTranslation();
@@ -590,7 +614,7 @@ function MegaMenuPanel({
             {col.items.map((item) => (
               <NavItemLink
                 key={item.label}
-                href={item.href}
+                href={item.href ?? fallbackHref}
                 onClick={onNavigate}
                 className="group flex items-start gap-3 rounded-xl px-2.5 py-2.5 -ml-2.5 transition-colors hover:bg-brand"
               >
@@ -727,7 +751,7 @@ function MegaMenuPanel({
 
           {/* CTA pushed to bottom */}
           <a
-            href="#"
+            href={fallbackHref}
             onClick={onNavigate}
             className="group/cta mt-auto flex items-center gap-1.5 pt-5 text-[13px] font-semibold text-white"
           >

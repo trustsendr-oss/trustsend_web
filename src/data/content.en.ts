@@ -1,10 +1,10 @@
 import type { MockupVariant, NavMegaMenu } from "./content.fr";
 
 export const navLinks = [
-  { label: "Payments", href: "#payments" },
+  { label: "Payments", href: "/paiement-marchand" },
   { label: "Transfers", href: "/transferts-internationaux" },
   // { label: "Savings & Games", href: "#savings" },
-  { label: "Partners", href: "#partners" },
+  { label: "Partners", href: "/agents" },
   { label: "Pricing", href: "/pricing" },
 
 ];
@@ -552,69 +552,75 @@ export const noCodeExamples: { icon: string; title: string; subtitle: string }[]
   },
 ];
 
-// Fictional testimonials illustrating how Reemite products are used (cards,
-// Likelemba, agents, transfers). Names and companies are generic examples,
-// not real customers.
+// Fictional examples only; these names and quotes are not real customer reviews.
 export const testimonials: {
   quote: string;
   name: string;
   title: string;
   company: string;
-  avatar: string;
 }[] = [
   {
     quote:
       "With Reemite virtual cards, my online subscriptions never get blocked anymore. I manage them all from my phone.",
-    name: "Amina Kariuki",
-    title: "Founder",
-    company: "Boutique A",
-    avatar:
-      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
+    name: "Mombo Tshimanga",
+    title: "Small business owner",
+    company: "Independent shop",
   },
   {
     quote:
       "Our Likelemba used to run on WhatsApp and a notebook. With Reemite, every contribution is logged and no one can dispute it anymore.",
-    name: "Daniel Mensah",
+    name: "Bundule Myapi",
     title: "Group treasurer",
-    company: "Group B",
-    avatar:
-      "https://images.unsplash.com/photo-1614023342667-6f060e9d1e04?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
+    company: "Likelemba group",
   },
   {
     quote:
       "As a Reemite agent, I handle deposits and withdrawals all day. The commission lands automatically, no manual calculations.",
-    name: "Nia Achieng",
+    name: "Mwangaza Kyalumbu",
     title: "Reemite Agent",
-    company: "Point C",
-    avatar:
-      "https://images.unsplash.com/photo-1563132337-f159f484226c?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
+    company: "Agent network",
   },
   {
     quote:
       "I collect school fees through a payment link. No more queues on registration day.",
-    name: "David Okafor",
-    title: "Principal",
-    company: "School D",
-    avatar:
-      "https://images.unsplash.com/photo-1605980776566-0486c3ac7617?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
+    name: "Mbataku Ponzo Michel",
+    title: "School administrator",
+    company: "School",
   },
   {
     quote:
       "Sending money to my family abroad used to take days. With Reemite international transfers, it arrives in seconds.",
-    name: "Grace Gitau",
+    name: "Kangulu Matatias",
     title: "Customer",
-    company: "Diaspora E",
-    avatar:
-      "https://images.unsplash.com/photo-1613876215075-276fd62c89a4?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
+    company: "Family transfers",
   },
   {
     quote:
       "We integrated the Reemite API for paying our in-store and online orders in a week, cards and Mobile Money included.",
-    name: "Abena Njoroge",
+    name: "Serveillez Kumbuku",
     title: "Co-founder",
-    company: "Commerce F",
-    avatar:
-      "https://images.unsplash.com/photo-1562173650-f61426fbe683?auto=format&fit=crop&crop=faces&w=160&h=160&q=85",
+    company: "Commerce",
+  },
+  {
+    quote:
+      "In our rural group, members can check the Likelemba contributions in one place. It helps us keep track of each turn together.",
+    name: "Masala Mwenyebato",
+    title: "Rural group member",
+    company: "Rural Likelemba",
+  },
+  {
+    quote:
+      "Our members live in different villages. Keeping the Likelemba contribution history together makes it easier to follow the group cycle.",
+    name: "Anonymous example 1",
+    title: "Group member",
+    company: "Rural Likelemba",
+  },
+  {
+    quote:
+      "As group treasurer, I can review the contributions and the order of turns without having to reconstruct everything from the notebook.",
+    name: "Anonymous example 2",
+    title: "Group treasurer",
+    company: "Rural Likelemba",
   },
 ];
 

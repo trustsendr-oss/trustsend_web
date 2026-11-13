@@ -150,7 +150,9 @@
   },
   "testimonials": {
     "title": "Reemite grandit avec vous !",
-    "subtitle": "Adopté par ceux qui font bouger l'argent chaque jour",
+    "subtitle": "Découvrez des exemples d'utilisation de Reemite",
+    "examplesNotice": "Exemples fictifs : ces témoignages et pseudonymes ne sont pas des avis de clients réels.",
+    "community": "Membres de la communauté Reemite",
     "prev": "Témoignage précédent",
     "next": "Témoignage suivant",
     "goTo": "Témoignage de {{name}}",

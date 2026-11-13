@@ -28,6 +28,8 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { LanguageFlag } from "../LanguageFlag";
+import { loadAutomaticTranslationBundle } from "../../lib/automaticTranslations";
+import { AUTO_TRANSLATIONS_ENABLED } from "../../lib/languageRoutes";
 import { useLogout } from "../../hooks/useLogout";
 import { useProfile } from "../../hooks/useProfile";
 import { getStoredBusiness } from "../../lib/session";
@@ -39,7 +41,7 @@ import { BUSINESS_ORIGIN, isSandbox } from "../../lib/domains";
 import "../../styles/geist.css";
 
 /** `perm` : permission sans laquelle l'entrée est masquée (voir business_permissions.ts côté API). */
-type NavItem = { key: string; icon: typeof Home; to?: string; perm?: DashboardPermission };
+type NavItem = { key: string; icon: typeof Home; to: string; perm?: DashboardPermission };
 
 const navSections: { headingKey?: string; items: NavItem[] }[] = [
   {
@@ -146,8 +148,11 @@ export function DashboardLayout() {
     }
   };
 
-  const switchLang = (lng: "fr" | "en" | "ln" | "sw") => {
-    i18n.changeLanguage(lng);
+  const switchLang = async (lng: "fr" | "en" | "ln" | "sw") => {
+    if (AUTO_TRANSLATIONS_ENABLED && (lng === "ln" || lng === "sw")) {
+      await loadAutomaticTranslationBundle(lng);
+    }
+    await i18n.changeLanguage(lng);
     setLangOpen(false);
   };
 
@@ -178,7 +183,7 @@ export function DashboardLayout() {
                     {rail ? <span className="sr-only">{label}</span> : <span className="truncate">{label}</span>}
                   </>
                 );
-                return item.to ? (
+                return (
                   <Link
                     key={item.key}
                     to={item.to}
@@ -188,10 +193,6 @@ export function DashboardLayout() {
                   >
                     {content}
                   </Link>
-                ) : (
-                  <a key={item.key} href="#" title={rail ? label : undefined} className={className}>
-                    {content}
-                  </a>
                 );
               })}
             </div>

@@ -1,7 +1,15 @@
 import { CANONICAL_ORIGIN } from "./lib/domains";
 import { faqs as faqsFr } from "./data/content.fr";
 import { faqs as faqsEn } from "./data/content.en";
-import { languageFromPath, localizedPath, type UrlLanguage } from "./lib/languageRoutes";
+import {
+  INDEXED_LANGUAGES,
+  languageFromPath,
+  localizedPath,
+  localeTag,
+  openGraphLocale,
+  type UrlLanguage,
+} from "./lib/languageRoutes";
+import { getAutomaticTranslationBundle } from "./lib/automaticTranslations";
 
 /**
  * Configuration SEO par route : utilisée côté client par <Seo /> (navigation SPA) et au build
@@ -197,7 +205,7 @@ export const seoConfigEn: Record<string, SeoEntry> = {
   },
 };
 
-/** Pages publiques du site vitrine, générées en HTML au build (en français à la racine, en anglais sous /en). */
+/** Pages publiques du site vitrine, générées en HTML au build pour chaque langue indexée. */
 export const PRERENDER_ROUTES = [
   "/",
   "/pricing",
@@ -212,10 +220,7 @@ export const PRERENDER_ROUTES = [
   "/paiement-marchand",
 ];
 
-/** Langues indexées : chacune a sa propre URL, reliée aux autres par hreflang. */
-export const INDEXED_LANGUAGES: UrlLanguage[] = ["fr", "en"];
-
-/** Toutes les URL pré-rendues : /pricing, /en/pricing, etc. */
+/** Toutes les URL pré-rendues : /pricing, /en/pricing, /ln/pricing, etc. */
 export const PRERENDER_URLS = INDEXED_LANGUAGES.flatMap((lang) =>
   PRERENDER_ROUTES.map((route) => localizedPath(route, lang)),
 );
@@ -223,10 +228,13 @@ export const PRERENDER_URLS = INDEXED_LANGUAGES.flatMap((lang) =>
 /** SEO d'une page ; pathname sans préfixe de langue ("/pricing"). */
 export function resolveSeo(pathname: string, lang: UrlLanguage = "fr") {
   const base = seoConfig[pathname] ?? seoConfig["/"];
-  const translated = lang === "en" ? seoConfigEn[pathname] : undefined;
+  const automaticSeo = (lang === "ln" || lang === "sw")
+    ? getAutomaticTranslationBundle(lang)?.seo[pathname]
+    : undefined;
+  const translated = lang === "en" ? seoConfigEn[pathname] : automaticSeo;
   const seo = { ...base, ...translated };
   const canonicalOf = (l: UrlLanguage) => `${CANONICAL_ORIGIN}${localizedPath(pathname, l)}`;
-  // Une page sans version anglaise n'annonce pas d'alternative
+  // Une page sans version anglaise n'annonce pas d'alternative.
   const hasEnglish = pathname in seoConfigEn;
   return {
     ...seo,
@@ -234,7 +242,12 @@ export function resolveSeo(pathname: string, lang: UrlLanguage = "fr") {
     image: seo.image ?? DEFAULT_SEO_IMAGE,
     robots: seo.robots ?? "index,follow",
     url: canonicalOf(lang),
-    alternates: hasEnglish ? INDEXED_LANGUAGES.map((l) => ({ lang: l, url: canonicalOf(l) })) : [],
+    alternates: hasEnglish
+      ? INDEXED_LANGUAGES.map((language) => ({
+          lang: localeTag(language),
+          url: canonicalOf(language),
+        }))
+      : [],
     xDefault: canonicalOf("fr"),
   };
 }
@@ -242,7 +255,10 @@ export function resolveSeo(pathname: string, lang: UrlLanguage = "fr") {
 /** Données structurées schema.org de la page. */
 export function buildSchema(pathname: string, lang: UrlLanguage = "fr") {
   const { title, description, url } = resolveSeo(pathname, lang);
-  const faqs = lang === "en" ? faqsEn : faqsFr;
+  const automaticContent = (lang === "ln" || lang === "sw")
+    ? getAutomaticTranslationBundle(lang)?.content
+    : undefined;
+  const faqs = lang === "en" ? faqsEn : automaticContent?.faqs ?? faqsFr;
   const organizationDescription = lang === "en"
     ? "Reemite is a financial technology platform for payments, local and international transfers, virtual cards, crypto services and business APIs, serving individuals and businesses in the DRC and across Africa."
     : "Reemite est une plateforme de technologie financière proposant paiements, transferts locaux et internationaux, cartes virtuelles, services crypto et API aux particuliers et aux entreprises en RDC et en Afrique.";
@@ -253,8 +269,8 @@ export function buildSchema(pathname: string, lang: UrlLanguage = "fr") {
     "@context": "https://schema.org",
     "@graph": [
       { "@type": ["Organization", "FinancialService"], "@id": `${CANONICAL_ORIGIN}/#organization`, name: "Reemite", url: CANONICAL_ORIGIN, logo: `${CANONICAL_ORIGIN}/android-chrome-512x512.png`, description: organizationDescription, founder: [{ "@type": "Person", "@id": `${CANONICAL_ORIGIN}/#prince-muloko`, name: "Prince Muloko", description: princeMulokoBiography, birthDate: "1996-12-27", birthPlace: { "@type": "Place", name: "Fizi, République démocratique du Congo" }, knowsAbout: ["Innovation technologique", "Santé", "Inclusion financière", "Intelligence artificielle", "Internet des objets"] }, { "@type": "Person", "@id": `${CANONICAL_ORIGIN}/#prince-lulinda`, name: "Prince Lulinda", description: cofounderDescription }], areaServed: "Africa and international markets", contactPoint: { "@type": "ContactPoint", contactType: "customer support", url: `${CANONICAL_ORIGIN}/contact`, areaServed: "Worldwide" } },
-      { "@type": "WebSite", "@id": `${CANONICAL_ORIGIN}/#website`, url: `${CANONICAL_ORIGIN}/`, name: "Reemite", publisher: { "@id": `${CANONICAL_ORIGIN}/#organization` }, inLanguage: ["fr", "en", "ln", "sw"] },
-      { "@type": pathname === "/contact" ? "ContactPage" : "WebPage", "@id": `${url}#webpage`, url, name: title, description, inLanguage: lang, isPartOf: { "@id": `${CANONICAL_ORIGIN}/#website` }, about: { "@id": `${CANONICAL_ORIGIN}/#organization` } },
+      { "@type": "WebSite", "@id": `${CANONICAL_ORIGIN}/#website`, url: `${CANONICAL_ORIGIN}/`, name: "Reemite", publisher: { "@id": `${CANONICAL_ORIGIN}/#organization` }, inLanguage: INDEXED_LANGUAGES.map(localeTag) },
+      { "@type": pathname === "/contact" ? "ContactPage" : "WebPage", "@id": `${url}#webpage`, url, name: title, description, inLanguage: localeTag(lang), isPartOf: { "@id": `${CANONICAL_ORIGIN}/#website` }, about: { "@id": `${CANONICAL_ORIGIN}/#organization` } },
       // FAQ de l'accueil, dans la langue de la page
       ...(pathname === "/"
         ? [{ "@type": "FAQPage", "@id": `${url}#faq`, mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer } })) }]
@@ -270,14 +286,15 @@ function escapeHtml(value: string) {
 /** Balises <head> de la page (lisibles sans JavaScript) ; url avec préfixe de langue ("/en/pricing"). */
 export function renderHeadTags(url: string) {
   const lang = languageFromPath(url);
-  const pathname = lang === "en" ? url.slice(3) || "/" : url;
+  const prefix = lang === "fr" ? "" : `/${lang}`;
+  const pathname = prefix ? url.slice(prefix.length) || "/" : url;
   const seo = resolveSeo(pathname, lang);
   const title = escapeHtml(seo.title);
   const description = escapeHtml(seo.description);
   // Les robots de partage (WhatsApp, Facebook, LinkedIn) exigent une URL d'image absolue
   const image = escapeHtml(seo.image.startsWith("http") ? seo.image : `${CANONICAL_ORIGIN}${seo.image}`);
   const schema = JSON.stringify(buildSchema(pathname, lang)).replace(/</g, "\\u003c");
-  const ogLocale = lang === "en" ? "en_US" : "fr_FR";
+  const ogLocale = openGraphLocale(lang);
 
   return [
     `<title>${title}</title>`,
