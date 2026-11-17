@@ -2,12 +2,20 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { useContent } from "../hooks/useContent";
 import { Reveal } from "./Reveal";
 import { useHashTab } from "../hooks/useHashTab";
 
 // Ancres des profils, dans l'ordre de `industries` : "/#profil-ecoles" ouvre l'onglet Écoles
 const PROFILE_SLUGS = ["commercants", "ecoles", "diaspora", "agents", "epargne"];
+const PROFILE_HREFS = [
+  "/paiement-marchand",
+  "/contact",
+  "/transferts-internationaux",
+  "/agents",
+  "/#solution-epargne-bgame",
+];
 
 export function IndustryGrid() {
   const { t } = useTranslation();
@@ -94,8 +102,8 @@ export function IndustryGrid() {
                     </span>
                   </div>
 
-                  <a
-                    href="#"
+                  <Link
+                    to={PROFILE_HREFS[active] ?? "/contact"}
                     className="group mt-7 inline-flex items-center gap-2 rounded bg-brand px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
                   >
                     {t("industryGrid.seeSolutions")}
@@ -103,7 +111,7 @@ export function IndustryGrid() {
                       size={16}
                       className="transition-transform duration-300 group-hover:translate-x-0.5"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </motion.div>

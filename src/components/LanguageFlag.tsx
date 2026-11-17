@@ -1,15 +1,19 @@
-import { flagAssets } from "../lib/languages";
-import type { Language } from "../lib/languages";
+type Language = "fr" | "en" | "ln" | "sw";
 
 export function LanguageFlag({ language }: { language: Language }) {
+  const flagPaths: Record<Language, string> = {
+    fr: "/flags/fr.svg",
+    en: "/flags/us.svg",
+    ln: "/flags/cd.svg",
+    sw: "/flags/tz.svg",
+  };
   return (
     <img
-      src={flagAssets[language]}
+      src={flagPaths[language]}
       alt=""
       aria-hidden="true"
-      width="24"
-      height="16"
-      className="language-flag"
+      className="inline-block h-4 w-6 rounded-sm object-cover shadow-sm"
+      draggable={false}
     />
   );
 }

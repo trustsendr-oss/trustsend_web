@@ -21,6 +21,7 @@ import {
   Phone,
   ShieldCheck,
   UserRound,
+  Users,
   Webhook as WebhookIcon,
   X,
   type LucideIcon,
@@ -34,6 +35,9 @@ import {
   useChangePin,
 } from "../../hooks/useProfile";
 import { ApiError } from "../../lib/api";
+import { usePermissions } from "../../hooks/useMe";
+import { TeamSettings } from "../../components/dashboard/TeamSettings";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../../styles/geist.css";
 
 /* -------------------------------------------------------------------------- */
@@ -224,8 +228,20 @@ export function ProfilePage() {
   const changePassword = useChangePassword();
   const setPin = useSetPin();
   const changePin = useChangePin();
+  const { me, can, isMember } = usePermissions();
+  // Un membre sans `settings.manage` voit le profil de l'entreprise sans pouvoir le modifier.
+  const canEdit = can("settings.manage");
 
-  const [tab, setTab] = useState<"general" | "security">("general");
+  // L'onglet suit l'ancre de l'URL (#team, #security) : un lien peut mener droit à l'équipe.
+  const location = useLocation();
+  const navigate = useNavigate();
+  const tabFromHash = (hash: string): "general" | "security" | "team" =>
+    hash === "#team" ? "team" : hash === "#security" ? "security" : "general";
+  const requested = tabFromHash(location.hash);
+  // L'équipe n'est visible que de qui la gère : un lien #team mène sinon au profil.
+  const tab = requested === "team" && !can("team.manage") ? "general" : requested;
+  const setTab = (next: "general" | "security" | "team") =>
+    navigate({ hash: next === "general" ? "" : next }, { replace: true });
   const [editing, setEditing] = useState<Editing>(null);
   const [toast, setToast] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -368,6 +384,9 @@ export function ProfilePage() {
   const tabs = [
     { key: "general" as const, label: t("dashboard.profile.general"), icon: UserRound },
     { key: "security" as const, label: t("dashboard.profile.security"), icon: ShieldCheck },
+    ...(can("team.manage")
+      ? [{ key: "team" as const, label: t("dashboard.profile.team"), icon: Users }]
+      : []),
   ];
 
   return (
@@ -405,7 +424,7 @@ export function ProfilePage() {
       </header>
 
       {/* ---------- Onglets ---------- */}
-      <nav className="mt-8 flex justify-center border-b border-[#dadce0]">
+      <nav className="mt-8 flex justify-center overflow-x-auto border-b border-[#dadce0]">
         {tabs.map((item) => {
           const active = tab === item.key;
           return (
@@ -416,7 +435,7 @@ export function ProfilePage() {
                 setTab(item.key);
                 setEditing(null);
               }}
-              className={`relative flex h-12 items-center gap-2 px-6 text-sm font-medium transition-colors hover:bg-[#1f1f1f]/[0.04] ${
+              className={`relative flex h-12 shrink-0 items-center gap-2 px-4 text-sm font-medium sm:px-6 transition-colors hover:bg-[#1f1f1f]/[0.04] ${
                 active ? "text-accent" : "text-[#444746]"
               }`}
             >
@@ -442,7 +461,7 @@ export function ProfilePage() {
               label={t("dashboard.profile.companyName")}
               value={account.name}
               open={editing === "name"}
-              onToggle={() => toggle("name")}
+              onToggle={canEdit ? () => toggle("name") : undefined}
             >
               {profileField(
                 "name",
@@ -473,7 +492,7 @@ export function ProfilePage() {
               label={t("dashboard.profile.phone")}
               value={account.phone}
               open={editing === "phone"}
-              onToggle={() => toggle("phone")}
+              onToggle={canEdit ? () => toggle("phone") : undefined}
             >
               {profileField(
                 "phone",
@@ -489,6 +508,7 @@ export function ProfilePage() {
               )}
             </Row>
 
+            {(can("developers.manage") || canEdit) && (
             <Row
               icon={WebhookIcon}
               label={t("dashboard.profile.webhookUrl")}
@@ -498,7 +518,7 @@ export function ProfilePage() {
                 )
               }
               open={editing === "webhook_url"}
-              onToggle={() => toggle("webhook_url")}
+              onToggle={canEdit ? () => toggle("webhook_url") : undefined}
             >
               {profileField(
                 "webhook_url",
@@ -513,6 +533,8 @@ export function ProfilePage() {
                 />,
               )}
             </Row>
+
+            )}
 
             <Row
               icon={Hash}
@@ -532,7 +554,49 @@ export function ProfilePage() {
           </Card>
         )}
 
-        {tab === "security" && (
+        {tab === "team" && <TeamSettings onToast={setToast} />}
+
+        {tab === "security" && isMember && me?.member && (
+          <Card
+            title={t("dashboard.profile.memberTitle")}
+            description={t("dashboard.profile.memberDesc")}
+          >
+            <Row
+              icon={UserRound}
+              label={t("dashboard.profile.memberName")}
+              value={me.member.user.full_name ?? "—"}
+            />
+            <Row icon={Mail} label={t("dashboard.profile.email")} value={me.member.user.email ?? "—"} />
+            <Row
+              icon={ShieldCheck}
+              label={t("dashboard.profile.memberRole")}
+              value={t(`dashboard.team.roles.${me.role}`)}
+            />
+            <Row
+              icon={KeyRound}
+              warn={!me.pin_set}
+              label={t("dashboard.profile.pinTitle")}
+              value={
+                me.pin_set ? (
+                  <span className="inline-flex items-center gap-1.5">
+                    <Check size={16} className="text-[#146c2e]" />
+                    {t("dashboard.profile.memberPinSet")}
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5 text-[#b06000]">
+                    <X size={16} />
+                    {t("dashboard.profile.memberPinNotSet")}
+                  </span>
+                )
+              }
+            />
+            <p className="border-t border-[#dadce0] px-6 py-4 text-sm text-[#444746]">
+              {t("dashboard.profile.memberCredentialsNote")}
+            </p>
+          </Card>
+        )}
+
+        {tab === "security" && me?.kind === "owner" && (
           <>
             {!pinSet && (
               <div className="flex items-start gap-4 rounded-2xl bg-[#fef7e0] px-6 py-5">

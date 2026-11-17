@@ -4,33 +4,38 @@ import fr from "./locales/fr.json";
 import en from "./locales/en.json";
 import ln from "./locales/ln.json";
 import sw from "./locales/sw.json";
-import { languageFromPath } from "../lib/languageRoutes";
+import { languageFromPath, localeTag, type UrlLanguage } from "../lib/languageRoutes";
 
 const STORAGE_KEY = "TrustSend_lang";
 export const supportedLanguages = ["fr", "en", "ln", "sw"] as const;
+export type SupportedLanguage = (typeof supportedLanguages)[number];
 
 const isBrowser = typeof window !== "undefined";
 
+function isSupportedLanguage(language: string): language is SupportedLanguage {
+  return supportedLanguages.some((supportedLanguage) => supportedLanguage === language);
+}
+
 /** Langue choisie explicitement par le visiteur (sélecteur de langue), sinon null. */
-export function storedLanguage(): string | null {
+export function storedLanguage(): SupportedLanguage | null {
   if (!isBrowser) return null;
   const stored = localStorage.getItem(STORAGE_KEY);
-  return stored && new Set<string>(supportedLanguages).has(stored) ? stored : null;
+  return stored && isSupportedLanguage(stored) ? stored : null;
 }
 
 /** Mémorise un choix de langue fait avant une navigation complète (changement d'URL de langue). */
-export function rememberLanguage(lng: string) {
+export function rememberLanguage(lng: SupportedLanguage) {
   localStorage.setItem(STORAGE_KEY, lng);
 }
 
 /** Langue préférée du visiteur ; "fr" pendant le pré-rendu (build). */
-export function detectLanguage(): string {
+export function detectLanguage(): SupportedLanguage {
   if (!isBrowser) return "fr";
   return storedLanguage() ?? (navigator.language.startsWith("en") ? "en" : "fr");
 }
 
 /**
- * Les pages pré-rendues sont dans la langue de leur URL (/en → anglais, sinon français) :
+ * Les pages pré-rendues sont dans la langue de leur URL (/en, /ln ou /sw) :
  * on hydrate dans cette langue pour que React reconnaisse le HTML.
  */
 export const isPrerendered = isBrowser && !!document.getElementById("root")?.hasChildNodes();
@@ -44,7 +49,7 @@ i18n.use(initReactI18next).init({
     ln: { translation: ln },
     sw: { translation: sw },
   },
-  lng: urlLanguage === "en" || isPrerendered ? urlLanguage : detectLanguage(),
+  lng: urlLanguage !== "fr" || isPrerendered ? urlLanguage : detectLanguage(),
   fallbackLng: "fr",
   supportedLngs: supportedLanguages,
   load: "languageOnly",
@@ -57,10 +62,10 @@ i18n.use(initReactI18next).init({
 if (isBrowser) {
   i18n.on("languageChanged", (lng) => {
     localStorage.setItem(STORAGE_KEY, lng);
-    document.documentElement.lang = lng;
+    document.documentElement.lang = localeTag(lng as UrlLanguage);
   });
 
-  document.documentElement.lang = i18n.language;
+  document.documentElement.lang = localeTag(i18n.language as UrlLanguage);
 }
 
 export default i18n;

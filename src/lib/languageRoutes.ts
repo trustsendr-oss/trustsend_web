@@ -1,28 +1,60 @@
-/**
- * Langue portée par l'URL : le français vit à la racine (/pricing), l'anglais sous /en (/en/pricing).
- * Le lingala et le swahili, encore peu traduits, ne sont pas indexés : ils restent une préférence
- * du visiteur, appliquée sur les URL françaises.
- *
- * Sur une page /en, le routeur reçoit le basename "/en" : tous les <Link to="/pricing"> deviennent
- * /en/pricing sans toucher aux composants.
- */
+export type UrlLanguage = "fr" | "en" | "ln" | "sw";
 
-export type UrlLanguage = "fr" | "en";
+const LANGUAGE_PREFIXES: Partial<Record<UrlLanguage, string>> = {
+  en: "/en",
+  ln: "/ln",
+  sw: "/sw",
+};
 
-export const EN_BASENAME = "/en";
+const LANGUAGE_TAGS: Record<UrlLanguage, string> = {
+  fr: "fr-FR",
+  en: "en-US",
+  ln: "ln-CD",
+  sw: "sw-TZ",
+};
 
-/** Langue de l'URL : "en" sous /en, "fr" ailleurs. */
+const OPEN_GRAPH_LOCALES: Record<UrlLanguage, string> = {
+  fr: "fr_FR",
+  en: "en_US",
+  ln: "ln_CD",
+  sw: "sw_TZ",
+};
+
+export const AUTO_TRANSLATIONS_ENABLED = import.meta.env.VITE_AUTO_TRANSLATIONS_ENABLED;
+
+export const INDEXED_LANGUAGES: UrlLanguage[] = [
+  "fr",
+  "en",
+  ...(AUTO_TRANSLATIONS_ENABLED ? (["ln", "sw"] as const) : []),
+];
+
+/** Langue de l'URL, à partir de son préfixe. */
 export function languageFromPath(pathname: string): UrlLanguage {
-  return pathname === EN_BASENAME || pathname.startsWith(`${EN_BASENAME}/`) ? "en" : "fr";
+  for (const language of ["en", "ln", "sw"] as const) {
+    const prefix = LANGUAGE_PREFIXES[language];
+    if (prefix && (pathname === prefix || pathname.startsWith(`${prefix}/`))) return language;
+  }
+  return "fr";
+}
+
+/** Balise BCP 47 de la langue et du marché ciblés. */
+export function localeTag(language: UrlLanguage): string {
+  return LANGUAGE_TAGS[language];
+}
+
+/** Locale Open Graph utilisée pour les aperçus de partage. */
+export function openGraphLocale(language: UrlLanguage): string {
+  return OPEN_GRAPH_LOCALES[language];
 }
 
 /** Basename du routeur pour cette URL. */
 export function routerBasename(pathname: string) {
-  return languageFromPath(pathname) === "en" ? EN_BASENAME : undefined;
+  return LANGUAGE_PREFIXES[languageFromPath(pathname)];
 }
 
 /** Chemin d'une page dans une langue : localizedPath("/pricing", "en") → "/en/pricing". */
 export function localizedPath(path: string, language: UrlLanguage) {
-  if (language === "fr") return path;
-  return path === "/" ? EN_BASENAME : `${EN_BASENAME}${path}`;
+  const prefix = LANGUAGE_PREFIXES[language];
+  if (!prefix) return path;
+  return path === "/" ? prefix : `${prefix}${path}`;
 }

@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../lib/api";
-import { clearSession } from "../lib/session";
+import { authPath, clearSession } from "../lib/session";
 
 export function useLogout() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async () => {
-      await api.post("/business/auth/logout");
+      await api.post(`${authPath()}/logout`);
     },
     // onSettled et non onSuccess : même si l'appel echoue (reseau, cookie deja expire),
     // la session locale doit disparaitre.

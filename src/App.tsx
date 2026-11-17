@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Navigate, Route, Routes, useHref, useLocation } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Pricing } from "./pages/Pricing";
@@ -8,6 +9,7 @@ import { Crypto } from "./pages/Crypto";
 import { Merchant } from "./pages/Merchant";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
+import { Invitation } from "./pages/Invitation";
 import { RequireAuth } from "./components/RequireAuth";
 import { ExternalRedirect } from "./components/ExternalRedirect";
 import { DashboardLayout } from "./components/dashboard/DashboardLayout";
@@ -27,6 +29,13 @@ import { MerchantPaymentsPage } from "./pages/dashboard/MerchantPaymentsPage";
 import { ProfilePage } from "./pages/dashboard/ProfilePage";
 import { NotificationsPage } from "./pages/dashboard/NotificationsPage";
 import { KycPage } from "./pages/dashboard/KycPage";
+import { RequirePermission } from "./components/dashboard/RequirePermission";
+import type { DashboardPermission } from "./types/auth";
+
+// Raccourci : un écran réservé à une permission (voir RequirePermission).
+const guard = (permission: DashboardPermission, element: ReactNode) => (
+  <RequirePermission permission={permission}>{element}</RequirePermission>
+);
 import { Legal } from "./pages/Legal";
 import { InstallApp } from "./components/InstallApp";
 import { Contact } from "./pages/Contact";
@@ -79,6 +88,7 @@ function App() {
           <>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/invitation" element={<Invitation />} />
             <Route
               path="/dashboard"
               element={
@@ -88,21 +98,23 @@ function App() {
               }
             >
               <Route index element={<Overview />} />
-              <Route path="transactions" element={<TransactionsPage />} />
-              <Route path="merchant-payments" element={<MerchantPaymentsPage />} />
-              <Route path="wallet" element={<WalletPage />} />
-              <Route path="wallet/new" element={<AddWalletPage />} />
-              <Route path="deposit" element={<DepositPage />} />
-              <Route path="withdraw" element={<WithdrawPage />} />
-              <Route path="swap" element={<SwapPage />} />
-              <Route path="cards" element={<CardsPage />} />
-              <Route path="cards/new" element={<CreateCardPage />} />
-              <Route path="cards/:id" element={<CardDetailPage />} />
-              <Route path="api-keys" element={<ApiKeysPage />} />
-              <Route path="webhooks" element={<WebhooksPage />} />
+              <Route path="transactions" element={guard("finance.read", <TransactionsPage />)} />
+              <Route path="merchant-payments" element={guard("finance.read", <MerchantPaymentsPage />)} />
+              <Route path="wallet" element={guard("finance.read", <WalletPage />)} />
+              <Route path="wallet/new" element={guard("money.move", <AddWalletPage />)} />
+              <Route path="deposit" element={guard("money.move", <DepositPage />)} />
+              <Route path="withdraw" element={guard("money.move", <WithdrawPage />)} />
+              <Route path="swap" element={guard("money.move", <SwapPage />)} />
+              <Route path="cards" element={guard("finance.read", <CardsPage />)} />
+              <Route path="cards/new" element={guard("money.move", <CreateCardPage />)} />
+              <Route path="cards/:id" element={guard("finance.read", <CardDetailPage />)} />
+              <Route path="api-keys" element={guard("developers.manage", <ApiKeysPage />)} />
+              <Route path="webhooks" element={guard("developers.manage", <WebhooksPage />)} />
               <Route path="profile" element={<ProfilePage />} />
               <Route path="notifications" element={<NotificationsPage />} />
-              <Route path="kyc" element={<KycPage />} />
+              <Route path="kyc" element={guard("settings.manage", <KycPage />)} />
+              {/* L'équipe vit dans les paramètres ; l'ancien chemin y mène. */}
+              <Route path="team" element={<Navigate to="/dashboard/profile#team" replace />} />
             </Route>
           </>
         ) : (
@@ -110,6 +122,10 @@ function App() {
           <>
             <Route path="/login" element={<ExternalRedirect to={`${BUSINESS_ORIGIN}/login`} />} />
             <Route path="/signup" element={<ExternalRedirect to={`${BUSINESS_ORIGIN}/signup`} />} />
+            <Route
+              path="/invitation"
+              element={<ExternalRedirect to={`${BUSINESS_ORIGIN}/invitation${location.search}`} />}
+            />
             <Route
               path="/dashboard/*"
               element={<ExternalRedirect to={`${BUSINESS_ORIGIN}/dashboard`} />}

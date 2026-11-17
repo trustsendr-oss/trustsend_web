@@ -4,9 +4,9 @@ import type { NavMegaMenu } from "./content.fr";
 export * from "./content.en";
 
 export const navLinks = [
-  { label: "Kofuta", href: "#payments" },
+  { label: "Kofuta", href: "/paiement-marchand" },
   { label: "Kotinda mbongo", href: "/transferts-internationaux" },
-  { label: "Baninga", href: "#partners" },
+  { label: "Baninga", href: "/agents" },
   { label: "Ntalo", href: "/pricing" },
 ];
 

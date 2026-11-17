@@ -12,6 +12,7 @@ import {
   MinusCircle,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { usePermissions } from "../../hooks/useMe";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 import {
   useCards,
@@ -131,6 +132,7 @@ export function CardDetailPage() {
   const freeze = useFreezeCard();
   const unfreeze = useUnfreezeCard();
   const terminate = useTerminateCard();
+  const canMove = usePermissions().can("money.move");
 
   const card = cards.data?.find((c) => c.id === cardId);
 
@@ -190,13 +192,14 @@ export function CardDetailPage() {
           {formatMinorUnits(card.balance, card.currency_code)}
         </p>
 
-        {card.status === "active" && (
+        {canMove && card.status === "active" && (
           <div className="mt-5 flex flex-wrap gap-3 border-t border-surface-2 pt-5">
             <AmountAction cardId={card.id} kind="topup" />
             <AmountAction cardId={card.id} kind="withdraw" />
           </div>
         )}
 
+        {canMove && (
         <div className="mt-5 flex flex-wrap gap-2 border-t border-surface-2 pt-5">
           {card.status === "active" && (
             <button
@@ -229,6 +232,7 @@ export function CardDetailPage() {
             </button>
           )}
         </div>
+        )}
 
         {(freeze.isError || unfreeze.isError || terminate.isError) && (
           <p className="mt-4 flex items-center gap-1.5 rounded border border-red-200 bg-red-50 px-3.5 py-2.5 text-sm text-red-700">

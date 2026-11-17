@@ -9,6 +9,7 @@ import { isSandbox } from "../lib/domains";
 import { AuthField } from "../components/auth/AuthField";
 import "../styles/geist.css";
 import { Nav } from "../components/Nav";
+import { marketingUrl } from "../lib/domains";
 
 const primaryButtonClasses =
   "ms-auto inline-flex h-10 cursor-pointer items-center justify-center rounded-full bg-brand px-6 text-sm font-semibold text-white transition-colors hover:bg-brand-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60";
@@ -398,11 +399,11 @@ export function Signup() {
                     />
                     <span>
                       {t("signup.acceptTerms")}{" "}
-                      <a href="#" className="font-medium text-ink underline-offset-2 hover:underline">
+                      <a href={marketingUrl("/terms")} className="font-medium text-ink underline-offset-2 hover:underline">
                         {t("login.terms")}
                       </a>{" "}
                       {t("signup.and")}{" "}
-                      <a href="#" className="font-medium text-ink underline-offset-2 hover:underline">
+                      <a href={marketingUrl("/privacy")} className="font-medium text-ink underline-offset-2 hover:underline">
                         {t("login.privacy")}
                       </a>{" "}
                       {t("signup.termsSuffix")}

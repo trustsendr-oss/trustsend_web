@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useContent } from "../hooks/useContent";
 import { Reveal } from "./Reveal";
 import multiDeviceAsset from "../assets/multi_device.webp";
+import { businessUrl } from "../lib/domains";
 
 export function FeatureBlocks() {
   const { t } = useTranslation();
@@ -94,7 +95,7 @@ export function FeatureBlocks() {
             </div>
 
             <a
-              href="#"
+              href={businessUrl("/signup")}
               className="group mt-9 inline-flex items-center gap-2 rounded-lg bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
             >
               {t("featureBlocks.cta")}

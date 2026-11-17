@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, MonitorSmartphone } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { useContent } from "../hooks/useContent";
 import { Reveal } from "./Reveal";
+import { businessUrl } from "../lib/domains";
 import heroAsset from "../assets/hero.png";
 import patternAsset from "../assets/Group.png";
 import bgAsset from "../assets/hero_woman.webp";
@@ -12,17 +14,8 @@ import bgAsset2 from "../assets/bg_2.png";
 const SLIDE_COUNT = 2;
 const SLIDE_INTERVAL = 8000;
 
-// TODO: remplacer par les liens réels des stores
-const APP_STORE_URL = "#";
-const PLAY_STORE_URL = "#";
-
-function AppleIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
-      <path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.7-3.18-1.73-1.35-.14-2.64.8-3.33.8-.69 0-1.74-.78-2.87-.76-1.47.02-2.83.86-3.59 2.18-1.54 2.66-.39 6.6 1.1 8.76.73 1.06 1.6 2.24 2.73 2.2 1.1-.05 1.51-.71 2.84-.71 1.32 0 1.7.71 2.86.69 1.18-.02 1.93-1.07 2.65-2.13.84-1.22 1.18-2.41 1.2-2.47-.03-.01-2.3-.88-2.3-3.52ZM14.2 6.13c.6-.74 1.01-1.75.9-2.77-.87.04-1.93.58-2.55 1.31-.56.64-1.05 1.68-.92 2.67.97.08 1.97-.49 2.57-1.21Z" />
-    </svg>
-  );
-}
+const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.reemite.app&pcampaignid=web_share";
 
 function PlayIcon() {
   return (
@@ -147,17 +140,15 @@ export function Hero() {
                 <Reveal delay={0.2}>
                   <div className="mt-8 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center">
                     <a
-                      href={APP_STORE_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href={businessUrl("/signup")}
                       className="inline-flex items-center justify-center gap-2.5 rounded-xl bg-accent px-3 py-2.5 sm:justify-start sm:gap-3 sm:px-5 text-white shadow-soft transition-all hover:-translate-y-0.5 hover:bg-accent/90"
                     >
-                      <AppleIcon />
+                      <MonitorSmartphone size={24} aria-hidden="true" />
                       <span className="flex flex-col text-left leading-tight">
                         <span className="text-[10px] font-medium uppercase tracking-wide text-white/80">
-                          {t("hero.downloadOn")}
+                          {t("nav.signup")}
                         </span>
-                        <span className="font-semibold">App Store</span>
+                        <span className="font-semibold">Web</span>
                       </span>
                     </a>
 
@@ -267,7 +258,7 @@ export function Hero() {
                 <Reveal delay={0.2}>
                   <div className="mt-8 flex flex-wrap items-center gap-5">
                     <a
-                      href="#"
+                      href={businessUrl("/signup")}
                       className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-white shadow-soft transition-colors hover:bg-accent/90"
                     >
                       {t("hero.ctaSignupNow")}
@@ -275,7 +266,7 @@ export function Hero() {
                     </a>
 
                     <a
-                      href="#"
+                      href="/paiement-marchand"
                       className="font-semibold text-white transition-colors hover:text-accent-light"
                     >
                       {t("hero.ctaLearnMore")}
@@ -313,13 +304,21 @@ export function Hero() {
                 {t("hero.whatToDo")}
               </span>
               <div className="-mx-4 flex w-[calc(100%+2rem)] gap-2 overflow-x-auto px-4 pb-0.5 [scrollbar-width:none] sm:mx-0 sm:w-auto sm:flex-wrap sm:overflow-visible sm:px-0">
-                {recommendationChips.map((c) => (
-                  <button
+                {recommendationChips.map((c, i) => (
+                  <Link
                     key={c}
+                    to={[
+                      "/transferts-internationaux",
+                      "/agents",
+                      "/cartes-virtuelles",
+                      "/#solution-epargne-bgame",
+                      "/cryptomonnaies",
+                      "/#solution-epargne-bgame",
+                    ][i] ?? "/contact"}
                     className="shrink-0 whitespace-nowrap rounded-full bg-surface px-3 py-1.5 text-xs font-medium text-ink/80 transition-colors hover:bg-brand-light hover:text-brand"
                   >
                     {c}
-                  </button>
+                  </Link>
                 ))}
               </div>
             </div>

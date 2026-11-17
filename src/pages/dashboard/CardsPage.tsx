@@ -4,6 +4,7 @@ import { LoadingSpinner } from "../../components/LoadingSpinner";
 import { useTranslation } from "react-i18next";
 import { useCards } from "../../hooks/useCards";
 import { formatMinorUnits } from "../../lib/format";
+import { usePermissions } from "../../hooks/useMe";
 
 const STATUS_STYLE: Record<string, string> = {
   active: "bg-accent-light text-accent",
@@ -16,6 +17,7 @@ const STATUS_STYLE: Record<string, string> = {
 export function CardsPage() {
   const { t } = useTranslation();
   const cards = useCards();
+  const canMove = usePermissions().can("money.move");
 
   return (
     <div>
@@ -24,13 +26,15 @@ export function CardsPage() {
           <h1 className="font-display text-2xl font-bold text-ink">{t("dashboard.cards.title")}</h1>
           <p className="mt-1 text-muted">{t("dashboard.cards.subtitle")}</p>
         </div>
-        <Link
-          to="/dashboard/cards/new"
-          className="inline-flex items-center gap-2 rounded bg-brand px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
-        >
-          <Plus size={16} />
-          {t("dashboard.cards.create")}
-        </Link>
+        {canMove && (
+          <Link
+            to="/dashboard/cards/new"
+            className="inline-flex items-center gap-2 rounded bg-brand px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+          >
+            <Plus size={16} />
+            {t("dashboard.cards.create")}
+          </Link>
+        )}
       </div>
 
       {cards.isLoading ? (

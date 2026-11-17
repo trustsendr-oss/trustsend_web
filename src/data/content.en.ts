@@ -1,10 +1,10 @@
 import type { MockupVariant, NavMegaMenu } from "./content.fr";
 
 export const navLinks = [
-  { label: "Payments", href: "#payments" },
+  { label: "Payments", href: "/paiement-marchand" },
   { label: "Transfers", href: "/transferts-internationaux" },
   // { label: "Savings & Games", href: "#savings" },
-  { label: "Partners", href: "#partners" },
+  { label: "Partners", href: "/agents" },
   { label: "Pricing", href: "/pricing" },
 
 ];
@@ -552,63 +552,75 @@ export const noCodeExamples: { icon: string; title: string; subtitle: string }[]
   },
 ];
 
-// Fictional testimonials illustrating how Reemite products are used (cards,
-// Likelemba, agents, transfers). Names and companies are generic examples,
-// not real customers.
+// Fictional examples only; these names and quotes are not real customer reviews.
 export const testimonials: {
   quote: string;
   name: string;
   title: string;
   company: string;
-  avatar: string;
 }[] = [
   {
     quote:
       "With Reemite virtual cards, my online subscriptions never get blocked anymore. I manage them all from my phone.",
-    name: "A. Kariuki",
-    title: "Founder",
-    company: "Boutique A",
-    avatar: "/assets/testimonials/kariuki.jpg",
+    name: "Mombo Tshimanga",
+    title: "Small business owner",
+    company: "Independent shop",
   },
   {
     quote:
       "Our Likelemba used to run on WhatsApp and a notebook. With Reemite, every contribution is logged and no one can dispute it anymore.",
-    name: "D. Mensah",
+    name: "Bundule Myapi",
     title: "Group treasurer",
-    company: "Group B",
-    avatar: "/assets/testimonials/mensah.jpg",
+    company: "Likelemba group",
   },
   {
     quote:
       "As a Reemite agent, I handle deposits and withdrawals all day. The commission lands automatically, no manual calculations.",
-    name: "N. Achieng",
+    name: "Mwangaza Kyalumbu",
     title: "Reemite Agent",
-    company: "Point C",
-    avatar: "/assets/testimonials/achieng.jpg",
+    company: "Agent network",
   },
   {
     quote:
       "I collect school fees through a payment link. No more queues on registration day.",
-    name: "D. Rawat",
-    title: "Principal",
-    company: "School D",
-    avatar: "/assets/testimonials/rawat.jpg",
+    name: "Mbataku Ponzo Michel",
+    title: "School administrator",
+    company: "School",
   },
   {
     quote:
       "Sending money to my family abroad used to take days. With Reemite international transfers, it arrives in seconds.",
-    name: "N. Gitau",
+    name: "Kangulu Matatias",
     title: "Customer",
-    company: "Diaspora E",
-    avatar: "/assets/testimonials/gitau.jpg",
+    company: "Family transfers",
   },
   {
     quote:
       "We integrated the Reemite API for paying our in-store and online orders in a week, cards and Mobile Money included.",
-    name: "A. Njoroge",
+    name: "Serveillez Kumbuku",
     title: "Co-founder",
-    company: "Commerce F",
-    avatar: "/assets/testimonials/njoroge.jpg",
+    company: "Commerce",
+  },
+  {
+    quote:
+      "In our rural group, members can check the Likelemba contributions in one place. It helps us keep track of each turn together.",
+    name: "Masala Mwenyebato",
+    title: "Rural group member",
+    company: "Rural Likelemba",
+  },
+  {
+    quote:
+      "Our members live in different villages. Keeping the Likelemba contribution history together makes it easier to follow the group cycle.",
+    name: "Anonymous example 1",
+    title: "Group member",
+    company: "Rural Likelemba",
+  },
+  {
+    quote:
+      "As group treasurer, I can review the contributions and the order of turns without having to reconstruct everything from the notebook.",
+    name: "Anonymous example 2",
+    title: "Group treasurer",
+    company: "Rural Likelemba",
   },
 ];
 
