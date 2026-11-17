@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight, MonitorSmartphone } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  MonitorSmartphone,
+  Pause,
+  Play,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useContent } from "../hooks/useContent";
@@ -11,7 +18,7 @@ import patternAsset from "../assets/Group.png";
 import bgAsset from "../assets/hero_woman.webp";
 import bgAsset2 from "../assets/bg_2.png";
 
-const SLIDE_COUNT = 2;
+const SLIDE_COUNT = 3;
 const SLIDE_INTERVAL = 8000;
 
 const PLAY_STORE_URL =
@@ -35,25 +42,39 @@ export function Hero() {
   const [slide, setSlide] = useState(0);
   const [capIndex, setCapIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [isPointerOver, setIsPointerOver] = useState(false);
+  const [isFocusWithin, setIsFocusWithin] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
+    updatePreference();
+    mediaQuery.addEventListener("change", updatePreference);
+
+    return () => mediaQuery.removeEventListener("change", updatePreference);
+  }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const t = setInterval(() => {
       setCapIndex((i) => (i + 1) % heroCapabilities.length);
     }, 2600);
 
     return () => clearInterval(t);
-  }, []);
+  }, [heroCapabilities.length, prefersReducedMotion]);
 
   // Défilement automatique des slides, relancé à chaque navigation manuelle
   useEffect(() => {
-    if (paused) return;
+    if (paused || isPointerOver || isFocusWithin || prefersReducedMotion) return;
 
-    const t = setInterval(() => {
+    const t = window.setInterval(() => {
       setSlide((s) => (s + 1) % SLIDE_COUNT);
     }, SLIDE_INTERVAL);
 
-    return () => clearInterval(t);
-  }, [slide, paused]);
+    return () => window.clearInterval(t);
+  }, [slide, paused, isPointerOver, isFocusWithin, prefersReducedMotion]);
 
   const prevSlide = () =>
     setSlide((s) => (s - 1 + SLIDE_COUNT) % SLIDE_COUNT);
@@ -63,26 +84,35 @@ export function Hero() {
 
   return (
     <section
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={t("hero.carouselLabel")}
       className="relative overflow-hidden bg-[#020D30] pt-16 pb-12 sm:pt-28 sm:pb-14 lg:pt-30 lg:pb-16"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={() => setPaused(false)}
+      onMouseEnter={() => setIsPointerOver(true)}
+      onMouseLeave={() => setIsPointerOver(false)}
+      onFocusCapture={() => setIsFocusWithin(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setIsFocusWithin(false);
+        }
+      }}
     >
       {/* Navigation gauche */}
       <button
+        type="button"
         onClick={prevSlide}
         aria-label={t("hero.slidePrev")}
-        className="hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 z-10 h-10 w-10 items-center justify-center rounded-full bg-white shadow-card text-muted-2 hover:text-brand transition-colors"
+        className="hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 z-10 h-10 w-10 items-center justify-center rounded-full bg-white shadow-card text-muted-2 transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
       >
         <ChevronLeft size={18} />
       </button>
 
       {/* Navigation droite */}
       <button
+        type="button"
         onClick={nextSlide}
         aria-label={t("hero.slideNext")}
-        className="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 z-10 h-10 w-10 items-center justify-center rounded-full bg-white shadow-card text-muted-2 hover:text-brand transition-colors"
+        className="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 z-10 h-10 w-10 items-center justify-center rounded-full bg-white shadow-card text-muted-2 transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
       >
         <ChevronRight size={18} />
       </button>
@@ -111,11 +141,14 @@ export function Hero() {
           {slide === 0 ? (
             <motion.div
               key="capability-slide"
+              role="group"
+              aria-roledescription={t("hero.slideRole")}
+              aria-label={t("hero.slideLabel", { current: 1, total: SLIDE_COUNT })}
               initial={{ opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -24 }}
               transition={{
-                duration: 0.35,
+                duration: prefersReducedMotion ? 0 : 0.35,
                 ease: [0.16, 1, 0.3, 1],
               }}
               className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16"
@@ -209,10 +242,11 @@ export function Hero() {
                   <div className="mt-6 flex justify-center gap-2 sm:mt-8">
                     {heroCapabilities.map((s, i) => (
                       <button
+                        type="button"
                         key={s.label}
                         onClick={() => setCapIndex(i)}
                         aria-label={t("hero.showLabel", { label: s.label })}
-                        className={`h-2 rounded-full transition-all duration-300 ${
+                        className={`h-2 rounded-full transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
                           i === capIndex
                             ? "w-7 bg-accent"
                             : "w-2 bg-white/25"
@@ -223,17 +257,20 @@ export function Hero() {
                 </div>
               </Reveal>
             </motion.div>
-          ) : (
+          ) : slide === 1 ? (
             /* =========================================================
                 SLIDE 2 — SPOTLIGHT
             ========================================================= */
             <motion.div
               key="spotlight-slide"
+              role="group"
+              aria-roledescription={t("hero.slideRole")}
+              aria-label={t("hero.slideLabel", { current: 2, total: SLIDE_COUNT })}
               initial={{ opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 1, x: -24 }}
+              exit={{ opacity: 0, x: -24 }}
               transition={{
-                duration: 0.35,
+                duration: prefersReducedMotion ? 0 : 0.35,
                 ease: [0.16, 1, 0.3, 1],
               }}
               className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16"
@@ -292,8 +329,101 @@ export function Hero() {
                 </div>
               </Reveal>
             </motion.div>
+          ) : (
+            <motion.div
+              key="app-download-slide"
+              role="group"
+              aria-roledescription={t("hero.slideRole")}
+              aria-label={t("hero.slideLabel", { current: 3, total: SLIDE_COUNT })}
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -24 }}
+              transition={{
+                duration: prefersReducedMotion ? 0 : 0.35,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="grid items-center gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-16"
+            >
+              <div className="max-w-xl">
+                <Reveal>
+                  <h2 className="font-display text-[1.95rem] font-bold leading-[1.12] tracking-tight text-balance text-white sm:text-4xl lg:text-[2.6rem]">
+                    {t("hero.appHeadline")}
+                  </h2>
+                </Reveal>
+
+                <Reveal delay={0.1}>
+                  <p className="mt-5 max-w-lg text-base leading-relaxed text-white/70 sm:text-lg">
+                    {t("hero.appSubtext")}
+                  </p>
+                </Reveal>
+
+                <Reveal delay={0.2}>
+                  <a
+                    href={PLAY_STORE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-8 inline-flex items-center gap-2.5 rounded-xl bg-accent px-5 py-3 text-white shadow-soft transition-colors hover:bg-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                  >
+                    <PlayIcon />
+                    <span className="flex flex-col text-left leading-tight">
+                      <span className="text-[10px] font-medium uppercase tracking-wide text-white/80">
+                        {t("hero.getItOn")}
+                      </span>
+                      <span className="font-semibold">Google Play</span>
+                    </span>
+                  </a>
+                </Reveal>
+              </div>
+
+              <Reveal delay={0.15}>
+                <img
+                  src="/assets/images/reemite-phones-cutout.png"
+                  alt={t("hero.appImageAlt")}
+                  className="mx-auto aspect-[6/7] w-full max-w-[460px] select-none object-contain"
+                  loading="lazy"
+                />
+              </Reveal>
+            </motion.div>
           )}
         </AnimatePresence>
+        <div
+          className="mt-6 flex items-center justify-center gap-2"
+          role="group"
+          aria-label={t("hero.slideNavigation")}
+        >
+          {Array.from({ length: SLIDE_COUNT }, (_, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => setSlide(index)}
+              aria-label={t("hero.goToSlide", { number: index + 1 })}
+              aria-current={slide === index ? "true" : undefined}
+              className="flex h-11 w-11 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              <span
+                aria-hidden="true"
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  slide === index ? "w-7 bg-accent-light" : "w-2.5 bg-white/40"
+                }`}
+              />
+            </button>
+          ))}
+          {!prefersReducedMotion && (
+            <button
+              type="button"
+              onClick={() => setPaused((isPaused) => !isPaused)}
+              aria-label={t(paused ? "hero.resumeRotation" : "hero.pauseRotation")}
+              aria-pressed={paused}
+              className="ml-1 flex h-11 w-11 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              {paused ? (
+                <Play size={18} aria-hidden="true" />
+              ) : (
+                <Pause size={18} aria-hidden="true" />
+              )}
+            </button>
+          )}
+        </div>
 
           {/* =========================================================
               RECOMMENDATIONS

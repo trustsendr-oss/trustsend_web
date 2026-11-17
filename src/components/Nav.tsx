@@ -38,7 +38,6 @@ export function Nav() {
   const { t, i18n } = useTranslation();
   const currentLanguage = languageForLocale(i18n.language);
   const { navLinks, navMegaMenus } = useContent();
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
@@ -85,13 +84,6 @@ export function Nav() {
     i18n.changeLanguage(lng);
   };
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   // Fermer le menu mobile avec Échap, et bloquer le scroll de fond
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -120,14 +112,9 @@ export function Nav() {
     closeTimer.current = setTimeout(() => setActiveMenu(null), 150);
   };
 
-  const solid = scrolled || open || activeMenu !== null;
-
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${solid
-        ? "border-b border-surface-2/80 bg-white/85 backdrop-blur-md supports-[backdrop-filter]:bg-white/70"
-        : "border-b border-transparent bg-transparent"
-        }`}
+      className="fixed inset-x-0 top-0 z-50 border-b border-surface-2 bg-white shadow-sm"
       onMouseLeave={scheduleClose}
     >
       <AnimatePresence>
@@ -197,14 +184,14 @@ export function Nav() {
         <nav
           className="
             hidden min-w-0 items-center justify-center
-            gap-4 overflow-hidden
+            gap-3 overflow-hidden
             px-2
             xl:flex
-            2xl:gap-7
+            2xl:gap-4
           "
           aria-label="Main navigation"
         >
-          <div className="flex min-w-0 max-w-full items-center justify-center gap-4 2xl:gap-7">
+          <div className="flex min-w-0 max-w-full items-center justify-center gap-3 2xl:gap-4">
             {navLinks.map((link) => {
               const menu = navMegaMenus[link.label];
               const isActive = activeMenu === link.label;
@@ -224,7 +211,7 @@ export function Nav() {
                     main-nav-link
                     group relative flex shrink-0 items-center gap-1
                     whitespace-nowrap py-2
-                    text-base font-bold text-muted-2 2xl:text-lg
+                    text-sm font-bold text-muted-2 2xl:text-base
                     transition-colors
                     hover:text-ink
                     focus-visible:text-ink

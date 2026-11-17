@@ -1,12 +1,21 @@
 {
+  "hero": {
+    "carouselLabel": "Mzunguko wa vipengele vya Reemite",
+    "slideRole": "slaidi",
+    "slideLabel": "Slaidi ya {{current}} kati ya {{total}}",
+    "slideNavigation": "Urambazaji wa mzunguko",
+    "goToSlide": "Onyesha slaidi ya {{number}}",
+    "pauseRotation": "Sitisha mzunguko",
+    "resumeRotation": "Endelea na mzunguko",
+    "appHeadline": "Pakua programu ya Reemite",
+    "appSubtext": "Pata pochi, malipo na uhamisho wako karibu nawe kupitia simu yako.",
+    "appImageAlt": "Simu mbili zinazoonyesha programu ya Reemite."
+  },
   "nav": {
     "login": "Ingia",
     "signup": "Fungua akaunti",
     "openMenu": "Fungua menyu",
     "closeMenu": "Funga menyu"
-  },
-  "testimonials": {
-    "examplesNotice": "Mifano ya kubuni: ushuhuda na majina haya si maoni halisi ya wateja."
   },
   "footer": {
     "terms": "Masharti ya matumizi",

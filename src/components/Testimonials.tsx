@@ -12,18 +12,16 @@ export function Testimonials() {
   const testimonialColumns = Array.from({ length: 4 }, (_, columnIndex) =>
     testimonials.filter((_, testimonialIndex) => testimonialIndex % 4 === columnIndex),
   );
+  const maxColumnLength = Math.max(
+    1,
+    ...testimonialColumns.map((column) => column.length),
+  );
 
   return (
     <section
       id="temoignages"
       className="relative scroll-mt-16 overflow-hidden bg-brand-light/40 py-16 sm:py-20 lg:scroll-mt-20 lg:py-24"
     >
-      <img
-        src="/assets/images/figure-get-card.webp"
-        alt=""
-        aria-hidden
-        className="pointer-events-none absolute left-30 top-1/2 hidden w-[520px] max-w-none -translate-y-1/2 select-none opacity-25 lg:block"
-      />
       <div className="relative mx-auto w-full max-w-[1600px] px-4 text-center sm:px-6 lg:px-8">
         <Reveal>
           <h2 className="font-display font-bold text-[1.75rem] leading-[1.15] tracking-tight text-balance sm:text-3xl lg:text-4xl text-ink">
@@ -33,12 +31,12 @@ export function Testimonials() {
             {t("testimonials.subtitle")}
           </p>
           <TrustpilotReviewCollector />
-          <p className="mx-auto mt-3 max-w-2xl text-sm text-muted" role="note">
-            {t("testimonials.examplesNotice")}
-          </p>
         </Reveal>
 
-        <div className="testimonial-marquee-grid mt-10 hidden grid-cols-4 gap-5 text-left sm:mt-12 xl:grid">
+        <div
+          className="testimonial-marquee-grid mt-10 hidden grid-cols-4 gap-4 text-left sm:mt-12 xl:grid"
+          style={{ height: `${maxColumnLength * 252}px` }}
+        >
           {testimonialColumns.map((column, columnIndex) => (
             <div key={columnIndex} className="testimonial-marquee">
               <div
@@ -52,7 +50,7 @@ export function Testimonials() {
                   animationDelay: `${-columnIndex * 4}s`,
                 }}
               >
-                {[0, 1, 2].map((copyIndex) => (
+                {[0, 1].map((copyIndex) => (
                   <div
                     key={copyIndex}
                     className="testimonial-marquee-group"
@@ -62,6 +60,7 @@ export function Testimonials() {
                       <TestimonialCard
                         key={testimonial.name}
                         testimonial={testimonial}
+                        marquee
                       />
                     ))}
                   </div>
@@ -81,7 +80,13 @@ export function Testimonials() {
   );
 }
 
-function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
+function TestimonialCard({
+  testimonial,
+  marquee = false,
+}: {
+  testimonial: Testimonial;
+  marquee?: boolean;
+}) {
   const initials = testimonial.name
     .split(/\s+/)
     .slice(0, 2)
@@ -90,7 +95,11 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
     .toUpperCase();
 
   return (
-    <article className="flex flex-col rounded-3xl border border-ink/5 bg-white p-6 shadow-card sm:p-7">
+    <article
+      className={`flex flex-col rounded-3xl border border-ink/5 bg-white p-6 shadow-card sm:p-7 ${
+        marquee ? "testimonial-marquee-card" : ""
+      }`}
+    >
       <div className="flex items-center gap-3">
         <span
           aria-hidden="true"
@@ -101,7 +110,11 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         <span className="font-semibold text-ink">{testimonial.company}</span>
       </div>
 
-      <p className="mt-6 flex-1 text-base leading-relaxed text-ink sm:text-lg">
+      <p
+        className={`mt-6 flex-1 text-base leading-relaxed text-ink sm:text-lg ${
+          marquee ? "testimonial-marquee-quote" : ""
+        }`}
+      >
         “{testimonial.quote}”
       </p>
 

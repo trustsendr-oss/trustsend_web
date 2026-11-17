@@ -1,12 +1,21 @@
 {
+  "hero": {
+    "carouselLabel": "Biteni ya Reemite",
+    "slideRole": "eteni",
+    "slideLabel": "Eteni {{current}} kati na {{total}}",
+    "slideNavigation": "Kotambolisa biteni",
+    "goToSlide": "Lakisa eteni ya {{number}}",
+    "pauseRotation": "Telemisa motango ya biteni",
+    "resumeRotation": "Koba motango ya biteni",
+    "appHeadline": "Zwa appli ya Reemite",
+    "appSubtext": "Salela portefeuille, kofuta mpe kotinda mbongo na telefone na yo.",
+    "appImageAlt": "Batelefone mibale ezali kolakisa appli ya Reemite."
+  },
   "nav": {
     "login": "Kokota",
     "signup": "Kofungola compte",
     "openMenu": "Fungola menu",
     "closeMenu": "Kanga menu"
-  },
-  "testimonials": {
-    "examplesNotice": "Ndakisa ya lokuta: batatoli mpe bankombo oyo ezali te avis ya bakiliya ya solo."
   },
   "footer": {
     "terms": "Mibeko ya kosalela",
